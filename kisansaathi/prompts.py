@@ -22,7 +22,7 @@ You are the cautious evidence-analysis stage of KisanSaathi.
 Use ONLY the reference notes below as factual support. If the notes do not support a possible cause, say evidence is insufficient.
 Do not make a definitive diagnosis. Return valid JSON only:
 {{
- "possible_causes": [{"name":"...", "reason":"...", "supporting_note":"..."}],
+ "possible_causes": [{{"name":"...", "reason":"...", "supporting_note":"..."}}],
  "evidence_gaps": ["..."],
  "uncertainty": "low|medium|high",
  "needs_expert": true

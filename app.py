@@ -1,9 +1,10 @@
+import os
 import streamlit as st
 from dotenv import load_dotenv
 from kisansaathi.pipeline import KisanSaathiPipeline
 from kisansaathi.retrieval import load_reference_notes
 
-load_dotenv()
+load_dotenv(override=True)
 st.set_page_config(page_title="KisanSaathi", page_icon="🌱", layout="wide")
 
 st.title("🌱 KisanSaathi")
@@ -13,6 +14,12 @@ st.info("This prototype provides general information, not a confirmed diagnosis.
 with st.sidebar:
     st.header("About")
     st.write("KisanSaathi uses a three-stage prompt workflow: extraction, grounded diagnosis and safe advisory generation.")
+    api_key_input = st.text_input(
+        "Gemini API Key",
+        value=os.getenv("GEMINI_API_KEY", ""),
+        type="password",
+        help="Enter your Gemini API key (or set GEMINI_API_KEY in .env)"
+    )
     language = st.selectbox("Preferred response language", ["Hindi", "English", "Hinglish"])
     st.caption("Do not enter names, phone numbers, exact addresses or other personal information.")
 
@@ -30,12 +37,16 @@ if submit:
         st.stop()
     try:
         notes = load_reference_notes()
-        pipeline = KisanSaathiPipeline(notes)
-        with st.spinner("Understanding the symptoms..."):
+        pipeline = KisanSaathiPipeline(notes, api_key=api_key_input.strip() if api_key_input else None)
+        with st.status("🌱 Analyzing crop problem...", expanded=True) as status:
+            step_text = st.empty()
+            def handle_step(msg):
+                step_text.write(f"⏳ {msg}")
             result = pipeline.run(
                 query=query, crop=crop, region=region, stage=stage,
-                spread=spread, language=language
+                spread=spread, language=language, on_step=handle_step
             )
+            status.update(label="✅ Analysis complete!", state="complete", expanded=False)
         st.divider()
         st.subheader("KisanSaathi assessment")
         extraction = result["extraction"]
