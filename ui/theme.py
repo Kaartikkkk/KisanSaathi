@@ -120,7 +120,9 @@ div[data-testid="stTabs"] {
     border: none !important;
 }
 
-div[data-testid="stTabs"] > div[data-baseweb="tab-list"] {
+[data-baseweb="tab-list"],
+div[data-testid="stTabs"] [data-baseweb="tab-list"],
+.stTabs [data-baseweb="tab-list"] {
     position: fixed !important;
     top: 14px !important;
     left: 50% !important;
@@ -137,12 +139,18 @@ div[data-testid="stTabs"] > div[data-baseweb="tab-list"] {
 
 /* Hide default underline border */
 div[data-baseweb="tab-border"],
-div[data-baseweb="tab-highlight"] {
+div[data-baseweb="tab-highlight"],
+[data-baseweb="tab-border"],
+[data-baseweb="tab-highlight"] {
     display: none !important;
+    height: 0px !important;
+    border: none !important;
 }
 
 /* Clean tab pill buttons */
-button[data-baseweb="tab"] {
+button[data-baseweb="tab"],
+div[data-baseweb="tab-list"] button,
+.stTabs [data-baseweb="tab"] {
     background-color: transparent !important;
     color: #25352D !important;
     font-family: 'Inter', -apple-system, sans-serif !important;
@@ -156,15 +164,21 @@ button[data-baseweb="tab"] {
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-button[data-baseweb="tab"]:hover {
+button[data-baseweb="tab"]:hover,
+div[data-baseweb="tab-list"] button:hover,
+.stTabs [data-baseweb="tab"]:hover {
     background-color: rgba(23, 75, 53, 0.06) !important;
     color: #174B35 !important;
 }
 
 /* Active tab: dark green pill */
-button[data-baseweb="tab"][aria-selected="true"] {
+button[data-baseweb="tab"][aria-selected="true"],
+div[data-baseweb="tab-list"] button[aria-selected="true"],
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
     background-color: #174B35 !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
