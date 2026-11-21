@@ -135,20 +135,39 @@ html, body, [class*="css"], .stMarkdown, .stTextInput label,
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
-.main .block-container {
+.block-container,
+.main .block-container,
+[data-testid="stMainBlockContainer"],
+[data-testid="block-container"],
+.stMainBlockContainer,
+section[data-testid="stMain"] > div:first-child,
+div[data-testid="stAppViewContainer"] > section > div {
     max-width: 100% !important;
+    width: 100% !important;
     padding-top: 0 !important;
-    padding-bottom: 4rem !important;
+    padding-bottom: 3.5rem !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
-[data-testid="stHeader"] {
-    background: transparent !important;
+header[data-testid="stHeader"],
+[data-testid="stHeader"],
+.stApp > header {
+    display: none !important;
     height: 0 !important;
     min-height: 0 !important;
     padding: 0 !important;
-    z-index: 1000 !important;
+    margin: 0 !important;
+}
+
+[data-testid="stHeaderActionElements"],
+a.header-anchor,
+.stMarkdown h1 a,
+.stMarkdown h2 a,
+.stMarkdown h3 a {
+    display: none !important;
 }
 
 /* Remove default blue link styling and underlines */
@@ -688,9 +707,35 @@ st.html("""
             if (stMain) stMain.style.backgroundColor = "#F7F8F2";
         } catch(e) {}
     }
+    function forceFullWidth() {
+        try {
+            var blocks = document.querySelectorAll('[data-testid="stMainBlockContainer"], .block-container, [data-testid="block-container"]');
+            blocks.forEach(function(b) {
+                b.style.paddingTop = '0px';
+                b.style.paddingLeft = '0px';
+                b.style.paddingRight = '0px';
+                b.style.maxWidth = '100%';
+                b.style.width = '100%';
+                b.style.marginLeft = '0px';
+                b.style.marginRight = '0px';
+            });
+            var hdrs = document.querySelectorAll('[data-testid="stHeader"], header');
+            hdrs.forEach(function(h) {
+                h.style.display = 'none';
+                h.style.height = '0px';
+            });
+        } catch(e) {}
+    }
     forceLightTheme();
-    window.addEventListener("load", forceLightTheme);
-    setTimeout(forceLightTheme, 300);
+    forceFullWidth();
+    window.addEventListener("load", function() {
+        forceLightTheme();
+        forceFullWidth();
+    });
+    setInterval(function() {
+        forceLightTheme();
+        forceFullWidth();
+    }, 400);
 })();
 </script>
 """)
