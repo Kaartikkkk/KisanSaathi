@@ -93,9 +93,24 @@ section.main,
     }
 }
 
-/* Make inner layout blocks transparent so #F7F8F2 shines through */
-[data-testid="stVerticalBlock"],
-[data-testid="stVerticalBlockBorderWrapper"],
+/* Containers with border (like intake form & follow-up card) */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 2rem !important;
+}
+[data-testid="stVerticalBlockBorderWrapper"] > div {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #E2E9E1 !important;
+    border-radius: 20px !important;
+    padding: 2.25rem 2.4rem !important;
+    box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04) !important;
+}
+
+/* Regular vertical and horizontal blocks stay transparent */
+[data-testid="stVerticalBlock"]:not([data-testid="stVerticalBlockBorderWrapper"]),
 [data-testid="stHorizontalBlock"],
 [data-testid="column"],
 div[data-testid="column"] {
@@ -491,20 +506,48 @@ a:hover,
     border-color: #2E7D50 !important;
     box-shadow: 0 0 0 2px rgba(46, 125, 80, 0.15) !important;
 }
-.stButton > button {
+/* Secondary Buttons (Chips, Presets, Actions) */
+.stButton > button,
+.stButton > button[kind="secondary"],
+.stButton > button:not([kind="primary"]) {
+    background-color: #FFFFFF !important;
+    color: #174B35 !important;
+    border: 1.5px solid #E2E9E1 !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    padding: 0.5rem 1.15rem !important;
+    box-shadow: 0 2px 6px rgba(23, 75, 53, 0.04) !important;
+    transition: all 0.15s ease !important;
+}
+.stButton > button:hover,
+.stButton > button[kind="secondary"]:hover,
+.stButton > button:not([kind="primary"]:hover) {
+    background-color: #E7F2E8 !important;
+    border-color: #2E7D50 !important;
+    color: #174B35 !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Primary Submit Button */
+.stButton > button[kind="primary"],
+.stButton > button[data-testid="baseButton-primary"] {
     background-color: #174B35 !important;
     color: #FFFFFF !important;
     border: none !important;
     border-radius: 999px !important;
     font-weight: 700 !important;
-    padding: 0.75rem 2rem !important;
+    font-size: 1.05rem !important;
+    padding: 0.85rem 2rem !important;
+    box-shadow: 0 4px 16px rgba(23, 75, 53, 0.25) !important;
     transition: all 0.2s ease !important;
-    box-shadow: 0 4px 14px rgba(23, 75, 53, 0.2) !important;
 }
-.stButton > button:hover {
+.stButton > button[kind="primary"]:hover,
+.stButton > button[data-testid="baseButton-primary"]:hover {
     background-color: #133E2B !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 18px rgba(23, 75, 53, 0.28) !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 22px rgba(23, 75, 53, 0.35) !important;
 }
 [data-testid="stSidebar"] .stButton > button {
     background-color: #FFFFFF !important;
@@ -818,76 +861,90 @@ with tab_ask:
     # -----------------------------------------------------------------------------
     st.markdown('<div id="ask-ai"></div>', unsafe_allow_html=True)
 
-    st.markdown(f"""
-    <div class="ks-form-container">
+    with st.container(border=True):
+        st.markdown(f"""
         <div class="ks-form-header">
             <div class="ks-form-title">
                 {ICONS['leaf_brand']}
                 <span>Crop Diagnostic Center</span>
             </div>
-            <span style="font-size:0.75rem; font-weight:700; color:#2E7D50; background:#E7F2E8; padding:0.35rem 0.85rem; border-radius:999px;">
+            <span style="font-size:0.78rem; font-weight:700; color:#2E7D50; background:#E7F2E8; padding:0.35rem 0.9rem; border-radius:999px;">
                 AI Symptom Intake
             </span>
         </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-    # Benchmark scenario quick-fill buttons
-    st.caption("🧪 **Quick-Fill Benchmark Scenarios:**")
-    p1, p2, p3, p4, p5 = st.columns([1, 1, 1, 1, 0.9])
-    with p1:
-        if st.button("🍅 Tomato Leaf Curl (UP)", use_container_width=True):
-            set_preset("Tomato", "Uttar Pradesh", "Flowering", "Slowly", "English", "Tomato leaves have yellow spots and curling edges.")
-            st.rerun()
-    with p2:
-        if st.button("🌾 Rice Brown Spot (WB)", use_container_width=True):
-            set_preset("Rice", "West Bengal", "Vegetative", "Slowly", "English", "Rice plants have brown spots on the leaves.")
-            st.rerun()
-    with p3:
-        if st.button("🌱 Wheat Yellowing (PB)", use_container_width=True):
-            set_preset("Wheat", "Punjab", "Not sure", "Rapidly", "Hindi", "गेहूं की पत्तियां नोक से पीली पड़ रही हैं और समस्या तेजी से बढ़ रही है।")
-            st.rerun()
-    with p4:
-        if st.button("🥔 Potato Stunting (UP)", use_container_width=True):
-            set_preset("Potato", "Uttar Pradesh", "Vegetative", "Not sure", "Hinglish", "Aloo ke paudhe me curling leaves dikh rahi hain aur growth ruk gayi hai.")
-            st.rerun()
-    with p5:
-        if st.button("🔄 Reset Inputs", use_container_width=True):
-            st.session_state.result = None
-            st.session_state.follow_up_history = []
-            st.session_state.follow_up_answer = ""
-            st.session_state.original_form = {
-                "crop": "",
-                "region": "",
-                "stage": "Not sure",
-                "query": "",
-                "spread": "Not sure",
-                "language": st.session_state.original_form.get("language", "English"),
-            }
-            st.rerun()
+        # Benchmark scenario quick-fill buttons
+        st.caption("🧪 **Quick-Fill Benchmark Scenarios:**")
+        p1, p2, p3, p4, p5 = st.columns([1, 1, 1, 1, 0.85])
+        with p1:
+            if st.button("🍅 Tomato Curl (UP)", use_container_width=True):
+                set_preset("Tomato", "Uttar Pradesh", "Flowering", "Slowly", "English", "Tomato leaves have yellow spots and curling edges.")
+                st.rerun()
+        with p2:
+            if st.button("🌾 Rice Spot (WB)", use_container_width=True):
+                set_preset("Rice", "West Bengal", "Vegetative", "Slowly", "English", "Rice plants have brown spots on the leaves.")
+                st.rerun()
+        with p3:
+            if st.button("🌱 Wheat Yellow (PB)", use_container_width=True):
+                set_preset("Wheat", "Punjab", "Not sure", "Rapidly", "Hindi", "गेहूं की पत्तियां नोक से पीली पड़ रही हैं और समस्या तेजी से बढ़ रही है।")
+                st.rerun()
+        with p4:
+            if st.button("🥔 Potato Stunt (UP)", use_container_width=True):
+                set_preset("Potato", "Uttar Pradesh", "Vegetative", "Not sure", "Hinglish", "Aloo ke paudhe me curling leaves dikh rahi hain aur growth ruk gayi hai.")
+                st.rerun()
+        with p5:
+            if st.button("🔄 Reset", use_container_width=True):
+                st.session_state.result = None
+                st.session_state.follow_up_history = []
+                st.session_state.follow_up_answer = ""
+                st.session_state.original_form = {
+                    "crop": "",
+                    "region": "",
+                    "stage": "Not sure",
+                    "query": "",
+                    "spread": "Not sure",
+                    "language": st.session_state.original_form.get("language", "English"),
+                }
+                st.rerun()
 
-    OF = st.session_state.original_form
-    form_col1, form_col2 = st.columns(2, gap="medium")
+        st.markdown("<div style='height: 0.75rem;'></div>", unsafe_allow_html=True)
+        OF = st.session_state.original_form
 
-    with form_col1:
-        crop = st.text_input("Crop Name", value=OF["crop"], placeholder="e.g. Tomato / Rice / गेहूं")
-        region = st.text_input("Region / State", value=OF["region"], placeholder="e.g. Uttar Pradesh, Punjab")
-        stage_opts = ["Not sure", "Seedling", "Vegetative", "Flowering", "Fruiting", "Harvest"]
-        current_stage = OF["stage"]
-        stage = st.selectbox("Growth Stage", stage_opts, index=stage_opts.index(current_stage) if current_stage in stage_opts else 0)
+        # Row 1: Crop Name & Region
+        r1_c1, r1_c2 = st.columns(2, gap="medium")
+        with r1_c1:
+            crop = st.text_input("Crop Name", value=OF["crop"], placeholder="e.g. Tomato / Rice / गेहूं")
+        with r1_c2:
+            region = st.text_input("Region / State", value=OF["region"], placeholder="e.g. Uttar Pradesh, Punjab")
 
-    with form_col2:
-        spread_opts = ["Not sure", "Not spreading", "Slowly", "Rapidly"]
-        current_spread = OF["spread"]
-        spread = st.selectbox("Problem Spreading?", spread_opts, index=spread_opts.index(current_spread) if current_spread in spread_opts else 0)
-        lang_opts = ["English", "Hindi", "Hinglish"]
-        current_lang = OF["language"]
-        form_lang = st.selectbox("Preferred Advisory Language", lang_opts, index=lang_opts.index(current_lang) if current_lang in lang_opts else 0)
-        query = st.text_area("Describe Symptoms Observed", value=OF["query"], placeholder="Describe color change, leaf curling, spots, insect presence, etc.", height=105)
+        # Row 2: Growth Stage, Problem Spreading, Advisory Language
+        r2_c1, r2_c2, r2_c3 = st.columns(3, gap="medium")
+        with r2_c1:
+            stage_opts = ["Not sure", "Seedling", "Vegetative", "Flowering", "Fruiting", "Harvest"]
+            current_stage = OF["stage"]
+            stage = st.selectbox("Growth Stage", stage_opts, index=stage_opts.index(current_stage) if current_stage in stage_opts else 0)
+        with r2_c2:
+            spread_opts = ["Not sure", "Not spreading", "Slowly", "Rapidly"]
+            current_spread = OF["spread"]
+            spread = st.selectbox("Problem Spreading?", spread_opts, index=spread_opts.index(current_spread) if current_spread in spread_opts else 0)
+        with r2_c3:
+            lang_opts = ["English", "Hindi", "Hinglish"]
+            current_lang = OF["language"]
+            form_lang = st.selectbox("Advisory Language", lang_opts, index=lang_opts.index(current_lang) if current_lang in lang_opts else 0)
 
-    OF["language"] = form_lang
+        # Row 3: Symptoms Observed (Full Width)
+        query = st.text_area(
+            "Describe Symptoms Observed",
+            value=OF["query"],
+            placeholder="Describe color change, leaf curling, spots, insect presence, etc.",
+            height=110,
+        )
 
-    submit = st.button("🌿 Get Crop Advice", use_container_width=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        OF["language"] = form_lang
+
+        st.markdown("<div style='height: 0.75rem;'></div>", unsafe_allow_html=True)
+        submit = st.button("🌿 Get Crop Advice", type="primary", use_container_width=True)
 
     # -----------------------------------------------------------------------------
     # 6. Pipeline Execution
@@ -949,7 +1006,7 @@ with tab_ask:
         advisory = result["advisory"]
         follow_up_q = extraction.get("follow_up_question", "").strip()
 
-        st.markdown("---")
+        st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
         st.markdown(f"""
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
             <div>
@@ -980,7 +1037,18 @@ with tab_ask:
         """, unsafe_allow_html=True)
 
         # Possible causes card
-        st.markdown("""
+        causes = diagnosis.get("possible_causes", [])
+        if causes:
+            causes_html = "".join([f"""
+            <div class="ks-cause-box">
+                <div style="font-size:1.05rem; font-weight:700; color:#174B35; margin-bottom:0.35rem;">{c.get('name', 'Possible cause')}</div>
+                <div style="font-size:0.92rem; color:#68756C; line-height:1.55;">{c.get('reason', '')}</div>
+            </div>
+            """ for c in causes])
+        else:
+            causes_html = "<p style='color:#68756C; font-size:0.9rem;'>No definitive match in reference notes. Continued observation recommended.</p>"
+
+        st.markdown(f"""
         <div class="ks-card">
             <h3 style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
                 Possible Agronomic Causes
@@ -988,20 +1056,9 @@ with tab_ask:
             <div style="background:#F0FDF4; border-left:4px solid #2E7D50; padding:0.75rem 1rem; border-radius:0 8px 8px 0; margin-bottom:1.25rem; font-size:0.85rem; color:#166534;">
                 <b>Grounded Literature Disclaimer:</b> The following are potential agronomic causes derived from symptom matching with ICAR reference materials. They represent preliminary assessments rather than confirmed laboratory diagnoses.
             </div>
+            {causes_html}
+        </div>
         """, unsafe_allow_html=True)
-
-        causes = diagnosis.get("possible_causes", [])
-        if causes:
-            for c in causes:
-                st.markdown(f"""
-                <div class="ks-cause-box">
-                    <div style="font-size:1.05rem; font-weight:700; color:#174B35; margin-bottom:0.35rem;">{c.get('name', 'Possible cause')}</div>
-                    <div style="font-size:0.92rem; color:#68756C; line-height:1.55;">{c.get('reason', '')}</div>
-                </div>
-                """, unsafe_allow_html=True)
-        else:
-            st.write("No definitive match in reference notes. Continued observation recommended.")
-        st.markdown("</div>", unsafe_allow_html=True)
 
         # Advisory & Field Checklist in 2 equal columns
         res_col1, res_col2 = st.columns(2, gap="medium")
@@ -1016,20 +1073,23 @@ with tab_ask:
             """, unsafe_allow_html=True)
 
         with res_col2:
-            st.markdown("""
-            <div class="ks-card" style="height:100%;">
-                <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">Recommended Field Checklist</h3>
-            """, unsafe_allow_html=True)
             next_steps = advisory.get("next_steps", [])
             if next_steps:
-                for item in next_steps:
-                    st.markdown(f"""
-                    <div style="display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:0.75rem; font-size:0.88rem; color:#25352D;">
-                        <div style="margin-top:2px;">{ICONS['check_green']}</div>
-                        <div>{item}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-            st.markdown("</div>", unsafe_allow_html=True)
+                steps_html = "".join([f"""
+                <div style="display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:0.75rem; font-size:0.88rem; color:#25352D;">
+                    <div style="margin-top:2px;">{ICONS['check_green']}</div>
+                    <div>{item}</div>
+                </div>
+                """ for item in next_steps])
+            else:
+                steps_html = "<p style='color:#68756C;'>No specific checklist steps provided.</p>"
+
+            st.markdown(f"""
+            <div class="ks-card" style="height:100%;">
+                <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">Recommended Field Checklist</h3>
+                {steps_html}
+            </div>
+            """, unsafe_allow_html=True)
 
         # Safety Warning Banner
         st.markdown(f"""
@@ -1058,85 +1118,83 @@ with tab_ask:
 
         # Follow-Up Question Card
         if follow_up_q:
-            st.markdown(f"""
-            <div class="ks-followup-card">
+            with st.container(border=True):
+                st.markdown(f"""
                 <div style="display:flex; align-items:center; gap:0.6rem; color:#2E7D50; margin-bottom:0.6rem; font-weight:700; text-transform:uppercase; font-size:0.82rem;">
                     {ICONS['question']} Follow-Up Clarification Needed
                 </div>
                 <div style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.75rem; line-height:1.4;">
                     {follow_up_q}
                 </div>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
 
-            if extraction.get("missing_information"):
-                st.caption(f"Pending Information: {', '.join(extraction['missing_information'])}")
+                if extraction.get("missing_information"):
+                    st.caption(f"Pending Information: {', '.join(extraction['missing_information'])}")
 
-            with st.form("follow_up_form"):
-                follow_up_answer = st.text_input(
-                    "Your Clarification:",
-                    placeholder="e.g. Flowering stage / Around 20% of plants are affected",
-                    key="follow_up_text_input",
-                )
-                submit_follow_up = st.form_submit_button("Submit Clarification & Update Diagnosis")
+                with st.form("follow_up_form"):
+                    follow_up_answer = st.text_input(
+                        "Your Clarification:",
+                        placeholder="e.g. Flowering stage / Around 20% of plants are affected",
+                        key="follow_up_text_input",
+                    )
+                    submit_follow_up = st.form_submit_button("Submit Clarification & Update Diagnosis")
 
-            if submit_follow_up:
-                if not follow_up_answer.strip():
-                    st.warning("Please type your answer before submitting.")
-                else:
-                    submitted_ans = follow_up_answer.strip()
-                    st.session_state["follow_up_answer"] = submitted_ans
-                    st.session_state.follow_up_history.append({"q": follow_up_q, "a": submitted_ans})
-                    try:
-                        rk = get_gemini_api_key(api_key_input)
-                        rm = get_gemini_model()
-                        if not rk:
-                            st.error("⚠️ GEMINI_API_KEY is missing.")
-                            st.stop()
+                if submit_follow_up:
+                    if not follow_up_answer.strip():
+                        st.warning("Please type your answer before submitting.")
+                    else:
+                        submitted_ans = follow_up_answer.strip()
+                        st.session_state["follow_up_answer"] = submitted_ans
+                        st.session_state.follow_up_history.append({"q": follow_up_q, "a": submitted_ans})
+                        try:
+                            rk = get_gemini_api_key(api_key_input)
+                            rm = get_gemini_model()
+                            if not rk:
+                                st.error("⚠️ GEMINI_API_KEY is missing.")
+                                st.stop()
 
-                        notes = load_reference_notes()
-                        pipeline = KisanSaathiPipeline(notes, api_key=rk, model=rm)
-                        with st.status("🌱 Updating analysis with your clarification...", expanded=True) as status:
-                            step_text = st.empty()
-                            def handle_step(msg):
-                                step_text.write(f"⏳ {msg}")
-                            orig = st.session_state.original_form
-                            prev_extraction = st.session_state.result.get("extraction")
-                            updated_result = pipeline.run(
-                                query=orig["query"],
-                                crop=orig["crop"],
-                                region=orig["region"],
-                                stage=orig["stage"],
-                                spread=orig["spread"],
-                                language=orig["language"],
-                                follow_up_answer=submitted_ans,
-                                previous_extraction=prev_extraction,
-                                on_step=handle_step,
-                            )
-                            status.update(label="✅ Analysis Updated!", state="complete", expanded=False)
+                            notes = load_reference_notes()
+                            pipeline = KisanSaathiPipeline(notes, api_key=rk, model=rm)
+                            with st.status("🌱 Updating analysis with your clarification...", expanded=True) as status:
+                                step_text = st.empty()
+                                def handle_step(msg):
+                                    step_text.write(f"⏳ {msg}")
+                                orig = st.session_state.original_form
+                                prev_extraction = st.session_state.result.get("extraction")
+                                updated_result = pipeline.run(
+                                    query=orig["query"],
+                                    crop=orig["crop"],
+                                    region=orig["region"],
+                                    stage=orig["stage"],
+                                    spread=orig["spread"],
+                                    language=orig["language"],
+                                    follow_up_answer=submitted_ans,
+                                    previous_extraction=prev_extraction,
+                                    on_step=handle_step,
+                                )
+                                status.update(label="✅ Analysis Updated!", state="complete", expanded=False)
 
-                        clean_submitted = submitted_ans.rstrip(".?! ")
-                        ans_to_record = updated_result["extraction"].get("follow_up_answer") or clean_submitted
-                        st.session_state["follow_up_answer"] = ans_to_record
-                        updated_result["follow_up_answer"] = ans_to_record
-                        updated_result["extraction"]["follow_up_answer"] = ans_to_record
-                        st.session_state.result = updated_result
+                            clean_submitted = submitted_ans.rstrip(".?! ")
+                            ans_to_record = updated_result["extraction"].get("follow_up_answer") or clean_submitted
+                            st.session_state["follow_up_answer"] = ans_to_record
+                            updated_result["follow_up_answer"] = ans_to_record
+                            updated_result["extraction"]["follow_up_answer"] = ans_to_record
+                            st.session_state.result = updated_result
 
-                        # Update form values
-                        new_spread = updated_result["extraction"].get("spread", "")
-                        if new_spread and new_spread.lower() not in ["unknown", "not sure"]:
-                            st.session_state.original_form["spread"] = new_spread
-                        new_stage = updated_result["extraction"].get("growth_stage", "")
-                        if new_stage and new_stage.lower() not in ["unknown", "not sure"]:
-                            st.session_state.original_form["stage"] = new_stage
-                        new_crop = updated_result["extraction"].get("crop", "")
-                        if new_crop and new_crop.lower() not in ["unknown", "not provided"]:
-                            st.session_state.original_form["crop"] = new_crop
+                            # Update form values
+                            new_spread = updated_result["extraction"].get("spread", "")
+                            if new_spread and new_spread.lower() not in ["unknown", "not sure"]:
+                                st.session_state.original_form["spread"] = new_spread
+                            new_stage = updated_result["extraction"].get("growth_stage", "")
+                            if new_stage and new_stage.lower() not in ["unknown", "not sure"]:
+                                st.session_state.original_form["stage"] = new_stage
+                            new_crop = updated_result["extraction"].get("crop", "")
+                            if new_crop and new_crop.lower() not in ["unknown", "not provided"]:
+                                st.session_state.original_form["crop"] = new_crop
 
-                        st.rerun()
-                    except Exception as exc:
-                        st.error(f"Could not update analysis: {exc}")
-
-            st.markdown("</div>", unsafe_allow_html=True)
+                            st.rerun()
+                        except Exception as exc:
+                            st.error(f"Could not update analysis: {exc}")
 
         if st.session_state.follow_up_history:
             with st.expander("📝 Multi-Turn Conversation History", expanded=False):
@@ -1156,7 +1214,7 @@ with tab_home:
 
     st.markdown(f"""
     <div class="ks-hero-card">
-        <svg class="ks-foliage-svg" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="ks-foliage-svg" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.4;">
             <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
             <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
             <path d="M55 35 C 50 20, 65 10, 78 18 C 85 28, 70 40, 55 35 Z" fill="#3B925E" opacity="0.85"/>
@@ -1168,7 +1226,7 @@ with tab_home:
         <div class="ks-hero-left">
             <h1 class="ks-hero-h1">
                 Better Crop Decisions.<br>
-                <span style="color:#174B35;">Safer Farming.</span>
+                <span style="color:#174B35;">Better Farming.</span>
             </h1>
             <div class="ks-hero-accent-bar"></div>
             <p class="ks-hero-desc">
