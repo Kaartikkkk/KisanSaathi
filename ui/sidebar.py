@@ -64,15 +64,15 @@ def render_sidebar() -> tuple[str, str]:
             </div>
             """, unsafe_allow_html=True)
         else:
-            st.markdown("""
-            <div style="background:#FEF2F2; border:1px solid #FCA5A5; padding:0.5rem 0.8rem; border-radius:8px; font-size:0.8rem; color:#991B1B; font-weight:600; margin-bottom:1rem;">
-                ⚠️ No API Key Detected
+            st.markdown(f"""
+            <div style="background:#FEF2F2; border:1px solid #FCA5A5; padding:0.5rem 0.8rem; border-radius:8px; font-size:0.8rem; color:#991B1B; font-weight:600; margin-bottom:1rem; display:flex; align-items:center; gap:0.4rem;">
+                {ICONS['alert_amber']} API Key Required
             </div>
             """, unsafe_allow_html=True)
 
         st.markdown("---")
         st.markdown("""
-        <div style="font-size:0.85rem; color:#68756C; line-height:1.5;">
+        <div style="font-size:0.85rem; color:#5A6860; line-height:1.6;">
             <b>Agricultural Knowledge Base:</b><br>
             • ICAR agronomic profiles<br>
             • State Agriculture Universities<br>

@@ -170,4 +170,3 @@ SAFETY_HTML = """<div class="ks-how-it-works-page">
 def render_tab_safety():
     """Render the 3 safety guardrail pillars."""
     st.markdown(SAFETY_HTML, unsafe_allow_html=True)
-    st.markdown(BOTTOM_ORGANIC_WAVE_SVG, unsafe_allow_html=True)

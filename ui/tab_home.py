@@ -1,5 +1,6 @@
 """Home View module for KisanSaathi.
 Renders hero section matching mockup media_1795285920306_a3ee7658.jpg and 4-pillar strip.
+Features high-contrast typography, sharp farmer portrait, and professional SVG icons.
 """
 
 import base64
@@ -23,6 +24,7 @@ def render_tab_home():
 
     st.markdown(f"""
     <div class="ks-hero-card" style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:24px; padding:2.8rem 3rem; position:relative; overflow:hidden; box-shadow:0 4px 22px rgba(23,75,53,0.04); margin-bottom:2rem;">
+        <!-- Foliage Accent SVG -->
         <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:0; left:0; width:130px; height:100px; pointer-events:none; opacity:0.45;">
             <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
             <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
@@ -40,15 +42,15 @@ def render_tab_home():
                     <span style="color:#174B35;">Safer Farming.</span>
                 </h1>
                 <div style="width:48px; height:4px; background:#2E7D50; border-radius:2px; margin-bottom:1.5rem;"></div>
-                <p style="font-size:1.05rem; color:#68756C; line-height:1.6; margin:0 0 2rem 0;">
-                    Describe your crop problem in your preferred language and receive clear, cautious guidance to help you take the next step.
+                <p style="font-size:1.05rem; color:#5A6860; line-height:1.6; margin:0 0 2rem 0;">
+                    Describe your crop problem in your preferred language and receive clear, cautious guidance grounded in verified agronomic practices.
                 </p>
                 <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
-                    <button onclick="parent.document.querySelectorAll('[data-baseweb=\\'tab\\']')[2].click()" style="background:#174B35; color:#FFFFFF; border:none; border-radius:999px; padding:0.85rem 1.85rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(23,75,53,0.25);">
+                    <button onclick="(function(){{ var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[2]) t[2].click(); }})()" style="background:#174B35; color:#FFFFFF; border:none; border-radius:999px; padding:0.85rem 1.85rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(23,75,53,0.25);">
                         {ICONS['leaf_white']} Get Crop Advice &rarr;
                     </button>
-                    <button onclick="parent.document.querySelectorAll('[data-baseweb=\\'tab\\']')[1].click()" style="background:#FFFFFF; color:#174B35; border:1.5px solid #174B35; border-radius:999px; padding:0.82rem 1.8rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;">
-                        &#9675; How It Works
+                    <button onclick="(function(){{ var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[1]) t[1].click(); }})()" style="background:#FFFFFF; color:#174B35; border:1.5px solid #174B35; border-radius:999px; padding:0.82rem 1.8rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;">
+                        How It Works
                     </button>
                 </div>
             </div>
@@ -62,46 +64,46 @@ def render_tab_home():
     </div>
     """, unsafe_allow_html=True)
 
-    # 4-Pillar Feature Strip
-    st.markdown("""
+    # 4-Pillar Capability Strip (Using professional SVG line icons)
+    st.markdown(f"""
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
         <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem;">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span style="font-size:1.3rem;">🍃</span>
+                {ICONS['leaf_primary']}
             </div>
             <div>
                 <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Crop Guidance</div>
-                <div style="font-size:0.78rem; color:#68756C;">ICAR validated steps</div>
+                <div style="font-size:0.78rem; color:#5A6860;">ICAR validated steps</div>
             </div>
         </div>
 
         <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem;">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span style="font-size:1.3rem;">🔍</span>
+                {ICONS['search']}
             </div>
             <div>
                 <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Problem Identification</div>
-                <div style="font-size:0.78rem; color:#68756C;">Multilingual symptom parsing</div>
+                <div style="font-size:0.78rem; color:#5A6860;">Multilingual symptom parsing</div>
             </div>
         </div>
 
         <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem;">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span style="font-size:1.3rem;">🛡️</span>
+                {ICONS['shield_check']}
             </div>
             <div>
                 <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Safe Recommendations</div>
-                <div style="font-size:0.78rem; color:#68756C;">Zero synthetic dosage</div>
+                <div style="font-size:0.78rem; color:#5A6860;">Zero synthetic dosage</div>
             </div>
         </div>
 
         <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem;">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                <span style="font-size:1.3rem;">🗣️</span>
+                {ICONS['language']}
             </div>
             <div>
                 <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Multi-language Support</div>
-                <div style="font-size:0.78rem; color:#68756C;">English, Hindi & Hinglish</div>
+                <div style="font-size:0.78rem; color:#5A6860;">English, Hindi & Hinglish</div>
             </div>
         </div>
     </div>

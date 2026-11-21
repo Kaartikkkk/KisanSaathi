@@ -1,22 +1,25 @@
 """Complete Light Theme & Design System Stylesheet for KisanSaathi.
-Enforces #F7F8F2 globally, pinned top edge-to-edge navbar, and integrated tabs.
+Enforces warm ivory #F7F8F2, forest green #174B35, edge-to-edge top navbar,
+centered tab navigation, responsive layouts (1440px to 375px), and zero CSS conflicts.
 """
 
 CSS_LIGHT_THEME = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-:root,
-html,
-body,
-[data-theme="dark"],
-[data-theme="light"],
-.stApp {
-    color-scheme: light !important;
-    --background-color: #F7F8F2 !important;
-    --secondary-background-color: #E7F2E8 !important;
-    --text-color: #25352D !important;
-    --primary-color: #174B35 !important;
+:root {
+    --bg-primary: #F7F8F2;
+    --bg-card: #FFFFFF;
+    --border-color: #E2E9E1;
+    --border-focus: #174B35;
+    --color-primary: #174B35;
+    --color-primary-hover: #123D2B;
+    --color-secondary: #2E7D50;
+    --color-accent: #E7F2E8;
+    --text-primary: #25352D;
+    --text-secondary: #4A5B52;
+    --text-muted: #5A6860;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* 1. FORCE COMPLETE VIEWPORT & ROOT CONTAINERS TO WARM IVORY #F7F8F2 */
@@ -33,12 +36,14 @@ section.main,
 .main,
 .block-container,
 .main .block-container {
-    background-color: #F7F8F2 !important;
-    background: #F7F8F2 !important;
-    color: #25352D !important;
+    background-color: var(--bg-primary) !important;
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-main) !important;
+    overflow-x: hidden !important;
 }
 
-/* Strip top header & side margin so top navbar is 100% full width from edge to edge */
+/* Strip default Streamlit header bar completely */
 [data-testid="stHeader"],
 header[data-testid="stHeader"],
 [data-testid="stToolbar"],
@@ -47,20 +52,20 @@ header[data-testid="stHeader"],
     height: 0px !important;
 }
 
+/* Strip main block padding so top navbar touches true top edge-to-edge */
 .block-container,
 [data-testid="block-container"],
 [data-testid="stMainBlockContainer"] {
     padding-top: 0rem !important;
     padding-left: 0rem !important;
     padding-right: 0rem !important;
-    padding-bottom: 3rem !important;
+    padding-bottom: 2.5rem !important;
     max-width: 100% !important;
     width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin: 0 !important;
 }
 
-/* 2. PINNED EDGE-TO-EDGE TOP NAVBAR */
+/* 2. PINNED FULL-WIDTH TOP NAVBAR */
 .ks-navbar {
     position: fixed !important;
     top: 0 !important;
@@ -69,7 +74,7 @@ header[data-testid="stHeader"],
     width: 100% !important;
     height: 70px !important;
     background: #FFFFFF !important;
-    border-bottom: 1.5px solid #E2E9E1 !important;
+    border-bottom: 1.5px solid var(--border-color) !important;
     z-index: 9999 !important;
     padding: 0 2.5rem !important;
     box-sizing: border-box !important;
@@ -89,21 +94,21 @@ header[data-testid="stHeader"],
 .ks-nav-brand-title {
     font-size: 1.35rem !important;
     font-weight: 800 !important;
-    color: #174B35 !important;
+    color: var(--color-primary) !important;
     line-height: 1.1 !important;
     letter-spacing: -0.02em !important;
 }
 
 .ks-nav-brand-sub {
     font-size: 0.75rem !important;
-    color: #68756C !important;
+    color: var(--text-muted) !important;
     font-weight: 500 !important;
     line-height: 1.1 !important;
 }
 
 .ks-lang-pill {
     background: #FFFFFF !important;
-    color: #25352D !important;
+    color: var(--text-primary) !important;
     border: 1.5px solid #DCE5DB !important;
     border-radius: 999px !important;
     padding: 0.45rem 1.1rem !important;
@@ -131,13 +136,13 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"],
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
+    gap: 6px !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
 }
 
-/* Hide default underline border */
+/* Hide default underline border and indicator */
 div[data-baseweb="tab-border"],
 div[data-baseweb="tab-highlight"],
 [data-baseweb="tab-border"],
@@ -147,14 +152,14 @@ div[data-baseweb="tab-highlight"],
     border: none !important;
 }
 
-/* Clean tab pill buttons */
+/* Tab button styling */
 button[data-baseweb="tab"],
 div[data-baseweb="tab-list"] button,
 .stTabs [data-baseweb="tab"] {
     background-color: transparent !important;
-    color: #25352D !important;
-    font-family: 'Inter', -apple-system, sans-serif !important;
-    font-size: 0.95rem !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-main) !important;
+    font-size: 0.92rem !important;
     font-weight: 500 !important;
     padding: 8px 18px !important;
     border-radius: 999px !important;
@@ -172,25 +177,27 @@ button[data-baseweb="tab"]:hover,
 div[data-baseweb="tab-list"] button:hover,
 .stTabs [data-baseweb="tab"]:hover {
     background-color: rgba(23, 75, 53, 0.06) !important;
-    color: #174B35 !important;
+    color: var(--color-primary) !important;
 }
 
-/* Active tab: dark green pill */
+/* Active tab: solid forest green pill */
 button[data-baseweb="tab"][aria-selected="true"],
 div[data-baseweb="tab-list"] button[aria-selected="true"],
 .stTabs [data-baseweb="tab"][aria-selected="true"] {
-    background-color: #174B35 !important;
+    background-color: var(--color-primary) !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
     box-shadow: 0 4px 14px rgba(23, 75, 53, 0.25) !important;
 }
 
-/* Vector Outline Icons on tabs via CSS ::before */
-button[data-baseweb="tab"]::before {
+/* Vector line icons on tabs via CSS ::before */
+button[data-baseweb="tab"]::before,
+div[data-baseweb="tab-list"] button::before,
+.stTabs [data-baseweb="tab"]::before {
     content: "";
     display: inline-block;
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
     margin-right: 6px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -238,22 +245,22 @@ button[data-baseweb="tab"]:nth-child(5)[aria-selected="true"]::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 20V10M12 20V4M6 20v-6' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
-/* 4. TAB PANELS CONTAINER WITH CLEAN TOP OFFSET */
+/* 4. TAB PANELS CONTAINER WITH COMFORTABLE TOP OFFSET */
 div[data-baseweb="tab-panel"] {
     padding-top: 92px !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
     padding-bottom: 2.5rem !important;
-    max-width: 1220px !important;
+    max-width: 1240px !important;
     margin-left: auto !important;
     margin-right: auto !important;
     box-sizing: border-box !important;
 }
 
-/* 5. CROP DIAGNOSTIC CENTER (MOCKUP 7 PIXEL-PERFECT CARD) */
+/* 5. CROP DIAGNOSTIC CENTER (CARD STYLING) */
 .ks-ask-card {
     background: #FFFFFF !important;
-    border: 1.5px solid #E2E9E1 !important;
+    border: 1.5px solid var(--border-color) !important;
     border-radius: 24px !important;
     padding: 2.5rem 2.75rem !important;
     position: relative !important;
@@ -284,7 +291,7 @@ div[data-baseweb="tab-panel"] {
 .ks-ask-title {
     font-size: 1.6rem !important;
     font-weight: 800 !important;
-    color: #174B35 !important;
+    color: var(--color-primary) !important;
     line-height: 1.2 !important;
     margin: 0 0 0.35rem 0 !important;
     display: flex !important;
@@ -294,40 +301,39 @@ div[data-baseweb="tab-panel"] {
 
 .ks-ask-subtitle {
     font-size: 0.95rem !important;
-    color: #68756C !important;
+    color: var(--text-muted) !important;
     margin: 0 !important;
 }
 
 .ks-ask-badge {
-    background: #E8F5E9 !important;
-    color: #174B35 !important;
-    font-size: 0.85rem !important;
+    background: var(--color-accent) !important;
+    color: var(--color-primary) !important;
+    font-size: 0.82rem !important;
     font-weight: 700 !important;
     border-radius: 999px !important;
-    padding: 6px 18px !important;
+    padding: 6px 16px !important;
     border: 1px solid #D0E7D4 !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 0.4rem !important;
 }
 
-/* Quick Fill Preset Section */
+/* Preset Scenarios */
 .ks-preset-section-title {
-    font-size: 1.02rem !important;
+    font-size: 1rem !important;
     font-weight: 700 !important;
-    color: #174B35 !important;
+    color: var(--color-primary) !important;
     margin-bottom: 0.85rem !important;
     display: flex !important;
     align-items: center !important;
     gap: 0.5rem !important;
 }
 
-/* Preset buttons styling */
 .ks-preset-col button {
-    background: #174B35 !important;
+    background: var(--color-primary) !important;
     color: #FFFFFF !important;
-    font-weight: 700 !important;
-    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    font-size: 0.86rem !important;
     border-radius: 999px !important;
     border: none !important;
     padding: 0.55rem 1rem !important;
@@ -335,16 +341,15 @@ div[data-baseweb="tab-panel"] {
     transition: all 0.2s ease !important;
 }
 .ks-preset-col button:hover {
-    background: #1e5a41 !important;
+    background: var(--color-primary-hover) !important;
     transform: translateY(-1px) !important;
 }
 
-/* Reset Inputs button styling */
 .ks-reset-col button {
     background: #FFFFFF !important;
-    color: #174B35 !important;
-    font-weight: 700 !important;
-    font-size: 0.88rem !important;
+    color: var(--color-primary) !important;
+    font-weight: 600 !important;
+    font-size: 0.86rem !important;
     border-radius: 999px !important;
     border: 1.5px solid #DCE5DB !important;
     padding: 0.55rem 1rem !important;
@@ -352,41 +357,41 @@ div[data-baseweb="tab-panel"] {
 }
 .ks-reset-col button:hover {
     background: #F4F8F4 !important;
-    border-color: #174B35 !important;
+    border-color: var(--color-primary) !important;
 }
 
-/* Form Inputs Styling */
+/* Form Inputs */
 .stTextInput > div > div > input,
 .stTextArea > div > div > textarea,
 .stSelectbox > div > div {
     background-color: #FFFFFF !important;
     border: 1.5px solid #DCE5DB !important;
     border-radius: 12px !important;
-    color: #25352D !important;
-    font-family: 'Inter', sans-serif !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-main) !important;
     font-size: 0.95rem !important;
 }
 .stTextInput > div > div > input:focus,
 .stTextArea > div > div > textarea:focus {
-    border-color: #174B35 !important;
+    border-color: var(--color-primary) !important;
     box-shadow: 0 0 0 2px rgba(23, 75, 53, 0.15) !important;
 }
 
 .stTextInput label,
 .stSelectbox label,
 .stTextArea label {
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     font-weight: 700 !important;
-    color: #174B35 !important;
+    color: var(--color-primary) !important;
     margin-bottom: 0.35rem !important;
 }
 
-/* Analyze Button: Solid Green Pill */
+/* Full-width Analyze button */
 .ks-analyze-btn button {
-    background: #174B35 !important;
+    background: var(--color-primary) !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
-    font-size: 1.08rem !important;
+    font-size: 1.05rem !important;
     border-radius: 999px !important;
     border: none !important;
     padding: 0.85rem 2rem !important;
@@ -396,25 +401,25 @@ div[data-baseweb="tab-panel"] {
     transition: all 0.2s ease !important;
 }
 .ks-analyze-btn button:hover {
-    background: #123d2b !important;
+    background: var(--color-primary-hover) !important;
     transform: translateY(-1px) !important;
 }
 
-/* 6. GENERAL CARDS, PILLS & SECTIONS */
+/* 6. CARDS, SECTIONS & BADGES */
 .ks-card {
     background-color: #FFFFFF !important;
-    border: 1.5px solid #E2E9E1 !important;
+    border: 1.5px solid var(--border-color) !important;
     border-radius: 20px !important;
-    padding: 2.25rem 2.4rem !important;
+    padding: 2rem 2.25rem !important;
     margin-bottom: 1.5rem !important;
     box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04) !important;
 }
 
 .ks-pill-badge {
     display: inline-block;
-    padding: 0.3rem 0.95rem;
-    background: #E7F2E8;
-    color: #174B35;
+    padding: 0.35rem 1rem;
+    background: var(--color-accent);
+    color: var(--color-primary);
     border-radius: 999px;
     font-size: 0.76rem;
     font-weight: 800;
@@ -423,65 +428,92 @@ div[data-baseweb="tab-panel"] {
     margin-bottom: 0.75rem;
 }
 
-.ks-section-header {
+/* PASS / FAIL Badges */
+.ks-badge-pass {
+    background: #E8F5E9 !important;
+    color: #174B35 !important;
+    border: 1.5px solid #2E7D50 !important;
+    font-weight: 700 !important;
+    font-size: 0.82rem !important;
+    border-radius: 999px !important;
+    padding: 4px 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.ks-badge-fail {
+    background: #FFEBEE !important;
+    color: #C62828 !important;
+    border: 1.5px solid #D32F2F !important;
+    font-weight: 700 !important;
+    font-size: 0.82rem !important;
+    border-radius: 999px !important;
+    padding: 4px 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+/* Shared Footer */
+.ks-footer {
+    border-top: 1.5px solid var(--border-color);
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    margin-top: 3.5rem;
     text-align: center;
-    margin-bottom: 2.75rem;
+    background: transparent;
 }
-.ks-section-title {
-    font-size: 2.45rem;
-    font-weight: 800;
-    color: #174B35;
-    letter-spacing: -0.025em;
-    margin-bottom: 0.65rem;
+.ks-footer a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
 }
-.ks-section-sub {
-    font-size: 1.05rem;
-    color: #68756C;
-    max-width: 680px;
-    margin: 0 auto;
-    line-height: 1.6;
+.ks-footer a:hover {
+    text-decoration: underline;
 }
 
-.ks-bottom-wave-wrap {
-    width: 100%;
-    margin-top: 2rem;
-    margin-bottom: -2.5rem;
-}
-
-/* Evaluation Table Rows */
-.ks-eval-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E9E1;
-    border-radius: 14px;
-    padding: 1.15rem 1.4rem;
-    margin-bottom: 0.85rem;
-}
-.ks-eval-badge {
-    background: #E7F2E8;
-    color: #0B5A2A;
-    padding: 0.25rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.78rem;
-    font-weight: 700;
-}
-
-/* Sidebar styling */
-[data-testid="stSidebar"] {
-    background-color: #FFFFFF !important;
-    border-right: 1.5px solid #E2E9E1 !important;
-}
-
-@media (max-width: 900px) {
-    div[data-testid="stTabs"] > div[data-baseweb="tab-list"] {
+/* 7. RESPONSIVE DESIGN (1440px, 1280px, 768px, 375px) */
+@media (max-width: 992px) {
+    [data-baseweb="tab-list"],
+    div[data-testid="stTabs"] [data-baseweb="tab-list"],
+    .stTabs [data-baseweb="tab-list"] {
         position: static !important;
         transform: none !important;
         overflow-x: auto !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
+        padding: 0.65rem 1rem !important;
+        background: #FFFFFF !important;
+        border-bottom: 1.5px solid var(--border-color) !important;
+        border-radius: 0 !important;
     }
+
     .ks-navbar {
         position: static !important;
+        height: auto !important;
+        padding: 0.85rem 1.25rem !important;
+        flex-wrap: wrap !important;
+        gap: 0.75rem !important;
     }
+
     div[data-baseweb="tab-panel"] {
-        padding-top: 1rem !important;
+        padding-top: 1.5rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .ks-ask-card {
+        padding: 1.75rem 1.25rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .ks-ask-header {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+    }
+    .ks-ask-title {
+        font-size: 1.35rem !important;
     }
 }
 </style>

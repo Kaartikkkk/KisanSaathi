@@ -189,4 +189,3 @@ HOW_IT_WORKS_HTML = """<div class="ks-how-it-works-page">
 def render_tab_how():
     """Render the 3-stage architecture workflow."""
     st.markdown(HOW_IT_WORKS_HTML, unsafe_allow_html=True)
-    st.markdown(BOTTOM_ORGANIC_WAVE_SVG, unsafe_allow_html=True)
