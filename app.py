@@ -136,11 +136,19 @@ html, body, [class*="css"], .stMarkdown, .stTextInput label,
 }
 
 .main .block-container {
-    max-width: 1200px;
-    padding-top: 1.25rem !important;
+    max-width: 100% !important;
+    padding-top: 0 !important;
     padding-bottom: 4rem !important;
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+[data-testid="stHeader"] {
+    background: transparent !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    z-index: 1000 !important;
 }
 
 /* Remove default blue link styling and underlines */
@@ -160,17 +168,27 @@ a:hover,
     text-decoration: none !important;
 }
 
-/* 4. TOP NAVIGATION BAR */
+/* 4. TOP NAVIGATION BAR (FULL WIDTH, AT TOP, NO MARGINS/FLOATING) */
 .ks-navbar {
+    width: 100% !important;
+    background: #FFFFFF !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1.5px solid #E2E9E1 !important;
+    border-radius: 0 !important;
+    padding: 0.85rem 0 !important;
+    margin: 0 0 1.75rem 0 !important;
+    box-shadow: 0 2px 10px rgba(23, 75, 53, 0.04) !important;
+}
+.ks-navbar-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #FFFFFF;
-    border: 1px solid #E2E9E1;
-    border-radius: 16px;
-    padding: 0.75rem 1.6rem;
-    margin-bottom: 1.75rem;
-    box-shadow: 0 2px 12px rgba(23, 75, 53, 0.04);
+    width: 100%;
 }
 .ks-nav-brand {
     display: flex;
@@ -233,6 +251,13 @@ a:hover,
 }
 
 /* 4.5. MODERN PILL TABS */
+.stTabs {
+    max-width: 1240px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+}
 .stTabs [data-baseweb="tab-list"] {
     display: flex !important;
     justify-content: center !important;
@@ -835,15 +860,17 @@ with st.sidebar:
 # -----------------------------------------------------------------------------
 st.markdown(f"""
 <div class="ks-navbar">
-    <div class="ks-nav-brand">
-        <div>{ICONS['leaf_brand']}</div>
-        <div>
-            <div class="ks-nav-brand-title">KisanSaathi</div>
-            <div class="ks-nav-brand-sub">AI Crop Advisory Assistant</div>
+    <div class="ks-navbar-inner">
+        <div class="ks-nav-brand">
+            <div>{ICONS['leaf_brand']}</div>
+            <div>
+                <div class="ks-nav-brand-title">KisanSaathi</div>
+                <div class="ks-nav-brand-sub">AI Crop Advisory Assistant</div>
+            </div>
         </div>
-    </div>
-    <div style="display:flex; align-items:center; gap:0.75rem;">
-        <span class="ks-lang-pill">{ICONS['globe']} {st.session_state.original_form['language']}</span>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+            <span class="ks-lang-pill">{ICONS['globe']} {st.session_state.original_form['language']}</span>
+        </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
