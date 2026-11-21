@@ -3,11 +3,12 @@ Matches mockup media_1795286699297_c6bbf8cd.jpg.
 """
 
 import streamlit as st
-from ui.assets import BOTTOM_ORGANIC_WAVE_SVG
+from ui.assets import clean_html
 
-HOW_IT_WORKS_HTML = """<div class="ks-how-it-works-page">
+HOW_IT_WORKS_HTML = """
+<div class="ks-how-it-works-page">
     <!-- Floating Foliage Background SVGs -->
-    <svg class="ks-bg-foliage-left" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="ks-bg-foliage-left" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:20px; left:0; width:110px !important; height:130px !important; max-width:110px !important; max-height:130px !important; pointer-events:none; z-index:1; opacity:0.45;">
         <path d="M-10 20 C 30 40, 70 80, 100 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
         <path d="M28 35 C 10 25, 12 5, 28 8 C 42 12, 45 28, 28 35 Z" fill="#7BA887" opacity="0.55"/>
         <path d="M60 55 C 50 40, 62 25, 78 30 C 88 40, 80 58, 60 55 Z" fill="#6B9978" opacity="0.6"/>
@@ -15,7 +16,7 @@ HOW_IT_WORKS_HTML = """<div class="ks-how-it-works-page">
         <path d="M42 65 C 28 75, 15 68, 20 54 C 26 42, 42 48, 42 65 Z" fill="#6B9978" opacity="0.5"/>
         <path d="M78 120 C 62 130, 52 118, 58 104 C 64 92, 82 98, 78 120 Z" fill="#7BA887" opacity="0.55"/>
     </svg>
-    <svg class="ks-bg-foliage-right" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="ks-bg-foliage-right" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:20px; right:0; width:110px !important; height:130px !important; max-width:110px !important; max-height:130px !important; pointer-events:none; z-index:1; opacity:0.45;">
         <path d="M150 20 C 110 40, 70 80, 40 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
         <path d="M112 35 C 130 25, 128 5, 112 8 C 98 12, 95 28, 112 35 Z" fill="#7BA887" opacity="0.55"/>
         <path d="M80 55 C 90 40, 78 25, 62 30 C 52 40, 60 58, 80 55 Z" fill="#6B9978" opacity="0.6"/>
@@ -184,8 +185,9 @@ HOW_IT_WORKS_HTML = """<div class="ks-how-it-works-page">
             <path d="M0 65 C 400 95, 800 35, 1200 75 L 1440 60 L 1440 90 L 0 90 Z" fill="#C7DFC8" opacity="0.75"/>
         </svg>
     </div>
-</div>"""
+</div>
+"""
 
 def render_tab_how():
     """Render the 3-stage architecture workflow."""
-    st.markdown(HOW_IT_WORKS_HTML, unsafe_allow_html=True)
+    st.markdown(clean_html(HOW_IT_WORKS_HTML), unsafe_allow_html=True)

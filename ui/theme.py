@@ -171,6 +171,7 @@ div[data-baseweb="tab-list"] button,
     gap: 6px !important;
     outline: none !important;
     box-shadow: none !important;
+    white-space: nowrap !important;
 }
 
 button[data-baseweb="tab"]:hover,
@@ -273,8 +274,8 @@ div[data-baseweb="tab-panel"] {
     position: absolute !important;
     top: 0 !important;
     right: 0 !important;
-    width: 170px !important;
-    height: 140px !important;
+    width: 140px !important;
+    height: 110px !important;
     pointer-events: none !important;
     z-index: 1 !important;
 }
@@ -329,35 +330,139 @@ div[data-baseweb="tab-panel"] {
     gap: 0.5rem !important;
 }
 
-.ks-preset-col button {
-    background: var(--color-primary) !important;
+/* Quick-Fill Preset Buttons: Columns 1-4 Solid Forest Green Pill with White Text */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) div[data-testid="stButton"] button,
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) button {
+    background-color: #174B35 !important;
+    background: #174B35 !important;
     color: #FFFFFF !important;
-    font-weight: 600 !important;
-    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
     border-radius: 999px !important;
-    border: none !important;
+    border: 1.5px solid #174B35 !important;
     padding: 0.55rem 1rem !important;
-    box-shadow: 0 2px 6px rgba(23, 75, 53, 0.15) !important;
+    box-shadow: 0 2px 8px rgba(23, 75, 53, 0.18) !important;
     transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
 }
-.ks-preset-col button:hover {
-    background: var(--color-primary-hover) !important;
+
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) button:hover {
+    background-color: #123D2B !important;
+    background: #123D2B !important;
+    border-color: #123D2B !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(23, 75, 53, 0.25) !important;
+}
+
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) button * {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+}
+
+/* Preset Button 5 (Reset): White Pill with #174B35 Border and Text */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) div[data-testid="stButton"] button,
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    color: #174B35 !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    border-radius: 999px !important;
+    border: 1.5px solid #174B35 !important;
+    padding: 0.55rem 1rem !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+}
+
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button:hover {
+    background-color: #F4F8F4 !important;
+    background: #F4F8F4 !important;
+    border-color: #123D2B !important;
+    color: #123D2B !important;
     transform: translateY(-1px) !important;
 }
 
-.ks-reset-col button {
-    background: #FFFFFF !important;
-    color: var(--color-primary) !important;
-    font-weight: 600 !important;
-    font-size: 0.86rem !important;
-    border-radius: 999px !important;
-    border: 1.5px solid #DCE5DB !important;
-    padding: 0.55rem 1rem !important;
-    transition: all 0.2s ease !important;
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button * {
+    color: #174B35 !important;
+    font-weight: 700 !important;
 }
-.ks-reset-col button:hover {
-    background: #F4F8F4 !important;
-    border-color: var(--color-primary) !important;
+
+/* Preset Button 1 Icon (Leaf) */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(1) button::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+}
+
+/* Preset Button 2 Icon (Rice/Grain) */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(2) button::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 20h10'/%3E%3Cpath d='M10 20c5.5-2.5.8-6.4 3-10'/%3E%3Cpath d='M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4.1 5.5.8z'/%3E%3Cpath d='M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4.1 1-4.9 2z'/%3E%3C/svg%3E");
+}
+
+/* Preset Button 3 Icon (Wheat Sprout) */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(3) button::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22v-9'/%3E%3Cpath d='M9 15c-3-1-3-4-1-6 2 2 3 4 3 6'/%3E%3Cpath d='M15 15c3-1 3-4 1-6-2 2-3 4-3 6'/%3E%3Cpath d='M9 9c-2-1-2-3 0-5 2 2 2 3 2 5'/%3E%3Cpath d='M15 9c2-1 2-3 0-5-2 2-2 3-2 5'/%3E%3C/svg%3E");
+}
+
+/* Preset Button 4 Icon (Potato/Tuber dots) */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(4) button::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='12' rx='9' ry='6'/%3E%3Ccircle cx='9' cy='11' r='0.5' fill='%23FFFFFF'/%3E%3Ccircle cx='14' cy='13' r='0.5' fill='%23FFFFFF'/%3E%3Ccircle cx='12' cy='10' r='0.5' fill='%23FFFFFF'/%3E%3C/svg%3E");
+}
+
+/* Preset Button 5 Icon (Reset Outline Circle) */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3C/svg%3E");
 }
 
 /* Form Inputs */
@@ -386,9 +491,12 @@ div[data-baseweb="tab-panel"] {
     margin-bottom: 0.35rem !important;
 }
 
-/* Full-width Analyze button */
-.ks-analyze-btn button {
-    background: var(--color-primary) !important;
+/* Primary Button (Analyze Crop Problem) */
+button[kind="primary"],
+div[data-testid="stBaseButton-primary"] button,
+div.ks-analyze-btn button {
+    background-color: #174B35 !important;
+    background: #174B35 !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
     font-size: 1.05rem !important;
@@ -399,13 +507,163 @@ div[data-baseweb="tab-panel"] {
     width: 100% !important;
     margin-top: 1rem !important;
     transition: all 0.2s ease !important;
-}
-.ks-analyze-btn button:hover {
-    background: var(--color-primary-hover) !important;
-    transform: translateY(-1px) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
 }
 
-/* 6. CARDS, SECTIONS & BADGES */
+button[kind="primary"]:hover,
+div[data-testid="stBaseButton-primary"] button:hover,
+div.ks-analyze-btn button:hover {
+    background-color: #123D2B !important;
+    background: #123D2B !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 18px rgba(23, 75, 53, 0.32) !important;
+}
+
+button[kind="primary"] *,
+div[data-testid="stBaseButton-primary"] button *,
+div.ks-analyze-btn button * {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+}
+
+/* Primary Button (Analyze Crop Problem) leaf icon */
+div.ks-analyze-btn button::before,
+button[kind="primary"]::before,
+div[data-testid="stBaseButton-primary"] button::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+    vertical-align: middle;
+}
+
+/* 6. ARCHITECTURE & SAFETY CARDS (HOW IT WORKS & SAFETY) */
+.ks-how-it-works-page,
+.ks-safety-page {
+    position: relative !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+.ks-bg-foliage-left {
+    position: absolute !important;
+    top: 20px !important;
+    left: 0 !important;
+    width: 110px !important;
+    height: 130px !important;
+    max-width: 110px !important;
+    max-height: 130px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    opacity: 0.45 !important;
+}
+
+.ks-bg-foliage-right {
+    position: absolute !important;
+    top: 20px !important;
+    right: 0 !important;
+    width: 110px !important;
+    height: 130px !important;
+    max-width: 110px !important;
+    max-height: 130px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    opacity: 0.45 !important;
+}
+
+.ks-arch-container {
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    gap: 1.25rem !important;
+    position: relative !important;
+    z-index: 2 !important;
+    margin-bottom: 2.5rem !important;
+}
+
+.ks-arch-card {
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--border-color) !important;
+    border-radius: 24px !important;
+    padding: 2.25rem 2rem 1.75rem 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    flex: 1 1 0 !important;
+    min-width: 270px !important;
+    box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.ks-arch-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 30px rgba(23, 75, 53, 0.08) !important;
+}
+
+.ks-arch-icon-box {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 14px !important;
+    background: var(--color-accent) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 1.25rem !important;
+}
+
+.ks-arch-card-title {
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    color: var(--color-primary) !important;
+    margin: 0 0 0.65rem 0 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+}
+
+.ks-arch-card-desc {
+    font-size: 0.92rem !important;
+    color: var(--text-muted) !important;
+    line-height: 1.55 !important;
+    margin: 0 0 1.5rem 0 !important;
+}
+
+.ks-arch-illus {
+    margin-top: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    padding-top: 1rem !important;
+}
+
+.ks-arch-illus svg {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+.ks-arch-arrow {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50% !important;
+    background: var(--color-accent) !important;
+    border: 1.5px solid #D0E7D4 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    align-self: center !important;
+    margin: 0 0.25rem !important;
+}
+
+/* 7. GENERAL CARDS, SECTIONS & BADGES */
 .ks-card {
     background-color: #FFFFFF !important;
     border: 1.5px solid var(--border-color) !important;
@@ -472,7 +730,7 @@ div[data-baseweb="tab-panel"] {
     text-decoration: underline;
 }
 
-/* 7. RESPONSIVE DESIGN (1440px, 1280px, 768px, 375px) */
+/* 8. RESPONSIVE DESIGN (1440px, 1280px, 768px, 375px) */
 @media (max-width: 992px) {
     [data-baseweb="tab-list"],
     div[data-testid="stTabs"] [data-baseweb="tab-list"],
@@ -504,6 +762,21 @@ div[data-baseweb="tab-panel"] {
 
     .ks-ask-card {
         padding: 1.75rem 1.25rem !important;
+    }
+
+    .ks-arch-container {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .ks-arch-arrow {
+        transform: rotate(90deg) !important;
+        margin: 0.5rem auto !important;
+    }
+
+    .ks-arch-card {
+        width: 100% !important;
+        min-width: 0 !important;
     }
 }
 

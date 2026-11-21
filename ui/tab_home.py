@@ -6,7 +6,7 @@ Features high-contrast typography, sharp farmer portrait, and professional SVG i
 import base64
 import os
 import streamlit as st
-from ui.assets import ICONS
+from ui.assets import ICONS, clean_html
 
 def get_base64_image(image_path: str) -> str:
     """Read a local image file and encode it as base64."""
@@ -22,10 +22,10 @@ def render_tab_home():
         or get_base64_image("assets/farmer_clean_hd.jpg")
     )
 
-    st.markdown(f"""
+    hero_html = f"""
     <div class="ks-hero-card" style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:24px; padding:2.8rem 3rem; position:relative; overflow:hidden; box-shadow:0 4px 22px rgba(23,75,53,0.04); margin-bottom:2rem;">
         <!-- Foliage Accent SVG -->
-        <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:0; left:0; width:130px; height:100px; pointer-events:none; opacity:0.45;">
+        <svg width="130" height="100" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:0; left:0; width:130px !important; height:100px !important; pointer-events:none; opacity:0.45;">
             <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
             <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
             <path d="M55 35 C 50 20, 65 10, 78 18 C 85 28, 70 40, 55 35 Z" fill="#3B925E" opacity="0.85"/>
@@ -62,10 +62,11 @@ def render_tab_home():
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """
+    st.markdown(clean_html(hero_html), unsafe_allow_html=True)
 
     # 4-Pillar Capability Strip (Using professional SVG line icons)
-    st.markdown(f"""
+    strip_html = f"""
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
         <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem;">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -107,4 +108,5 @@ def render_tab_home():
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """
+    st.markdown(clean_html(strip_html), unsafe_allow_html=True)

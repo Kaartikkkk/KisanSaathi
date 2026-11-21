@@ -3,11 +3,11 @@ Renders edge-to-edge top navigation bar with brand logo, tabs slot, and language
 """
 
 import streamlit as st
-from ui.assets import ICONS
+from ui.assets import ICONS, clean_html
 
 def render_pinned_navbar(language: str = "English"):
     """Render the pinned full-width top navbar."""
-    st.markdown(f"""
+    nav_html = f"""
     <div class="ks-navbar">
         <div class="ks-nav-brand">
             <div>{ICONS['leaf_brand']}</div>
@@ -20,4 +20,5 @@ def render_pinned_navbar(language: str = "English"):
             <span class="ks-lang-pill">{ICONS['globe']} {language} &#9662;</span>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """
+    st.markdown(clean_html(nav_html), unsafe_allow_html=True)

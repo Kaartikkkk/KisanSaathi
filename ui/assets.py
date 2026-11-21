@@ -3,6 +3,16 @@ All SVGs are rendered inline for maximum sharpness, zero network latency, and hi
 Features consistent 24x24 viewBox and 2.0px stroke-width line styling.
 """
 
+def clean_html(html_str: str) -> str:
+    """Clean HTML string by stripping leading whitespace from all lines.
+    
+    Prevents Markdown parsers (like markdown-it-py) from ever interpreting 
+    indented HTML or comments as <pre><code> code blocks.
+    """
+    if not html_str:
+        return ""
+    return "\n".join(line.strip() for line in html_str.splitlines() if line.strip())
+
 def svg_icon(inner_svg: str, size: int = 18, color: str = "#174B35", sw: float = 2.0) -> str:
     """Render an inline SVG icon wrapper."""
     return (
@@ -63,9 +73,9 @@ ICONS = {
     "chart": svg_icon(P_CHART, 18, "#174B35", 2.0),
 }
 
-# Corner foliage leaf branch overlay
+# Corner foliage leaf branch overlay with strict dimensions to prevent full-screen stretching
 CORNER_LEAF_BRANCH_SVG = """
-<svg class="ks-corner-foliage-svg" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg class="ks-corner-foliage-svg" width="140" height="110" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:0; right:0; width:140px !important; height:110px !important; max-width:140px !important; max-height:110px !important; pointer-events:none; z-index:1; opacity:0.5;">
     <path d="M190 -10 C 140 20, 90 50, 40 100" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
     <path d="M140 15 C 160 5, 165 -15, 148 -10 C 132 -6, 128 10, 140 15 Z" fill="#7BA887" opacity="0.55"/>
     <path d="M105 35 C 120 22, 115 5, 98 12 C 86 18, 92 34, 105 35 Z" fill="#6B9978" opacity="0.6"/>

@@ -6,7 +6,7 @@ and strict adherence to ICAR agronomic grounding without synthetic dosages.
 import streamlit as st
 from kisansaathi.pipeline import KisanSaathiPipeline
 from kisansaathi.retrieval import load_reference_notes
-from ui.assets import ICONS, CORNER_LEAF_BRANCH_SVG
+from ui.assets import ICONS, CORNER_LEAF_BRANCH_SVG, clean_html
 
 INDIAN_STATES = [
     "Select your state",
@@ -88,7 +88,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
     OF = st.session_state.original_form
 
     # 1. Main White Card Container
-    st.markdown(f"""
+    header_html = f"""
     <div class="ks-ask-card">
         <div class="ks-ask-corner-foliage">
             {CORNER_LEAF_BRANCH_SVG}
@@ -103,30 +103,31 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                     Crop Diagnostic Center
                 </h2>
                 <p class="ks-ask-subtitle">
-                    Describe crop symptoms in your preferred language to receive safe, grounded agronomic guidance.
+                    Describe the crop problem details below to get clear and safe guidance.
                 </p>
             </div>
             <div>
                 <span class="ks-ask-badge">&#10022; AI Symptom Intake</span>
             </div>
         </div>
-    """, unsafe_allow_html=True)
+    """
+    st.markdown(clean_html(header_html), unsafe_allow_html=True)
 
     # 2. Quick-Fill Benchmark Scenarios Section (Clean text, no random emojis)
-    st.markdown("""
-        <div class="ks-preset-section-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                <polyline points="2 17 12 22 22 17"/>
-                <polyline points="2 12 12 17 22 12"/>
-            </svg>
-            Quick-Fill Benchmark Scenarios:
-        </div>
-    """, unsafe_allow_html=True)
+    preset_title_html = """
+    <div class="ks-preset-section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+        </svg>
+        Quick-Fill Benchmark Scenarios:
+    </div>
+    """
+    st.markdown(clean_html(preset_title_html), unsafe_allow_html=True)
 
     p1, p2, p3, p4, p5 = st.columns([1.1, 1.1, 1.1, 1.1, 0.9], gap="small")
     with p1:
-        st.markdown('<div class="ks-preset-col">', unsafe_allow_html=True)
         if st.button("Tomato Leaf Curl (UP)", key="qf_tomato", use_container_width=True):
             set_preset_scenario(
                 "Tomato",
@@ -137,10 +138,8 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 "Tomato leaves have yellow spots and curling edges with stunted apex."
             )
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with p2:
-        st.markdown('<div class="ks-preset-col">', unsafe_allow_html=True)
         if st.button("Rice Brown Spot (WB)", key="qf_rice", use_container_width=True):
             set_preset_scenario(
                 "Rice",
@@ -151,10 +150,8 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 "Small circular to oval dark brown spots on leaves with yellow halo."
             )
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with p3:
-        st.markdown('<div class="ks-preset-col">', unsafe_allow_html=True)
         if st.button("Wheat Yellowing (PB)", key="qf_wheat", use_container_width=True):
             set_preset_scenario(
                 "Wheat",
@@ -165,10 +162,8 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 "Yellow stripes parallel to leaf veins, yellow powder rubs off on fingers."
             )
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with p4:
-        st.markdown('<div class="ks-preset-col">', unsafe_allow_html=True)
         if st.button("Potato Stunting (UP)", key="qf_potato", use_container_width=True):
             set_preset_scenario(
                 "Potato",
@@ -179,14 +174,11 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 "आलू के पौधे बौने रह गए हैं, पत्तियां ऊपर की ओर मुड़ रही हैं और शिराएं पीली पड़ रही हैं।"
             )
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with p5:
-        st.markdown('<div class="ks-reset-col">', unsafe_allow_html=True)
         if st.button("Reset Inputs", key="qf_reset", use_container_width=True):
             reset_all_inputs()
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("<div style='height: 1.25rem;'></div>", unsafe_allow_html=True)
 
@@ -223,7 +215,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         spread_val_current = OF.get("spread", "Not sure")
         spd_idx = SPREAD_OPTIONS.index(spread_val_current) if spread_val_current in SPREAD_OPTIONS else 0
         spread_val = st.selectbox(
-            "Problem Spreading Rate",
+            "Problem Spreading?",
             SPREAD_OPTIONS,
             index=spd_idx,
             help="Rate at which observed symptoms are expanding across adjacent plots."
@@ -239,9 +231,9 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         )
 
         query_val = st.text_area(
-            "Describe Observed Symptoms",
+            "Describe the Symptoms Observed",
             value=OF.get("query", ""),
-            placeholder="e.g. leaves have yellow spots and curling edges with stunted shoot apex",
+            placeholder="e.g. leaves have yellow spots and curling edges",
             height=85,
             help="Detail visible symptoms: leaf discoloration, necrotic lesions, wilting, insect presence, etc."
         )
@@ -256,7 +248,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
 
     # 4. Full-Width Analyze Button
     st.markdown('<div class="ks-analyze-btn">', unsafe_allow_html=True)
-    analyze_clicked = st.button("Analyze Crop Problem →", key="btn_analyze_crop", use_container_width=True)
+    analyze_clicked = st.button("Analyze Crop Problem →", key="btn_analyze_crop", type="primary", use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
     # Close the outer white card
@@ -315,7 +307,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         follow_up_q = extraction.get("follow_up_question", "").strip()
 
         st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-        st.markdown(f"""
+        results_header = f"""
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
             <div>
                 <h2 style="font-size:1.85rem; font-weight:800; color:#174B35; margin:0;">
@@ -329,10 +321,11 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 {ICONS['check_green']} Verified Advisory
             </span>
         </div>
-        """, unsafe_allow_html=True)
+        """
+        st.markdown(clean_html(results_header), unsafe_allow_html=True)
 
         # Context summary strip
-        st.markdown(f"""
+        summary_strip = f"""
         <div class="ks-card" style="padding:1.15rem 1.6rem; background:#FFFFFF; margin-bottom:1.5rem;">
             <div style="display:flex; flex-wrap:wrap; gap:1.75rem; align-items:center;">
                 <div><span style="font-size:0.75rem; color:#5A6860; font-weight:700; text-transform:uppercase;">Crop:</span> <b style="color:#174B35;">{extraction.get('crop', 'Unknown')}</b></div>
@@ -342,7 +335,8 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 <div><span style="font-size:0.75rem; color:#5A6860; font-weight:700; text-transform:uppercase;">Symptoms:</span> <b style="color:#174B35;">{', '.join(extraction.get('symptoms', [])) or 'Observed'}</b></div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """
+        st.markdown(clean_html(summary_strip), unsafe_allow_html=True)
 
         # Possible agronomic causes card
         causes = diagnosis.get("possible_causes", [])
@@ -356,7 +350,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         else:
             causes_html = "<p style='color:#5A6860; font-size:0.9rem;'>No definitive single match in reference notes. Continued observation recommended.</p>"
 
-        st.markdown(f"""
+        causes_card = f"""
         <div class="ks-card" style="margin-bottom:1.5rem;">
             <h3 style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
                 Possible Agronomic Causes
@@ -366,12 +360,13 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             </div>
             {causes_html}
         </div>
-        """, unsafe_allow_html=True)
+        """
+        st.markdown(clean_html(causes_card), unsafe_allow_html=True)
 
         # Advisory & Field Checklist in 2 equal columns
         res_col1, res_col2 = st.columns(2, gap="medium")
         with res_col1:
-            st.markdown(f"""
+            checklist_card = f"""
             <div class="ks-card" style="height:100%;">
                 <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
                     Immediate Practical Checklist
@@ -383,10 +378,11 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                     {advisory.get('checklist_md', advisory.get('response_text', 'No checklist available.'))}
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(clean_html(checklist_card), unsafe_allow_html=True)
 
         with res_col2:
-            st.markdown(f"""
+            guardrails_card = f"""
             <div class="ks-card" style="height:100%; border:1.5px solid #FCD34D; background:#FFFDF7;">
                 <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.85rem;">
                     <div style="background:#FEF3C7; padding:8px; border-radius:10px;">
@@ -403,11 +399,12 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                     <b>Escalation Policy:</b> Rapidly spreading conditions or uncertain diagnostics must be evaluated by your local Krishi Vigyan Kendra (KVK) or Block Agriculture Officer.
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(clean_html(guardrails_card), unsafe_allow_html=True)
 
         # KVK Escalation Banner
         if advisory.get("escalate_to_expert", False) or extraction.get("spread") == "Rapidly":
-            st.markdown(f"""
+            escalation_html = f"""
             <div style="background:#FEF2F2; border:1.5px solid #FCA5A5; border-radius:16px; padding:1.25rem 1.5rem; margin-top:1.5rem; display:flex; align-items:center; gap:1.25rem;">
                 <div style="background:#FEE2E2; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     {ICONS['phone']}
@@ -421,11 +418,12 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                     </div>
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(clean_html(escalation_html), unsafe_allow_html=True)
 
         # Multi-turn Follow-up Section
         st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
-        st.markdown("""
+        fu_header = """
         <div class="ks-card">
             <h3 style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.5rem;">
                 Follow-Up Clarifications & Questions
@@ -433,14 +431,15 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             <p style="font-size:0.92rem; color:#5A6860; margin-bottom:1.25rem;">
                 Ask about specific symptoms, organic alternatives, or clarifying details about this diagnosis.
             </p>
-        """, unsafe_allow_html=True)
+        """
+        st.markdown(clean_html(fu_header), unsafe_allow_html=True)
 
         if follow_up_q:
             st.info(f"Suggested Clarification: {follow_up_q}")
 
         # Display conversational follow-up history
         for item in st.session_state.follow_up_history:
-            st.markdown(f"""
+            fu_item = f"""
             <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:0.85rem 1.15rem; margin-bottom:0.75rem;">
                 <div style="font-weight:700; color:#166534; font-size:0.85rem; margin-bottom:0.25rem; display:flex; align-items:center; gap:6px;">
                     {ICONS['user']} Farmer Query:
@@ -453,7 +452,8 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 </div>
                 <div style="color:#25352D; font-size:0.92rem; line-height:1.6;">{item['a']}</div>
             </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(clean_html(fu_item), unsafe_allow_html=True)
 
         fu_input = st.text_input(
             "Ask follow-up question:",

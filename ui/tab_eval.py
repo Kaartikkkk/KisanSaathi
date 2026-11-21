@@ -6,7 +6,7 @@ Ensures zero hardcoded scores and visually distinct PASS/FAIL states.
 import os
 import csv
 import streamlit as st
-from ui.assets import ICONS, BOTTOM_ORGANIC_WAVE_SVG
+from ui.assets import ICONS, BOTTOM_ORGANIC_WAVE_SVG, clean_html
 
 def get_evaluation_metrics(csv_path: str = "evaluation_results.csv") -> dict:
     """Dynamically parse evaluation_results.csv and compute benchmark telemetry."""
@@ -55,10 +55,10 @@ def render_tab_eval():
     rows = metrics["rows"]
 
     # 1. Header & Dynamic 4-Metric Grid
-    st.markdown(f"""
+    eval_header_html = f"""
     <div class="ks-eval-page" style="position:relative; padding-bottom:1.5rem;">
         <!-- Left Leafy Branch SVG -->
-        <svg class="ks-bg-foliage-left" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:10px; left:0; width:110px; height:130px; pointer-events:none; opacity:0.4;">
+        <svg class="ks-bg-foliage-left" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:10px; left:0; width:110px !important; height:130px !important; pointer-events:none; opacity:0.4;">
             <path d="M-10 20 C 30 40, 70 80, 100 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round"/>
             <path d="M28 35 C 10 25, 12 5, 28 8 C 42 12, 45 28, 28 35 Z" fill="#7BA887"/>
             <path d="M60 55 C 50 40, 62 25, 78 30 C 88 40, 80 58, 60 55 Z" fill="#6B9978"/>
@@ -140,7 +140,8 @@ def render_tab_eval():
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """
+    st.markdown(clean_html(eval_header_html), unsafe_allow_html=True)
 
     # 2. Benchmark Test Cases Expander with Dynamic Rows & Clear PASS/FAIL States
     if rows:
@@ -205,16 +206,17 @@ def render_tab_eval():
                 {divider}
                 """)
 
-            st.markdown(f"""
+            cases_card_html = f"""
             <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:18px; padding:1.5rem 1.8rem; box-shadow:0 2px 12px rgba(23,75,53,0.03);">
                 {''.join(rows_html)}
             </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(clean_html(cases_card_html), unsafe_allow_html=True)
     else:
         st.info("No benchmark results found. Run evaluation.py to generate evaluation_results.csv.")
 
     # 3. Clean Footer & Single Bottom Wave
-    st.markdown(f"""
+    footer_html = f"""
     <div class="ks-footer">
         <div style="display:flex; align-items:center; justify-content:center; gap:0.5rem; font-size:1.3rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
             {ICONS['leaf_brand']} KisanSaathi
@@ -233,6 +235,6 @@ def render_tab_eval():
             &copy; 2026 KisanSaathi &middot; Built with Gemini 2.5 Flash &middot; Grounded in ICAR Agronomic Practice Standards
         </div>
     </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(BOTTOM_ORGANIC_WAVE_SVG, unsafe_allow_html=True)
+    """
+    st.markdown(clean_html(footer_html), unsafe_allow_html=True)
+    st.markdown(clean_html(BOTTOM_ORGANIC_WAVE_SVG), unsafe_allow_html=True)
