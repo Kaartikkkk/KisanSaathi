@@ -217,6 +217,45 @@ a:hover,
     background: #FFFFFF;
 }
 
+/* 4.5. MODERN PILL TABS */
+.stTabs [data-baseweb="tab-list"] {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #E2E9E1 !important;
+    border-radius: 999px !important;
+    padding: 0.45rem 0.6rem !important;
+    margin: 0 auto 2.5rem auto !important;
+    max-width: fit-content !important;
+    box-shadow: 0 4px 18px rgba(23, 75, 53, 0.04) !important;
+}
+.stTabs [data-baseweb="tab"] {
+    height: 42px !important;
+    border-radius: 999px !important;
+    padding: 0 1.4rem !important;
+    background-color: transparent !important;
+    color: #25352D !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border: none !important;
+    transition: all 0.15s ease !important;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    color: #174B35 !important;
+    background-color: #E7F2E8 !important;
+}
+.stTabs [aria-selected="true"] {
+    background-color: #174B35 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 8px rgba(23, 75, 53, 0.22) !important;
+}
+.stTabs [data-baseweb="tab-highlight"],
+.stTabs [data-baseweb="tab-border"] {
+    display: none !important;
+}
+
 /* 5. HERO SECTION */
 .ks-hero-card {
     position: relative;
@@ -749,568 +788,576 @@ with st.sidebar:
         st.rerun()
 
 # -----------------------------------------------------------------------------
-# 1. Navigation Bar (Light, Professional, Single Brand Logo)
+# 1. Navigation Bar & Multi-Tab Routing
 # -----------------------------------------------------------------------------
 st.markdown(f"""
-<div class="ks-navbar" id="home">
-    <a href="#home" class="ks-nav-brand">
+<div class="ks-navbar">
+    <div class="ks-nav-brand">
         <div>{ICONS['leaf_brand']}</div>
         <div>
             <div class="ks-nav-brand-title">KisanSaathi</div>
             <div class="ks-nav-brand-sub">AI Crop Advisory Assistant</div>
         </div>
-    </a>
-    <div class="ks-nav-links">
-        <a href="#home" class="ks-nav-btn-active">{ICONS['home_white']} Home</a>
-        <a href="#how-it-works" class="ks-nav-link">{ICONS['layers']} How It Works</a>
-        <a href="#ask-ai" class="ks-nav-link">{ICONS['chat']} Ask AI</a>
-        <a href="#safety" class="ks-nav-link">{ICONS['shield']} Safety</a>
-        <span class="ks-lang-pill">{ICONS['globe']} {st.session_state.original_form['language']} ▾</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+        <span class="ks-lang-pill">{ICONS['globe']} {st.session_state.original_form['language']}</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# -----------------------------------------------------------------------------
-# 2. Hero Section (Clean 2-Column, No Overlapping Logos, Sharp Farmer Photo)
-# -----------------------------------------------------------------------------
-farmer_b64 = get_base64_image("assets/farmer_portrait_hd.jpg") or get_base64_image("assets/farmer_clean_hd.jpg")
+tab_ask, tab_home, tab_how, tab_safety, tab_eval = st.tabs([
+    "🌿 Ask AI (Crop Advisor)",
+    "🏡 Home",
+    "📐 How It Works",
+    "🛡️ Safety Guardrails",
+    "📊 Evaluation",
+])
+with tab_ask:
+    # -----------------------------------------------------------------------------
+    # 5. Crop Diagnostic Intake Form (#ask-ai)
+    # -----------------------------------------------------------------------------
+    st.markdown('<div id="ask-ai"></div>', unsafe_allow_html=True)
 
-st.markdown(f"""
-<div class="ks-hero-card">
-    <svg class="ks-foliage-svg" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
-        <path d="M55 35 C 50 20, 65 10, 78 18 C 85 28, 70 40, 55 35 Z" fill="#3B925E" opacity="0.85"/>
-        <path d="M85 41 C 85 25, 102 22, 110 32 C 115 42, 98 50, 85 41 Z" fill="#2E7D50" opacity="0.75"/>
-        <path d="M40 32 C 30 45, 15 45, 18 32 C 22 22, 35 25, 40 32 Z" fill="#256C42" opacity="0.7"/>
-        <path d="M72 40 C 65 55, 50 56, 52 42 C 55 32, 68 32, 72 40 Z" fill="#2E7D50" opacity="0.8"/>
-        <path d="M105 45 C 102 60, 88 62, 88 48 C 90 38, 102 38, 105 45 Z" fill="#3B925E" opacity="0.75"/>
-    </svg>
-    <div class="ks-hero-left">
-        <h1 class="ks-hero-h1">
-            Better Crop Decisions.<br>
-            <span style="color:#174B35;">Safer Farming.</span>
-        </h1>
-        <div class="ks-hero-accent-bar"></div>
-        <p class="ks-hero-desc">
-            Describe your crop problem in your preferred language and receive clear, cautious guidance to help you take the next step.
-        </p>
-        <div class="ks-hero-actions">
-            <a href="#ask-ai" class="ks-btn-primary">
-                {ICONS['leaf_white']} Get Crop Advice &rarr;
-            </a>
-            <a href="#how-it-works" class="ks-btn-outline">
-                {ICONS['circle_icon']} How It Works
-            </a>
-        </div>
-    </div>
-    <div class="ks-hero-right">
-        <div class="ks-farmer-frame">
-            <img src="data:image/jpeg;base64,{farmer_b64}" alt="Indian farmer using smartphone in green field" />
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# -----------------------------------------------------------------------------
-# 3. 4-Pillar Feature Strip (Matching Reference Mockup)
-# -----------------------------------------------------------------------------
-st.markdown(f"""
-<div class="ks-feature-strip">
-    <div class="ks-feature-item">
-        <div class="ks-feature-icon">{ICONS['leaf_pillar']}</div>
-        <div class="ks-feature-title">Crop Guidance</div>
-    </div>
-    <div class="ks-feature-item">
-        <div class="ks-feature-icon">{ICONS['search_pillar']}</div>
-        <div class="ks-feature-title">Problem Identification</div>
-    </div>
-    <div class="ks-feature-item">
-        <div class="ks-feature-icon">{ICONS['shield_pillar']}</div>
-        <div class="ks-feature-title">Safe Recommendations</div>
-    </div>
-    <div class="ks-feature-item">
-        <div class="ks-feature-icon">{ICONS['lang_pillar']}</div>
-        <div class="ks-feature-title">Multi-language Support</div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# -----------------------------------------------------------------------------
-# 4. How It Works Section
-# -----------------------------------------------------------------------------
-st.markdown("""
-<div id="how-it-works" style="margin-bottom:3rem;">
-    <div style="text-align:center; max-width:680px; margin:0 auto 2rem auto;">
-        <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.3rem 0.85rem; border-radius:999px; display:inline-block; margin-bottom:0.6rem;">
-            System Architecture
-        </span>
-        <h2 style="font-size:2rem; font-weight:800; color:#174B35; margin-bottom:0.5rem;">
-            How KisanSaathi Works
-        </h2>
-        <p style="color:#68756C; font-size:1rem; line-height:1.6;">
-            A grounded three-stage prompt workflow ensuring verified agronomic advice with zero chemical dosage hallucination.
-        </p>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-hw_col1, hw_col2, hw_col3 = st.columns(3)
-with hw_col1:
     st.markdown(f"""
-    <div class="ks-card">
-        <div class="ks-card-icon-box">{ICONS['search']}</div>
-        <h3>1. Multi-Lingual Extraction</h3>
-        <p>Understands farmer queries in English, Hindi, and Hinglish. Extracts crop, region, phenological stage, symptoms, and spread rate.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with hw_col2:
-    st.markdown(f"""
-    <div class="ks-card">
-        <div class="ks-card-icon-box">{ICONS['leaf_brand']}</div>
-        <h3>2. Grounded TF-IDF Retrieval</h3>
-        <p>Matches symptom profiles against ICAR agronomic reference materials. Every diagnosis is grounded in verified literature citations.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with hw_col3:
-    st.markdown(f"""
-    <div class="ks-card">
-        <div class="ks-card-icon-box">{ICONS['shield_pillar']}</div>
-        <h3>3. Safe Advisory & Escalation</h3>
-        <p>Generates cultural management checklists, asks follow-up questions for missing details, and escalates to KVK experts.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# -----------------------------------------------------------------------------
-# 5. Crop Diagnostic Intake Form (#ask-ai)
-# -----------------------------------------------------------------------------
-st.markdown('<div id="ask-ai"></div>', unsafe_allow_html=True)
-
-st.markdown(f"""
-<div class="ks-form-container">
-    <div class="ks-form-header">
-        <div class="ks-form-title">
-            {ICONS['leaf_brand']}
-            <span>Crop Diagnostic Center</span>
-        </div>
-        <span style="font-size:0.75rem; font-weight:700; color:#2E7D50; background:#E7F2E8; padding:0.35rem 0.85rem; border-radius:999px;">
-            AI Symptom Intake
-        </span>
-    </div>
-""", unsafe_allow_html=True)
-
-# Benchmark scenario quick-fill buttons
-st.caption("🧪 **Quick-Fill Benchmark Scenarios:**")
-p1, p2, p3, p4, p5 = st.columns([1, 1, 1, 1, 0.9])
-with p1:
-    if st.button("🍅 Tomato Leaf Curl (UP)", use_container_width=True):
-        set_preset("Tomato", "Uttar Pradesh", "Flowering", "Slowly", "English", "Tomato leaves have yellow spots and curling edges.")
-        st.rerun()
-with p2:
-    if st.button("🌾 Rice Brown Spot (WB)", use_container_width=True):
-        set_preset("Rice", "West Bengal", "Vegetative", "Slowly", "English", "Rice plants have brown spots on the leaves.")
-        st.rerun()
-with p3:
-    if st.button("🌱 Wheat Yellowing (PB)", use_container_width=True):
-        set_preset("Wheat", "Punjab", "Not sure", "Rapidly", "Hindi", "गेहूं की पत्तियां नोक से पीली पड़ रही हैं और समस्या तेजी से बढ़ रही है।")
-        st.rerun()
-with p4:
-    if st.button("🥔 Potato Stunting (UP)", use_container_width=True):
-        set_preset("Potato", "Uttar Pradesh", "Vegetative", "Not sure", "Hinglish", "Aloo ke paudhe me curling leaves dikh rahi hain aur growth ruk gayi hai.")
-        st.rerun()
-with p5:
-    if st.button("🔄 Reset Inputs", use_container_width=True):
-        st.session_state.result = None
-        st.session_state.follow_up_history = []
-        st.session_state.follow_up_answer = ""
-        st.session_state.original_form = {
-            "crop": "",
-            "region": "",
-            "stage": "Not sure",
-            "query": "",
-            "spread": "Not sure",
-            "language": st.session_state.original_form.get("language", "English"),
-        }
-        st.rerun()
-
-OF = st.session_state.original_form
-form_col1, form_col2 = st.columns(2, gap="medium")
-
-with form_col1:
-    crop = st.text_input("Crop Name", value=OF["crop"], placeholder="e.g. Tomato / Rice / गेहूं")
-    region = st.text_input("Region / State", value=OF["region"], placeholder="e.g. Uttar Pradesh, Punjab")
-    stage_opts = ["Not sure", "Seedling", "Vegetative", "Flowering", "Fruiting", "Harvest"]
-    current_stage = OF["stage"]
-    stage = st.selectbox("Growth Stage", stage_opts, index=stage_opts.index(current_stage) if current_stage in stage_opts else 0)
-
-with form_col2:
-    spread_opts = ["Not sure", "Not spreading", "Slowly", "Rapidly"]
-    current_spread = OF["spread"]
-    spread = st.selectbox("Problem Spreading?", spread_opts, index=spread_opts.index(current_spread) if current_spread in spread_opts else 0)
-    lang_opts = ["English", "Hindi", "Hinglish"]
-    current_lang = OF["language"]
-    form_lang = st.selectbox("Preferred Advisory Language", lang_opts, index=lang_opts.index(current_lang) if current_lang in lang_opts else 0)
-    query = st.text_area("Describe Symptoms Observed", value=OF["query"], placeholder="Describe color change, leaf curling, spots, insect presence, etc.", height=105)
-
-OF["language"] = form_lang
-
-submit = st.button("🌿 Get Crop Advice", use_container_width=True)
-st.markdown("</div>", unsafe_allow_html=True)
-
-# -----------------------------------------------------------------------------
-# 6. Pipeline Execution
-# -----------------------------------------------------------------------------
-if submit:
-    if not query.strip():
-        st.warning("Please describe the crop symptoms before proceeding.")
-        st.stop()
-
-    try:
-        st.session_state.original_form = {
-            "crop": crop.strip(),
-            "region": region.strip(),
-            "stage": stage,
-            "query": query.strip(),
-            "spread": spread,
-            "language": form_lang,
-        }
-        st.session_state.follow_up_history = []
-        st.session_state.follow_up_answer = ""
-
-        rk = get_gemini_api_key(api_key_input)
-        rm = get_gemini_model()
-        if not rk:
-            st.error("⚠️ GEMINI_API_KEY is missing. Add it to Streamlit Secrets, .env, or the sidebar.")
-            st.stop()
-
-        notes = load_reference_notes()
-        pipeline = KisanSaathiPipeline(notes, api_key=rk, model=rm)
-        with st.status("🌱 Running Grounded Agronomic Analysis...", expanded=True) as status:
-            step_text = st.empty()
-            def handle_step(msg):
-                step_text.write(f"⏳ {msg}")
-            o = st.session_state.original_form
-            result = pipeline.run(
-                query=o["query"],
-                crop=o["crop"],
-                region=o["region"],
-                stage=o["stage"],
-                spread=o["spread"],
-                language=o["language"],
-                follow_up_answer="",
-                previous_extraction=None,
-                on_step=handle_step,
-            )
-            status.update(label="✅ Analysis Complete!", state="complete", expanded=False)
-        st.session_state.result = result
-    except Exception as exc:
-        st.error(f"Could not complete the analysis: {exc}")
-        st.info("Check GEMINI_API_KEY configuration and connectivity.")
-
-# -----------------------------------------------------------------------------
-# 7. Diagnostic Assessment Results Display
-# -----------------------------------------------------------------------------
-if st.session_state.result:
-    result = st.session_state.result
-    extraction = result["extraction"]
-    diagnosis = result["diagnosis"]
-    advisory = result["advisory"]
-    follow_up_q = extraction.get("follow_up_question", "").strip()
-
-    st.markdown("---")
-    st.markdown(f"""
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
-        <div>
-            <h2 style="font-size:1.85rem; font-weight:800; color:#174B35; margin:0;">
-                KisanSaathi Assessment Results
-            </h2>
-            <p style="color:#68756C; margin:0.25rem 0 0 0; font-size:0.95rem;">
-                Grounded diagnostic evaluation for <b>{extraction.get('crop', 'Crop')}</b> in <b>{extraction.get('broad_region', 'Region')}</b>
-            </p>
-        </div>
-        <span style="background:#E7F2E8; color:#0B5A2A; padding:0.4rem 0.95rem; border-radius:999px; font-weight:700; font-size:0.8rem;">
-            {ICONS['check_green']} Verified Advisory
-        </span>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Context badge strip
-    st.markdown(f"""
-    <div class="ks-card" style="padding:1.15rem 1.5rem; background:#FFFFFF; margin-bottom:1.25rem;">
-        <div style="display:flex; flex-wrap:wrap; gap:1.4rem; align-items:center;">
-            <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Crop:</span> <b>{extraction.get('crop', 'Unknown')}</b></div>
-            <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Region:</span> <b>{extraction.get('broad_region', 'Unknown')}</b></div>
-            <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Stage:</span> <b>{extraction.get('growth_stage', 'Unknown')}</b></div>
-            <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Spread:</span> <b>{extraction.get('spread', 'Unknown')}</b></div>
-            <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Symptoms:</span> <b>{', '.join(extraction.get('symptoms', [])) or 'Observed'}</b></div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Possible causes card
-    st.markdown("""
-    <div class="ks-card">
-        <h3 style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
-            Possible Agronomic Causes
-        </h3>
-        <div style="background:#F0FDF4; border-left:4px solid #2E7D50; padding:0.75rem 1rem; border-radius:0 8px 8px 0; margin-bottom:1.25rem; font-size:0.85rem; color:#166534;">
-            <b>Grounded Literature Disclaimer:</b> The following are potential agronomic causes derived from symptom matching with ICAR reference materials. They represent preliminary assessments rather than confirmed laboratory diagnoses.
-        </div>
-    """, unsafe_allow_html=True)
-
-    causes = diagnosis.get("possible_causes", [])
-    if causes:
-        for c in causes:
-            st.markdown(f"""
-            <div class="ks-cause-box">
-                <div style="font-size:1.05rem; font-weight:700; color:#174B35; margin-bottom:0.35rem;">{c.get('name', 'Possible cause')}</div>
-                <div style="font-size:0.92rem; color:#68756C; line-height:1.55;">{c.get('reason', '')}</div>
+    <div class="ks-form-container">
+        <div class="ks-form-header">
+            <div class="ks-form-title">
+                {ICONS['leaf_brand']}
+                <span>Crop Diagnostic Center</span>
             </div>
-            """, unsafe_allow_html=True)
-    else:
-        st.write("No definitive match in reference notes. Continued observation recommended.")
+            <span style="font-size:0.75rem; font-weight:700; color:#2E7D50; background:#E7F2E8; padding:0.35rem 0.85rem; border-radius:999px;">
+                AI Symptom Intake
+            </span>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Benchmark scenario quick-fill buttons
+    st.caption("🧪 **Quick-Fill Benchmark Scenarios:**")
+    p1, p2, p3, p4, p5 = st.columns([1, 1, 1, 1, 0.9])
+    with p1:
+        if st.button("🍅 Tomato Leaf Curl (UP)", use_container_width=True):
+            set_preset("Tomato", "Uttar Pradesh", "Flowering", "Slowly", "English", "Tomato leaves have yellow spots and curling edges.")
+            st.rerun()
+    with p2:
+        if st.button("🌾 Rice Brown Spot (WB)", use_container_width=True):
+            set_preset("Rice", "West Bengal", "Vegetative", "Slowly", "English", "Rice plants have brown spots on the leaves.")
+            st.rerun()
+    with p3:
+        if st.button("🌱 Wheat Yellowing (PB)", use_container_width=True):
+            set_preset("Wheat", "Punjab", "Not sure", "Rapidly", "Hindi", "गेहूं की पत्तियां नोक से पीली पड़ रही हैं और समस्या तेजी से बढ़ रही है।")
+            st.rerun()
+    with p4:
+        if st.button("🥔 Potato Stunting (UP)", use_container_width=True):
+            set_preset("Potato", "Uttar Pradesh", "Vegetative", "Not sure", "Hinglish", "Aloo ke paudhe me curling leaves dikh rahi hain aur growth ruk gayi hai.")
+            st.rerun()
+    with p5:
+        if st.button("🔄 Reset Inputs", use_container_width=True):
+            st.session_state.result = None
+            st.session_state.follow_up_history = []
+            st.session_state.follow_up_answer = ""
+            st.session_state.original_form = {
+                "crop": "",
+                "region": "",
+                "stage": "Not sure",
+                "query": "",
+                "spread": "Not sure",
+                "language": st.session_state.original_form.get("language", "English"),
+            }
+            st.rerun()
+
+    OF = st.session_state.original_form
+    form_col1, form_col2 = st.columns(2, gap="medium")
+
+    with form_col1:
+        crop = st.text_input("Crop Name", value=OF["crop"], placeholder="e.g. Tomato / Rice / गेहूं")
+        region = st.text_input("Region / State", value=OF["region"], placeholder="e.g. Uttar Pradesh, Punjab")
+        stage_opts = ["Not sure", "Seedling", "Vegetative", "Flowering", "Fruiting", "Harvest"]
+        current_stage = OF["stage"]
+        stage = st.selectbox("Growth Stage", stage_opts, index=stage_opts.index(current_stage) if current_stage in stage_opts else 0)
+
+    with form_col2:
+        spread_opts = ["Not sure", "Not spreading", "Slowly", "Rapidly"]
+        current_spread = OF["spread"]
+        spread = st.selectbox("Problem Spreading?", spread_opts, index=spread_opts.index(current_spread) if current_spread in spread_opts else 0)
+        lang_opts = ["English", "Hindi", "Hinglish"]
+        current_lang = OF["language"]
+        form_lang = st.selectbox("Preferred Advisory Language", lang_opts, index=lang_opts.index(current_lang) if current_lang in lang_opts else 0)
+        query = st.text_area("Describe Symptoms Observed", value=OF["query"], placeholder="Describe color change, leaf curling, spots, insect presence, etc.", height=105)
+
+    OF["language"] = form_lang
+
+    submit = st.button("🌿 Get Crop Advice", use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Advisory & Field Checklist in 2 equal columns
-    res_col1, res_col2 = st.columns(2, gap="medium")
-    with res_col1:
+    # -----------------------------------------------------------------------------
+    # 6. Pipeline Execution
+    # -----------------------------------------------------------------------------
+    if submit:
+        if not query.strip():
+            st.warning("Please describe the crop symptoms before proceeding.")
+            st.stop()
+
+        try:
+            st.session_state.original_form = {
+                "crop": crop.strip(),
+                "region": region.strip(),
+                "stage": stage,
+                "query": query.strip(),
+                "spread": spread,
+                "language": form_lang,
+            }
+            st.session_state.follow_up_history = []
+            st.session_state.follow_up_answer = ""
+
+            rk = get_gemini_api_key(api_key_input)
+            rm = get_gemini_model()
+            if not rk:
+                st.error("⚠️ GEMINI_API_KEY is missing. Add it to Streamlit Secrets, .env, or the sidebar.")
+                st.stop()
+
+            notes = load_reference_notes()
+            pipeline = KisanSaathiPipeline(notes, api_key=rk, model=rm)
+            with st.status("🌱 Running Grounded Agronomic Analysis...", expanded=True) as status:
+                step_text = st.empty()
+                def handle_step(msg):
+                    step_text.write(f"⏳ {msg}")
+                o = st.session_state.original_form
+                result = pipeline.run(
+                    query=o["query"],
+                    crop=o["crop"],
+                    region=o["region"],
+                    stage=o["stage"],
+                    spread=o["spread"],
+                    language=o["language"],
+                    follow_up_answer="",
+                    previous_extraction=None,
+                    on_step=handle_step,
+                )
+                status.update(label="✅ Analysis Complete!", state="complete", expanded=False)
+            st.session_state.result = result
+        except Exception as exc:
+            st.error(f"Could not complete the analysis: {exc}")
+            st.info("Check GEMINI_API_KEY configuration and connectivity.")
+
+    # -----------------------------------------------------------------------------
+    # 7. Diagnostic Assessment Results Display
+    # -----------------------------------------------------------------------------
+    if st.session_state.result:
+        result = st.session_state.result
+        extraction = result["extraction"]
+        diagnosis = result["diagnosis"]
+        advisory = result["advisory"]
+        follow_up_q = extraction.get("follow_up_question", "").strip()
+
+        st.markdown("---")
         st.markdown(f"""
-        <div class="ks-card" style="height:100%;">
-            <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">Agronomic Advisory</h3>
-            <div style="font-size:0.92rem; line-height:1.6; color:#25352D;">
-                {advisory.get('advice', 'No specific advisory available.')}
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+            <div>
+                <h2 style="font-size:1.85rem; font-weight:800; color:#174B35; margin:0;">
+                    KisanSaathi Assessment Results
+                </h2>
+                <p style="color:#68756C; margin:0.25rem 0 0 0; font-size:0.95rem;">
+                    Grounded diagnostic evaluation for <b>{extraction.get('crop', 'Crop')}</b> in <b>{extraction.get('broad_region', 'Region')}</b>
+                </p>
+            </div>
+            <span style="background:#E7F2E8; color:#0B5A2A; padding:0.4rem 0.95rem; border-radius:999px; font-weight:700; font-size:0.8rem;">
+                {ICONS['check_green']} Verified Advisory
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Context badge strip
+        st.markdown(f"""
+        <div class="ks-card" style="padding:1.15rem 1.5rem; background:#FFFFFF; margin-bottom:1.25rem;">
+            <div style="display:flex; flex-wrap:wrap; gap:1.4rem; align-items:center;">
+                <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Crop:</span> <b>{extraction.get('crop', 'Unknown')}</b></div>
+                <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Region:</span> <b>{extraction.get('broad_region', 'Unknown')}</b></div>
+                <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Stage:</span> <b>{extraction.get('growth_stage', 'Unknown')}</b></div>
+                <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Spread:</span> <b>{extraction.get('spread', 'Unknown')}</b></div>
+                <div><span style="font-size:0.75rem; color:#68756C; font-weight:700; text-transform:uppercase;">Symptoms:</span> <b>{', '.join(extraction.get('symptoms', [])) or 'Observed'}</b></div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-    with res_col2:
+        # Possible causes card
         st.markdown("""
-        <div class="ks-card" style="height:100%;">
-            <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">Recommended Field Checklist</h3>
+        <div class="ks-card">
+            <h3 style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
+                Possible Agronomic Causes
+            </h3>
+            <div style="background:#F0FDF4; border-left:4px solid #2E7D50; padding:0.75rem 1rem; border-radius:0 8px 8px 0; margin-bottom:1.25rem; font-size:0.85rem; color:#166534;">
+                <b>Grounded Literature Disclaimer:</b> The following are potential agronomic causes derived from symptom matching with ICAR reference materials. They represent preliminary assessments rather than confirmed laboratory diagnoses.
+            </div>
         """, unsafe_allow_html=True)
-        next_steps = advisory.get("next_steps", [])
-        if next_steps:
-            for item in next_steps:
+
+        causes = diagnosis.get("possible_causes", [])
+        if causes:
+            for c in causes:
                 st.markdown(f"""
-                <div style="display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:0.75rem; font-size:0.88rem; color:#25352D;">
-                    <div style="margin-top:2px;">{ICONS['check_green']}</div>
-                    <div>{item}</div>
+                <div class="ks-cause-box">
+                    <div style="font-size:1.05rem; font-weight:700; color:#174B35; margin-bottom:0.35rem;">{c.get('name', 'Possible cause')}</div>
+                    <div style="font-size:0.92rem; color:#68756C; line-height:1.55;">{c.get('reason', '')}</div>
                 </div>
                 """, unsafe_allow_html=True)
+        else:
+            st.write("No definitive match in reference notes. Continued observation recommended.")
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # Safety Warning Banner
-    st.markdown(f"""
-    <div class="ks-alert ks-alert-warn">
-        <div style="flex-shrink:0; padding-top:2px;">{ICONS['shield']}</div>
-        <div>
-            <h4 style="margin:0 0 0.35rem 0; font-size:0.98rem; font-weight:700;">Strict Zero Chemical Dosage Policy</h4>
-            <p style="margin:0; font-size:0.88rem; line-height:1.5;">KisanSaathi does <b>not</b> provide chemical pesticide dosages. Always consult qualified local agronomists or your nearest Krishi Vigyan Kendra before applying synthetic chemicals.</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    if advisory.get("escalate", True):
-        st.markdown(f"""
-        <div class="ks-alert ks-alert-danger">
-            <div style="flex-shrink:0; padding-top:2px;">{ICONS['alert']}</div>
-            <div>
-                <h4 style="margin:0 0 0.35rem 0; font-size:0.98rem; font-weight:700;">Extension Officer / KVK Escalation Recommended</h4>
-                <p style="margin:0; font-size:0.88rem; line-height:1.5;"><b>Reason:</b> {advisory.get('escalation_reason', 'Physical on-ground inspection required.')}</p>
-                <div style="margin-top:0.6rem; font-weight:600; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
-                    {ICONS['phone']} National Kisan Call Centre: <b>1800-180-1551</b> (Toll-Free, 6 AM - 10 PM)
+        # Advisory & Field Checklist in 2 equal columns
+        res_col1, res_col2 = st.columns(2, gap="medium")
+        with res_col1:
+            st.markdown(f"""
+            <div class="ks-card" style="height:100%;">
+                <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">Agronomic Advisory</h3>
+                <div style="font-size:0.92rem; line-height:1.6; color:#25352D;">
+                    {advisory.get('advice', 'No specific advisory available.')}
                 </div>
             </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
-    # Follow-Up Question Card
-    if follow_up_q:
+        with res_col2:
+            st.markdown("""
+            <div class="ks-card" style="height:100%;">
+                <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">Recommended Field Checklist</h3>
+            """, unsafe_allow_html=True)
+            next_steps = advisory.get("next_steps", [])
+            if next_steps:
+                for item in next_steps:
+                    st.markdown(f"""
+                    <div style="display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:0.75rem; font-size:0.88rem; color:#25352D;">
+                        <div style="margin-top:2px;">{ICONS['check_green']}</div>
+                        <div>{item}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
+
+        # Safety Warning Banner
         st.markdown(f"""
-        <div class="ks-followup-card">
-            <div style="display:flex; align-items:center; gap:0.6rem; color:#2E7D50; margin-bottom:0.6rem; font-weight:700; text-transform:uppercase; font-size:0.82rem;">
-                {ICONS['question']} Follow-Up Clarification Needed
+        <div class="ks-alert ks-alert-warn">
+            <div style="flex-shrink:0; padding-top:2px;">{ICONS['shield']}</div>
+            <div>
+                <h4 style="margin:0 0 0.35rem 0; font-size:0.98rem; font-weight:700;">Strict Zero Chemical Dosage Policy</h4>
+                <p style="margin:0; font-size:0.88rem; line-height:1.5;">KisanSaathi does <b>not</b> provide chemical pesticide dosages. Always consult qualified local agronomists or your nearest Krishi Vigyan Kendra before applying synthetic chemicals.</p>
             </div>
-            <div style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.75rem; line-height:1.4;">
-                {follow_up_q}
-            </div>
+        </div>
         """, unsafe_allow_html=True)
 
-        if extraction.get("missing_information"):
-            st.caption(f"Pending Information: {', '.join(extraction['missing_information'])}")
+        if advisory.get("escalate", True):
+            st.markdown(f"""
+            <div class="ks-alert ks-alert-danger">
+                <div style="flex-shrink:0; padding-top:2px;">{ICONS['alert']}</div>
+                <div>
+                    <h4 style="margin:0 0 0.35rem 0; font-size:0.98rem; font-weight:700;">Extension Officer / KVK Escalation Recommended</h4>
+                    <p style="margin:0; font-size:0.88rem; line-height:1.5;"><b>Reason:</b> {advisory.get('escalation_reason', 'Physical on-ground inspection required.')}</p>
+                    <div style="margin-top:0.6rem; font-weight:600; font-size:0.85rem; display:flex; align-items:center; gap:0.4rem;">
+                        {ICONS['phone']} National Kisan Call Centre: <b>1800-180-1551</b> (Toll-Free, 6 AM - 10 PM)
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
-        with st.form("follow_up_form"):
-            follow_up_answer = st.text_input(
-                "Your Clarification:",
-                placeholder="e.g. Flowering stage / Around 20% of plants are affected",
-                key="follow_up_text_input",
-            )
-            submit_follow_up = st.form_submit_button("Submit Clarification & Update Diagnosis")
+        # Follow-Up Question Card
+        if follow_up_q:
+            st.markdown(f"""
+            <div class="ks-followup-card">
+                <div style="display:flex; align-items:center; gap:0.6rem; color:#2E7D50; margin-bottom:0.6rem; font-weight:700; text-transform:uppercase; font-size:0.82rem;">
+                    {ICONS['question']} Follow-Up Clarification Needed
+                </div>
+                <div style="font-size:1.25rem; font-weight:800; color:#174B35; margin-bottom:0.75rem; line-height:1.4;">
+                    {follow_up_q}
+                </div>
+            """, unsafe_allow_html=True)
 
-        if submit_follow_up:
-            if not follow_up_answer.strip():
-                st.warning("Please type your answer before submitting.")
-            else:
-                submitted_ans = follow_up_answer.strip()
-                st.session_state["follow_up_answer"] = submitted_ans
-                st.session_state.follow_up_history.append({"q": follow_up_q, "a": submitted_ans})
-                try:
-                    rk = get_gemini_api_key(api_key_input)
-                    rm = get_gemini_model()
-                    if not rk:
-                        st.error("⚠️ GEMINI_API_KEY is missing.")
-                        st.stop()
+            if extraction.get("missing_information"):
+                st.caption(f"Pending Information: {', '.join(extraction['missing_information'])}")
 
-                    notes = load_reference_notes()
-                    pipeline = KisanSaathiPipeline(notes, api_key=rk, model=rm)
-                    with st.status("🌱 Updating analysis with your clarification...", expanded=True) as status:
-                        step_text = st.empty()
-                        def handle_step(msg):
-                            step_text.write(f"⏳ {msg}")
-                        orig = st.session_state.original_form
-                        prev_extraction = st.session_state.result.get("extraction")
-                        updated_result = pipeline.run(
-                            query=orig["query"],
-                            crop=orig["crop"],
-                            region=orig["region"],
-                            stage=orig["stage"],
-                            spread=orig["spread"],
-                            language=orig["language"],
-                            follow_up_answer=submitted_ans,
-                            previous_extraction=prev_extraction,
-                            on_step=handle_step,
-                        )
-                        status.update(label="✅ Analysis Updated!", state="complete", expanded=False)
+            with st.form("follow_up_form"):
+                follow_up_answer = st.text_input(
+                    "Your Clarification:",
+                    placeholder="e.g. Flowering stage / Around 20% of plants are affected",
+                    key="follow_up_text_input",
+                )
+                submit_follow_up = st.form_submit_button("Submit Clarification & Update Diagnosis")
 
-                    clean_submitted = submitted_ans.rstrip(".?! ")
-                    ans_to_record = updated_result["extraction"].get("follow_up_answer") or clean_submitted
-                    st.session_state["follow_up_answer"] = ans_to_record
-                    updated_result["follow_up_answer"] = ans_to_record
-                    updated_result["extraction"]["follow_up_answer"] = ans_to_record
-                    st.session_state.result = updated_result
+            if submit_follow_up:
+                if not follow_up_answer.strip():
+                    st.warning("Please type your answer before submitting.")
+                else:
+                    submitted_ans = follow_up_answer.strip()
+                    st.session_state["follow_up_answer"] = submitted_ans
+                    st.session_state.follow_up_history.append({"q": follow_up_q, "a": submitted_ans})
+                    try:
+                        rk = get_gemini_api_key(api_key_input)
+                        rm = get_gemini_model()
+                        if not rk:
+                            st.error("⚠️ GEMINI_API_KEY is missing.")
+                            st.stop()
 
-                    # Update form values
-                    new_spread = updated_result["extraction"].get("spread", "")
-                    if new_spread and new_spread.lower() not in ["unknown", "not sure"]:
-                        st.session_state.original_form["spread"] = new_spread
-                    new_stage = updated_result["extraction"].get("growth_stage", "")
-                    if new_stage and new_stage.lower() not in ["unknown", "not sure"]:
-                        st.session_state.original_form["stage"] = new_stage
-                    new_crop = updated_result["extraction"].get("crop", "")
-                    if new_crop and new_crop.lower() not in ["unknown", "not provided"]:
-                        st.session_state.original_form["crop"] = new_crop
+                        notes = load_reference_notes()
+                        pipeline = KisanSaathiPipeline(notes, api_key=rk, model=rm)
+                        with st.status("🌱 Updating analysis with your clarification...", expanded=True) as status:
+                            step_text = st.empty()
+                            def handle_step(msg):
+                                step_text.write(f"⏳ {msg}")
+                            orig = st.session_state.original_form
+                            prev_extraction = st.session_state.result.get("extraction")
+                            updated_result = pipeline.run(
+                                query=orig["query"],
+                                crop=orig["crop"],
+                                region=orig["region"],
+                                stage=orig["stage"],
+                                spread=orig["spread"],
+                                language=orig["language"],
+                                follow_up_answer=submitted_ans,
+                                previous_extraction=prev_extraction,
+                                on_step=handle_step,
+                            )
+                            status.update(label="✅ Analysis Updated!", state="complete", expanded=False)
 
-                    st.rerun()
-                except Exception as exc:
-                    st.error(f"Could not update analysis: {exc}")
+                        clean_submitted = submitted_ans.rstrip(".?! ")
+                        ans_to_record = updated_result["extraction"].get("follow_up_answer") or clean_submitted
+                        st.session_state["follow_up_answer"] = ans_to_record
+                        updated_result["follow_up_answer"] = ans_to_record
+                        updated_result["extraction"]["follow_up_answer"] = ans_to_record
+                        st.session_state.result = updated_result
 
-        st.markdown("</div>", unsafe_allow_html=True)
+                        # Update form values
+                        new_spread = updated_result["extraction"].get("spread", "")
+                        if new_spread and new_spread.lower() not in ["unknown", "not sure"]:
+                            st.session_state.original_form["spread"] = new_spread
+                        new_stage = updated_result["extraction"].get("growth_stage", "")
+                        if new_stage and new_stage.lower() not in ["unknown", "not sure"]:
+                            st.session_state.original_form["stage"] = new_stage
+                        new_crop = updated_result["extraction"].get("crop", "")
+                        if new_crop and new_crop.lower() not in ["unknown", "not provided"]:
+                            st.session_state.original_form["crop"] = new_crop
 
-    if st.session_state.follow_up_history:
-        with st.expander("📝 Multi-Turn Conversation History", expanded=False):
-            for idx, item in enumerate(st.session_state.follow_up_history, 1):
-                st.markdown(f"**Turn {idx}:** {item['q']}")
-                st.markdown(f"*Farmer's Answer:* `{item['a']}`")
-                st.markdown("---")
+                        st.rerun()
+                    except Exception as exc:
+                        st.error(f"Could not update analysis: {exc}")
 
-    with st.expander("🔍 View Structured Pipeline Output (JSON)", expanded=bool(st.session_state.get("follow_up_answer"))):
-        st.json(result)
+            st.markdown("</div>", unsafe_allow_html=True)
 
-# -----------------------------------------------------------------------------
-# 8. Safety Architecture Section (#safety)
-# -----------------------------------------------------------------------------
-st.markdown("""
-<div id="safety" style="margin-top:4rem; margin-bottom:3rem;">
-    <div style="text-align:center; max-width:680px; margin:0 auto 2rem auto;">
-        <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.3rem 0.85rem; border-radius:999px; display:inline-block; margin-bottom:0.6rem;">
-            Safety Architecture
-        </span>
-        <h2 style="font-size:2rem; font-weight:800; color:#174B35; margin-bottom:0.5rem;">
-            Safety-First Agricultural Guardrails
-        </h2>
-        <p style="color:#68756C; font-size:1rem; line-height:1.6;">
-            Protecting crop health, soil vitality, and farmer safety through strict computational guardrails.
-        </p>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-saf_col1, saf_col2, saf_col3 = st.columns(3)
-with saf_col1:
-    st.markdown(f"""
-    <div class="ks-card">
-        <div class="ks-card-icon-box">{ICONS['shield_pillar']}</div>
-        <h3>Zero Chemical Dosage</h3>
-        <p>Never computes or prescribes synthetic pesticide spraying doses, preventing crop phytotoxicity and pollinator poisoning.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with saf_col2:
-    st.markdown(f"""
-    <div class="ks-card">
-        <div class="ks-card-icon-box">{ICONS['leaf_brand']}</div>
-        <h3>Evidence Grounding</h3>
-        <p>All possible causes are grounded in ICAR and state university agronomy reference manuals, eliminating ungrounded speculation.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with saf_col3:
-    st.markdown(f"""
-    <div class="ks-card">
-        <div class="ks-card-icon-box">{ICONS['search']}</div>
-        <h3>Human-In-The-Loop</h3>
-        <p>Uncertain symptoms or rapidly spreading plots automatically trigger escalation recommendations to local extension officers.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# -----------------------------------------------------------------------------
-# 9. Evaluation Benchmark Summary
-# -----------------------------------------------------------------------------
-st.markdown("""
-<div class="ks-card" style="margin-top:1rem;">
-    <div style="text-align:center; margin-bottom:1.5rem;">
-        <h3 style="font-size:1.45rem; font-weight:800; color:#174B35; margin-bottom:0.35rem;">
-            Empirical Benchmark Verification
-        </h3>
-        <p style="color:#68756C; font-size:0.9rem; margin:0;">
-            Evaluated across 12 distinct synthetic field scenarios with zero failures.
-        </p>
-    </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:1rem; text-align:center;">
-        <div style="padding:1.1rem; background:#F7F8F2; border-radius:12px; border:1px solid #E2E9E1;">
-            <div style="font-size:1.9rem; font-weight:800; color:#174B35; line-height:1;">12 / 12</div>
-            <div style="font-size:0.8rem; font-weight:600; color:#68756C; margin-top:0.35rem;">Scenarios Evaluated</div>
-        </div>
-        <div style="padding:1.1rem; background:#F0FDF4; border-radius:12px; border:1px solid #BBF7D0;">
-            <div style="font-size:1.9rem; font-weight:800; color:#15803D; line-height:1;">100%</div>
-            <div style="font-size:0.8rem; font-weight:600; color:#166534; margin-top:0.35rem;">Pass Rate</div>
-        </div>
-        <div style="padding:1.1rem; background:#FEF3C7; border-radius:12px; border:1px solid #FDE68A;">
-            <div style="font-size:1.9rem; font-weight:800; color:#B45309; line-height:1;">0</div>
-            <div style="font-size:0.8rem; font-weight:600; color:#92400E; margin-top:0.35rem;">Dosages Prescribed</div>
-        </div>
-        <div style="padding:1.1rem; background:#F7F8F2; border-radius:12px; border:1px solid #E2E9E1;">
-            <div style="font-size:1.9rem; font-weight:800; color:#2E7D50; line-height:1;">3</div>
-            <div style="font-size:0.8rem; font-weight:600; color:#68756C; margin-top:0.35rem;">Languages Supported</div>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-csv_path = "evaluation_results.csv"
-if os.path.exists(csv_path):
-    with st.expander("📋 View All 12 Test Cases (evaluation_results.csv)", expanded=False):
-        try:
-            with open(csv_path, encoding="utf-8") as f:
-                reader = csv.DictReader(f)
-                for r in reader:
-                    st.markdown(f"**{r.get('Test ID', '')}:** {r.get('Input', '')[:100]}... — **Status:** `{r.get('Pass/Fail', '')}`")
-                    st.caption(f"Reason: {r.get('Reason', '')}")
+        if st.session_state.follow_up_history:
+            with st.expander("📝 Multi-Turn Conversation History", expanded=False):
+                for idx, item in enumerate(st.session_state.follow_up_history, 1):
+                    st.markdown(f"**Turn {idx}:** {item['q']}")
+                    st.markdown(f"*Farmer's Answer:* `{item['a']}`")
                     st.markdown("---")
-        except Exception as e:
-            st.caption(f"Could not read CSV: {e}")
+
+        with st.expander("🔍 View Structured Pipeline Output (JSON)", expanded=bool(st.session_state.get("follow_up_answer"))):
+            st.json(result)
+
+with tab_home:
+    # -----------------------------------------------------------------------------
+    # 2. Hero Section (Clean 2-Column, No Overlapping Logos, Sharp Farmer Photo)
+    # -----------------------------------------------------------------------------
+    farmer_b64 = get_base64_image("assets/farmer_portrait_hd.jpg") or get_base64_image("assets/farmer_clean_hd.jpg")
+
+    st.markdown(f"""
+    <div class="ks-hero-card">
+        <svg class="ks-foliage-svg" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
+            <path d="M55 35 C 50 20, 65 10, 78 18 C 85 28, 70 40, 55 35 Z" fill="#3B925E" opacity="0.85"/>
+            <path d="M85 41 C 85 25, 102 22, 110 32 C 115 42, 98 50, 85 41 Z" fill="#2E7D50" opacity="0.75"/>
+            <path d="M40 32 C 30 45, 15 45, 18 32 C 22 22, 35 25, 40 32 Z" fill="#256C42" opacity="0.7"/>
+            <path d="M72 40 C 65 55, 50 56, 52 42 C 55 32, 68 32, 72 40 Z" fill="#2E7D50" opacity="0.8"/>
+            <path d="M105 45 C 102 60, 88 62, 88 48 C 90 38, 102 38, 105 45 Z" fill="#3B925E" opacity="0.75"/>
+        </svg>
+        <div class="ks-hero-left">
+            <h1 class="ks-hero-h1">
+                Better Crop Decisions.<br>
+                <span style="color:#174B35;">Safer Farming.</span>
+            </h1>
+            <div class="ks-hero-accent-bar"></div>
+            <p class="ks-hero-desc">
+                Describe your crop problem in your preferred language and receive clear, cautious guidance to help you take the next step.
+            </p>
+            <div class="ks-hero-actions">
+                <a href="#ask-ai" class="ks-btn-primary">
+                    {ICONS['leaf_white']} Get Crop Advice &rarr;
+                </a>
+                <a href="#how-it-works" class="ks-btn-outline">
+                    {ICONS['circle_icon']} How It Works
+                </a>
+            </div>
+        </div>
+        <div class="ks-hero-right">
+            <div class="ks-farmer-frame">
+                <img src="data:image/jpeg;base64,{farmer_b64}" alt="Indian farmer using smartphone in green field" />
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # -----------------------------------------------------------------------------
+    # 3. 4-Pillar Feature Strip (Matching Reference Mockup)
+    # -----------------------------------------------------------------------------
+    st.markdown(f"""
+    <div class="ks-feature-strip">
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['leaf_pillar']}</div>
+            <div class="ks-feature-title">Crop Guidance</div>
+        </div>
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['search_pillar']}</div>
+            <div class="ks-feature-title">Problem Identification</div>
+        </div>
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['shield_pillar']}</div>
+            <div class="ks-feature-title">Safe Recommendations</div>
+        </div>
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['lang_pillar']}</div>
+            <div class="ks-feature-title">Multi-language Support</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with tab_how:
+    # -----------------------------------------------------------------------------
+    # 4. How It Works Section
+    # -----------------------------------------------------------------------------
+    st.markdown("""
+    <div id="how-it-works" style="margin-bottom:3rem;">
+        <div style="text-align:center; max-width:680px; margin:0 auto 2rem auto;">
+            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.3rem 0.85rem; border-radius:999px; display:inline-block; margin-bottom:0.6rem;">
+                System Architecture
+            </span>
+            <h2 style="font-size:2rem; font-weight:800; color:#174B35; margin-bottom:0.5rem;">
+                How KisanSaathi Works
+            </h2>
+            <p style="color:#68756C; font-size:1rem; line-height:1.6;">
+                A grounded three-stage prompt workflow ensuring verified agronomic advice with zero chemical dosage hallucination.
+            </p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    hw_col1, hw_col2, hw_col3 = st.columns(3)
+    with hw_col1:
+        st.markdown(f"""
+        <div class="ks-card">
+            <div class="ks-card-icon-box">{ICONS['search']}</div>
+            <h3>1. Multi-Lingual Extraction</h3>
+            <p>Understands farmer queries in English, Hindi, and Hinglish. Extracts crop, region, phenological stage, symptoms, and spread rate.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with hw_col2:
+        st.markdown(f"""
+        <div class="ks-card">
+            <div class="ks-card-icon-box">{ICONS['leaf_brand']}</div>
+            <h3>2. Grounded TF-IDF Retrieval</h3>
+            <p>Matches symptom profiles against ICAR agronomic reference materials. Every diagnosis is grounded in verified literature citations.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with hw_col3:
+        st.markdown(f"""
+        <div class="ks-card">
+            <div class="ks-card-icon-box">{ICONS['shield_pillar']}</div>
+            <h3>3. Safe Advisory & Escalation</h3>
+            <p>Generates cultural management checklists, asks follow-up questions for missing details, and escalates to KVK experts.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+with tab_safety:
+    # -----------------------------------------------------------------------------
+    # 8. Safety Architecture Section (#safety)
+    # -----------------------------------------------------------------------------
+    st.markdown("""
+    <div id="safety" style="margin-top:4rem; margin-bottom:3rem;">
+        <div style="text-align:center; max-width:680px; margin:0 auto 2rem auto;">
+            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.3rem 0.85rem; border-radius:999px; display:inline-block; margin-bottom:0.6rem;">
+                Safety Architecture
+            </span>
+            <h2 style="font-size:2rem; font-weight:800; color:#174B35; margin-bottom:0.5rem;">
+                Safety-First Agricultural Guardrails
+            </h2>
+            <p style="color:#68756C; font-size:1rem; line-height:1.6;">
+                Protecting crop health, soil vitality, and farmer safety through strict computational guardrails.
+            </p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    saf_col1, saf_col2, saf_col3 = st.columns(3)
+    with saf_col1:
+        st.markdown(f"""
+        <div class="ks-card">
+            <div class="ks-card-icon-box">{ICONS['shield_pillar']}</div>
+            <h3>Zero Chemical Dosage</h3>
+            <p>Never computes or prescribes synthetic pesticide spraying doses, preventing crop phytotoxicity and pollinator poisoning.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with saf_col2:
+        st.markdown(f"""
+        <div class="ks-card">
+            <div class="ks-card-icon-box">{ICONS['leaf_brand']}</div>
+            <h3>Evidence Grounding</h3>
+            <p>All possible causes are grounded in ICAR and state university agronomy reference manuals, eliminating ungrounded speculation.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with saf_col3:
+        st.markdown(f"""
+        <div class="ks-card">
+            <div class="ks-card-icon-box">{ICONS['search']}</div>
+            <h3>Human-In-The-Loop</h3>
+            <p>Uncertain symptoms or rapidly spreading plots automatically trigger escalation recommendations to local extension officers.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+with tab_eval:
+    # -----------------------------------------------------------------------------
+    # 9. Evaluation Benchmark Summary
+    # -----------------------------------------------------------------------------
+    st.markdown("""
+    <div class="ks-card" style="margin-top:1rem;">
+        <div style="text-align:center; margin-bottom:1.5rem;">
+            <h3 style="font-size:1.45rem; font-weight:800; color:#174B35; margin-bottom:0.35rem;">
+                Empirical Benchmark Verification
+            </h3>
+            <p style="color:#68756C; font-size:0.9rem; margin:0;">
+                Evaluated across 12 distinct synthetic field scenarios with zero failures.
+            </p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:1rem; text-align:center;">
+            <div style="padding:1.1rem; background:#F7F8F2; border-radius:12px; border:1px solid #E2E9E1;">
+                <div style="font-size:1.9rem; font-weight:800; color:#174B35; line-height:1;">12 / 12</div>
+                <div style="font-size:0.8rem; font-weight:600; color:#68756C; margin-top:0.35rem;">Scenarios Evaluated</div>
+            </div>
+            <div style="padding:1.1rem; background:#F0FDF4; border-radius:12px; border:1px solid #BBF7D0;">
+                <div style="font-size:1.9rem; font-weight:800; color:#15803D; line-height:1;">100%</div>
+                <div style="font-size:0.8rem; font-weight:600; color:#166534; margin-top:0.35rem;">Pass Rate</div>
+            </div>
+            <div style="padding:1.1rem; background:#FEF3C7; border-radius:12px; border:1px solid #FDE68A;">
+                <div style="font-size:1.9rem; font-weight:800; color:#B45309; line-height:1;">0</div>
+                <div style="font-size:0.8rem; font-weight:600; color:#92400E; margin-top:0.35rem;">Dosages Prescribed</div>
+            </div>
+            <div style="padding:1.1rem; background:#F7F8F2; border-radius:12px; border:1px solid #E2E9E1;">
+                <div style="font-size:1.9rem; font-weight:800; color:#2E7D50; line-height:1;">3</div>
+                <div style="font-size:0.8rem; font-weight:600; color:#68756C; margin-top:0.35rem;">Languages Supported</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    csv_path = "evaluation_results.csv"
+    if os.path.exists(csv_path):
+        with st.expander("📋 View All 12 Test Cases (evaluation_results.csv)", expanded=False):
+            try:
+                with open(csv_path, encoding="utf-8") as f:
+                    reader = csv.DictReader(f)
+                    for r in reader:
+                        st.markdown(f"**{r.get('Test ID', '')}:** {r.get('Input', '')[:100]}... — **Status:** `{r.get('Pass/Fail', '')}`")
+                        st.caption(f"Reason: {r.get('Reason', '')}")
+                        st.markdown("---")
+            except Exception as e:
+                st.caption(f"Could not read CSV: {e}")
 
 # -----------------------------------------------------------------------------
 # 10. Footer (Clean, High-Quality Light Theme)
