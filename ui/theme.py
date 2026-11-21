@@ -93,8 +93,17 @@ header[data-testid="stHeader"],
     text-decoration: none !important;
     cursor: pointer !important;
     flex-shrink: 0 !important;
+    width: 170px !important;
+    min-width: 170px !important;
     z-index: 100000 !important;
     pointer-events: auto !important; /* Brand logo is clickable */
+}
+
+.ks-nav-brand svg {
+    height: 42px !important;
+    width: 100% !important;
+    max-width: 170px !important;
+    display: block !important;
 }
 
 .ks-nav-brand-title {
@@ -379,11 +388,11 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
     gap: 0.5rem !important;
 }
 
-/* Quick-Fill Preset Buttons: Columns 1-4 Solid Forest Green Pill with White Text */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button,
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) button,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(-n+4) button,
-div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button {
+/* Quick-Fill Preset Buttons: Explicit key scoping to prevent tooltip pollution */
+.st-key-qf_tomato button,
+.st-key-qf_rice button,
+.st-key-qf_wheat button,
+.st-key-qf_potato button {
     background-color: #174B35 !important;
     background: #174B35 !important;
     color: #FFFFFF !important;
@@ -391,18 +400,20 @@ div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button {
     font-size: 0.88rem !important;
     border-radius: 999px !important;
     border: 1.5px solid #174B35 !important;
-    padding: 0.55rem 1rem !important;
+    padding: 0.55rem 1.1rem !important;
     box-shadow: 0 2px 8px rgba(23, 75, 53, 0.18) !important;
     transition: all 0.2s ease !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
+    white-space: nowrap !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) button:hover,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(-n+4) button:hover,
-div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button:hover {
+.st-key-qf_tomato button:hover,
+.st-key-qf_rice button:hover,
+.st-key-qf_wheat button:hover,
+.st-key-qf_potato button:hover {
     background-color: #123D2B !important;
     background: #123D2B !important;
     border-color: #123D2B !important;
@@ -411,18 +422,16 @@ div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button:h
     box-shadow: 0 4px 12px rgba(23, 75, 53, 0.25) !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) button *,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(-n+4) button *,
-div[data-testid="stColumn"]:nth-child(-n+4) button * {
+.st-key-qf_tomato button *,
+.st-key-qf_rice button *,
+.st-key-qf_wheat button *,
+.st-key-qf_potato button * {
     color: #FFFFFF !important;
     font-weight: 700 !important;
 }
 
 /* Preset Button 5 (Reset): White Pill with #174B35 Border and Text */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button,
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button,
-div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button {
+.st-key-qf_reset button {
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     color: #174B35 !important;
@@ -430,18 +439,17 @@ div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button {
     font-size: 0.88rem !important;
     border-radius: 999px !important;
     border: 1.5px solid #174B35 !important;
-    padding: 0.55rem 1rem !important;
+    padding: 0.55rem 1.1rem !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     transition: all 0.2s ease !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
+    white-space: nowrap !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button:hover,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button:hover,
-div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button:hover {
+.st-key-qf_reset button:hover {
     background-color: #F4F8F4 !important;
     background: #F4F8F4 !important;
     border-color: #123D2B !important;
@@ -449,16 +457,13 @@ div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button:hove
     transform: translateY(-1px) !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button *,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button *,
-div[data-testid="stColumn"]:nth-child(5) button * {
+.st-key-qf_reset button * {
     color: #174B35 !important;
     font-weight: 700 !important;
 }
 
-/* Preset Button 1 Icon (Leaf) */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(1) button::before,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(1) button::before {
+/* Preset Icons */
+.st-key-qf_tomato button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -471,9 +476,7 @@ div[data-testid="stHorizontalBlock"] .stColumn:nth-child(1) button::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
 }
 
-/* Preset Button 2 Icon (Rice/Grain) */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(2) button::before,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(2) button::before {
+.st-key-qf_rice button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -486,9 +489,7 @@ div[data-testid="stHorizontalBlock"] .stColumn:nth-child(2) button::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 20h10'/%3E%3Cpath d='M10 20c5.5-2.5.8-6.4 3-10'/%3E%3Cpath d='M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4.1 5.5.8z'/%3E%3Cpath d='M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4.1 1-4.9 2z'/%3E%3C/svg%3E");
 }
 
-/* Preset Button 3 Icon (Wheat Sprout) */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(3) button::before,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(3) button::before {
+.st-key-qf_wheat button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -501,9 +502,7 @@ div[data-testid="stHorizontalBlock"] .stColumn:nth-child(3) button::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22v-9'/%3E%3Cpath d='M9 15c-3-1-3-4-1-6 2 2 3 4 3 6'/%3E%3Cpath d='M15 15c3-1 3-4 1-6-2 2-3 4-3 6'/%3E%3Cpath d='M9 9c-2-1-2-3 0-5 2 2 2 3 2 5'/%3E%3Cpath d='M15 9c2-1 2-3 0-5-2 2-2 3-2 5'/%3E%3C/svg%3E");
 }
 
-/* Preset Button 4 Icon (Potato/Tuber dots) */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(4) button::before,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(4) button::before {
+.st-key-qf_potato button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -516,9 +515,7 @@ div[data-testid="stHorizontalBlock"] .stColumn:nth-child(4) button::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='12' rx='9' ry='6'/%3E%3Ccircle cx='9' cy='11' r='0.5' fill='%23FFFFFF'/%3E%3Ccircle cx='14' cy='13' r='0.5' fill='%23FFFFFF'/%3E%3Ccircle cx='12' cy='10' r='0.5' fill='%23FFFFFF'/%3E%3C/svg%3E");
 }
 
-/* Preset Button 5 Icon (Reset Outline Circle) */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button::before,
-div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button::before {
+.st-key-qf_reset button::before {
     content: "";
     display: inline-block;
     width: 14px;
@@ -529,6 +526,38 @@ div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button::before {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3C/svg%3E");
+}
+
+/* CRITICAL RESET: Streamlit Tooltip Hover Target Buttons must never be styled as pills */
+div.stTooltipHoverTarget button,
+.stTooltipHoverTarget button {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex !important;
+    transform: none !important;
+}
+
+div.stTooltipHoverTarget button::before,
+.stTooltipHoverTarget button::before {
+    display: none !important;
+    content: none !important;
+}
+
+div.stTooltipHoverTarget svg {
+    width: 16px !important;
+    height: 16px !important;
+    opacity: 0.65 !important;
+}
+
+div.stTooltipHoverTarget:hover svg {
+    opacity: 1 !important;
 }
 
 /* Form Inputs */
@@ -639,9 +668,9 @@ div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(2) > 
 }
 
 /* Primary Button (Analyze Crop Problem) */
+.st-key-btn_analyze_crop button,
 button[kind="primary"],
-div[data-testid="stBaseButton-primary"] button,
-div.ks-analyze-btn button {
+div[data-testid="stBaseButton-primary"] button {
     background-color: #174B35 !important;
     background: #174B35 !important;
     color: #FFFFFF !important;
@@ -654,41 +683,52 @@ div.ks-analyze-btn button {
     width: 100% !important;
     margin-top: 1rem !important;
     transition: all 0.2s ease !important;
-    display: inline-flex !important;
+    display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 8px !important;
 }
 
+.st-key-btn_analyze_crop button > div,
+button[kind="primary"] > div,
+div[data-testid="stBaseButton-primary"] button > div {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+}
+
+.st-key-btn_analyze_crop button:hover,
 button[kind="primary"]:hover,
-div[data-testid="stBaseButton-primary"] button:hover,
-div.ks-analyze-btn button:hover {
+div[data-testid="stBaseButton-primary"] button:hover {
     background-color: #123D2B !important;
     background: #123D2B !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 6px 18px rgba(23, 75, 53, 0.32) !important;
 }
 
+.st-key-btn_analyze_crop button *,
 button[kind="primary"] *,
-div[data-testid="stBaseButton-primary"] button *,
-div.ks-analyze-btn button * {
+div[data-testid="stBaseButton-primary"] button * {
     color: #FFFFFF !important;
     font-weight: 700 !important;
 }
 
 /* Primary Button (Analyze Crop Problem) leaf icon */
-div.ks-analyze-btn button::before,
+.st-key-btn_analyze_crop button::before,
 button[kind="primary"]::before,
 div[data-testid="stBaseButton-primary"] button::before {
     content: "";
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin-right: 8px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 6px !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E") !important;
     vertical-align: middle;
 }
 

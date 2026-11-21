@@ -11,7 +11,7 @@ def render_pinned_navbar(language: str = "English"):
     nav_html = f"""
     <div class="ks-navbar">
         <div class="ks-nav-brand" onclick="var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=tab-list] button, button[role=tab]'); if(t&&t[0]) t[0].click();">
-            <div style="height:44px; display:flex; align-items:center;">
+            <div style="height:44px; width:170px; min-width:170px; display:flex; align-items:center;">
                 {LOGOS['horizontal']}
             </div>
         </div>

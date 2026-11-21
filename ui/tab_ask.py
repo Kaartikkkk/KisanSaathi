@@ -252,9 +252,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         st.markdown("<div style='height: 0.85rem;'></div>", unsafe_allow_html=True)
 
         # 4. Full-Width Analyze Button
-        st.markdown('<div class="ks-analyze-btn">', unsafe_allow_html=True)
         analyze_clicked = st.button("Analyze Crop Problem →", key="btn_analyze_crop", type="primary", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
     # -------------------------------------------------------------------------
     # 5. Pipeline Execution
