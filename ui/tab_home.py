@@ -41,10 +41,10 @@ def render_tab_home():
                     Describe your crop problem in your preferred language and receive clear, cautious guidance grounded in verified ICAR agronomic practices.
                 </p>
                 <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
-                    <button onclick="var t=document.querySelectorAll('[data-baseweb=tab-list] button, button[role=tab]'); if(t&&t[2]) t[2].click();" style="background:#174B35; color:#FFFFFF; border:none; border-radius:999px; padding:0.85rem 1.85rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(23,75,53,0.25);">
+                    <button onclick="if(window.ksSwitchTab) window.ksSwitchTab(2);" style="background:#174B35; color:#FFFFFF; border:none; border-radius:999px; padding:0.85rem 1.85rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(23,75,53,0.25);">
                         {ICONS['leaf_white']} Get Crop Advice &rarr;
                     </button>
-                    <button onclick="var t=document.querySelectorAll('[data-baseweb=tab-list] button, button[role=tab]'); if(t&&t[1]) t[1].click();" style="background:#FFFFFF; color:#174B35; border:1.5px solid #174B35; border-radius:999px; padding:0.82rem 1.8rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;">
+                    <button onclick="if(window.ksSwitchTab) window.ksSwitchTab(1);" style="background:#FFFFFF; color:#174B35; border:1.5px solid #174B35; border-radius:999px; padding:0.82rem 1.8rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;">
                         How It Works
                     </button>
                 </div>

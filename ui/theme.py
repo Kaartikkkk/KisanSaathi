@@ -73,54 +73,103 @@ header[data-testid="stHeader"],
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    height: 70px !important;
+    height: 68px !important;
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     border-bottom: 1.5px solid var(--border-color) !important;
     z-index: 9999 !important;
-    padding: 0 2.5rem !important;
+    padding: 0 2rem !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     box-shadow: 0 2px 10px rgba(23, 75, 53, 0.03) !important;
-    pointer-events: none !important; /* Clicks pass through empty areas to centered tabs */
 }
 
 .ks-nav-brand {
     display: flex !important;
     align-items: center !important;
-    gap: 0.75rem !important;
     text-decoration: none !important;
     cursor: pointer !important;
     flex-shrink: 0 !important;
-    width: 170px !important;
-    min-width: 170px !important;
-    z-index: 10001 !important;
-    pointer-events: auto !important; /* Brand logo is clickable */
+    width: 180px !important;
+    user-select: none !important;
 }
 
 .ks-nav-brand svg {
-    height: 42px !important;
-    width: 100% !important;
-    max-width: 170px !important;
+    height: 38px !important;
+    width: auto !important;
+    max-width: 180px !important;
     display: block !important;
 }
 
-.ks-nav-tabs-slot {
+.ks-nav-links {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
     flex: 1 !important;
-    max-width: 650px !important;
-    height: 42px !important;
-    pointer-events: none !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+}
+
+.ks-nav-btn {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 7px 18px !important;
+    font-size: 0.90rem !important;
+    font-weight: 500 !important;
+    font-family: var(--font-main) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.18s ease !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    user-select: none !important;
+    outline: none !important;
+}
+
+.ks-nav-btn svg {
+    width: 16px !important;
+    height: 16px !important;
+    stroke: var(--color-primary) !important;
+    transition: stroke 0.18s ease !important;
+    vertical-align: middle !important;
+    flex-shrink: 0 !important;
+}
+
+.ks-nav-btn:hover {
+    background-color: rgba(23, 75, 53, 0.08) !important;
+    color: var(--color-primary) !important;
+}
+
+.ks-nav-btn.active {
+    background-color: var(--color-primary) !important;
+    background: var(--color-primary) !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 3px 12px rgba(23, 75, 53, 0.22) !important;
+}
+
+.ks-nav-btn.active svg {
+    stroke: #FFFFFF !important;
+}
+
+.ks-nav-btn.active span {
+    color: #FFFFFF !important;
 }
 
 .ks-nav-lang {
     display: flex !important;
     align-items: center !important;
-    gap: 0.75rem !important;
+    justify-content: flex-end !important;
     flex-shrink: 0 !important;
-    z-index: 10001 !important;
-    pointer-events: auto !important; /* Language pill is clickable */
+    width: 140px !important;
 }
 
 .ks-lang-pill {
@@ -128,8 +177,8 @@ header[data-testid="stHeader"],
     color: var(--text-primary) !important;
     border: 1.5px solid var(--border-color) !important;
     border-radius: 999px !important;
-    padding: 0.45rem 1.1rem !important;
-    font-size: 0.88rem !important;
+    padding: 0.42rem 1rem !important;
+    font-size: 0.85rem !important;
     font-weight: 600 !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -138,91 +187,23 @@ header[data-testid="stHeader"],
     flex-shrink: 0 !important;
 }
 
-/* 3. TABS CONTAINER IN NORMAL DOCUMENT FLOW (Sticky alignment inside the 70px bar) */
+/* 3. OFF-SCREEN ACCESSIBLE NATIVE TABS (Hidden from view, 100% active React click listener) */
 div[data-testid="stTabs"] {
-    margin-top: -56px !important;
-    position: relative !important;
-    z-index: 10000 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
-[data-baseweb="tab-list"],
 div[data-testid="stTabs"] [data-baseweb="tab-list"],
 .stTabs [data-baseweb="tab-list"] {
-    position: sticky !important;
-    top: 14px !important;
-    left: auto !important;
-    transform: none !important;
-    margin: 0 auto !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    height: 42px !important;
-    max-width: 650px !important;
-    z-index: 10002 !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
     pointer-events: auto !important;
-}
-
-/* Individual Tab Buttons */
-div[data-baseweb="tab-list"] button[role="tab"],
-.stTabs [data-baseweb="tab-list"] button {
-    position: relative !important;
-    z-index: 10003 !important;
-    pointer-events: auto !important;
-    cursor: pointer !important;
-    background-color: transparent !important;
-    background: transparent !important;
-    color: var(--text-primary) !important;
-    font-family: var(--font-main) !important;
-    font-size: 0.92rem !important;
-    font-weight: 500 !important;
-    padding: 8px 18px !important;
-    border-radius: 999px !important;
-    border: none !important;
-    transition: all 0.2s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    outline: none !important;
-    box-shadow: none !important;
-    white-space: nowrap !important;
-    height: 38px !important;
-}
-
-div[data-baseweb="tab-list"] button[role="tab"]:hover,
-.stTabs [data-baseweb="tab-list"] button:hover {
-    background-color: rgba(23, 75, 53, 0.08) !important;
-    color: var(--color-primary) !important;
-}
-
-/* Child elements inside tab buttons must not intercept clicks */
-div[data-baseweb="tab-list"] button[role="tab"] *,
-.stTabs [data-baseweb="tab-list"] button * {
-    pointer-events: none !important;
-    user-select: none !important;
-}
-
-/* Active Tab: Solid Forest Green Pill with White Text */
-div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"],
-.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
-    background-color: var(--color-primary) !important;
-    background: var(--color-primary) !important;
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-    border-radius: 999px !important;
-    box-shadow: 0 4px 14px rgba(23, 75, 53, 0.22) !important;
-}
-
-div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] *,
-.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] * {
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
+    visibility: visible !important;
 }
 
 /* Hide Default Streamlit Underline Highlights & Borders */
@@ -236,48 +217,13 @@ div[data-baseweb="tab-border"],
     background: transparent !important;
 }
 
-/* Tab Icons via ::before */
-div[data-baseweb="tab-list"] button[role="tab"]::before,
-.stTabs [data-baseweb="tab-list"] button::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    flex-shrink: 0;
-}
-
-/* Tab 1: Home */
-div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(1)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
-}
-
-/* Tab 2: How It Works */
-div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(2)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'/%3E%3Cpolyline points='2 17 12 22 22 17'/%3E%3Cpolyline points='2 12 12 17 22 12'/%3E%3C/svg%3E");
-}
-
-/* Tab 3: Ask AI */
-div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(3)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
-}
-
-/* Tab 4: Safety */
-div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(4)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpolyline points='9 12 11 14 15 10'/%3E%3C/svg%3E");
-}
-
-/* Tab 5: Evaluation */
-div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(5)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E");
-}
-
-/* Invert icon color to pure white when tab is active */
-div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"]::before,
-.stTabs [data-baseweb="tab-list"] button[aria-selected="true"]::before {
-    filter: brightness(0) invert(1) !important;
+/* Constrain all decorative and foliage SVGs to prevent viewport overflow */
+.ks-hero-card svg,
+.ks-ask-corner-foliage svg,
+.ks-decorative-svg svg {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
 }
 
 /* 4. TAB PANELS CONTAINER (Comfortable 1240px container, natural document flow) */
@@ -810,27 +756,35 @@ div[data-testid="stBaseButton-primary"] button::before {
 @media (max-width: 992px) {
     .ks-navbar {
         height: auto !important;
-        min-height: 64px !important;
-        padding: 0.6rem 1.25rem !important;
+        min-height: 58px !important;
+        padding: 0.5rem 1rem !important;
         flex-wrap: wrap !important;
+        gap: 0.5rem !important;
     }
 
-    div[data-testid="stTabs"] {
-        margin-top: 0.35rem !important;
+    .ks-nav-brand {
+        order: 1 !important;
+        width: auto !important;
     }
 
-    [data-baseweb="tab-list"],
-    div[data-testid="stTabs"] [data-baseweb="tab-list"],
-    .stTabs [data-baseweb="tab-list"] {
-        top: 0 !important;
+    .ks-nav-lang {
+        order: 2 !important;
+        width: auto !important;
+    }
+
+    .ks-nav-links {
+        order: 3 !important;
         width: 100% !important;
         max-width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
         justify-content: flex-start !important;
-        padding: 0.35rem 0.5rem !important;
-        background: #FFFFFF !important;
-        border-bottom: 1px solid var(--border-color) !important;
+        padding: 0.25rem 0 !important;
+    }
+
+    .ks-nav-btn {
+        padding: 5px 13px !important;
+        font-size: 0.84rem !important;
     }
 
     div[data-baseweb="tab-panel"] {

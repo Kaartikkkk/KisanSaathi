@@ -192,8 +192,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             crop_val = st.text_input(
                 "Crop Name",
                 value=OF.get("crop", ""),
-                placeholder="e.g. Tomato / Rice / गेहूं",
-                help="Enter common English or local name of the crop."
+                placeholder="e.g. Tomato / Rice / गेहूं"
             )
 
             reg_val_current = OF.get("region", "Select your state")
@@ -201,8 +200,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             reg_val = st.selectbox(
                 "Region / State",
                 INDIAN_STATES,
-                index=reg_idx,
-                help="Select the geographic state for localized agronomic calibration."
+                index=reg_idx
             )
 
             stage_val_current = OF.get("stage", "Select growth stage")
@@ -210,8 +208,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             stage_val = st.selectbox(
                 "Crop Growth Stage",
                 GROWTH_STAGES,
-                index=stg_idx,
-                help="Current phenological development phase of the crop."
+                index=stg_idx
             )
 
         with col_right:
@@ -220,8 +217,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             spread_val = st.selectbox(
                 "Problem Spreading?",
                 SPREAD_OPTIONS,
-                index=spd_idx,
-                help="Rate at which observed symptoms are expanding across adjacent plots."
+                index=spd_idx
             )
 
             lang_val_current = OF.get("language", "Select language")
@@ -229,16 +225,14 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             lang_val = st.selectbox(
                 "Preferred Advisory Language",
                 LANGUAGE_OPTIONS,
-                index=lng_idx,
-                help="Select preferred language for diagnostic summary and cultural management checklists."
+                index=lng_idx
             )
 
             query_val = st.text_area(
                 "Describe the Symptoms Observed",
                 value=OF.get("query", ""),
                 placeholder="e.g. leaves have yellow spots and curling edges",
-                height=85,
-                help="Detail visible symptoms: leaf discoloration, necrotic lesions, wilting, insect presence, etc."
+                height=85
             )
 
         # Update session state with current form values
