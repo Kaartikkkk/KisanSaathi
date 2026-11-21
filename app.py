@@ -252,11 +252,10 @@ a:hover,
 
 /* 4.5. MODERN PILL TABS */
 .stTabs {
-    max-width: 1240px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 .stTabs [data-baseweb="tab-list"] {
     display: flex !important;
@@ -266,148 +265,164 @@ a:hover,
     border: 1.5px solid #E2E9E1 !important;
     border-radius: 999px !important;
     padding: 0.45rem 0.6rem !important;
-    margin: 0 auto 2.5rem auto !important;
+    margin: 0 auto 2rem auto !important;
     max-width: fit-content !important;
     box-shadow: 0 4px 18px rgba(23, 75, 53, 0.04) !important;
 }
-.stTabs [data-baseweb="tab"] {
-    height: 42px !important;
-    border-radius: 999px !important;
-    padding: 0 1.4rem !important;
-    background-color: transparent !important;
-    color: #25352D !important;
-    font-weight: 600 !important;
-    font-size: 0.95rem !important;
-    border: none !important;
-    transition: all 0.15s ease !important;
+.stTabs [data-baseweb="tab-panel"] {
+    width: 100% !important;
+    padding: 0 !important;
 }
-.stTabs [data-baseweb="tab"]:hover {
-    color: #174B35 !important;
-    background-color: #E7F2E8 !important;
-}
-.stTabs [aria-selected="true"] {
-    background-color: #174B35 !important;
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-    box-shadow: 0 2px 8px rgba(23, 75, 53, 0.22) !important;
-}
-.stTabs [data-baseweb="tab-highlight"],
-.stTabs [data-baseweb="tab-border"] {
-    display: none !important;
+.ks-content-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
 }
 
-/* 5. HERO SECTION */
+/* Centered layout for content cards & forms across tabs */
+[data-testid="stVerticalBlockBorderWrapper"],
+.ks-card,
+.ks-alert,
+.ks-feature-strip,
+div[id="how-it-works"],
+div[id="safety"],
+.stTabs [data-testid="stHorizontalBlock"] {
+    max-width: 1240px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+}
+
+/* 5. FULL-PAGE HERO SECTION */
 .ks-hero-card {
     position: relative;
+    width: 100% !important;
+    min-height: 72vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF !important;
+    background: radial-gradient(circle at 10% 20%, #EEF7EF 0%, #FFFFFF 65%) !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1.5px solid #E2E9E1 !important;
+    border-radius: 0 !important;
+    padding: 4.5rem 0 !important;
+    margin: 0 0 3rem 0 !important;
+    box-shadow: 0 4px 20px rgba(23, 75, 53, 0.03) !important;
+    overflow: hidden;
+}
+.ks-hero-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 3rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 2.5rem;
-    background: #FFFFFF;
-    background: radial-gradient(circle at 6% 8%, #EDF6EE 0%, #FFFFFF 65%);
-    border: 1px solid #E2E9E1;
-    border-radius: 28px;
-    padding: 3.2rem 2.8rem;
-    margin-bottom: 1.75rem;
-    box-shadow: 0 8px 30px rgba(23, 75, 53, 0.04);
-    overflow: hidden;
+    gap: 4rem;
+    width: 100%;
 }
 .ks-foliage-svg {
     position: absolute;
     top: 0;
     left: 0;
-    width: 140px;
-    height: 110px;
+    width: 160px;
+    height: 120px;
     pointer-events: none;
-    opacity: 0.9;
+    opacity: 0.5;
     z-index: 1;
 }
 .ks-hero-left {
     position: relative;
     z-index: 2;
-    flex: 1 1 480px;
-    min-width: 300px;
+    flex: 1 1 540px;
+    min-width: 320px;
 }
 .ks-hero-h1 {
-    font-size: 3.1rem;
-    font-weight: 800;
+    font-size: 3.6rem !important;
+    font-weight: 800 !important;
     color: #174B35 !important;
-    line-height: 1.14;
-    letter-spacing: -0.03em;
-    margin: 0 0 0.8rem 0;
+    line-height: 1.12 !important;
+    letter-spacing: -0.03em !important;
+    margin: 0 0 1rem 0 !important;
 }
 .ks-hero-accent-bar {
-    width: 64px;
-    height: 4.5px;
+    width: 72px;
+    height: 5px;
     background: #2E7D50;
     border-radius: 3px;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.5rem;
 }
 .ks-hero-desc {
-    font-size: 1.08rem;
-    color: #68756C;
-    line-height: 1.62;
-    margin-bottom: 2rem;
-    max-width: 530px;
+    font-size: 1.18rem !important;
+    color: #68756C !important;
+    line-height: 1.65 !important;
+    margin-bottom: 2.2rem !important;
+    max-width: 560px;
 }
 .ks-hero-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.1rem;
+    gap: 1.2rem;
 }
 .ks-btn-primary {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.6rem;
     background: #174B35 !important;
     color: #FFFFFF !important;
     font-weight: 700;
-    font-size: 1rem;
-    padding: 0.85rem 2rem;
+    font-size: 1.05rem;
+    padding: 0.95rem 2.2rem;
     border-radius: 999px;
-    box-shadow: 0 4px 14px rgba(23, 75, 53, 0.24);
+    box-shadow: 0 4px 16px rgba(23, 75, 53, 0.24);
     transition: all 0.15s ease;
     text-decoration: none !important;
 }
 .ks-btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(23, 75, 53, 0.32);
+    box-shadow: 0 6px 22px rgba(23, 75, 53, 0.32);
+    background: #133E2B !important;
+    color: #FFFFFF !important;
 }
 .ks-btn-outline {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.6rem;
     background: #FFFFFF !important;
     color: #174B35 !important;
     border: 1.8px solid #174B35 !important;
     font-weight: 700;
-    font-size: 1rem;
-    padding: 0.82rem 1.85rem;
+    font-size: 1.05rem;
+    padding: 0.92rem 2.1rem;
     border-radius: 999px;
-    transition: background 0.15s ease;
+    transition: all 0.15s ease;
     text-decoration: none !important;
 }
 .ks-btn-outline:hover {
     background: #E7F2E8 !important;
+    color: #174B35 !important;
 }
 .ks-hero-right {
     position: relative;
     z-index: 2;
-    flex: 1 1 400px;
-    min-width: 280px;
+    flex: 1 1 440px;
+    min-width: 300px;
     display: flex;
     justify-content: center;
 }
 .ks-farmer-frame {
     position: relative;
-    max-width: 440px;
+    max-width: 480px;
     width: 100%;
-    border-radius: 36px;
+    border-radius: 32px;
     overflow: hidden;
-    box-shadow: 0 16px 40px rgba(23, 75, 53, 0.12);
-    border: 4px solid #FFFFFF;
+    box-shadow: 0 20px 48px rgba(23, 75, 53, 0.14);
+    border: 5px solid #FFFFFF;
     background: #E7F2E8;
 }
 .ks-farmer-frame img {
@@ -875,9 +890,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_ask, tab_home, tab_how, tab_safety, tab_eval = st.tabs([
-    "🌿 Ask AI (Crop Advisor)",
+tab_home, tab_ask, tab_how, tab_safety, tab_eval = st.tabs([
     "🏡 Home",
+    "🌿 Ask AI (Crop Advisor)",
     "📐 How It Works",
     "🛡️ Safety Guardrails",
     "📊 Evaluation",
@@ -1250,27 +1265,29 @@ with tab_home:
             <path d="M72 40 C 65 55, 50 56, 52 42 C 55 32, 68 32, 72 40 Z" fill="#2E7D50" opacity="0.8"/>
             <path d="M105 45 C 102 60, 88 62, 88 48 C 90 38, 102 38, 105 45 Z" fill="#3B925E" opacity="0.75"/>
         </svg>
-        <div class="ks-hero-left">
-            <h1 class="ks-hero-h1">
-                Better Crop Decisions.<br>
-                <span style="color:#174B35;">Better Farming.</span>
-            </h1>
-            <div class="ks-hero-accent-bar"></div>
-            <p class="ks-hero-desc">
-                Describe your crop problem in your preferred language and receive clear, cautious guidance to help you take the next step.
-            </p>
-            <div class="ks-hero-actions">
-                <a href="#ask-ai" class="ks-btn-primary">
-                    {ICONS['leaf_white']} Get Crop Advice &rarr;
-                </a>
-                <a href="#how-it-works" class="ks-btn-outline">
-                    {ICONS['circle_icon']} How It Works
-                </a>
+        <div class="ks-hero-inner">
+            <div class="ks-hero-left">
+                <h1 class="ks-hero-h1">
+                    Better Crop Decisions.<br>
+                    <span style="color:#174B35;">Better Farming.</span>
+                </h1>
+                <div class="ks-hero-accent-bar"></div>
+                <p class="ks-hero-desc">
+                    Describe your crop problem in your preferred language and receive clear, cautious guidance to help you take the next step.
+                </p>
+                <div class="ks-hero-actions">
+                    <a href="#ask-ai" class="ks-btn-primary">
+                        {ICONS['leaf_white']} Get Crop Advice &rarr;
+                    </a>
+                    <a href="#how-it-works" class="ks-btn-outline">
+                        {ICONS['circle_icon']} How It Works
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="ks-hero-right">
-            <div class="ks-farmer-frame">
-                <img src="data:image/jpeg;base64,{farmer_b64}" alt="Indian farmer using smartphone in green field" />
+            <div class="ks-hero-right">
+                <div class="ks-farmer-frame">
+                    <img src="data:image/jpeg;base64,{farmer_b64}" alt="Indian farmer using smartphone in green field" />
+                </div>
             </div>
         </div>
     </div>
