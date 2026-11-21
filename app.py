@@ -18,94 +18,18 @@ st.set_page_config(
 )
 
 # -----------------------------------------------------------------------------
-# Asset & Image Helper
-# -----------------------------------------------------------------------------
-@st.cache_data
-def get_base64_image(image_path: str) -> str:
-    if os.path.exists(image_path):
-        with open(image_path, "rb") as f:
-            return base64.b64encode(f.read()).decode("utf-8")
-    return ""
-
-# -----------------------------------------------------------------------------
-# Clean SVG Icons (Consistent 24x24 viewBox, stroke-width 2.2)
-# -----------------------------------------------------------------------------
-def svg_icon(path_data: str, size: int = 20, color: str = "currentColor", sw: str = "2.2") -> str:
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{size}" height="{size}" '
-        f'viewBox="0 0 24 24" fill="none" stroke="{color}" stroke-width="{sw}" '
-        f'stroke-linecap="round" stroke-linejoin="round">{path_data}</svg>'
-    )
-
-P_LEAF = '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>'
-P_SHIELD = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'
-P_SHIELD_CHECK = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'
-P_SEARCH = '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>'
-P_SEARCH_LEAF = '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8c-1.5 1.5-1.5 3.5 0 5"/>'
-P_CHECK = '<polyline points="20 6 9 17 4 12"/>'
-P_ALERT = '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
-P_PHONE = '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.84.36 1.86.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.95.34 1.97.57 2.81.7A2 2 0 0 1 22 16.92z"/>'
-P_QUESTION = '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>'
-P_GLOBE = '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
-P_HOME = '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'
-P_LAYERS = '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
-P_CHAT = '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
-P_LANG = '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>'
-
-ICONS = {
-    "leaf_brand": svg_icon(P_LEAF, 26, "#174B35"),
-    "leaf_green": svg_icon(P_LEAF, 20, "#2E7D50"),
-    "leaf_pillar": svg_icon(P_LEAF, 28, "#2E7D50"),
-    "search_pillar": svg_icon(P_SEARCH_LEAF, 28, "#2E7D50"),
-    "shield_pillar": svg_icon(P_SHIELD_CHECK, 28, "#2E7D50"),
-    "lang_pillar": svg_icon(P_LANG, 28, "#2E7D50"),
-    "home_white": svg_icon(P_HOME, 16, "#FFFFFF"),
-    "layers": svg_icon(P_LAYERS, 16, "currentColor"),
-    "chat": svg_icon(P_CHAT, 16, "currentColor"),
-    "shield": svg_icon(P_SHIELD, 16, "currentColor"),
-    "globe": svg_icon(P_GLOBE, 15, "currentColor"),
-    "check_green": svg_icon(P_CHECK, 16, "#2E7D50", "2.5"),
-    "search": svg_icon(P_SEARCH, 20, "#174B35"),
-    "alert": svg_icon(P_ALERT, 20, "currentColor"),
-    "phone": svg_icon(P_PHONE, 18, "currentColor"),
-    "question": svg_icon(P_QUESTION, 22, "#174B35"),
-}
-
-# -----------------------------------------------------------------------------
-# API Key & Model Resolution (Strict Priority)
-# -----------------------------------------------------------------------------
-def get_gemini_api_key(sidebar_input=""):
-    if sidebar_input and sidebar_input.strip():
-        return sidebar_input.strip()
-    try:
-        cloud_key = st.secrets.get("GEMINI_API_KEY", "")
-        if cloud_key and str(cloud_key).strip():
-            return str(cloud_key).strip()
-    except Exception:
-        pass
-    env_key = os.getenv("GEMINI_API_KEY", "")
-    return env_key.strip() if env_key else ""
-
-def get_gemini_model():
-    try:
-        cloud_model = st.secrets.get("GEMINI_MODEL", "")
-        if cloud_model and str(cloud_model).strip():
-            return str(cloud_model).strip()
-    except Exception:
-        pass
-    env_model = os.getenv("GEMINI_MODEL", "")
-    if env_model and env_model.strip():
-        return env_model.strip()
-    return "gemini-2.5-flash"
-
-# -----------------------------------------------------------------------------
-# Complete Light Theme CSS (Forces #F7F8F2 Globally — No Black Background)
+# Complete Light Theme CSS (Forces #F7F8F2 Globally — Zero Dark Margins)
 # -----------------------------------------------------------------------------
 CSS_LIGHT_THEME = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-:root {
+:root,
+html,
+body,
+[data-theme="dark"],
+[data-theme="light"],
+.stApp {
     color-scheme: light !important;
     --background-color: #F7F8F2 !important;
     --secondary-background-color: #E7F2E8 !important;
@@ -113,45 +37,55 @@ CSS_LIGHT_THEME = """
     --primary-color: #174B35 !important;
 }
 
-/* 1. FORCE ENTIRE VIEWPORT & ROOT CONTAINERS TO WARM IVORY #F7F8F2 */
-html, body, #root, .stApp,
+/* 1. FORCE COMPLETE VIEWPORT & ROOT CONTAINERS TO WARM IVORY #F7F8F2 */
+html,
+body,
+#root,
+.stApp,
 [data-testid="stAppViewContainer"],
 [data-testid="stAppViewRoot"],
+[data-testid="stMain"],
+[data-testid="stMainBlockContainer"],
 [data-testid="stHeader"],
 [data-testid="stToolbar"],
 [data-testid="stBottom"],
 [data-testid="stDecoration"],
+[data-testid="stSidebarCollapseButton"],
+section[data-testid="stMain"],
 section.main,
 .main,
+.block-container,
 .main .block-container {
     background-color: #F7F8F2 !important;
     background: #F7F8F2 !important;
     color: #25352D !important;
 }
 
-/* Overwrite dark mode media queries from browser or Streamlit */
+/* Overwrite dark mode media queries from browser or Streamlit Cloud */
 @media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: light !important;
-        --background-color: #F7F8F2 !important;
-        --secondary-background-color: #E7F2E8 !important;
-        --text-color: #25352D !important;
-    }
-    html, body, #root, .stApp,
+    :root,
+    html,
+    body,
+    #root,
+    .stApp,
     [data-testid="stAppViewContainer"],
     [data-testid="stAppViewRoot"],
+    [data-testid="stMain"],
+    [data-testid="stMainBlockContainer"],
     [data-testid="stHeader"],
     [data-testid="stToolbar"],
     [data-testid="stBottom"],
+    section[data-testid="stMain"],
     section.main,
     .main,
-    .main .block-container {
+    .block-container {
         background-color: #F7F8F2 !important;
         background: #F7F8F2 !important;
         color: #25352D !important;
     }
     [data-testid="stSidebar"],
     [data-testid="stSidebarContent"],
+    section[data-testid="stSidebar"],
     section[data-testid="stSidebar"] > div {
         background-color: #FFFFFF !important;
         background: #FFFFFF !important;
@@ -159,9 +93,20 @@ section.main,
     }
 }
 
+/* Make inner layout blocks transparent so #F7F8F2 shines through */
+[data-testid="stVerticalBlock"],
+[data-testid="stVerticalBlockBorderWrapper"],
+[data-testid="stHorizontalBlock"],
+[data-testid="column"],
+div[data-testid="column"] {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
 /* 2. SIDEBAR LIGHT STYLING */
 [data-testid="stSidebar"],
 [data-testid="stSidebarContent"],
+section[data-testid="stSidebar"],
 section[data-testid="stSidebar"] > div {
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
@@ -183,13 +128,20 @@ html, body, [class*="css"], .stMarkdown, .stTextInput label,
     padding-right: 2rem !important;
 }
 
-/* Remove default blue link styling */
-a {
-    color: #2E7D50 !important;
+/* Remove default blue link styling and underlines */
+a,
+a:visited,
+a:hover,
+a:active,
+.stMarkdown a,
+[data-testid="stMarkdownContainer"] a {
+    color: #25352D !important;
     text-decoration: none !important;
 }
-a:hover {
-    color: #174B35 !important;
+a:hover,
+.stMarkdown a:hover,
+[data-testid="stMarkdownContainer"] a:hover {
+    color: #2E7D50 !important;
     text-decoration: none !important;
 }
 
@@ -200,7 +152,7 @@ a:hover {
     align-items: center;
     background: #FFFFFF;
     border: 1px solid #E2E9E1;
-    border-radius: 14px;
+    border-radius: 16px;
     padding: 0.75rem 1.6rem;
     margin-bottom: 1.75rem;
     box-shadow: 0 2px 12px rgba(23, 75, 53, 0.04);
@@ -250,6 +202,7 @@ a:hover {
     padding: 0.45rem 1.15rem;
     border-radius: 999px;
     box-shadow: 0 2px 8px rgba(23, 75, 53, 0.2);
+    text-decoration: none !important;
 }
 .ks-lang-pill {
     display: inline-flex;
@@ -264,22 +217,37 @@ a:hover {
     background: #FFFFFF;
 }
 
-/* 5. HERO SECTION (CLEAN 2-COLUMN, NO OVERLAPPING GHOST IMAGES) */
+/* 5. HERO SECTION */
 .ks-hero-card {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 2.5rem;
     background: #FFFFFF;
+    background: radial-gradient(circle at 6% 8%, #EDF6EE 0%, #FFFFFF 65%);
     border: 1px solid #E2E9E1;
-    border-radius: 24px;
-    padding: 3rem 2.75rem 2.5rem 2.75rem;
+    border-radius: 28px;
+    padding: 3.2rem 2.8rem;
     margin-bottom: 1.75rem;
-    box-shadow: 0 8px 30px rgba(23, 75, 53, 0.05);
+    box-shadow: 0 8px 30px rgba(23, 75, 53, 0.04);
+    overflow: hidden;
+}
+.ks-foliage-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: 110px;
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: 1;
 }
 .ks-hero-left {
-    flex: 1 1 500px;
+    position: relative;
+    z-index: 2;
+    flex: 1 1 480px;
     min-width: 300px;
 }
 .ks-hero-h1 {
@@ -291,8 +259,8 @@ a:hover {
     margin: 0 0 0.8rem 0;
 }
 .ks-hero-accent-bar {
-    width: 72px;
-    height: 5px;
+    width: 64px;
+    height: 4.5px;
     background: #2E7D50;
     border-radius: 3px;
     margin-bottom: 1.4rem;
@@ -322,6 +290,7 @@ a:hover {
     border-radius: 999px;
     box-shadow: 0 4px 14px rgba(23, 75, 53, 0.24);
     transition: all 0.15s ease;
+    text-decoration: none !important;
 }
 .ks-btn-primary:hover {
     transform: translateY(-2px);
@@ -339,23 +308,26 @@ a:hover {
     padding: 0.82rem 1.85rem;
     border-radius: 999px;
     transition: background 0.15s ease;
+    text-decoration: none !important;
 }
 .ks-btn-outline:hover {
     background: #E7F2E8 !important;
 }
 .ks-hero-right {
-    flex: 1 1 420px;
+    position: relative;
+    z-index: 2;
+    flex: 1 1 400px;
     min-width: 280px;
     display: flex;
     justify-content: center;
 }
 .ks-farmer-frame {
     position: relative;
-    max-width: 480px;
+    max-width: 440px;
     width: 100%;
-    border-radius: 24px;
+    border-radius: 36px;
     overflow: hidden;
-    box-shadow: 0 14px 36px rgba(23, 75, 53, 0.12);
+    box-shadow: 0 16px 40px rgba(23, 75, 53, 0.12);
     border: 4px solid #FFFFFF;
     background: #E7F2E8;
 }
@@ -372,7 +344,7 @@ a:hover {
     grid-template-columns: repeat(4, 1fr);
     background: #FFFFFF;
     border: 1px solid #E2E9E1;
-    border-radius: 18px;
+    border-radius: 20px;
     margin-bottom: 3rem;
     box-shadow: 0 4px 18px rgba(23, 75, 53, 0.03);
 }
@@ -424,78 +396,89 @@ a:hover {
     margin: 0;
 }
 .ks-card-icon-box {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 12px;
     background: #E7F2E8;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
 }
 
 /* 8. FORM WRAPPER */
 .ks-form-container {
     background: #FFFFFF;
     border: 1px solid #E2E9E1;
-    border-radius: 22px;
-    padding: 2.25rem;
+    border-radius: 20px;
+    padding: 2.25rem 2.4rem;
     margin-bottom: 2.5rem;
     box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04);
 }
 .ks-form-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid #E2E9E1;
-    padding-bottom: 1.25rem;
+    padding-bottom: 1.15rem;
     margin-bottom: 1.5rem;
 }
 .ks-form-title {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: #174B35;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
 }
 
-/* Streamlit Inputs Override */
-.stTextInput > div > div, .stTextArea > div > div, .stSelectbox > div > div {
+/* 9. INPUTS, BUTTONS & STREAMLIT OVERRIDES */
+.stTextInput > div > div,
+.stTextArea > div > div,
+.stSelectbox > div > div {
     background-color: #FFFFFF !important;
-    border-color: #E2E9E1 !important;
+    border: 1.5px solid #E2E9E1 !important;
     border-radius: 10px !important;
     color: #25352D !important;
 }
-.stTextInput label, .stSelectbox label, .stTextArea label {
+.stTextInput input,
+.stTextArea textarea {
     color: #25352D !important;
-    font-weight: 600 !important;
+    background-color: #FFFFFF !important;
 }
-
-/* Primary Button Override */
-div.stButton > button[kind="primary"],
-div.stButton > button:first-child {
-    background: #174B35 !important;
+.stTextInput > div > div:focus-within,
+.stTextArea > div > div:focus-within,
+.stSelectbox > div > div:focus-within {
+    border-color: #2E7D50 !important;
+    box-shadow: 0 0 0 2px rgba(46, 125, 80, 0.15) !important;
+}
+.stButton > button {
+    background-color: #174B35 !important;
     color: #FFFFFF !important;
-    font-weight: 700 !important;
-    font-size: 1.05rem !important;
-    border-radius: 999px !important;
     border: none !important;
-    padding: 0.8rem 2.2rem !important;
-    box-shadow: 0 4px 14px rgba(23, 75, 53, 0.22) !important;
-    transition: all 0.15s ease !important;
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    padding: 0.75rem 2rem !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 14px rgba(23, 75, 53, 0.2) !important;
 }
-div.stButton > button:first-child:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(23, 75, 53, 0.32) !important;
+.stButton > button:hover {
+    background-color: #133E2B !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 18px rgba(23, 75, 53, 0.28) !important;
 }
-div[data-testid="column"] div.stButton > button {
-    border-radius: 8px !important;
-    font-size: 0.82rem !important;
-    padding: 0.4rem 0.8rem !important;
+[data-testid="stSidebar"] .stButton > button {
+    background-color: #FFFFFF !important;
+    color: #174B35 !important;
+    border: 1.5px solid #E2E9E1 !important;
+    box-shadow: none !important;
+}
+[data-testid="stSidebar"] .stButton > button:hover {
+    background-color: #E7F2E8 !important;
+    border-color: #2E7D50 !important;
 }
 
-/* 9. RESULTS & ALERTS */
+/* 10. DIAGNOSTIC RESULTS & ALERTS */
 .ks-cause-box {
     background: #FAFCF9;
     border: 1px solid #E2E9E1;
@@ -561,7 +544,117 @@ div[data-testid="column"] div.stButton > button {
 </style>
 """
 
+# Force light theme immediately at start of render
 st.markdown(CSS_LIGHT_THEME, unsafe_allow_html=True)
+st.html("""
+<script>
+(function() {
+    function forceLightTheme() {
+        try {
+            localStorage.setItem("stActiveTheme", JSON.stringify({
+                base: "light",
+                primaryColor: "#174B35",
+                backgroundColor: "#F7F8F2",
+                secondaryBackgroundColor: "#E7F2E8",
+                textColor: "#25352D"
+            }));
+            document.documentElement.style.backgroundColor = "#F7F8F2";
+            document.body.style.backgroundColor = "#F7F8F2";
+            var stApp = document.querySelector(".stApp");
+            if (stApp) stApp.style.backgroundColor = "#F7F8F2";
+            var stMain = document.querySelector('[data-testid="stMain"]');
+            if (stMain) stMain.style.backgroundColor = "#F7F8F2";
+        } catch(e) {}
+    }
+    forceLightTheme();
+    window.addEventListener("load", forceLightTheme);
+    setTimeout(forceLightTheme, 300);
+})();
+</script>
+""")
+
+# -----------------------------------------------------------------------------
+# Asset & Image Helper
+# -----------------------------------------------------------------------------
+@st.cache_data
+def get_base64_image(image_path: str) -> str:
+    if os.path.exists(image_path):
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode("utf-8")
+    return ""
+
+# -----------------------------------------------------------------------------
+# Clean SVG Icons (Consistent 24x24 viewBox, stroke-width 2.2)
+# -----------------------------------------------------------------------------
+def svg_icon(path_data: str, size: int = 20, color: str = "currentColor", sw: str = "2.2") -> str:
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{size}" height="{size}" '
+        f'viewBox="0 0 24 24" fill="none" stroke="{color}" stroke-width="{sw}" '
+        f'stroke-linecap="round" stroke-linejoin="round">{path_data}</svg>'
+    )
+
+P_LEAF = '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>'
+P_SHIELD = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'
+P_SHIELD_CHECK = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'
+P_SEARCH = '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>'
+P_SEARCH_LEAF = '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8c-1.5 1.5-1.5 3.5 0 5"/>'
+P_CHECK = '<polyline points="20 6 9 17 4 12"/>'
+P_ALERT = '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
+P_PHONE = '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.84.36 1.86.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.95.34 1.97.57 2.81.7A2 2 0 0 1 22 16.92z"/>'
+P_QUESTION = '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>'
+P_GLOBE = '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
+P_HOME = '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'
+P_LAYERS = '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
+P_CHAT = '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
+P_LANG = '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>'
+
+ICONS = {
+    "leaf_brand": svg_icon(P_LEAF, 26, "#174B35"),
+    "leaf_green": svg_icon(P_LEAF, 20, "#2E7D50"),
+    "leaf_white": svg_icon(P_LEAF, 18, "#FFFFFF"),
+    "circle_icon": svg_icon('<circle cx="12" cy="12" r="9"/>', 16, "#174B35", "2.2"),
+    "leaf_pillar": svg_icon(P_LEAF, 28, "#2E7D50"),
+    "search_pillar": svg_icon(P_SEARCH_LEAF, 28, "#2E7D50"),
+    "shield_pillar": svg_icon(P_SHIELD_CHECK, 28, "#2E7D50"),
+    "lang_pillar": svg_icon(P_LANG, 28, "#2E7D50"),
+    "home_white": svg_icon(P_HOME, 16, "#FFFFFF"),
+    "layers": svg_icon(P_LAYERS, 16, "currentColor"),
+    "chat": svg_icon(P_CHAT, 16, "currentColor"),
+    "shield": svg_icon(P_SHIELD, 16, "currentColor"),
+    "globe": svg_icon(P_GLOBE, 15, "currentColor"),
+    "check_green": svg_icon(P_CHECK, 16, "#2E7D50", "2.5"),
+    "search": svg_icon(P_SEARCH, 20, "#174B35"),
+    "alert": svg_icon(P_ALERT, 20, "currentColor"),
+    "phone": svg_icon(P_PHONE, 18, "currentColor"),
+    "question": svg_icon(P_QUESTION, 22, "#174B35"),
+}
+
+# -----------------------------------------------------------------------------
+# API Key & Model Resolution (Strict Priority)
+# -----------------------------------------------------------------------------
+def get_gemini_api_key(sidebar_input=""):
+    if sidebar_input and sidebar_input.strip():
+        return sidebar_input.strip()
+    try:
+        cloud_key = st.secrets.get("GEMINI_API_KEY", "")
+        if cloud_key and str(cloud_key).strip():
+            return str(cloud_key).strip()
+    except Exception:
+        pass
+    env_key = os.getenv("GEMINI_API_KEY", "")
+    return env_key.strip() if env_key else ""
+
+def get_gemini_model():
+    try:
+        cloud_model = st.secrets.get("GEMINI_MODEL", "")
+        if cloud_model and str(cloud_model).strip():
+            return str(cloud_model).strip()
+    except Exception:
+        pass
+    env_model = os.getenv("GEMINI_MODEL", "")
+    if env_model and env_model.strip():
+        return env_model.strip()
+    return "gemini-2.5-flash"
 
 # -----------------------------------------------------------------------------
 # Initialize Session State
@@ -690,13 +783,23 @@ st.markdown(f"""
 # -----------------------------------------------------------------------------
 # 2. Hero Section (Clean 2-Column, No Overlapping Logos, Sharp Farmer Photo)
 # -----------------------------------------------------------------------------
-farmer_b64 = get_base64_image("assets/farmer_clean_hd.jpg") or get_base64_image("assets/farmer_portrait_hd.jpg")
+farmer_b64 = get_base64_image("assets/farmer_portrait_hd.jpg") or get_base64_image("assets/farmer_clean_hd.jpg")
 
 st.markdown(f"""
 <div class="ks-hero-card">
+    <svg class="ks-foliage-svg" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
+        <path d="M55 35 C 50 20, 65 10, 78 18 C 85 28, 70 40, 55 35 Z" fill="#3B925E" opacity="0.85"/>
+        <path d="M85 41 C 85 25, 102 22, 110 32 C 115 42, 98 50, 85 41 Z" fill="#2E7D50" opacity="0.75"/>
+        <path d="M40 32 C 30 45, 15 45, 18 32 C 22 22, 35 25, 40 32 Z" fill="#256C42" opacity="0.7"/>
+        <path d="M72 40 C 65 55, 50 56, 52 42 C 55 32, 68 32, 72 40 Z" fill="#2E7D50" opacity="0.8"/>
+        <path d="M105 45 C 102 60, 88 62, 88 48 C 90 38, 102 38, 105 45 Z" fill="#3B925E" opacity="0.75"/>
+    </svg>
     <div class="ks-hero-left">
         <h1 class="ks-hero-h1">
-            Better Crop Decisions.<br>Better Farming.
+            Better Crop Decisions.<br>
+            <span style="color:#174B35;">Safer Farming.</span>
         </h1>
         <div class="ks-hero-accent-bar"></div>
         <p class="ks-hero-desc">
@@ -704,10 +807,10 @@ st.markdown(f"""
         </p>
         <div class="ks-hero-actions">
             <a href="#ask-ai" class="ks-btn-primary">
-                {ICONS['leaf_green']} Get Crop Advice &rarr;
+                {ICONS['leaf_white']} Get Crop Advice &rarr;
             </a>
             <a href="#how-it-works" class="ks-btn-outline">
-                How It Works
+                {ICONS['circle_icon']} How It Works
             </a>
         </div>
     </div>
