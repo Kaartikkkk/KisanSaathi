@@ -65,7 +65,7 @@ header[data-testid="stHeader"],
     margin: 0 !important;
 }
 
-/* 2. PINNED FULL-WIDTH TOP NAVBAR OVERLAY (Logo on Left, Lang on Right) */
+/* 2. PINNED FULL-WIDTH TOP NAVBAR (100% VISIBLE WITH BRAND, TABS, AND LANGUAGE) */
 .ks-navbar {
     position: fixed !important;
     top: 0 !important;
@@ -73,15 +73,15 @@ header[data-testid="stHeader"],
     right: 0 !important;
     width: 100% !important;
     height: 70px !important;
-    background: transparent !important;
-    border: none !important;
-    pointer-events: none !important;
-    z-index: 10005 !important;
+    background: #FFFFFF !important;
+    border-bottom: 1.5px solid var(--border-color) !important;
+    z-index: 99999 !important;
     padding: 0 2.5rem !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+    box-shadow: 0 2px 10px rgba(23, 75, 53, 0.03) !important;
 }
 
 .ks-nav-brand {
@@ -89,7 +89,8 @@ header[data-testid="stHeader"],
     align-items: center !important;
     gap: 0.75rem !important;
     text-decoration: none !important;
-    pointer-events: auto !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
 }
 
 .ks-nav-brand-title {
@@ -107,61 +108,16 @@ header[data-testid="stHeader"],
     line-height: 1.1 !important;
 }
 
-.ks-lang-pill {
-    background: #FFFFFF !important;
-    color: var(--text-primary) !important;
-    border: 1.5px solid #DCE5DB !important;
-    border-radius: 999px !important;
-    padding: 0.45rem 1.1rem !important;
-    font-size: 0.88rem !important;
-    font-weight: 600 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.45rem !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03) !important;
-    pointer-events: auto !important;
-}
-
-/* 3. PINNED STREAMLIT TABS AS THE SOLID WHITE TOP NAVBAR */
-div[data-testid="stTabs"] {
-    border: none !important;
-}
-
-[data-baseweb="tab-list"],
-div[data-testid="stTabs"] [data-baseweb="tab-list"],
-.stTabs [data-baseweb="tab-list"] {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: 70px !important;
-    background: #FFFFFF !important;
-    border-bottom: 1.5px solid var(--border-color) !important;
-    z-index: 10000 !important;
+/* Integrated Navigation Tabs in Navbar */
+.ks-nav-links {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 8px !important;
-    box-shadow: 0 2px 10px rgba(23, 75, 53, 0.03) !important;
-    padding: 0 14rem !important;
-    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
 }
 
-/* Hide default underline border and indicator */
-div[data-baseweb="tab-border"],
-div[data-baseweb="tab-highlight"],
-[data-baseweb="tab-border"],
-[data-baseweb="tab-highlight"] {
-    display: none !important;
-    height: 0px !important;
-    border: none !important;
-}
-
-/* Tab button styling */
-button[data-baseweb="tab"],
-div[data-baseweb="tab-list"] button,
-.stTabs [data-baseweb="tab"] {
+.ks-nav-btn {
     background-color: transparent !important;
     color: var(--text-primary) !important;
     font-family: var(--font-main) !important;
@@ -178,82 +134,67 @@ div[data-baseweb="tab-list"] button,
     outline: none !important;
     box-shadow: none !important;
     white-space: nowrap !important;
-    pointer-events: auto !important;
 }
 
-button[data-baseweb="tab"]:hover,
-div[data-baseweb="tab-list"] button:hover,
-.stTabs [data-baseweb="tab"]:hover {
+.ks-nav-btn:hover {
     background-color: rgba(23, 75, 53, 0.06) !important;
     color: var(--color-primary) !important;
 }
 
-/* Active tab: solid forest green pill */
-button[data-baseweb="tab"][aria-selected="true"],
-div[data-baseweb="tab-list"] button[aria-selected="true"],
-.stTabs [data-baseweb="tab"][aria-selected="true"] {
+/* Active Navigation Tab: Solid forest green pill */
+.ks-nav-btn.active {
     background-color: var(--color-primary) !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
     box-shadow: 0 4px 14px rgba(23, 75, 53, 0.25) !important;
 }
 
-/* Vector line icons on tabs via CSS ::before */
-button[data-baseweb="tab"]::before,
-div[data-baseweb="tab-list"] button::before,
-.stTabs [data-baseweb="tab"]::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: middle;
+.ks-nav-btn.active svg {
+    stroke: #FFFFFF !important;
+}
+.ks-nav-btn.active svg * {
+    stroke: #FFFFFF !important;
 }
 
-/* Tab 1: Home (House outline) */
-button[data-baseweb="tab"]:nth-child(1)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2325352D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'%3E%3C/path%3E%3Cpolyline points='9 22 9 12 15 12 15 22'%3E%3C/polyline%3E%3C/svg%3E");
-}
-button[data-baseweb="tab"]:nth-child(1)[aria-selected="true"]::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'%3E%3C/path%3E%3Cpolyline points='9 22 9 12 15 12 15 22'%3E%3C/polyline%3E%3C/svg%3E");
-}
-
-/* Tab 2: How It Works (Layers outline) */
-button[data-baseweb="tab"]:nth-child(2)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2325352D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'%3E%3C/polygon%3E%3Cpolyline points='2 17 12 22 22 17'%3E%3Cpolyline points='2 12 12 17 22 12'%3E%3C/svg%3E");
-}
-button[data-baseweb="tab"]:nth-child(2)[aria-selected="true"]::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'%3E%3C/polygon%3E%3Cpolyline points='2 17 12 22 22 17'%3E%3Cpolyline points='2 12 12 17 22 12'%3E%3C/svg%3E");
-}
-
-/* Tab 3: Ask AI (Leaf outline) */
-button[data-baseweb="tab"]:nth-child(3)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2325352D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'%3E%3C/path%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'%3E%3C/path%3E%3C/svg%3E");
-}
-button[data-baseweb="tab"]:nth-child(3)[aria-selected="true"]::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'%3E%3C/path%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'%3E%3C/path%3E%3C/svg%3E");
+.ks-lang-pill {
+    background: #FFFFFF !important;
+    color: var(--text-primary) !important;
+    border: 1.5px solid #DCE5DB !important;
+    border-radius: 999px !important;
+    padding: 0.45rem 1.1rem !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03) !important;
+    flex-shrink: 0 !important;
 }
 
-/* Tab 4: Safety (Shield outline) */
-button[data-baseweb="tab"]:nth-child(4)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2325352D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E");
-}
-button[data-baseweb="tab"]:nth-child(4)[aria-selected="true"]::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E");
-}
-
-/* Tab 5: Evaluation (Bar Chart outline) */
-button[data-baseweb="tab"]:nth-child(5)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2325352D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 20V10M12 20V4M6 20v-6' stroke='%2325352D' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-button[data-baseweb="tab"]:nth-child(5)[aria-selected="true"]::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 20V10M12 20V4M6 20v-6' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+/* Hide native Streamlit tabs bar cleanly off-screen */
+[data-baseweb="tab-list"],
+div[data-testid="stTabs"] [data-baseweb="tab-list"],
+.stTabs [data-baseweb="tab-list"] {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0px !important;
+    width: 0px !important;
+    overflow: hidden !important;
 }
 
-/* 4. TAB PANELS CONTAINER (Optimized to fit on a single screen without vertical overflow) */
+div[data-baseweb="tab-border"],
+div[data-baseweb="tab-highlight"],
+[data-baseweb="tab-border"],
+[data-baseweb="tab-highlight"] {
+    display: none !important;
+    height: 0px !important;
+    border: none !important;
+}
+
+/* 4. TAB PANELS CONTAINER (Comfortable top offset matching 70px navbar) */
 div[data-baseweb="tab-panel"] {
     padding-top: 78px !important;
     padding-left: 1.5rem !important;
@@ -413,7 +354,7 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(1) butt
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 12'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
 }
 
 /* Preset Button 2 Icon (Rice/Grain) */
@@ -548,7 +489,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 12'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
     vertical-align: middle;
 }
 
@@ -740,20 +681,23 @@ div[data-testid="stBaseButton-primary"] button::before {
 
 /* 8. RESPONSIVE DESIGN (1440px, 1280px, 768px, 375px) */
 @media (max-width: 992px) {
-    [data-baseweb="tab-list"],
-    div[data-testid="stTabs"] [data-baseweb="tab-list"],
-    .stTabs [data-baseweb="tab-list"] {
-        padding: 0 1rem !important;
-        overflow-x: auto !important;
-        justify-content: flex-start !important;
+    .ks-navbar {
+        height: auto !important;
+        padding: 0.65rem 1rem !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
     }
 
-    .ks-navbar {
-        padding: 0 1rem !important;
+    .ks-nav-links {
+        order: 3 !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        justify-content: flex-start !important;
+        padding: 0.35rem 0 !important;
     }
 
     div[data-baseweb="tab-panel"] {
-        padding-top: 80px !important;
+        padding-top: 110px !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
