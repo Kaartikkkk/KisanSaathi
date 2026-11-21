@@ -21,7 +21,7 @@ def render_tab_home():
     # 1. Main Hero Banner
     # -------------------------------------------------------------------------
     hero_html = f"""
-    <div class="ks-hero-card" style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:24px; padding:2.8rem 3rem; position:relative; overflow:hidden; box-shadow:0 4px 24px rgba(23,75,53,0.05); margin-bottom:2rem;">
+    <div class="ks-hero-card" style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:24px; padding:2.8rem 3rem; position:relative; overflow:hidden; box-shadow:0 4px 24px rgba(23,75,53,0.05); margin-bottom:2rem;">
         <!-- Foliage Accent SVG from Asset Pack -->
         <div style="position:absolute; top:0; left:0; width:160px; height:120px; pointer-events:none; opacity:0.35;">
             {DECORATIVE['leaf_branch']}
@@ -65,7 +65,7 @@ def render_tab_home():
     # -------------------------------------------------------------------------
     strip_html = f"""
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-bottom:2.5rem;">
-        <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
+        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                 {ICONS['leaf_primary']}
             </div>
@@ -75,7 +75,7 @@ def render_tab_home():
             </div>
         </div>
 
-        <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
+        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                 {ICONS['search']}
             </div>
@@ -85,7 +85,7 @@ def render_tab_home():
             </div>
         </div>
 
-        <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
+        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                 {ICONS['shield_check']}
             </div>
@@ -95,7 +95,7 @@ def render_tab_home():
             </div>
         </div>
 
-        <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
+        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
             <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                 {ICONS['language']}
             </div>
@@ -112,7 +112,7 @@ def render_tab_home():
     # 3. Crop Variety Showcase Section (Featuring crop-variety.jpg)
     # -------------------------------------------------------------------------
     crop_section_html = f"""
-    <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:24px; padding:2.5rem 3rem; margin-bottom:2rem; box-shadow:0 4px 20px rgba(23,75,53,0.03);">
+    <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:24px; padding:2.5rem 3rem; margin-bottom:2rem; box-shadow:0 4px 20px rgba(23,75,53,0.03);">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:2.5rem; flex-wrap:wrap;">
             <div style="flex:1 1 400px; max-width:480px;">
                 <div style="width:100%; aspect-ratio:16/9; border-radius:18px; overflow:hidden; box-shadow:0 8px 24px rgba(23,75,53,0.06); border:2px solid #FFFFFF;">
@@ -130,13 +130,13 @@ def render_tab_home():
                     KisanSaathi's grounded knowledge retrieval integrates standard packages of practices covering staple cereals, solanaceous vegetables, oilseeds, and pulses across distinct state agro-climatic zones.
                 </p>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
-                    <div style="background:#F7FAF4; border:1px solid #E2EBE2; border-radius:12px; padding:0.85rem 1rem;">
+                    <div style="background:#F7FAF4; border:1px solid #DFE8DF; border-radius:12px; padding:0.85rem 1rem;">
                         <div style="font-weight:700; color:#174B35; font-size:0.92rem; display:flex; align-items:center; gap:6px;">
                             {ICONS['sprout']} Cereals & Grains
                         </div>
                         <div style="font-size:0.8rem; color:#5A6860; margin-top:2px;">Rice (WB), Wheat (PB), Maize</div>
                     </div>
-                    <div style="background:#F7FAF4; border:1px solid #E2EBE2; border-radius:12px; padding:0.85rem 1rem;">
+                    <div style="background:#F7FAF4; border:1px solid #DFE8DF; border-radius:12px; padding:0.85rem 1rem;">
                         <div style="font-weight:700; color:#174B35; font-size:0.92rem; display:flex; align-items:center; gap:6px;">
                             {ICONS['leaf_primary']} Solanaceous Crops
                         </div>
@@ -153,7 +153,7 @@ def render_tab_home():
     # 4. Farmer Empowerment & KVK Extension Section (Featuring farmer-in-field.jpg)
     # -------------------------------------------------------------------------
     farmer_section_html = f"""
-    <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:24px; padding:2.5rem 3rem; margin-bottom:2rem; box-shadow:0 4px 20px rgba(23,75,53,0.03);">
+    <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:24px; padding:2.5rem 3rem; margin-bottom:2rem; box-shadow:0 4px 20px rgba(23,75,53,0.03);">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:2.5rem; flex-wrap:wrap;">
             <div style="flex:1 1 460px;">
                 <div style="display:inline-block; margin-bottom:0.5rem;">

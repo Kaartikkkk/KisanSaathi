@@ -342,7 +342,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         causes = diagnosis.get("possible_causes", [])
         if causes:
             causes_html = "".join([f"""
-            <div style="background:#F7F8F2; border-radius:12px; padding:1.15rem 1.35rem; margin-bottom:0.85rem; border:1px solid #E2E9E1;">
+            <div style="background:#F7F8F4; border-radius:12px; padding:1.15rem 1.35rem; margin-bottom:0.85rem; border:1px solid #DFE8DF;">
                 <div style="font-size:1.05rem; font-weight:700; color:#174B35; margin-bottom:0.35rem;">{c.get('name', 'Possible cause')}</div>
                 <div style="font-size:0.92rem; color:#5A6860; line-height:1.55;">{c.get('reason', '')}</div>
             </div>
@@ -446,7 +446,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                 </div>
                 <div style="color:#25352D; font-size:0.92rem;">{item['q']}</div>
             </div>
-            <div style="background:#FFFFFF; border:1px solid #E2E9E1; border-radius:12px; padding:1rem 1.25rem; margin-bottom:1rem;">
+            <div style="background:#FFFFFF; border:1px solid #DFE8DF; border-radius:12px; padding:1rem 1.25rem; margin-bottom:1rem;">
                 <div style="font-weight:700; color:#174B35; font-size:0.85rem; margin-bottom:0.25rem; display:flex; align-items:center; gap:6px;">
                     {ICONS['bot']} KisanSaathi Agronomist:
                 </div>

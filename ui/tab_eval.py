@@ -70,14 +70,14 @@ def render_tab_eval():
         </div>
 
         <!-- Section Header -->
-        <div style="text-align:center; max-width:760px; margin:0 auto 2.5rem auto; position:relative; z-index:2;">
-            <div style="display:inline-block; margin-bottom:0.75rem;">
-                <span class="ks-pill-badge">EVALUATION</span>
+        <div style="text-align:center; max-width:760px; margin:0 auto 1.4rem auto; position:relative; z-index:2;">
+            <div style="display:inline-block; margin-bottom:0.6rem;">
+                <span class="ks-pill-badge">EMPIRICAL BENCHMARKS</span>
             </div>
-            <h1 style="font-size:2.8rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0; letter-spacing:-0.03em;">
+            <h1 style="font-size:2.35rem; font-weight:800; color:#174B35; margin:0 0 0.5rem 0; letter-spacing:-0.03em; line-height:1.15;">
                 Empirical Benchmark Verification
             </h1>
-            <p style="color:#5A6860; font-size:1.05rem; line-height:1.6; margin:0;">
+            <p style="color:#5A6860; font-size:1rem; line-height:1.5; margin:0;">
                 Evaluated dynamically across verified synthetic field test cases against ICAR standards.
             </p>
         </div>
@@ -85,11 +85,11 @@ def render_tab_eval():
         <!-- 4 Dynamically Aligned Metric Cards -->
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:1.25rem; margin-bottom:2.5rem; position:relative; z-index:2;">
             <!-- Metric 1: Total Scenarios -->
-            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
                 <div style="width:48px; height:48px; border-radius:12px; background:#E7F2E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     {ICONS['clipboard_check']}
                 </div>
-                <div style="width:1px; height:42px; background:#E2EBE2;"></div>
+                <div style="width:1px; height:42px; background:#DFE8DF;"></div>
                 <div>
                     <div style="font-size:1.95rem; font-weight:800; color:#174B35; line-height:1.1;">{passed} / {total}</div>
                     <div style="font-size:0.82rem; font-weight:600; color:#5A6860; margin-top:3px;">Scenarios Evaluated</div>
@@ -121,11 +121,11 @@ def render_tab_eval():
             </div>
 
             <!-- Metric 4: Languages Supported -->
-            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
                 <div style="width:48px; height:48px; border-radius:12px; background:#E7F2E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     {ICONS['language']}
                 </div>
-                <div style="width:1px; height:42px; background:#E2EBE2;"></div>
+                <div style="width:1px; height:42px; background:#DFE8DF;"></div>
                 <div>
                     <div style="font-size:1.95rem; font-weight:800; color:#174B35; line-height:1.1;">{langs}</div>
                     <div style="font-size:0.82rem; font-weight:600; color:#5A6860; margin-top:3px;">Languages Supported</div>
@@ -169,7 +169,7 @@ def render_tab_eval():
                 else:
                     badge_markup = f'<span class="ks-badge-fail" style="display:inline-flex; align-items:center; gap:5px; background:#FFEBEE; color:#C62828; padding:5px 14px; border-radius:999px; font-weight:700; font-size:0.85rem; border:1px solid #FFCDD2;"><span style="width:16px; height:16px; display:inline-flex; align-items:center;">{BADGES["fail"]}</span> FAIL</span>'
 
-                divider = "" if idx == len(rows) - 1 else "<hr style='border:none; border-top:1px solid #E2EBE2; margin:1rem 0;'>"
+                divider = "" if idx == len(rows) - 1 else "<hr style='border:none; border-top:1px solid #DFE8DF; margin:1rem 0;'>"
 
                 rows_html.append(f"""
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1.25rem; padding:0.5rem 0;">
@@ -200,7 +200,7 @@ def render_tab_eval():
                 """)
 
             cases_card_html = f"""
-            <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:18px; padding:1.5rem 1.8rem; box-shadow:0 2px 12px rgba(23,75,53,0.03);">
+            <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:18px; padding:1.5rem 1.8rem; box-shadow:0 2px 12px rgba(23,75,53,0.03);">
                 {''.join(rows_html)}
             </div>
             """

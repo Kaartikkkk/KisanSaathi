@@ -1,6 +1,7 @@
 """Complete Light Theme & Design System Stylesheet for KisanSaathi.
-Enforces warm ivory #F7F8F2, forest green #174B35, edge-to-edge top navbar,
-centered tab navigation, responsive layouts (1440px to 375px), and zero CSS conflicts.
+Enforces warm ivory #F7F8F4, forest green #174B35, natural green #2F8A57, soft sage #E7F1E8,
+in-flow sticky top navbar, centered tab navigation, 1240px container max-width,
+responsive layouts (1440px to 375px), and zero CSS conflicts.
 """
 
 CSS_LIGHT_THEME = """
@@ -8,21 +9,21 @@ CSS_LIGHT_THEME = """
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --bg-primary: #F7F8F2;
+    --bg-primary: #F7F8F4;
     --bg-card: #FFFFFF;
-    --border-color: #E2E9E1;
+    --border-color: #DFE8DF;
     --border-focus: #174B35;
     --color-primary: #174B35;
     --color-primary-hover: #123D2B;
-    --color-secondary: #2E7D50;
-    --color-accent: #E7F2E8;
-    --text-primary: #25352D;
+    --color-secondary: #2F8A57;
+    --color-accent: #E7F1E8;
+    --text-primary: #26352D;
     --text-secondary: #4A5B52;
-    --text-muted: #5A6860;
+    --text-muted: #68766D;
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* 1. FORCE COMPLETE VIEWPORT & ROOT CONTAINERS TO WARM IVORY #F7F8F2 */
+/* 1. FORCE COMPLETE VIEWPORT & ROOT CONTAINERS TO WARM IVORY #F7F8F4 */
 html,
 body,
 #root,
@@ -65,9 +66,9 @@ header[data-testid="stHeader"],
     margin: 0 !important;
 }
 
-/* 2. PINNED FULL-WIDTH TOP NAVBAR (100% VISIBLE WITH BRAND, TABS, AND LANGUAGE) */
+/* 2. IN-FLOW STICKY FULL-WIDTH TOP NAVBAR (100% RELIABLE IN ALL BROWSERS) */
 .ks-navbar {
-    position: fixed !important;
+    position: sticky !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
@@ -76,7 +77,7 @@ header[data-testid="stHeader"],
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     border-bottom: 1.5px solid var(--border-color) !important;
-    z-index: 99990 !important;
+    z-index: 9999 !important;
     padding: 0 2.5rem !important;
     box-sizing: border-box !important;
     display: flex !important;
@@ -95,7 +96,7 @@ header[data-testid="stHeader"],
     flex-shrink: 0 !important;
     width: 170px !important;
     min-width: 170px !important;
-    z-index: 100000 !important;
+    z-index: 10001 !important;
     pointer-events: auto !important; /* Brand logo is clickable */
 }
 
@@ -106,23 +107,11 @@ header[data-testid="stHeader"],
     display: block !important;
 }
 
-.ks-nav-brand-title {
-    font-size: 1.35rem !important;
-    font-weight: 800 !important;
-    color: var(--color-primary) !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.02em !important;
-}
-
-.ks-nav-brand-sub {
-    font-size: 0.75rem !important;
-    color: var(--text-muted) !important;
-    font-weight: 500 !important;
-    line-height: 1.1 !important;
-}
-
 .ks-nav-tabs-slot {
-    pointer-events: none !important; /* Transparent slot passes clicks */
+    flex: 1 !important;
+    max-width: 650px !important;
+    height: 42px !important;
+    pointer-events: none !important;
 }
 
 .ks-nav-lang {
@@ -130,14 +119,14 @@ header[data-testid="stHeader"],
     align-items: center !important;
     gap: 0.75rem !important;
     flex-shrink: 0 !important;
-    z-index: 100000 !important;
+    z-index: 10001 !important;
     pointer-events: auto !important; /* Language pill is clickable */
 }
 
 .ks-lang-pill {
     background: #FFFFFF !important;
     color: var(--text-primary) !important;
-    border: 1.5px solid #DCE5DB !important;
+    border: 1.5px solid var(--border-color) !important;
     border-radius: 999px !important;
     padding: 0.45rem 1.1rem !important;
     font-size: 0.88rem !important;
@@ -149,25 +138,22 @@ header[data-testid="stHeader"],
     flex-shrink: 0 !important;
 }
 
-/* PIN NATIVE STREAMLIT TABS INTO NAVBAR CENTER WITH MAXIMUM STACKING & RELIABLE HIT-TESTING */
-div[data-testid="stElementContainer"]:has(div[data-testid="stTabs"]),
+/* 3. TABS CONTAINER IN NORMAL DOCUMENT FLOW (Sticky alignment inside the 70px bar) */
 div[data-testid="stTabs"] {
-    background: transparent !important;
-    border: none !important;
+    margin-top: -56px !important;
     position: relative !important;
-    z-index: 999999 !important;
+    z-index: 10000 !important;
 }
 
 [data-baseweb="tab-list"],
 div[data-testid="stTabs"] [data-baseweb="tab-list"],
 .stTabs [data-baseweb="tab-list"] {
-    position: fixed !important;
+    position: sticky !important;
     top: 14px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 1000000 !important;
-    pointer-events: auto !important;
-    display: inline-flex !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 8px !important;
@@ -176,17 +162,18 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"],
     border: none !important;
     border-bottom: none !important;
     box-shadow: none !important;
-    margin: 0 !important;
     padding: 0 !important;
     height: 42px !important;
     max-width: 650px !important;
+    z-index: 10002 !important;
+    pointer-events: auto !important;
 }
 
 /* Individual Tab Buttons */
 div[data-baseweb="tab-list"] button[role="tab"],
 .stTabs [data-baseweb="tab-list"] button {
     position: relative !important;
-    z-index: 1000001 !important;
+    z-index: 10003 !important;
     pointer-events: auto !important;
     cursor: pointer !important;
     background-color: transparent !important;
@@ -214,16 +201,11 @@ div[data-baseweb="tab-list"] button[role="tab"]:hover,
     color: var(--color-primary) !important;
 }
 
-/* Child elements and SVG icons inside tab buttons must not intercept clicks from the button */
+/* Child elements inside tab buttons must not intercept clicks */
 div[data-baseweb="tab-list"] button[role="tab"] *,
 .stTabs [data-baseweb="tab-list"] button * {
     pointer-events: none !important;
     user-select: none !important;
-}
-
-div[data-baseweb="tab-list"] button[role="tab"]::before,
-.stTabs [data-baseweb="tab-list"] button::before {
-    pointer-events: none !important;
 }
 
 /* Active Tab: Solid Forest Green Pill with White Text */
@@ -298,12 +280,12 @@ div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"]::before,
     filter: brightness(0) invert(1) !important;
 }
 
-/* 4. TAB PANELS CONTAINER (Comfortable top offset matching 70px navbar) */
+/* 4. TAB PANELS CONTAINER (Comfortable 1240px container, natural document flow) */
 div[data-baseweb="tab-panel"] {
-    padding-top: 84px !important;
+    padding-top: 1.75rem !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 2.5rem !important;
     max-width: 1240px !important;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -315,7 +297,7 @@ div[data-testid="stVerticalBlockBorderWrapper"],
 .ks-ask-card {
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
-    border: 1.5px solid #E2EBE2 !important;
+    border: 1.5px solid var(--border-color) !important;
     border-radius: 24px !important;
     padding: 2.25rem 2.8rem !important;
     position: relative !important;
@@ -393,13 +375,13 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
 .st-key-qf_rice button,
 .st-key-qf_wheat button,
 .st-key-qf_potato button {
-    background-color: #174B35 !important;
-    background: #174B35 !important;
+    background-color: var(--color-primary) !important;
+    background: var(--color-primary) !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
     font-size: 0.88rem !important;
     border-radius: 999px !important;
-    border: 1.5px solid #174B35 !important;
+    border: 1.5px solid var(--color-primary) !important;
     padding: 0.55rem 1.1rem !important;
     box-shadow: 0 2px 8px rgba(23, 75, 53, 0.18) !important;
     transition: all 0.2s ease !important;
@@ -414,9 +396,9 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
 .st-key-qf_rice button:hover,
 .st-key-qf_wheat button:hover,
 .st-key-qf_potato button:hover {
-    background-color: #123D2B !important;
-    background: #123D2B !important;
-    border-color: #123D2B !important;
+    background-color: var(--color-primary-hover) !important;
+    background: var(--color-primary-hover) !important;
+    border-color: var(--color-primary-hover) !important;
     color: #FFFFFF !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(23, 75, 53, 0.25) !important;
@@ -434,11 +416,11 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
 .st-key-qf_reset button {
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
-    color: #174B35 !important;
+    color: var(--color-primary) !important;
     font-weight: 700 !important;
     font-size: 0.88rem !important;
     border-radius: 999px !important;
-    border: 1.5px solid #174B35 !important;
+    border: 1.5px solid var(--color-primary) !important;
     padding: 0.55rem 1.1rem !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     transition: all 0.2s ease !important;
@@ -452,13 +434,13 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
 .st-key-qf_reset button:hover {
     background-color: #F4F8F4 !important;
     background: #F4F8F4 !important;
-    border-color: #123D2B !important;
-    color: #123D2B !important;
+    border-color: var(--color-primary-hover) !important;
+    color: var(--color-primary-hover) !important;
     transform: translateY(-1px) !important;
 }
 
 .st-key-qf_reset button * {
-    color: #174B35 !important;
+    color: var(--color-primary) !important;
     font-weight: 700 !important;
 }
 
@@ -528,9 +510,13 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3C/svg%3E");
 }
 
-/* CRITICAL RESET: Streamlit Tooltip Hover Target Buttons must never be styled as pills */
+/* ABSOLUTE RESET: Streamlit Tooltip Hover Target Buttons & Help Icons must never be styled as pills */
+div.stTooltipHoverTarget,
 div.stTooltipHoverTarget button,
-.stTooltipHoverTarget button {
+.stTooltipHoverTarget,
+.stTooltipHoverTarget button,
+[data-testid="stTooltipHoverTarget"],
+[data-testid="stTooltipHoverTarget"] button {
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
@@ -545,19 +531,25 @@ div.stTooltipHoverTarget button,
 }
 
 div.stTooltipHoverTarget button::before,
-.stTooltipHoverTarget button::before {
+.stTooltipHoverTarget button::before,
+[data-testid="stTooltipHoverTarget"] button::before {
     display: none !important;
     content: none !important;
 }
 
-div.stTooltipHoverTarget svg {
+div.stTooltipHoverTarget svg,
+[data-testid="stTooltipHoverTarget"] svg {
     width: 16px !important;
     height: 16px !important;
-    opacity: 0.65 !important;
+    opacity: 0.6 !important;
+    fill: none !important;
+    stroke: var(--text-muted) !important;
 }
 
-div.stTooltipHoverTarget:hover svg {
+div.stTooltipHoverTarget:hover svg,
+[data-testid="stTooltipHoverTarget"]:hover svg {
     opacity: 1 !important;
+    stroke: var(--color-primary) !important;
 }
 
 /* Form Inputs */
@@ -565,7 +557,7 @@ div.stTooltipHoverTarget:hover svg {
 .stTextArea > div > div > textarea,
 .stSelectbox > div > div {
     background-color: #FFFFFF !important;
-    border: 1.5px solid #DCE5DB !important;
+    border: 1.5px solid var(--border-color) !important;
     border-radius: 12px !important;
     color: var(--text-primary) !important;
     font-family: var(--font-main) !important;
@@ -588,91 +580,12 @@ div.stTooltipHoverTarget:hover svg {
     align-items: center !important;
 }
 
-/* Form Input Label Icons via ::before from Asset Pack */
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(1) div[data-testid="stTextInput"] label::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: middle;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 4c-8 0-14 3-14 10a6 6 0 0 0 6 6c7 0 8-8 8-16Z'/%3E%3Cpath d='M4 21c2-5 6-8 12-11'/%3E%3C/svg%3E");
-}
-
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(1) > div:nth-child(2) label::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: middle;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
-}
-
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(1) > div:nth-child(3) label::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: middle;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 20h10'/%3E%3Cpath d='M10 20c5.5-2.5.8-6.4 3-10'/%3E%3Cpath d='M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4.1 5.5.8z'/%3E%3Cpath d='M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4.1 1-4.9 2z'/%3E%3C/svg%3E");
-}
-
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(2) > div:nth-child(1) label::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: middle;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3 10 18H2L12 3Z'/%3E%3Cpath d='M12 9v5m0 3h.01'/%3E%3C/svg%3E");
-}
-
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(2) > div:nth-child(2) label::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: middle;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 8 6 6'/%3E%3Cpath d='m4 14 6-6 2-3'/%3E%3Cpath d='M2 5h12'/%3E%3Cpath d='M7 2h1'/%3E%3Cpath d='m22 22-5-10-5 10'/%3E%3Cpath d='M14 18h6'/%3E%3C/svg%3E");
-}
-
-div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(2) > div:nth-child(3) label::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: middle;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
-}
-
 /* Primary Button (Analyze Crop Problem) */
 .st-key-btn_analyze_crop button,
 button[kind="primary"],
 div[data-testid="stBaseButton-primary"] button {
-    background-color: #174B35 !important;
-    background: #174B35 !important;
+    background-color: var(--color-primary) !important;
+    background: var(--color-primary) !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
     font-size: 1.05rem !important;
@@ -702,8 +615,8 @@ div[data-testid="stBaseButton-primary"] button > div {
 .st-key-btn_analyze_crop button:hover,
 button[kind="primary"]:hover,
 div[data-testid="stBaseButton-primary"] button:hover {
-    background-color: #123D2B !important;
-    background: #123D2B !important;
+    background-color: var(--color-primary-hover) !important;
+    background: var(--color-primary-hover) !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 6px 18px rgba(23, 75, 53, 0.32) !important;
 }
@@ -732,38 +645,12 @@ div[data-testid="stBaseButton-primary"] button::before {
     vertical-align: middle;
 }
 
-/* 6. ARCHITECTURE & SAFETY CARDS (Compact layout to fit on a single screen without vertical scrolling) */
+/* 6. ARCHITECTURE & SAFETY CARDS (Compact equal-height layout without vertical overflow) */
 .ks-how-it-works-page,
 .ks-safety-page {
     position: relative !important;
     width: 100% !important;
     overflow: hidden !important;
-}
-
-.ks-bg-foliage-left {
-    position: absolute !important;
-    top: 10px !important;
-    left: 0 !important;
-    width: 100px !important;
-    height: 120px !important;
-    max-width: 100px !important;
-    max-height: 120px !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-    opacity: 0.45 !important;
-}
-
-.ks-bg-foliage-right {
-    position: absolute !important;
-    top: 10px !important;
-    right: 0 !important;
-    width: 100px !important;
-    height: 120px !important;
-    max-width: 100px !important;
-    max-height: 120px !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-    opacity: 0.45 !important;
 }
 
 .ks-arch-container {
@@ -786,6 +673,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     justify-content: space-between !important;
     flex: 1 1 0 !important;
     min-width: 250px !important;
+    min-height: 290px !important;
     box-shadow: 0 4px 20px rgba(23, 75, 53, 0.04) !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
@@ -803,14 +691,14 @@ div[data-testid="stBaseButton-primary"] button::before {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.85rem !important;
 }
 
 .ks-arch-card-title {
     font-size: 1.15rem !important;
     font-weight: 800 !important;
     color: var(--color-primary) !important;
-    margin: 0 0 0.5rem 0 !important;
+    margin: 0 0 0.45rem 0 !important;
     letter-spacing: -0.02em !important;
     line-height: 1.2 !important;
 }
@@ -819,7 +707,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     font-size: 0.88rem !important;
     color: var(--text-muted) !important;
     line-height: 1.5 !important;
-    margin: 0 0 1rem 0 !important;
+    margin: 0 0 0.85rem 0 !important;
 }
 
 .ks-arch-illus {
@@ -833,7 +721,7 @@ div[data-testid="stBaseButton-primary"] button::before {
 .ks-arch-illus svg {
     max-width: 100% !important;
     height: auto !important;
-    max-height: 110px !important;
+    max-height: 95px !important;
     display: block !important;
 }
 
@@ -918,34 +806,35 @@ div[data-testid="stBaseButton-primary"] button::before {
     text-decoration: underline;
 }
 
-/* 8. RESPONSIVE DESIGN (1440px, 1280px, 768px, 375px) */
+/* 8. RESPONSIVE DESIGN (1440px, 1280px, 992px, 768px, 375px) */
 @media (max-width: 992px) {
     .ks-navbar {
-        height: 64px !important;
-        padding: 0.5rem 1rem !important;
-        flex-wrap: nowrap !important;
+        height: auto !important;
+        min-height: 64px !important;
+        padding: 0.6rem 1.25rem !important;
+        flex-wrap: wrap !important;
+    }
+
+    div[data-testid="stTabs"] {
+        margin-top: 0.35rem !important;
     }
 
     [data-baseweb="tab-list"],
     div[data-testid="stTabs"] [data-baseweb="tab-list"],
     .stTabs [data-baseweb="tab-list"] {
-        top: 64px !important;
-        left: 0 !important;
-        transform: none !important;
+        top: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
         justify-content: flex-start !important;
-        padding: 0.35rem 0.75rem !important;
+        padding: 0.35rem 0.5rem !important;
         background: #FFFFFF !important;
         border-bottom: 1px solid var(--border-color) !important;
-        z-index: 1000000 !important;
-        pointer-events: auto !important;
     }
 
     div[data-baseweb="tab-panel"] {
-        padding-top: 125px !important;
+        padding-top: 1.25rem !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
@@ -968,6 +857,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     .ks-arch-card {
         width: 100% !important;
         min-width: 0 !important;
+        min-height: auto !important;
     }
 }
 
