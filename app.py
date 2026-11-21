@@ -1743,7 +1743,7 @@ with tab_safety:
                     <div class="ks-arch-icon-box">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                            <polyline points="9 12 11 14 15 10"></polyline>
                         </svg>
                     </div>
                     <h3 class="ks-arch-card-title">Zero Chemical Dosage</h3>
@@ -1751,24 +1751,28 @@ with tab_safety:
                         Never computes or prescribes synthetic pesticide spraying doses, preventing crop phytotoxicity and pollinator poisoning.
                     </p>
                 </div>
-                <!-- Illustration 1: Prohibition Flask & Sprout -->
+                <!-- Illustration 1: Sprayer tank with Red Prohibition badge & Sprout -->
                 <div class="ks-arch-illus">
                     <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="115" cy="116" rx="78" ry="12" fill="#E2E9E1"/>
-                        <path d="M106 32 L106 50 L84 96 A 8 8 0 0 0 91 108 L139 108 A 8 8 0 0 0 146 96 L124 50 L124 32 Z" fill="#FFFFFF" stroke="#174B35" stroke-width="2.2"/>
-                        <rect x="102" y="28" width="26" height="5" rx="2.5" fill="#174B35"/>
-                        <path d="M90 94 L97 78 L133 78 L140 94 C 137 104, 93 104, 90 94 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                        <circle cx="106" cy="88" r="3" fill="#2E7D50" opacity="0.6"/>
-                        <circle cx="122" cy="91" r="2.5" fill="#2E7D50" opacity="0.6"/>
-                        <!-- Red prohibition badge -->
-                        <g>
-                            <circle cx="152" cy="46" r="22" fill="#FFFFFF" stroke="#DC2626" stroke-width="2.5"/>
-                            <line x1="136" y1="30" x2="168" y2="62" stroke="#DC2626" stroke-width="2.5"/>
-                            <text x="152" y="49" font-family="Inter, sans-serif" font-size="9" font-weight="800" fill="#DC2626" text-anchor="middle">0% DOSE</text>
-                        </g>
-                        <!-- Sprout -->
-                        <path d="M68 96 C 64 82, 74 74, 80 66 C 82 76, 73 87, 68 96" fill="#3B925E"/>
-                        <path d="M69 84 C 61 78, 54 82, 52 88 C 58 89, 66 87, 69 84" fill="#2E7D50"/>
+                        <ellipse cx="120" cy="118" rx="85" ry="12" fill="#E2E9E1" opacity="0.7"/>
+                        <!-- Sprouting leaves on left -->
+                        <path d="M62 108 C 50 95, 52 75, 68 70 C 72 82, 68 98, 62 108 Z" fill="#3B925E"/>
+                        <path d="M62 108 C 45 106, 38 92, 42 82 C 54 80, 60 92, 62 108 Z" fill="#2E7D50"/>
+                        <!-- Sprayer Tank Body -->
+                        <rect x="94" y="44" width="62" height="68" rx="14" fill="#FFFFFF" stroke="#174B35" stroke-width="2.5"/>
+                        <!-- Sprayer Top Neck & Pump Handle -->
+                        <rect x="116" y="36" width="18" height="8" rx="2" fill="#2E7D50" stroke="#174B35" stroke-width="1.5"/>
+                        <path d="M110 26 H140 V31 C140 33, 138 36, 135 36 H115 C112 36, 110 33, 110 31 Z" fill="#3B925E" stroke="#174B35" stroke-width="2"/>
+                        <rect x="122" y="16" width="6" height="10" rx="2" fill="#174B35"/>
+                        <rect x="112" y="12" width="26" height="5" rx="2.5" fill="#174B35"/>
+                        <!-- Hose running from top right down around tank -->
+                        <path d="M140 34 C 158 36, 168 55, 164 78 C 160 98, 154 108, 150 110" stroke="#174B35" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- Red Prohibition Badge in Center of Tank -->
+                        <circle cx="125" cy="78" r="21" fill="#FFFFFF" stroke="#DC2626" stroke-width="2.5"/>
+                        <!-- Chemical Flask inside circle -->
+                        <path d="M122 68 L122 72 L116 82 A 2 2 0 0 0 118 85 L132 85 A 2 2 0 0 0 134 82 L128 72 L128 68 Z" fill="#DEF7EC" stroke="#174B35" stroke-width="1.2"/>
+                        <!-- Red Prohibition Slash -->
+                        <line x1="110" y1="63" x2="140" y2="93" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round"/>
                     </svg>
                 </div>
             </div>
@@ -1820,20 +1824,31 @@ with tab_safety:
                         Uncertain symptoms or rapidly spreading plots automatically trigger escalation recommendations to local extension officers (KVK).
                     </p>
                 </div>
-                <!-- Illustration 3: KVK Officer Badge & Call Centre -->
+                <!-- Illustration 3: Extension Officer & Checklist Clipboard -->
                 <div class="ks-arch-illus">
                     <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="52" y="24" width="126" height="92" rx="14" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2"/>
-                        <rect x="68" y="16" width="94" height="18" rx="4" fill="#174B35"/>
-                        <text x="115" y="29" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle">KVK EXTENSION</text>
-                        <!-- Officer avatar -->
-                        <circle cx="115" cy="54" r="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                        <circle cx="115" cy="48" r="4" fill="#174B35"/>
-                        <path d="M107 58 C 107 54, 123 54, 123 58 Z" fill="#174B35"/>
-                        <!-- Toll-free banner -->
-                        <rect x="62" y="76" width="106" height="30" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
-                        <text x="115" y="89" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">KISAN CALL CENTRE</text>
-                        <text x="115" y="100" font-family="Inter, sans-serif" font-size="8.5" font-weight="800" fill="#15803D" text-anchor="middle">1800-180-1551</text>
+                        <ellipse cx="120" cy="118" rx="85" ry="12" fill="#E2E9E1" opacity="0.7"/>
+                        <!-- Clipboard on the left -->
+                        <rect x="52" y="32" width="56" height="78" rx="8" fill="#FFFFFF" stroke="#174B35" stroke-width="2.4"/>
+                        <rect x="68" y="26" width="24" height="10" rx="3" fill="#174B35"/>
+                        <!-- Checkmarks & lines -->
+                        <path d="M62 48 L65 51 L71 45" stroke="#2E7D50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="76" y1="48" x2="98" y2="48" stroke="#174B35" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M62 64 L65 67 L71 61" stroke="#2E7D50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="76" y1="64" x2="98" y2="64" stroke="#174B35" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M62 80 L65 83 L71 77" stroke="#2E7D50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="76" y1="80" x2="98" y2="80" stroke="#174B35" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="64" y1="94" x2="90" y2="94" stroke="#7BA887" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Extension Officer on the right -->
+                        <path d="M120 118 C 120 102, 132 94, 146 92 L 152 92 C 166 94, 178 102, 178 118 Z" fill="#FFFFFF" stroke="#174B35" stroke-width="2.4"/>
+                        <path d="M142 92 L149 104 L146 118" stroke="#174B35" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M156 92 L149 104" stroke="#174B35" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="144" y="80" width="10" height="14" fill="#FFFFFF" stroke="#174B35" stroke-width="2"/>
+                        <path d="M136 56 C 136 46, 162 46, 162 56 C 162 68, 156 78, 149 78 C 142 78, 136 68, 136 56 Z" fill="#FFFFFF" stroke="#174B35" stroke-width="2.2"/>
+                        <path d="M136 58 C 133 58, 133 64, 136 64" stroke="#174B35" stroke-width="2"/>
+                        <!-- Cap -->
+                        <path d="M133 50 C 133 36, 165 36, 165 50 Z" fill="#2E7D50" stroke="#174B35" stroke-width="2.2"/>
+                        <path d="M130 50 C 140 48, 160 48, 172 53" stroke="#174B35" stroke-width="2.5" stroke-linecap="round"/>
                     </svg>
                 </div>
             </div>
