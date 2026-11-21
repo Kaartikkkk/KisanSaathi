@@ -14,7 +14,7 @@ st.set_page_config(
     page_title="KisanSaathi | AI Crop Advisory Assistant",
     page_icon="🌱",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # -----------------------------------------------------------------------------
@@ -734,16 +734,6 @@ with st.sidebar:
     st.session_state.original_form["language"] = sidebar_language
 
     st.markdown("---")
-    st.markdown("### Safety Guardrails")
-    st.markdown("""
-    <div style="font-size:0.82rem; color:#68756C; line-height:1.6;">
-        <p>🛡️ <b>Zero Chemical Dosage:</b> Never computes or prescribes pesticide dosages.</p>
-        <p>📚 <b>Evidence-Grounded:</b> All causes cited from ICAR reference corpus.</p>
-        <p>👨‍🌾 <b>KVK Escalation:</b> Rapidly spreading issues escalated to local officers.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("---")
     if st.button("Reset Session & Inputs", use_container_width=True):
         st.session_state.result = None
         st.session_state.follow_up_history = []
@@ -913,7 +903,7 @@ st.markdown(f"""
 
 # Benchmark scenario quick-fill buttons
 st.caption("🧪 **Quick-Fill Benchmark Scenarios:**")
-p1, p2, p3, p4 = st.columns(4)
+p1, p2, p3, p4, p5 = st.columns([1, 1, 1, 1, 0.9])
 with p1:
     if st.button("🍅 Tomato Leaf Curl (UP)", use_container_width=True):
         set_preset("Tomato", "Uttar Pradesh", "Flowering", "Slowly", "English", "Tomato leaves have yellow spots and curling edges.")
@@ -929,6 +919,20 @@ with p3:
 with p4:
     if st.button("🥔 Potato Stunting (UP)", use_container_width=True):
         set_preset("Potato", "Uttar Pradesh", "Vegetative", "Not sure", "Hinglish", "Aloo ke paudhe me curling leaves dikh rahi hain aur growth ruk gayi hai.")
+        st.rerun()
+with p5:
+    if st.button("🔄 Reset Inputs", use_container_width=True):
+        st.session_state.result = None
+        st.session_state.follow_up_history = []
+        st.session_state.follow_up_answer = ""
+        st.session_state.original_form = {
+            "crop": "",
+            "region": "",
+            "stage": "Not sure",
+            "query": "",
+            "spread": "Not sure",
+            "language": st.session_state.original_form.get("language", "English"),
+        }
         st.rerun()
 
 OF = st.session_state.original_form
