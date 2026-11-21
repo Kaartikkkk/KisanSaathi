@@ -1,5 +1,6 @@
 """Safety Architecture view module for KisanSaathi.
 Matches mockup media_1795286961776_09314f39.jpg.
+Compact vertical proportions to ensure the entire view fits on a single screen without overflow.
 """
 
 import streamlit as st
@@ -8,7 +9,7 @@ from ui.assets import clean_html
 SAFETY_HTML = """
 <div class="ks-safety-page">
     <!-- Floating Foliage Background SVGs -->
-    <svg class="ks-bg-foliage-left" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:20px; left:0; width:110px !important; height:130px !important; max-width:110px !important; max-height:130px !important; pointer-events:none; z-index:1; opacity:0.45;">
+    <svg class="ks-bg-foliage-left" width="100" height="120" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:10px; left:0; width:100px !important; height:120px !important; max-width:100px !important; max-height:120px !important; pointer-events:none; z-index:1; opacity:0.45;">
         <path d="M-10 20 C 30 40, 70 80, 100 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
         <path d="M28 35 C 10 25, 12 5, 28 8 C 42 12, 45 28, 28 35 Z" fill="#7BA887" opacity="0.55"/>
         <path d="M60 55 C 50 40, 62 25, 78 30 C 88 40, 80 58, 60 55 Z" fill="#6B9978" opacity="0.6"/>
@@ -16,7 +17,7 @@ SAFETY_HTML = """
         <path d="M42 65 C 28 75, 15 68, 20 54 C 26 42, 42 48, 42 65 Z" fill="#6B9978" opacity="0.5"/>
         <path d="M78 120 C 62 130, 52 118, 58 104 C 64 92, 82 98, 78 120 Z" fill="#7BA887" opacity="0.55"/>
     </svg>
-    <svg class="ks-bg-foliage-right" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:20px; right:0; width:110px !important; height:130px !important; max-width:110px !important; max-height:130px !important; pointer-events:none; z-index:1; opacity:0.45;">
+    <svg class="ks-bg-foliage-right" width="100" height="120" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:10px; right:0; width:100px !important; height:120px !important; max-width:100px !important; max-height:120px !important; pointer-events:none; z-index:1; opacity:0.45;">
         <path d="M150 20 C 110 40, 70 80, 40 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
         <path d="M112 35 C 130 25, 128 5, 112 8 C 98 12, 95 28, 112 35 Z" fill="#7BA887" opacity="0.55"/>
         <path d="M80 55 C 90 40, 78 25, 62 30 C 52 40, 60 58, 80 55 Z" fill="#6B9978" opacity="0.6"/>
@@ -25,17 +26,17 @@ SAFETY_HTML = """
         <path d="M62 120 C 78 130, 88 118, 82 104 C 76 92, 58 98, 62 120 Z" fill="#7BA887" opacity="0.55"/>
     </svg>
 
-    <!-- Section Header -->
-    <div style="text-align:center; max-width:760px; margin:0 auto 3.2rem auto; position:relative; z-index:2;">
-        <div style="display:inline-block; margin-bottom:0.85rem;">
-            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.4rem 1.15rem; border-radius:999px;">
+    <!-- Section Header (Balanced compact margins to fit completely on one screen) -->
+    <div style="text-align:center; max-width:760px; margin:0 auto 1.4rem auto; position:relative; z-index:2;">
+        <div style="display:inline-block; margin-bottom:0.6rem;">
+            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.35rem 1rem; border-radius:999px;">
                 SAFETY ARCHITECTURE
             </span>
         </div>
-        <h1 style="font-size:2.8rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0; letter-spacing:-0.03em;">
+        <h1 style="font-size:2.35rem; font-weight:800; color:#174B35; margin:0 0 0.5rem 0; letter-spacing:-0.03em; line-height:1.15;">
             Safety-First Agricultural Guardrails
         </h1>
-        <p style="color:#68756C; font-size:1.08rem; line-height:1.6; margin:0;">
+        <p style="color:#68756C; font-size:1rem; line-height:1.5; margin:0;">
             Protecting crop health, soil vitality, and farmer safety through strict computational guardrails.
         </p>
     </div>
@@ -46,7 +47,7 @@ SAFETY_HTML = """
         <div class="ks-arch-card">
             <div>
                 <div class="ks-arch-icon-box">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         <polyline points="9 12 11 14 15 10"></polyline>
                     </svg>
@@ -58,7 +59,7 @@ SAFETY_HTML = """
             </div>
             <!-- Illustration 1: Sprayer tank with Red Prohibition badge & Sprout -->
             <div class="ks-arch-illus">
-                <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="200" height="110" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <ellipse cx="120" cy="118" rx="85" ry="12" fill="#E2E9E1" opacity="0.7"/>
                     <!-- Sprouting leaves on left -->
                     <path d="M62 108 C 50 95, 52 75, 68 70 C 72 82, 68 98, 62 108 Z" fill="#3B925E"/>
@@ -86,7 +87,7 @@ SAFETY_HTML = """
         <div class="ks-arch-card">
             <div>
                 <div class="ks-arch-icon-box">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                         <polyline points="2 17 12 22 22 17"></polyline>
                         <polyline points="2 12 12 17 22 12"></polyline>
@@ -99,7 +100,7 @@ SAFETY_HTML = """
             </div>
             <!-- Illustration 2: 3D ICAR Book -->
             <div class="ks-arch-illus">
-                <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="200" height="110" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <ellipse cx="115" cy="116" rx="78" ry="12" fill="#E2E9E1"/>
                     <path d="M52 84 L114 106 L178 84 L178 72 L114 94 L52 72 Z" fill="#D6E8D8"/>
                     <path d="M52 78 L114 100 L178 78 L178 68 L114 90 L52 68 Z" fill="#F7F8F2" stroke="#D6E8D8"/>
@@ -117,7 +118,7 @@ SAFETY_HTML = """
         <div class="ks-arch-card">
             <div>
                 <div class="ks-arch-icon-box">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                         <circle cx="9" cy="7" r="4"></circle>
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -131,7 +132,7 @@ SAFETY_HTML = """
             </div>
             <!-- Illustration 3: Extension Officer & Checklist Clipboard -->
             <div class="ks-arch-illus">
-                <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="200" height="110" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <ellipse cx="120" cy="118" rx="85" ry="12" fill="#E2E9E1" opacity="0.7"/>
                     <!-- Clipboard on the left -->
                     <rect x="52" y="32" width="56" height="78" rx="8" fill="#FFFFFF" stroke="#174B35" stroke-width="2.4"/>
@@ -159,11 +160,11 @@ SAFETY_HTML = """
         </div>
     </div>
 
-    <!-- Bottom Landscape Wave -->
-    <div style="width:100%; overflow:hidden; line-height:0; margin-top:4rem;">
-        <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
-            <path d="M0 45 C 360 85, 720 15, 1080 65 C 1260 85, 1380 60, 1440 50 L 1440 90 L 0 90 Z" fill="#DCEBDE" opacity="0.6"/>
-            <path d="M0 65 C 400 95, 800 35, 1200 75 L 1440 60 L 1440 90 L 0 90 Z" fill="#C7DFC8" opacity="0.75"/>
+    <!-- Bottom Landscape Wave (Compact) -->
+    <div style="width:100%; overflow:hidden; line-height:0; margin-top:1.5rem;">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+            <path d="M0 30 C 360 55, 720 10, 1080 45 C 1260 55, 1380 40, 1440 35 L 1440 60 L 0 60 Z" fill="#DCEBDE" opacity="0.6"/>
+            <path d="M0 45 C 400 65, 800 25, 1200 50 L 1440 40 L 1440 60 L 0 60 Z" fill="#C7DFC8" opacity="0.75"/>
         </svg>
     </div>
 </div>

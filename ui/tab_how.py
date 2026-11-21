@@ -1,5 +1,6 @@
 """How It Works Architecture view module for KisanSaathi.
 Matches mockup media_1795286699297_c6bbf8cd.jpg.
+Compact vertical proportions to ensure the entire view fits on a single screen without overflow.
 """
 
 import streamlit as st
@@ -8,7 +9,7 @@ from ui.assets import clean_html
 HOW_IT_WORKS_HTML = """
 <div class="ks-how-it-works-page">
     <!-- Floating Foliage Background SVGs -->
-    <svg class="ks-bg-foliage-left" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:20px; left:0; width:110px !important; height:130px !important; max-width:110px !important; max-height:130px !important; pointer-events:none; z-index:1; opacity:0.45;">
+    <svg class="ks-bg-foliage-left" width="100" height="120" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:10px; left:0; width:100px !important; height:120px !important; max-width:100px !important; max-height:120px !important; pointer-events:none; z-index:1; opacity:0.45;">
         <path d="M-10 20 C 30 40, 70 80, 100 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
         <path d="M28 35 C 10 25, 12 5, 28 8 C 42 12, 45 28, 28 35 Z" fill="#7BA887" opacity="0.55"/>
         <path d="M60 55 C 50 40, 62 25, 78 30 C 88 40, 80 58, 60 55 Z" fill="#6B9978" opacity="0.6"/>
@@ -16,7 +17,7 @@ HOW_IT_WORKS_HTML = """
         <path d="M42 65 C 28 75, 15 68, 20 54 C 26 42, 42 48, 42 65 Z" fill="#6B9978" opacity="0.5"/>
         <path d="M78 120 C 62 130, 52 118, 58 104 C 64 92, 82 98, 78 120 Z" fill="#7BA887" opacity="0.55"/>
     </svg>
-    <svg class="ks-bg-foliage-right" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:20px; right:0; width:110px !important; height:130px !important; max-width:110px !important; max-height:130px !important; pointer-events:none; z-index:1; opacity:0.45;">
+    <svg class="ks-bg-foliage-right" width="100" height="120" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:10px; right:0; width:100px !important; height:120px !important; max-width:100px !important; max-height:120px !important; pointer-events:none; z-index:1; opacity:0.45;">
         <path d="M150 20 C 110 40, 70 80, 40 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
         <path d="M112 35 C 130 25, 128 5, 112 8 C 98 12, 95 28, 112 35 Z" fill="#7BA887" opacity="0.55"/>
         <path d="M80 55 C 90 40, 78 25, 62 30 C 52 40, 60 58, 80 55 Z" fill="#6B9978" opacity="0.6"/>
@@ -25,17 +26,17 @@ HOW_IT_WORKS_HTML = """
         <path d="M62 120 C 78 130, 88 118, 82 104 C 76 92, 58 98, 62 120 Z" fill="#7BA887" opacity="0.55"/>
     </svg>
 
-    <!-- Section Header -->
-    <div style="text-align:center; max-width:760px; margin:0 auto 3.2rem auto; position:relative; z-index:2;">
-        <div style="display:inline-block; margin-bottom:0.85rem;">
-            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.4rem 1.15rem; border-radius:999px;">
+    <!-- Section Header (Balanced compact margins to fit completely on one screen) -->
+    <div style="text-align:center; max-width:760px; margin:0 auto 1.4rem auto; position:relative; z-index:2;">
+        <div style="display:inline-block; margin-bottom:0.6rem;">
+            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.35rem 1rem; border-radius:999px;">
                 SYSTEM ARCHITECTURE
             </span>
         </div>
-        <h1 style="font-size:2.8rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0; letter-spacing:-0.03em;">
+        <h1 style="font-size:2.35rem; font-weight:800; color:#174B35; margin:0 0 0.5rem 0; letter-spacing:-0.03em; line-height:1.15;">
             How KisanSaathi Works
         </h1>
-        <p style="color:#68756C; font-size:1.08rem; line-height:1.6; margin:0;">
+        <p style="color:#68756C; font-size:1rem; line-height:1.5; margin:0;">
             A grounded three-stage prompt workflow ensuring verified agronomic advice with zero chemical dosage hallucination.
         </p>
     </div>
@@ -46,7 +47,7 @@ HOW_IT_WORKS_HTML = """
         <div class="ks-arch-card">
             <div>
                 <div class="ks-arch-icon-box">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
@@ -58,7 +59,7 @@ HOW_IT_WORKS_HTML = """
             </div>
             <!-- Illustration 1: Document with speech bubbles -->
             <div class="ks-arch-illus">
-                <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="200" height="110" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="80" y="24" width="70" height="96" rx="8" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2.2"/>
                     <line x1="94" y1="44" x2="136" y2="44" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
                     <line x1="94" y1="58" x2="136" y2="58" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
@@ -92,7 +93,7 @@ HOW_IT_WORKS_HTML = """
 
         <!-- Arrow 1 -> 2 -->
         <div class="ks-arch-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
@@ -102,7 +103,7 @@ HOW_IT_WORKS_HTML = """
         <div class="ks-arch-card">
             <div>
                 <div class="ks-arch-icon-box">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                         <polyline points="2 17 12 22 22 17"></polyline>
                         <polyline points="2 12 12 17 22 12"></polyline>
@@ -115,7 +116,7 @@ HOW_IT_WORKS_HTML = """
             </div>
             <!-- Illustration 2: 3D ICAR Book -->
             <div class="ks-arch-illus">
-                <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="200" height="110" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <ellipse cx="115" cy="116" rx="78" ry="12" fill="#E2E9E1"/>
                     <path d="M52 84 L114 106 L178 84 L178 72 L114 94 L52 72 Z" fill="#D6E8D8"/>
                     <path d="M52 78 L114 100 L178 78 L178 68 L114 90 L52 68 Z" fill="#F7F8F2" stroke="#D6E8D8"/>
@@ -131,7 +132,7 @@ HOW_IT_WORKS_HTML = """
 
         <!-- Arrow 2 -> 3 -->
         <div class="ks-arch-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
@@ -141,7 +142,7 @@ HOW_IT_WORKS_HTML = """
         <div class="ks-arch-card">
             <div>
                 <div class="ks-arch-icon-box">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         <polyline points="9 12 11 14 15 10"></polyline>
                     </svg>
@@ -153,7 +154,7 @@ HOW_IT_WORKS_HTML = """
             </div>
             <!-- Illustration 3: Clipboard Checklist & Leaf -->
             <div class="ks-arch-illus">
-                <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="200" height="110" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="80" y="22" width="70" height="96" rx="8" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2.2"/>
                     <rect x="96" y="14" width="38" height="16" rx="4" fill="#174B35"/>
                     <rect x="104" y="18" width="22" height="6" rx="2" fill="#E7F2E8"/>
@@ -178,11 +179,11 @@ HOW_IT_WORKS_HTML = """
         </div>
     </div>
 
-    <!-- Bottom Landscape Wave -->
-    <div style="width:100%; overflow:hidden; line-height:0; margin-top:4rem;">
-        <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
-            <path d="M0 45 C 360 85, 720 15, 1080 65 C 1260 85, 1380 60, 1440 50 L 1440 90 L 0 90 Z" fill="#DCEBDE" opacity="0.6"/>
-            <path d="M0 65 C 400 95, 800 35, 1200 75 L 1440 60 L 1440 90 L 0 90 Z" fill="#C7DFC8" opacity="0.75"/>
+    <!-- Bottom Landscape Wave (Compact) -->
+    <div style="width:100%; overflow:hidden; line-height:0; margin-top:1.5rem;">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+            <path d="M0 30 C 360 55, 720 10, 1080 45 C 1260 55, 1380 40, 1440 35 L 1440 60 L 0 60 Z" fill="#DCEBDE" opacity="0.6"/>
+            <path d="M0 45 C 400 65, 800 25, 1200 50 L 1440 40 L 1440 60 L 0 60 Z" fill="#C7DFC8" opacity="0.75"/>
         </svg>
     </div>
 </div>

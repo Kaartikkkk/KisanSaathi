@@ -65,7 +65,7 @@ header[data-testid="stHeader"],
     margin: 0 !important;
 }
 
-/* 2. PINNED FULL-WIDTH TOP NAVBAR */
+/* 2. PINNED FULL-WIDTH TOP NAVBAR OVERLAY (Logo on Left, Lang on Right) */
 .ks-navbar {
     position: fixed !important;
     top: 0 !important;
@@ -73,15 +73,15 @@ header[data-testid="stHeader"],
     right: 0 !important;
     width: 100% !important;
     height: 70px !important;
-    background: #FFFFFF !important;
-    border-bottom: 1.5px solid var(--border-color) !important;
-    z-index: 9999 !important;
+    background: transparent !important;
+    border: none !important;
+    pointer-events: none !important;
+    z-index: 10005 !important;
     padding: 0 2.5rem !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    box-shadow: 0 2px 10px rgba(23, 75, 53, 0.03) !important;
 }
 
 .ks-nav-brand {
@@ -89,6 +89,7 @@ header[data-testid="stHeader"],
     align-items: center !important;
     gap: 0.75rem !important;
     text-decoration: none !important;
+    pointer-events: auto !important;
 }
 
 .ks-nav-brand-title {
@@ -118,9 +119,10 @@ header[data-testid="stHeader"],
     align-items: center !important;
     gap: 0.45rem !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.03) !important;
+    pointer-events: auto !important;
 }
 
-/* 3. PINNED STREAMLIT TABS DIRECTLY IN NAVBAR CENTER */
+/* 3. PINNED STREAMLIT TABS AS THE SOLID WHITE TOP NAVBAR */
 div[data-testid="stTabs"] {
     border: none !important;
 }
@@ -129,17 +131,21 @@ div[data-testid="stTabs"] {
 div[data-testid="stTabs"] [data-baseweb="tab-list"],
 .stTabs [data-baseweb="tab-list"] {
     position: fixed !important;
-    top: 14px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 10001 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 70px !important;
+    background: #FFFFFF !important;
+    border-bottom: 1.5px solid var(--border-color) !important;
+    z-index: 10000 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 6px !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    gap: 8px !important;
+    box-shadow: 0 2px 10px rgba(23, 75, 53, 0.03) !important;
+    padding: 0 14rem !important;
+    box-sizing: border-box !important;
 }
 
 /* Hide default underline border and indicator */
@@ -172,6 +178,7 @@ div[data-baseweb="tab-list"] button,
     outline: none !important;
     box-shadow: none !important;
     white-space: nowrap !important;
+    pointer-events: auto !important;
 }
 
 button[data-baseweb="tab"]:hover,
@@ -246,12 +253,12 @@ button[data-baseweb="tab"]:nth-child(5)[aria-selected="true"]::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 20V10M12 20V4M6 20v-6' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
-/* 4. TAB PANELS CONTAINER WITH COMFORTABLE TOP OFFSET */
+/* 4. TAB PANELS CONTAINER (Optimized to fit on a single screen without vertical overflow) */
 div[data-baseweb="tab-panel"] {
-    padding-top: 92px !important;
+    padding-top: 78px !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
-    padding-bottom: 2.5rem !important;
+    padding-bottom: 1.5rem !important;
     max-width: 1240px !important;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -263,7 +270,7 @@ div[data-baseweb="tab-panel"] {
     background: #FFFFFF !important;
     border: 1.5px solid var(--border-color) !important;
     border-radius: 24px !important;
-    padding: 2.5rem 2.75rem !important;
+    padding: 2.25rem 2.5rem !important;
     position: relative !important;
     overflow: hidden !important;
     box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04) !important;
@@ -284,7 +291,7 @@ div[data-baseweb="tab-panel"] {
     display: flex !important;
     align-items: flex-start !important;
     justify-content: space-between !important;
-    margin-bottom: 1.75rem !important;
+    margin-bottom: 1.5rem !important;
     position: relative !important;
     z-index: 2 !important;
 }
@@ -406,7 +413,7 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(1) butt
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 12'/%3E%3C/svg%3E");
 }
 
 /* Preset Button 2 Icon (Rice/Grain) */
@@ -541,11 +548,11 @@ div[data-testid="stBaseButton-primary"] button::before {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 12'/%3E%3C/svg%3E");
     vertical-align: middle;
 }
 
-/* 6. ARCHITECTURE & SAFETY CARDS (HOW IT WORKS & SAFETY) */
+/* 6. ARCHITECTURE & SAFETY CARDS (Compact layout to fit on a single screen without vertical scrolling) */
 .ks-how-it-works-page,
 .ks-safety-page {
     position: relative !important;
@@ -555,12 +562,12 @@ div[data-testid="stBaseButton-primary"] button::before {
 
 .ks-bg-foliage-left {
     position: absolute !important;
-    top: 20px !important;
+    top: 10px !important;
     left: 0 !important;
-    width: 110px !important;
-    height: 130px !important;
-    max-width: 110px !important;
-    max-height: 130px !important;
+    width: 100px !important;
+    height: 120px !important;
+    max-width: 100px !important;
+    max-height: 120px !important;
     pointer-events: none !important;
     z-index: 1 !important;
     opacity: 0.45 !important;
@@ -568,12 +575,12 @@ div[data-testid="stBaseButton-primary"] button::before {
 
 .ks-bg-foliage-right {
     position: absolute !important;
-    top: 20px !important;
+    top: 10px !important;
     right: 0 !important;
-    width: 110px !important;
-    height: 130px !important;
-    max-width: 110px !important;
-    max-height: 130px !important;
+    width: 100px !important;
+    height: 120px !important;
+    max-width: 100px !important;
+    max-height: 120px !important;
     pointer-events: none !important;
     z-index: 1 !important;
     opacity: 0.45 !important;
@@ -583,56 +590,56 @@ div[data-testid="stBaseButton-primary"] button::before {
     display: flex !important;
     align-items: stretch !important;
     justify-content: space-between !important;
-    gap: 1.25rem !important;
+    gap: 1.15rem !important;
     position: relative !important;
     z-index: 2 !important;
-    margin-bottom: 2.5rem !important;
+    margin-bottom: 1.5rem !important;
 }
 
 .ks-arch-card {
     background: #FFFFFF !important;
     border: 1.5px solid var(--border-color) !important;
-    border-radius: 24px !important;
-    padding: 2.25rem 2rem 1.75rem 2rem !important;
+    border-radius: 20px !important;
+    padding: 1.4rem 1.5rem 1.15rem 1.5rem !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
     flex: 1 1 0 !important;
-    min-width: 270px !important;
-    box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04) !important;
+    min-width: 250px !important;
+    box-shadow: 0 4px 20px rgba(23, 75, 53, 0.04) !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .ks-arch-card:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 8px 30px rgba(23, 75, 53, 0.08) !important;
+    box-shadow: 0 8px 26px rgba(23, 75, 53, 0.08) !important;
 }
 
 .ks-arch-icon-box {
-    width: 46px !important;
-    height: 46px !important;
-    border-radius: 14px !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 12px !important;
     background: var(--color-accent) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin-bottom: 1.25rem !important;
+    margin-bottom: 1rem !important;
 }
 
 .ks-arch-card-title {
-    font-size: 1.25rem !important;
+    font-size: 1.15rem !important;
     font-weight: 800 !important;
     color: var(--color-primary) !important;
-    margin: 0 0 0.65rem 0 !important;
+    margin: 0 0 0.5rem 0 !important;
     letter-spacing: -0.02em !important;
     line-height: 1.2 !important;
 }
 
 .ks-arch-card-desc {
-    font-size: 0.92rem !important;
+    font-size: 0.88rem !important;
     color: var(--text-muted) !important;
-    line-height: 1.55 !important;
-    margin: 0 0 1.5rem 0 !important;
+    line-height: 1.5 !important;
+    margin: 0 0 1rem 0 !important;
 }
 
 .ks-arch-illus {
@@ -640,18 +647,19 @@ div[data-testid="stBaseButton-primary"] button::before {
     display: flex !important;
     justify-content: center !important;
     align-items: flex-end !important;
-    padding-top: 1rem !important;
+    padding-top: 0.5rem !important;
 }
 
 .ks-arch-illus svg {
     max-width: 100% !important;
     height: auto !important;
+    max-height: 110px !important;
     display: block !important;
 }
 
 .ks-arch-arrow {
-    width: 38px !important;
-    height: 38px !important;
+    width: 34px !important;
+    height: 34px !important;
     border-radius: 50% !important;
     background: var(--color-accent) !important;
     border: 1.5px solid #D0E7D4 !important;
@@ -660,7 +668,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     justify-content: center !important;
     flex-shrink: 0 !important;
     align-self: center !important;
-    margin: 0 0.25rem !important;
+    margin: 0 0.2rem !important;
 }
 
 /* 7. GENERAL CARDS, SECTIONS & BADGES */
@@ -668,7 +676,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     background-color: #FFFFFF !important;
     border: 1.5px solid var(--border-color) !important;
     border-radius: 20px !important;
-    padding: 2rem 2.25rem !important;
+    padding: 1.8rem 2rem !important;
     margin-bottom: 1.5rem !important;
     box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04) !important;
 }
@@ -716,8 +724,8 @@ div[data-testid="stBaseButton-primary"] button::before {
 /* Shared Footer */
 .ks-footer {
     border-top: 1.5px solid var(--border-color);
-    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-    margin-top: 3.5rem;
+    padding: 2.25rem 1.5rem 1.5rem 1.5rem;
+    margin-top: 2.5rem;
     text-align: center;
     background: transparent;
 }
@@ -735,27 +743,17 @@ div[data-testid="stBaseButton-primary"] button::before {
     [data-baseweb="tab-list"],
     div[data-testid="stTabs"] [data-baseweb="tab-list"],
     .stTabs [data-baseweb="tab-list"] {
-        position: static !important;
-        transform: none !important;
+        padding: 0 1rem !important;
         overflow-x: auto !important;
-        width: 100% !important;
         justify-content: flex-start !important;
-        padding: 0.65rem 1rem !important;
-        background: #FFFFFF !important;
-        border-bottom: 1.5px solid var(--border-color) !important;
-        border-radius: 0 !important;
     }
 
     .ks-navbar {
-        position: static !important;
-        height: auto !important;
-        padding: 0.85rem 1.25rem !important;
-        flex-wrap: wrap !important;
-        gap: 0.75rem !important;
+        padding: 0 1rem !important;
     }
 
     div[data-baseweb="tab-panel"] {
-        padding-top: 1.5rem !important;
+        padding-top: 80px !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
