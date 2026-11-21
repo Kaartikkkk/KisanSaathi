@@ -87,172 +87,174 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
     """Render the Crop Diagnostic Center, form inputs, and grounded results."""
     OF = st.session_state.original_form
 
-    # 1. Main White Card Container
-    header_html = f"""
-    <div class="ks-ask-card">
-        <div class="ks-ask-corner-foliage">
-            {CORNER_LEAF_BRANCH_SVG}
-        </div>
+    # 1. Main White Card Container wrapping Diagnostic Center
+    card = st.container(border=True)
+    with card:
+        header_html = f"""
         <div class="ks-ask-header">
-            <div>
-                <h2 class="ks-ask-title">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-                    </svg>
-                    Crop Diagnostic Center
-                </h2>
-                <p class="ks-ask-subtitle">
-                    Describe the crop problem details below to get clear and safe guidance.
-                </p>
+            <div class="ks-ask-corner-foliage">
+                {CORNER_LEAF_BRANCH_SVG}
             </div>
-            <div>
-                <span class="ks-ask-badge">&#10022; AI Symptom Intake</span>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:2;">
+                <div>
+                    <h2 class="ks-ask-title">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                        </svg>
+                        Crop Diagnostic Center
+                    </h2>
+                    <p class="ks-ask-subtitle">
+                        Describe the crop problem details below to get clear and safe guidance.
+                    </p>
+                </div>
+                <div>
+                    <span class="ks-ask-badge">&#10022; AI Symptom Intake</span>
+                </div>
             </div>
         </div>
-    """
-    st.markdown(clean_html(header_html), unsafe_allow_html=True)
+        """
+        st.markdown(clean_html(header_html), unsafe_allow_html=True)
 
-    # 2. Quick-Fill Benchmark Scenarios Section (Clean text, no random emojis)
-    preset_title_html = """
-    <div class="ks-preset-section-title">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-            <polyline points="2 17 12 22 22 17"/>
-            <polyline points="2 12 12 17 22 12"/>
-        </svg>
-        Quick-Fill Benchmark Scenarios:
-    </div>
-    """
-    st.markdown(clean_html(preset_title_html), unsafe_allow_html=True)
+        # 2. Quick-Fill Benchmark Scenarios Section (Clean text, no random emojis)
+        preset_title_html = """
+        <div class="ks-preset-section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+            </svg>
+            Quick-Fill Benchmark Scenarios:
+        </div>
+        """
+        st.markdown(clean_html(preset_title_html), unsafe_allow_html=True)
 
-    p1, p2, p3, p4, p5 = st.columns([1.1, 1.1, 1.1, 1.1, 0.9], gap="small")
-    with p1:
-        if st.button("Tomato Leaf Curl (UP)", key="qf_tomato", use_container_width=True):
-            set_preset_scenario(
-                "Tomato",
-                "Uttar Pradesh",
-                "Flowering",
-                "Slowly",
-                "English",
-                "Tomato leaves have yellow spots and curling edges with stunted apex."
+        p1, p2, p3, p4, p5 = st.columns([1.1, 1.1, 1.1, 1.1, 0.9], gap="small")
+        with p1:
+            if st.button("Tomato Leaf Curl (UP)", key="qf_tomato", use_container_width=True):
+                set_preset_scenario(
+                    "Tomato",
+                    "Uttar Pradesh",
+                    "Flowering",
+                    "Slowly",
+                    "English",
+                    "Tomato leaves have yellow spots and curling edges with stunted apex."
+                )
+                st.rerun()
+
+        with p2:
+            if st.button("Rice Brown Spot (WB)", key="qf_rice", use_container_width=True):
+                set_preset_scenario(
+                    "Rice",
+                    "West Bengal",
+                    "Vegetative",
+                    "Slowly",
+                    "English",
+                    "Small circular to oval dark brown spots on leaves with yellow halo."
+                )
+                st.rerun()
+
+        with p3:
+            if st.button("Wheat Yellowing (PB)", key="qf_wheat", use_container_width=True):
+                set_preset_scenario(
+                    "Wheat",
+                    "Punjab",
+                    "Vegetative",
+                    "Slowly",
+                    "English",
+                    "Yellow stripes parallel to leaf veins, yellow powder rubs off on fingers."
+                )
+                st.rerun()
+
+        with p4:
+            if st.button("Potato Stunting (UP)", key="qf_potato", use_container_width=True):
+                set_preset_scenario(
+                    "Potato",
+                    "Uttar Pradesh",
+                    "Vegetative",
+                    "Rapidly",
+                    "Hindi",
+                    "आलू के पौधे बौने रह गए हैं, पत्तियां ऊपर की ओर मुड़ रही हैं और शिराएं पीली पड़ रही हैं।"
+                )
+                st.rerun()
+
+        with p5:
+            if st.button("Reset Inputs", key="qf_reset", use_container_width=True):
+                reset_all_inputs()
+                st.rerun()
+
+        st.markdown("<div style='height: 1rem;'></div>", unsafe_allow_html=True)
+
+        # 3. Form Inputs in 2 Balanced Columns
+        col_left, col_right = st.columns(2, gap="large")
+
+        with col_left:
+            crop_val = st.text_input(
+                "Crop Name",
+                value=OF.get("crop", ""),
+                placeholder="e.g. Tomato / Rice / गेहूं",
+                help="Enter common English or local name of the crop."
             )
-            st.rerun()
 
-    with p2:
-        if st.button("Rice Brown Spot (WB)", key="qf_rice", use_container_width=True):
-            set_preset_scenario(
-                "Rice",
-                "West Bengal",
-                "Vegetative",
-                "Slowly",
-                "English",
-                "Small circular to oval dark brown spots on leaves with yellow halo."
+            reg_val_current = OF.get("region", "Select your state")
+            reg_idx = INDIAN_STATES.index(reg_val_current) if reg_val_current in INDIAN_STATES else 0
+            reg_val = st.selectbox(
+                "Region / State",
+                INDIAN_STATES,
+                index=reg_idx,
+                help="Select the geographic state for localized agronomic calibration."
             )
-            st.rerun()
 
-    with p3:
-        if st.button("Wheat Yellowing (PB)", key="qf_wheat", use_container_width=True):
-            set_preset_scenario(
-                "Wheat",
-                "Punjab",
-                "Vegetative",
-                "Slowly",
-                "English",
-                "Yellow stripes parallel to leaf veins, yellow powder rubs off on fingers."
+            stage_val_current = OF.get("stage", "Select growth stage")
+            stg_idx = GROWTH_STAGES.index(stage_val_current) if stage_val_current in GROWTH_STAGES else 0
+            stage_val = st.selectbox(
+                "Crop Growth Stage",
+                GROWTH_STAGES,
+                index=stg_idx,
+                help="Current phenological development phase of the crop."
             )
-            st.rerun()
 
-    with p4:
-        if st.button("Potato Stunting (UP)", key="qf_potato", use_container_width=True):
-            set_preset_scenario(
-                "Potato",
-                "Uttar Pradesh",
-                "Vegetative",
-                "Rapidly",
-                "Hindi",
-                "आलू के पौधे बौने रह गए हैं, पत्तियां ऊपर की ओर मुड़ रही हैं और शिराएं पीली पड़ रही हैं।"
+        with col_right:
+            spread_val_current = OF.get("spread", "Not sure")
+            spd_idx = SPREAD_OPTIONS.index(spread_val_current) if spread_val_current in SPREAD_OPTIONS else 0
+            spread_val = st.selectbox(
+                "Problem Spreading?",
+                SPREAD_OPTIONS,
+                index=spd_idx,
+                help="Rate at which observed symptoms are expanding across adjacent plots."
             )
-            st.rerun()
 
-    with p5:
-        if st.button("Reset Inputs", key="qf_reset", use_container_width=True):
-            reset_all_inputs()
-            st.rerun()
+            lang_val_current = OF.get("language", "Select language")
+            lng_idx = LANGUAGE_OPTIONS.index(lang_val_current) if lang_val_current in LANGUAGE_OPTIONS else 1
+            lang_val = st.selectbox(
+                "Preferred Advisory Language",
+                LANGUAGE_OPTIONS,
+                index=lng_idx,
+                help="Select preferred language for diagnostic summary and cultural management checklists."
+            )
 
-    st.markdown("<div style='height: 1.25rem;'></div>", unsafe_allow_html=True)
+            query_val = st.text_area(
+                "Describe the Symptoms Observed",
+                value=OF.get("query", ""),
+                placeholder="e.g. leaves have yellow spots and curling edges",
+                height=85,
+                help="Detail visible symptoms: leaf discoloration, necrotic lesions, wilting, insect presence, etc."
+            )
 
-    # 3. Form Inputs in 2 Balanced Columns
-    col_left, col_right = st.columns(2, gap="large")
+        # Update session state with current form values
+        OF["crop"] = crop_val
+        OF["region"] = reg_val if reg_val != "Select your state" else ""
+        OF["stage"] = stage_val if stage_val != "Select growth stage" else "Not sure"
+        OF["spread"] = spread_val
+        OF["language"] = lang_val if lang_val != "Select language" else "English"
+        OF["query"] = query_val
 
-    with col_left:
-        crop_val = st.text_input(
-            "Crop Name",
-            value=OF.get("crop", ""),
-            placeholder="e.g. Tomato / Rice / गेहूं",
-            help="Enter common English or local name of the crop."
-        )
+        st.markdown("<div style='height: 0.85rem;'></div>", unsafe_allow_html=True)
 
-        reg_val_current = OF.get("region", "Select your state")
-        reg_idx = INDIAN_STATES.index(reg_val_current) if reg_val_current in INDIAN_STATES else 0
-        reg_val = st.selectbox(
-            "Region / State",
-            INDIAN_STATES,
-            index=reg_idx,
-            help="Select the geographic state for localized agronomic calibration."
-        )
-
-        stage_val_current = OF.get("stage", "Select growth stage")
-        stg_idx = GROWTH_STAGES.index(stage_val_current) if stage_val_current in GROWTH_STAGES else 0
-        stage_val = st.selectbox(
-            "Crop Growth Stage",
-            GROWTH_STAGES,
-            index=stg_idx,
-            help="Current phenological development phase of the crop."
-        )
-
-    with col_right:
-        spread_val_current = OF.get("spread", "Not sure")
-        spd_idx = SPREAD_OPTIONS.index(spread_val_current) if spread_val_current in SPREAD_OPTIONS else 0
-        spread_val = st.selectbox(
-            "Problem Spreading?",
-            SPREAD_OPTIONS,
-            index=spd_idx,
-            help="Rate at which observed symptoms are expanding across adjacent plots."
-        )
-
-        lang_val_current = OF.get("language", "Select language")
-        lng_idx = LANGUAGE_OPTIONS.index(lang_val_current) if lang_val_current in LANGUAGE_OPTIONS else 1
-        lang_val = st.selectbox(
-            "Preferred Advisory Language",
-            LANGUAGE_OPTIONS,
-            index=lng_idx,
-            help="Select preferred language for diagnostic summary and cultural management checklists."
-        )
-
-        query_val = st.text_area(
-            "Describe the Symptoms Observed",
-            value=OF.get("query", ""),
-            placeholder="e.g. leaves have yellow spots and curling edges",
-            height=85,
-            help="Detail visible symptoms: leaf discoloration, necrotic lesions, wilting, insect presence, etc."
-        )
-
-    # Update session state with current form values
-    OF["crop"] = crop_val
-    OF["region"] = reg_val if reg_val != "Select your state" else ""
-    OF["stage"] = stage_val if stage_val != "Select growth stage" else "Not sure"
-    OF["spread"] = spread_val
-    OF["language"] = lang_val if lang_val != "Select language" else "English"
-    OF["query"] = query_val
-
-    # 4. Full-Width Analyze Button
-    st.markdown('<div class="ks-analyze-btn">', unsafe_allow_html=True)
-    analyze_clicked = st.button("Analyze Crop Problem →", key="btn_analyze_crop", type="primary", use_container_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Close the outer white card
-    st.markdown('</div>', unsafe_allow_html=True)
+        # 4. Full-Width Analyze Button
+        st.markdown('<div class="ks-analyze-btn">', unsafe_allow_html=True)
+        analyze_clicked = st.button("Analyze Crop Problem →", key="btn_analyze_crop", type="primary", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # -------------------------------------------------------------------------
     # 5. Pipeline Execution

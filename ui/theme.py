@@ -73,9 +73,10 @@ header[data-testid="stHeader"],
     right: 0 !important;
     width: 100% !important;
     height: 70px !important;
+    background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     border-bottom: 1.5px solid var(--border-color) !important;
-    z-index: 99999 !important;
+    z-index: 99998 !important;
     padding: 0 2.5rem !important;
     box-sizing: border-box !important;
     display: flex !important;
@@ -91,6 +92,7 @@ header[data-testid="stHeader"],
     text-decoration: none !important;
     cursor: pointer !important;
     flex-shrink: 0 !important;
+    z-index: 100000 !important;
 }
 
 .ks-nav-brand-title {
@@ -108,52 +110,12 @@ header[data-testid="stHeader"],
     line-height: 1.1 !important;
 }
 
-/* Integrated Navigation Tabs in Navbar */
-.ks-nav-links {
+.ks-nav-lang {
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
+    gap: 0.75rem !important;
     flex-shrink: 0 !important;
-}
-
-.ks-nav-btn {
-    background-color: transparent !important;
-    color: var(--text-primary) !important;
-    font-family: var(--font-main) !important;
-    font-size: 0.92rem !important;
-    font-weight: 500 !important;
-    padding: 8px 18px !important;
-    border-radius: 999px !important;
-    border: none !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    outline: none !important;
-    box-shadow: none !important;
-    white-space: nowrap !important;
-}
-
-.ks-nav-btn:hover {
-    background-color: rgba(23, 75, 53, 0.06) !important;
-    color: var(--color-primary) !important;
-}
-
-/* Active Navigation Tab: Solid forest green pill */
-.ks-nav-btn.active {
-    background-color: var(--color-primary) !important;
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-    box-shadow: 0 4px 14px rgba(23, 75, 53, 0.25) !important;
-}
-
-.ks-nav-btn.active svg {
-    stroke: #FFFFFF !important;
-}
-.ks-nav-btn.active svg * {
-    stroke: #FFFFFF !important;
+    z-index: 100000 !important;
 }
 
 .ks-lang-pill {
@@ -171,35 +133,141 @@ header[data-testid="stHeader"],
     flex-shrink: 0 !important;
 }
 
-/* Hide native Streamlit tabs bar cleanly off-screen */
+/* PIN NATIVE STREAMLIT TABS INTO NAVBAR CENTER */
+div[data-testid="stTabs"] {
+    background: transparent !important;
+    border: none !important;
+}
+
 [data-baseweb="tab-list"],
 div[data-testid="stTabs"] [data-baseweb="tab-list"],
 .stTabs [data-baseweb="tab-list"] {
-    position: absolute !important;
-    top: -9999px !important;
-    left: -9999px !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    height: 0px !important;
-    width: 0px !important;
-    overflow: hidden !important;
+    position: fixed !important;
+    top: 14px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 99999 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 42px !important;
+    max-width: 650px !important;
 }
 
-div[data-baseweb="tab-border"],
+/* Individual Tab Buttons */
+div[data-baseweb="tab-list"] button[role="tab"],
+.stTabs [data-baseweb="tab-list"] button {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-main) !important;
+    font-size: 0.92rem !important;
+    font-weight: 500 !important;
+    padding: 8px 18px !important;
+    border-radius: 999px !important;
+    border: none !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    outline: none !important;
+    box-shadow: none !important;
+    white-space: nowrap !important;
+    height: 38px !important;
+}
+
+div[data-baseweb="tab-list"] button[role="tab"]:hover,
+.stTabs [data-baseweb="tab-list"] button:hover {
+    background-color: rgba(23, 75, 53, 0.06) !important;
+    color: var(--color-primary) !important;
+}
+
+/* Active Tab: Solid Forest Green Pill with White Text */
+div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"],
+.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
+    background-color: var(--color-primary) !important;
+    background: var(--color-primary) !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(23, 75, 53, 0.22) !important;
+}
+
+div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] *,
+.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] * {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+}
+
+/* Hide Default Streamlit Underline Highlights & Borders */
 div[data-baseweb="tab-highlight"],
-[data-baseweb="tab-border"],
-[data-baseweb="tab-highlight"] {
+div[data-baseweb="tab-border"],
+[data-baseweb="tab-highlight"],
+[data-baseweb="tab-border"] {
     display: none !important;
     height: 0px !important;
     border: none !important;
+    background: transparent !important;
+}
+
+/* Tab Icons via ::before */
+div[data-baseweb="tab-list"] button[role="tab"]::before,
+.stTabs [data-baseweb="tab-list"] button::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    flex-shrink: 0;
+}
+
+/* Tab 1: Home */
+div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(1)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+}
+
+/* Tab 2: How It Works */
+div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(2)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'/%3E%3Cpolyline points='2 17 12 22 22 17'/%3E%3Cpolyline points='2 12 12 17 22 12'/%3E%3C/svg%3E");
+}
+
+/* Tab 3: Ask AI */
+div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(3)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+}
+
+/* Tab 4: Safety */
+div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(4)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpolyline points='9 12 11 14 15 10'/%3E%3C/svg%3E");
+}
+
+/* Tab 5: Evaluation */
+div[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(5)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23174B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E");
+}
+
+/* Invert icon color to pure white when tab is active */
+div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"]::before,
+.stTabs [data-baseweb="tab-list"] button[aria-selected="true"]::before {
+    filter: brightness(0) invert(1) !important;
 }
 
 /* 4. TAB PANELS CONTAINER (Comfortable top offset matching 70px navbar) */
 div[data-baseweb="tab-panel"] {
-    padding-top: 78px !important;
+    padding-top: 84px !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+    padding-bottom: 2rem !important;
     max-width: 1240px !important;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -207,15 +275,21 @@ div[data-baseweb="tab-panel"] {
 }
 
 /* 5. CROP DIAGNOSTIC CENTER (CARD STYLING) */
+div[data-testid="stVerticalBlockBorderWrapper"],
 .ks-ask-card {
     background: #FFFFFF !important;
-    border: 1.5px solid var(--border-color) !important;
+    background-color: #FFFFFF !important;
+    border: 1.5px solid #E2EBE2 !important;
     border-radius: 24px !important;
-    padding: 2.25rem 2.5rem !important;
+    padding: 2.25rem 2.8rem !important;
     position: relative !important;
     overflow: hidden !important;
-    box-shadow: 0 4px 22px rgba(23, 75, 53, 0.04) !important;
+    box-shadow: 0 4px 24px rgba(23, 75, 53, 0.05) !important;
     margin-bottom: 2rem !important;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] > div {
+    gap: 0.85rem !important;
 }
 
 .ks-ask-corner-foliage {
@@ -279,8 +353,10 @@ div[data-baseweb="tab-panel"] {
 }
 
 /* Quick-Fill Preset Buttons: Columns 1-4 Solid Forest Green Pill with White Text */
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) div[data-testid="stButton"] button,
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) button {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button,
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) button,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(-n+4) button,
+div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button {
     background-color: #174B35 !important;
     background: #174B35 !important;
     color: #FFFFFF !important;
@@ -297,7 +373,9 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) b
     gap: 6px !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) button:hover {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) button:hover,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(-n+4) button:hover,
+div[data-testid="stColumn"]:nth-child(-n+4) div[data-testid="stButton"] button:hover {
     background-color: #123D2B !important;
     background: #123D2B !important;
     border-color: #123D2B !important;
@@ -306,14 +384,18 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) b
     box-shadow: 0 4px 12px rgba(23, 75, 53, 0.25) !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+4) button * {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(-n+4) button *,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(-n+4) button *,
+div[data-testid="stColumn"]:nth-child(-n+4) button * {
     color: #FFFFFF !important;
     font-weight: 700 !important;
 }
 
 /* Preset Button 5 (Reset): White Pill with #174B35 Border and Text */
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) div[data-testid="stButton"] button,
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button,
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button,
+div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button {
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     color: #174B35 !important;
@@ -330,7 +412,9 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) butt
     gap: 6px !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button:hover {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button:hover,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button:hover,
+div[data-testid="stColumn"]:nth-child(5) div[data-testid="stButton"] button:hover {
     background-color: #F4F8F4 !important;
     background: #F4F8F4 !important;
     border-color: #123D2B !important;
@@ -338,13 +422,16 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) butt
     transform: translateY(-1px) !important;
 }
 
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button * {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button *,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button *,
+div[data-testid="stColumn"]:nth-child(5) button * {
     color: #174B35 !important;
     font-weight: 700 !important;
 }
 
 /* Preset Button 1 Icon (Leaf) */
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(1) button::before {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(1) button::before,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(1) button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -358,7 +445,8 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(1) butt
 }
 
 /* Preset Button 2 Icon (Rice/Grain) */
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(2) button::before {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(2) button::before,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(2) button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -372,7 +460,8 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(2) butt
 }
 
 /* Preset Button 3 Icon (Wheat Sprout) */
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(3) button::before {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(3) button::before,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(3) button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -386,7 +475,8 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(3) butt
 }
 
 /* Preset Button 4 Icon (Potato/Tuber dots) */
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(4) button::before {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(4) button::before,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(4) button::before {
     content: "";
     display: inline-block;
     width: 15px;
@@ -400,7 +490,8 @@ div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(4) butt
 }
 
 /* Preset Button 5 Icon (Reset Outline Circle) */
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(5) button::before {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-child(5) button::before,
+div[data-testid="stHorizontalBlock"] .stColumn:nth-child(5) button::before {
     content: "";
     display: inline-block;
     width: 14px;
@@ -688,22 +779,30 @@ div[data-testid="stBaseButton-primary"] button::before {
         gap: 0.5rem !important;
     }
 
-    .ks-nav-links {
-        order: 3 !important;
+    [data-baseweb="tab-list"],
+    div[data-testid="stTabs"] [data-baseweb="tab-list"],
+    .stTabs [data-baseweb="tab-list"] {
+        top: 60px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
         width: 100% !important;
+        max-width: 100% !important;
         overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
         justify-content: flex-start !important;
-        padding: 0.35rem 0 !important;
+        padding: 0.25rem 0.75rem !important;
+        background: #FFFFFF !important;
     }
 
     div[data-baseweb="tab-panel"] {
-        padding-top: 110px !important;
+        padding-top: 115px !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
 
+    div[data-testid="stVerticalBlockBorderWrapper"],
     .ks-ask-card {
-        padding: 1.75rem 1.25rem !important;
+        padding: 1.5rem 1.25rem !important;
     }
 
     .ks-arch-container {
