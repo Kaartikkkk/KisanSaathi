@@ -4,7 +4,7 @@ Handles API key configuration, active model status, and agronomic knowledge base
 
 import os
 import streamlit as st
-from ui.assets import ICONS
+from ui.assets import ICONS, LOGOS
 
 def get_gemini_api_key(sidebar_input: str = "") -> str:
     """Resolve Gemini API key with priority: sidebar input > Streamlit secrets > .env."""
@@ -37,12 +37,12 @@ def render_sidebar() -> tuple[str, str]:
     with st.sidebar:
         st.markdown(f"""
         <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1.25rem;">
-            <div style="background:#E7F2E8; padding:8px; border-radius:10px;">
-                {ICONS['leaf_brand']}
+            <div style="width:38px; height:38px; flex-shrink:0;">
+                {LOGOS['mark']}
             </div>
             <div>
-                <div style="font-weight:800; font-size:1.15rem; color:#174B35;">KisanSaathi</div>
-                <div style="font-size:0.75rem; color:#2E7D50; font-weight:600;">AI Crop Advisory Assistant</div>
+                <div style="font-weight:800; font-size:1.15rem; color:#174B35; line-height:1.1;">KisanSaathi</div>
+                <div style="font-size:0.75rem; color:#2F8A57; font-weight:600; line-height:1.1;">AI Crop Advisory Assistant</div>
             </div>
         </div>
         """, unsafe_allow_html=True)

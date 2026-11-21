@@ -1,12 +1,14 @@
 """Evaluation benchmark verification view module for KisanSaathi.
-Displays dynamically calculated metrics directly from evaluation_results.csv.
-Ensures zero hardcoded scores and visually distinct PASS/FAIL states.
+Integrates the complete KisanSaathi Visual Asset Pack:
+- Evaluation telemetry icons from assets/icons/ (clipboard-check, award, flask-ban, language)
+- Official status badges from assets/ (pass.svg, fail.svg)
+- Decorative elements from assets/decorative/ (leaf-branch, crop-rows)
 """
 
 import os
 import csv
 import streamlit as st
-from ui.assets import ICONS, BOTTOM_ORGANIC_WAVE_SVG, clean_html
+from ui.assets import ICONS, LOGOS, DECORATIVE, BADGES, BOTTOM_ORGANIC_WAVE_SVG, clean_html
 
 def get_evaluation_metrics(csv_path: str = "evaluation_results.csv") -> dict:
     """Dynamically parse evaluation_results.csv and compute benchmark telemetry."""
@@ -57,28 +59,19 @@ def render_tab_eval():
     # 1. Header & Dynamic 4-Metric Grid
     eval_header_html = f"""
     <div class="ks-eval-page" style="position:relative; padding-bottom:1.5rem;">
-        <!-- Left Leafy Branch SVG -->
-        <svg class="ks-bg-foliage-left" width="110" height="130" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:10px; left:0; width:110px !important; height:130px !important; pointer-events:none; opacity:0.4;">
-            <path d="M-10 20 C 30 40, 70 80, 100 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M28 35 C 10 25, 12 5, 28 8 C 42 12, 45 28, 28 35 Z" fill="#7BA887"/>
-            <path d="M60 55 C 50 40, 62 25, 78 30 C 88 40, 80 58, 60 55 Z" fill="#6B9978"/>
-            <path d="M75 90 C 65 72, 85 62, 98 72 C 102 85, 90 100, 75 90 Z" fill="#7BA887"/>
-        </svg>
+        <!-- Left Leafy Branch SVG from Asset Pack -->
+        <div style="position:absolute; top:0; left:0; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4;">
+            {DECORATIVE['leaf_branch']}
+        </div>
 
-        <!-- Right Terraced Farm Field Rows SVG -->
-        <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:20px; right:0px; width:200px; height:140px; pointer-events:none; z-index:1;">
-            <path d="M140 32 C 160 22, 185 24, 200 30 L 200 140 L 0 140 Z" fill="#C5DEC7" opacity="0.4"/>
-            <path d="M160 38 L 0 85 L 0 105 L 160 48 Z" fill="#88B890" opacity="0.65"/>
-            <path d="M160 48 L 0 105 L 0 118 L 165 58 Z" fill="#ADCBAF" opacity="0.6"/>
-            <path d="M165 58 L 15 130 L 40 140 L 172 68 Z" fill="#88B890" opacity="0.65"/>
-            <path d="M172 68 L 55 140 L 95 140 L 180 78 Z" fill="#ADCBAF" opacity="0.6"/>
-            <path d="M180 78 L 105 140 L 150 140 L 188 88 Z" fill="#88B890" opacity="0.65"/>
-            <path d="M188 88 L 160 140 L 200 140 L 195 98 Z" fill="#ADCBAF" opacity="0.6"/>
-        </svg>
+        <!-- Right Terraced Farm Field Rows SVG from Asset Pack -->
+        <div style="position:absolute; top:10px; right:0px; width:220px; height:90px; pointer-events:none; z-index:1; opacity:0.45;">
+            {DECORATIVE['crop_rows']}
+        </div>
 
         <!-- Section Header -->
-        <div style="text-align:center; max-width:760px; margin:0 auto 2.8rem auto; position:relative; z-index:2;">
-            <div style="display:inline-block; margin-bottom:0.85rem;">
+        <div style="text-align:center; max-width:760px; margin:0 auto 2.5rem auto; position:relative; z-index:2;">
+            <div style="display:inline-block; margin-bottom:0.75rem;">
                 <span class="ks-pill-badge">EVALUATION</span>
             </div>
             <h1 style="font-size:2.8rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0; letter-spacing:-0.03em;">
@@ -92,11 +85,11 @@ def render_tab_eval():
         <!-- 4 Dynamically Aligned Metric Cards -->
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:1.25rem; margin-bottom:2.5rem; position:relative; z-index:2;">
             <!-- Metric 1: Total Scenarios -->
-            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
                 <div style="width:48px; height:48px; border-radius:12px; background:#E7F2E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                    {ICONS['clipboard']}
+                    {ICONS['clipboard_check']}
                 </div>
-                <div style="width:1px; height:42px; background:#E2E9E1;"></div>
+                <div style="width:1px; height:42px; background:#E2EBE2;"></div>
                 <div>
                     <div style="font-size:1.95rem; font-weight:800; color:#174B35; line-height:1.1;">{passed} / {total}</div>
                     <div style="font-size:0.82rem; font-weight:600; color:#5A6860; margin-top:3px;">Scenarios Evaluated</div>
@@ -106,7 +99,7 @@ def render_tab_eval():
             <!-- Metric 2: Pass Rate -->
             <div style="display:flex; align-items:center; background:#F0FDF4; border:1.5px solid #BBF7D0; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
                 <div style="width:48px; height:48px; border-radius:12px; background:#DEF7EC; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                    {ICONS['shield_check']}
+                    {ICONS['award']}
                 </div>
                 <div style="width:1px; height:42px; background:#C6EAD3;"></div>
                 <div>
@@ -118,7 +111,7 @@ def render_tab_eval():
             <!-- Metric 3: Dosages Prescribed -->
             <div style="display:flex; align-items:center; background:#FFFDF7; border:1.5px solid #FDE68A; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
                 <div style="width:48px; height:48px; border-radius:12px; background:#FEF3C7; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                    {ICONS['alert_amber']}
+                    {ICONS['flask_ban']}
                 </div>
                 <div style="width:1px; height:42px; background:#FCE59F;"></div>
                 <div>
@@ -128,11 +121,11 @@ def render_tab_eval():
             </div>
 
             <!-- Metric 4: Languages Supported -->
-            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+            <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
                 <div style="width:48px; height:48px; border-radius:12px; background:#E7F2E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     {ICONS['language']}
                 </div>
-                <div style="width:1px; height:42px; background:#E2E9E1;"></div>
+                <div style="width:1px; height:42px; background:#E2EBE2;"></div>
                 <div>
                     <div style="font-size:1.95rem; font-weight:800; color:#174B35; line-height:1.1;">{langs}</div>
                     <div style="font-size:0.82rem; font-weight:600; color:#5A6860; margin-top:3px;">Languages Supported</div>
@@ -145,7 +138,7 @@ def render_tab_eval():
 
     # 2. Benchmark Test Cases Expander with Dynamic Rows & Clear PASS/FAIL States
     if rows:
-        with st.expander(f"📄 View All {len(rows)} Benchmark Test Cases (evaluation_results.csv)", expanded=True):
+        with st.expander(f"View All {len(rows)} Benchmark Test Cases (evaluation_results.csv)", expanded=True):
             rows_html = []
             for idx, r in enumerate(rows):
                 tid = r.get("Test ID", f"TC-{idx+1:02d}")
@@ -170,13 +163,13 @@ def render_tab_eval():
                 spread_v = meta.get("spread", "Not sure")
                 lang_v = meta.get("lang", "English")
 
-                # Badge markup
+                # Badge markup using SVG status badges from Asset Pack
                 if status == "PASS":
-                    badge_markup = '<span class="ks-badge-pass">&#10003; PASS</span>'
+                    badge_markup = f'<span class="ks-badge-pass" style="display:inline-flex; align-items:center; gap:5px; background:#E8F5E9; color:#174B35; padding:5px 14px; border-radius:999px; font-weight:700; font-size:0.85rem; border:1px solid #C8E6C9;"><span style="width:16px; height:16px; display:inline-flex; align-items:center;">{BADGES["pass"]}</span> PASS</span>'
                 else:
-                    badge_markup = '<span class="ks-badge-fail">&#10005; FAIL</span>'
+                    badge_markup = f'<span class="ks-badge-fail" style="display:inline-flex; align-items:center; gap:5px; background:#FFEBEE; color:#C62828; padding:5px 14px; border-radius:999px; font-weight:700; font-size:0.85rem; border:1px solid #FFCDD2;"><span style="width:16px; height:16px; display:inline-flex; align-items:center;">{BADGES["fail"]}</span> FAIL</span>'
 
-                divider = "" if idx == len(rows) - 1 else "<hr style='border:none; border-top:1px solid #E2E9E1; margin:1rem 0;'>"
+                divider = "" if idx == len(rows) - 1 else "<hr style='border:none; border-top:1px solid #E2EBE2; margin:1rem 0;'>"
 
                 rows_html.append(f"""
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1.25rem; padding:0.5rem 0;">
@@ -185,15 +178,15 @@ def render_tab_eval():
                     </div>
                     <div style="flex:1;">
                         <div style="display:flex; flex-wrap:wrap; align-items:center; gap:0.65rem; font-size:0.9rem; color:#25352D; line-height:1.4;">
-                            <span><b>Crop:</b> {crop_v}</span>
+                            <span style="display:inline-flex; align-items:center; gap:4px;">{ICONS['leaf_primary']} <b>Crop:</b> {crop_v}</span>
                             <span style="color:#C0D2C4;">|</span>
-                            <span><b>Region:</b> {region_v}</span>
+                            <span style="display:inline-flex; align-items:center; gap:4px;">{ICONS['map_pin']} <b>Region:</b> {region_v}</span>
                             <span style="color:#C0D2C4;">|</span>
-                            <span><b>Stage:</b> {stage_v}</span>
+                            <span style="display:inline-flex; align-items:center; gap:4px;">{ICONS['sprout']} <b>Stage:</b> {stage_v}</span>
                             <span style="color:#C0D2C4;">|</span>
-                            <span><b>Spread:</b> {spread_v}</span>
+                            <span style="display:inline-flex; align-items:center; gap:4px;">{ICONS['alert_triangle']} <b>Spread:</b> {spread_v}</span>
                             <span style="color:#C0D2C4;">|</span>
-                            <span><b>Lang:</b> {lang_v}</span>
+                            <span style="display:inline-flex; align-items:center; gap:4px;">{ICONS['language']} <b>Lang:</b> {lang_v}</span>
                         </div>
                         <div style="color:#4B6354; font-size:0.85rem; margin-top:0.45rem; line-height:1.5;">
                             <b>Assessment Verification:</b> {reas}
@@ -207,7 +200,7 @@ def render_tab_eval():
                 """)
 
             cases_card_html = f"""
-            <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:18px; padding:1.5rem 1.8rem; box-shadow:0 2px 12px rgba(23,75,53,0.03);">
+            <div style="background:#FFFFFF; border:1.5px solid #E2EBE2; border-radius:18px; padding:1.5rem 1.8rem; box-shadow:0 2px 12px rgba(23,75,53,0.03);">
                 {''.join(rows_html)}
             </div>
             """
@@ -215,18 +208,18 @@ def render_tab_eval():
     else:
         st.info("No benchmark results found. Run evaluation.py to generate evaluation_results.csv.")
 
-    # 3. Clean Footer & Single Bottom Wave
+    # 3. Clean Footer with Brand Mark from Asset Pack
     footer_html = f"""
     <div class="ks-footer">
-        <div style="display:flex; align-items:center; justify-content:center; gap:0.5rem; font-size:1.3rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
-            {ICONS['leaf_brand']} KisanSaathi
+        <div style="display:flex; align-items:center; justify-content:center; gap:0.5rem; height:42px; margin-bottom:0.75rem;">
+            {LOGOS['horizontal']}
         </div>
         <div style="display:flex; justify-content:center; gap:1.8rem; margin-bottom:1rem; font-weight:600; font-size:0.88rem; flex-wrap:wrap;">
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(0); else if(window.parent&&window.parent.ksSwitchTab) window.parent.ksSwitchTab(0); else {{ var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[0]) t[0].click(); }}">Home</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(1); else if(window.parent&&window.parent.ksSwitchTab) window.parent.ksSwitchTab(1); else {{ var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[1]) t[1].click(); }}">How It Works</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(2); else if(window.parent&&window.parent.ksSwitchTab) window.parent.ksSwitchTab(2); else {{ var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[2]) t[2].click(); }}">Ask AI</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(3); else if(window.parent&&window.parent.ksSwitchTab) window.parent.ksSwitchTab(3); else {{ var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[3]) t[3].click(); }}">Safety Guardrails</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(4); else if(window.parent&&window.parent.ksSwitchTab) window.parent.ksSwitchTab(4); else {{ var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[4]) t[4].click(); }}">Evaluation</a>
+            <a href="javascript:void(0)" onclick="var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[0]) t[0].click();">Home</a>
+            <a href="javascript:void(0)" onclick="var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[1]) t[1].click();">How It Works</a>
+            <a href="javascript:void(0)" onclick="var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[2]) t[2].click();">Ask AI</a>
+            <a href="javascript:void(0)" onclick="var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[3]) t[3].click();">Safety Guardrails</a>
+            <a href="javascript:void(0)" onclick="var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=\\'tab\\']'); if(t&&t[4]) t[4].click();">Evaluation</a>
         </div>
         <div style="max-width:720px; margin:0 auto 1rem auto; font-size:0.82rem; line-height:1.6; color:#5A6860;">
             <b>Agricultural Advisory Notice:</b> KisanSaathi is an agronomic artificial intelligence prototype developed for preliminary educational and advisory support. All assessments and recommendations must be physically verified by certified agricultural extension officers or Krishi Vigyan Kendras (KVK).

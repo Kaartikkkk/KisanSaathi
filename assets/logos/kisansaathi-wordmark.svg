@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140">
+<g transform="translate(0,4) scale(.95)">
+<path d="M63 111C28 104 13 78 24 49 35 21 70 14 105 18c-2 39-13 79-42 93Z" fill="#2F8A57"/>
+<path d="M28 91c20-24 42-43 72-62" fill="none" stroke="#F7FAF4" stroke-width="7" stroke-linecap="round"/>
+<path d="M58 112c-4-24-1-45 13-64" fill="none" stroke="#174B35" stroke-width="6" stroke-linecap="round"/>
+</g>
+<text x="142" y="68" font-family="Inter,Arial,sans-serif" font-size="48" font-weight="800" fill="#174B35">KisanSaathi</text>
+<text x="145" y="101" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="600" letter-spacing="1.2" fill="#64756A">AI Crop Advisory Assistant</text>
+</svg>
