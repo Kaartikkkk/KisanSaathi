@@ -202,11 +202,12 @@ a:hover,
     display: flex !important;
     align-items: center !important;
     box-shadow: 0 1px 8px rgba(23, 75, 53, 0.04) !important;
-    position: relative !important;
-    z-index: 99 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
 }
 .ks-navbar-inner {
-    max-width: 1360px;
+    max-width: 1380px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -220,47 +221,26 @@ a:hover,
     align-items: center;
     gap: 0.65rem;
     text-decoration: none !important;
+    flex-shrink: 0;
 }
 .ks-nav-brand-title {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: #174B35 !important;
     letter-spacing: -0.02em;
     line-height: 1.15;
 }
 .ks-nav-brand-sub {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: #68756C;
 }
-.ks-nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.4rem;
-}
-.ks-nav-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #25352D !important;
-}
-.ks-nav-link:hover {
-    color: #2E7D50 !important;
-}
-.ks-nav-btn-active {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: #174B35 !important;
-    color: #FFFFFF !important;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 0.45rem 1.15rem;
-    border-radius: 999px;
-    box-shadow: 0 2px 8px rgba(23, 75, 53, 0.2);
-    text-decoration: none !important;
+#ks-nav-tabs-slot {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+    margin: 0 1rem !important;
 }
 .ks-lang-pill {
     display: inline-flex;
@@ -273,6 +253,7 @@ a:hover,
     font-weight: 600;
     color: #25352D;
     background: #FFFFFF;
+    flex-shrink: 0;
 }
 
 /* 4.5. MODERN TABS INTEGRATED IN TOP BAR */
@@ -284,14 +265,10 @@ a:hover,
     position: relative !important;
 }
 .stTabs [data-baseweb="tab-list"] {
-    position: absolute !important;
-    top: -53px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 1000 !important;
     display: flex !important;
     align-items: center !important;
-    gap: 0.6rem !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -301,7 +278,7 @@ a:hover,
 .stTabs [data-baseweb="tab"] {
     height: 38px !important;
     border-radius: 999px !important;
-    padding: 0 1.25rem !important;
+    padding: 0 1.15rem !important;
     background-color: transparent !important;
     color: #25352D !important;
     font-weight: 600 !important;
@@ -309,6 +286,9 @@ a:hover,
     border: none !important;
     cursor: pointer !important;
     transition: all 0.15s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
 }
 .stTabs [data-baseweb="tab"]:hover {
     color: #174B35 !important;
@@ -320,6 +300,9 @@ a:hover,
     font-weight: 700 !important;
     box-shadow: 0 2px 8px rgba(23, 75, 53, 0.22) !important;
 }
+.stTabs [aria-selected="true"] * {
+    color: #FFFFFF !important;
+}
 .stTabs [data-baseweb="tab-highlight"],
 .stTabs [data-baseweb="tab-border"] {
     display: none !important;
@@ -328,19 +311,6 @@ a:hover,
     width: 100% !important;
     padding: 0 !important;
 }
-@media (max-width: 992px) {
-    .stTabs [data-baseweb="tab-list"] {
-        position: static !important;
-        transform: none !important;
-        margin: 1rem auto !important;
-        background: #FFFFFF !important;
-        border: 1.5px solid #E2E9E1 !important;
-        border-radius: 999px !important;
-        padding: 0.4rem 0.6rem !important;
-        box-shadow: 0 2px 10px rgba(23, 75, 53, 0.05) !important;
-        max-width: fit-content !important;
-    }
-}
 .ks-content-container {
     max-width: 1240px;
     margin: 0 auto;
@@ -348,21 +318,7 @@ a:hover,
     width: 100%;
 }
 
-/* Centered layout for content cards & forms across tabs */
-[data-testid="stVerticalBlockBorderWrapper"],
-.ks-card,
-.ks-alert,
-.ks-feature-strip,
-div[id="how-it-works"],
-div[id="safety"],
-.stTabs [data-testid="stHorizontalBlock"] {
-    max-width: 1240px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 100% !important;
-}
-
-/* 4.8. ARCHITECTURE / HOW IT WORKS PAGE (EXACT REFERENCE MOCKUP) */
+/* 4.8. ARCHITECTURE / HOW IT WORKS & SAFETY PAGE */
 .ks-how-it-works-page {
     position: relative;
     width: 100%;
@@ -391,16 +347,17 @@ div[id="safety"],
 .ks-arch-container {
     max-width: 1260px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     gap: 1.25rem;
     position: relative;
     z-index: 2;
 }
 .ks-arch-card {
-    flex: 1 1 340px;
+    flex: 1 1 0;
+    min-width: 0;
     background: #FFFFFF;
     border: 1.5px solid #E2E9E1;
     border-radius: 24px;
@@ -409,7 +366,7 @@ div[id="safety"],
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 450px;
+    min-height: 480px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .ks-arch-card:hover {
@@ -457,16 +414,48 @@ div[id="safety"],
     border: 1.5px solid #E2E9E1;
     box-shadow: 0 2px 8px rgba(23, 75, 53, 0.06);
     flex-shrink: 0;
+    align-self: center;
     z-index: 3;
 }
-@media (max-width: 960px) {
+@media (max-width: 768px) {
     .ks-arch-container {
         flex-direction: column;
         gap: 1.5rem;
     }
+    .ks-arch-card {
+        min-height: auto;
+    }
     .ks-arch-arrow {
         transform: rotate(90deg);
     }
+}
+
+/* Quick Fill Preset Row */
+.ks-preset-row {
+    margin-bottom: 1.5rem;
+}
+.ks-preset-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #4A6B53;
+    margin-bottom: 0.65rem;
+}
+.ks-preset-row [data-testid="column"] button {
+    background-color: #174B35 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    padding: 0.6rem 0.9rem !important;
+    box-shadow: 0 2px 8px rgba(23, 75, 53, 0.15) !important;
+    width: 100% !important;
+    transition: all 0.15s ease !important;
+}
+.ks-preset-row [data-testid="column"] button:hover {
+    background-color: #133E2B !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px) !important;
 }
 
 /* 5. FULL-PAGE HERO SECTION */
@@ -863,7 +852,7 @@ st.html("""
             if (stMain) stMain.style.backgroundColor = "#F7F8F2";
         } catch(e) {}
     }
-    function forceFullWidth() {
+    function forceFullWidthAndTabs() {
         try {
             var blocks = document.querySelectorAll('[data-testid="stMainBlockContainer"], .block-container, [data-testid="block-container"]');
             blocks.forEach(function(b) {
@@ -880,18 +869,31 @@ st.html("""
                 h.style.display = 'none';
                 h.style.height = '0px';
             });
+            var slot = document.getElementById('ks-nav-tabs-slot');
+            var tabList = document.querySelector('.stTabs [data-baseweb="tab-list"]');
+            if (slot && tabList && tabList.parentElement !== slot) {
+                slot.appendChild(tabList);
+            }
         } catch(e) {}
     }
+    window.switchTab = function(index) {
+        try {
+            var tabs = document.querySelectorAll('[data-baseweb="tab"]');
+            if (tabs && tabs[index]) {
+                tabs[index].click();
+            }
+        } catch(e) {}
+    };
     forceLightTheme();
-    forceFullWidth();
+    forceFullWidthAndTabs();
     window.addEventListener("load", function() {
         forceLightTheme();
-        forceFullWidth();
+        forceFullWidthAndTabs();
     });
     setInterval(function() {
         forceLightTheme();
-        forceFullWidth();
-    }, 400);
+        forceFullWidthAndTabs();
+    }, 250);
 })();
 </script>
 """)
@@ -1056,7 +1058,27 @@ with st.sidebar:
     )
     st.session_state.original_form["language"] = sidebar_language
 
-    st.markdown("---")
+    st.markdown("<hr style='border:none; border-top:1px solid #E2E9E1; margin:1.25rem 0;'>", unsafe_allow_html=True)
+
+    st.markdown("""
+    <div style="margin-bottom:1.25rem;">
+        <h4 style="font-size:1.02rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0;">Safety Guardrails</h4>
+        <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.84rem; line-height:1.5; color:#25352D;">
+            <div>
+                <b>🦺 Zero Chemical Dosage:</b> Never computes or prescribes pesticide dosages.
+            </div>
+            <div>
+                <b>📚 Evidence-Grounded:</b> All causes cited from ICAR reference corpus.
+            </div>
+            <div>
+                <b>🧑‍🌾 KVK Escalation:</b> Rapidly spreading issues escalated to local officers.
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<hr style='border:none; border-top:1px solid #E2E9E1; margin:1.25rem 0;'>", unsafe_allow_html=True)
+
     if st.button("Reset Session & Inputs", use_container_width=True):
         st.session_state.result = None
         st.session_state.follow_up_history = []
@@ -1084,8 +1106,9 @@ st.markdown(f"""
                 <div class="ks-nav-brand-sub">AI Crop Advisory Assistant</div>
             </div>
         </div>
+        <div id="ks-nav-tabs-slot"></div>
         <div style="display:flex; align-items:center; gap:0.75rem;">
-            <span class="ks-lang-pill">{ICONS['globe']} {st.session_state.original_form['language']}</span>
+            <span class="ks-lang-pill">{ICONS['globe']} {st.session_state.original_form['language']} &#9662;</span>
         </div>
     </div>
 </div>
@@ -1093,101 +1116,325 @@ st.markdown(f"""
 
 tab_home, tab_how, tab_ask, tab_safety, tab_eval = st.tabs([
     "🏠 Home",
-    "🥞 How It Works",
+    "📚 How It Works",
     "🌿 Ask AI",
     "🛡️ Safety",
     "📊 Evaluation",
 ])
+
+with tab_home:
+    # -----------------------------------------------------------------------------
+    # 2. Hero Section (Clean 2-Column, No Overlapping Logos, Sharp Farmer Photo)
+    # -----------------------------------------------------------------------------
+    farmer_b64 = get_base64_image("assets/farmer_portrait_hd.jpg") or get_base64_image("assets/farmer_clean_hd.jpg")
+
+    st.markdown(f"""
+    <div class="ks-hero-card">
+        <svg class="ks-foliage-svg" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.4;">
+            <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
+            <path d="M55 35 C 50 20, 65 10, 78 18 C 85 28, 70 40, 55 35 Z" fill="#3B925E" opacity="0.85"/>
+            <path d="M85 41 C 85 25, 102 22, 110 32 C 115 42, 98 50, 85 41 Z" fill="#2E7D50" opacity="0.75"/>
+            <path d="M40 32 C 30 45, 15 45, 18 32 C 22 22, 35 25, 40 32 Z" fill="#256C42" opacity="0.7"/>
+            <path d="M72 40 C 65 55, 50 56, 52 42 C 55 32, 68 32, 72 40 Z" fill="#2E7D50" opacity="0.8"/>
+            <path d="M105 45 C 102 60, 88 62, 88 48 C 90 38, 102 38, 105 45 Z" fill="#3B925E" opacity="0.75"/>
+        </svg>
+        <div class="ks-hero-inner">
+            <div class="ks-hero-left">
+                <h1 class="ks-hero-h1">
+                    Better Crop Decisions.<br>
+                    <span style="color:#174B35;">Safer Farming.</span>
+                </h1>
+                <div class="ks-hero-accent-bar"></div>
+                <p class="ks-hero-desc">
+                    Describe your crop problem in your preferred language and receive clear, cautious guidance to help you take the next step.
+                </p>
+                <div class="ks-hero-actions">
+                    <button onclick="window.switchTab(2)" class="ks-btn-primary">
+                        {ICONS['leaf_white']} Get Crop Advice &rarr;
+                    </button>
+                    <button onclick="window.switchTab(1)" class="ks-btn-outline">
+                        {ICONS['circle_icon']} How It Works
+                    </button>
+                </div>
+            </div>
+            <div class="ks-hero-right">
+                <div class="ks-farmer-frame">
+                    <img src="data:image/jpeg;base64,{farmer_b64}" alt="Indian farmer using smartphone in green field" />
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # -----------------------------------------------------------------------------
+    # 3. 4-Pillar Feature Strip (Matching Reference Mockup)
+    # -----------------------------------------------------------------------------
+    st.markdown(f"""
+    <div class="ks-feature-strip">
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['leaf_pillar']}</div>
+            <div class="ks-feature-title">Crop Guidance</div>
+        </div>
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['search_pillar']}</div>
+            <div class="ks-feature-title">Problem Identification</div>
+        </div>
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['shield_pillar']}</div>
+            <div class="ks-feature-title">Safe Recommendations</div>
+        </div>
+        <div class="ks-feature-item">
+            <div class="ks-feature-icon">{ICONS['lang_pillar']}</div>
+            <div class="ks-feature-title">Multi-language Support</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with tab_how:
+    # -----------------------------------------------------------------------------
+    # 4. How It Works Section (Exact Reference Mockup Layout)
+    # -----------------------------------------------------------------------------
+    st.markdown("""
+    <div class="ks-how-it-works-page">
+        <!-- Floating Foliage Background SVGs -->
+        <svg class="ks-bg-foliage-left" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-10 20 C 30 40, 70 80, 100 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M28 35 C 10 25, 12 5, 28 8 C 42 12, 45 28, 28 35 Z" fill="#7BA887" opacity="0.55"/>
+            <path d="M60 55 C 50 40, 62 25, 78 30 C 88 40, 80 58, 60 55 Z" fill="#6B9978" opacity="0.6"/>
+            <path d="M75 90 C 65 72, 85 62, 98 72 C 102 85, 90 100, 75 90 Z" fill="#7BA887" opacity="0.55"/>
+            <path d="M42 65 C 28 75, 15 68, 20 54 C 26 42, 42 48, 42 65 Z" fill="#6B9978" opacity="0.5"/>
+            <path d="M78 120 C 62 130, 52 118, 58 104 C 64 92, 82 98, 78 120 Z" fill="#7BA887" opacity="0.55"/>
+        </svg>
+        <svg class="ks-bg-foliage-right" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M150 20 C 110 40, 70 80, 40 130" stroke="#7BA887" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M112 35 C 130 25, 128 5, 112 8 C 98 12, 95 28, 112 35 Z" fill="#7BA887" opacity="0.55"/>
+            <path d="M80 55 C 90 40, 78 25, 62 30 C 52 40, 60 58, 80 55 Z" fill="#6B9978" opacity="0.6"/>
+            <path d="M65 90 C 75 72, 55 62, 42 72 C 38 85, 50 100, 65 90 Z" fill="#7BA887" opacity="0.55"/>
+            <path d="M98 65 C 112 75, 125 68, 120 54 C 114 42, 98 48, 98 65 Z" fill="#6B9978" opacity="0.5"/>
+            <path d="M62 120 C 78 130, 88 118, 82 104 C 76 92, 58 98, 62 120 Z" fill="#7BA887" opacity="0.55"/>
+        </svg>
+
+        <!-- Section Header -->
+        <div style="text-align:center; max-width:760px; margin:0 auto 3.2rem auto; position:relative; z-index:2;">
+            <div style="display:inline-block; margin-bottom:0.85rem;">
+                <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.4rem 1.15rem; border-radius:999px;">
+                    SYSTEM ARCHITECTURE
+                </span>
+            </div>
+            <h1 style="font-size:2.8rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0; letter-spacing:-0.03em;">
+                How KisanSaathi Works
+            </h1>
+            <p style="color:#68756C; font-size:1.08rem; line-height:1.6; margin:0;">
+                A grounded three-stage prompt workflow ensuring verified agronomic advice with zero chemical dosage hallucination.
+            </p>
+        </div>
+
+        <!-- 3 Cards with Connecting Arrows -->
+        <div class="ks-arch-container">
+            <!-- Card 1 -->
+            <div class="ks-arch-card">
+                <div>
+                    <div class="ks-arch-icon-box">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <h3 class="ks-arch-card-title">1. Multi-Lingual Extraction</h3>
+                    <p class="ks-arch-card-desc">
+                        Understands farmer queries in English, Hindi, and Hinglish. Extracts crop, region, phenological stage, symptoms, and spread rate.
+                    </p>
+                </div>
+                <!-- Illustration 1: Document with speech bubbles -->
+                <div class="ks-arch-illus">
+                    <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="24" width="70" height="96" rx="8" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2.2"/>
+                        <line x1="94" y1="44" x2="136" y2="44" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
+                        <line x1="94" y1="58" x2="136" y2="58" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
+                        <line x1="94" y1="72" x2="124" y2="72" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
+                        <line x1="94" y1="86" x2="136" y2="86" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
+                        <line x1="94" y1="100" x2="116" y2="100" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
+                        <!-- Bubble: Hindi -->
+                        <g>
+                            <rect x="18" y="20" width="56" height="28" rx="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                            <text x="46" y="38" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hindi</text>
+                            <path d="M52 47 L60 56 L64 47 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                            <line x1="53" y1="47" x2="63" y2="47" stroke="#E7F2E8" stroke-width="2"/>
+                        </g>
+                        <!-- Bubble: English -->
+                        <g>
+                            <rect x="146" y="14" width="66" height="28" rx="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                            <text x="179" y="32" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">English</text>
+                            <path d="M156 41 L148 50 L162 43 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                            <line x1="154" y1="41" x2="161" y2="41" stroke="#E7F2E8" stroke-width="2"/>
+                        </g>
+                        <!-- Bubble: Hinglish -->
+                        <g>
+                            <rect x="148" y="76" width="68" height="28" rx="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                            <text x="182" y="94" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hinglish</text>
+                            <path d="M158 77 L148 70 L160 76 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                            <line x1="156" y1="77" x2="161" y2="77" stroke="#E7F2E8" stroke-width="2"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Arrow 1 -> 2 -->
+            <div class="ks-arch-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="ks-arch-card">
+                <div>
+                    <div class="ks-arch-icon-box">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="ks-arch-card-title">2. Grounded TF-IDF Retrieval</h3>
+                    <p class="ks-arch-card-desc">
+                        Matches symptom profiles against ICAR agronomic reference materials. Every diagnosis is grounded in verified literature citations.
+                    </p>
+                </div>
+                <!-- Illustration 2: 3D ICAR Book -->
+                <div class="ks-arch-illus">
+                    <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="115" cy="116" rx="78" ry="12" fill="#E2E9E1"/>
+                        <path d="M52 84 L114 106 L178 84 L178 72 L114 94 L52 72 Z" fill="#D6E8D8"/>
+                        <path d="M52 78 L114 100 L178 78 L178 68 L114 90 L52 68 Z" fill="#F7F8F2" stroke="#D6E8D8"/>
+                        <path d="M50 72 L114 94 L180 72 L116 50 Z" fill="#2E7D50"/>
+                        <path d="M50 70 L114 92 L180 70 L116 48 Z" fill="#3B925E"/>
+                        <g transform="rotate(18, 114, 68) skewX(-24)">
+                            <text x="86" y="73" font-family="Inter, sans-serif" font-size="14.5" font-weight="800" fill="#FFFFFF" letter-spacing="2">ICAR</text>
+                        </g>
+                        <path d="M112 92 L112 112 L117 107 L122 112 L122 92 Z" fill="#D97706"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Arrow 2 -> 3 -->
+            <div class="ks-arch-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="ks-arch-card">
+                <div>
+                    <div class="ks-arch-icon-box">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <polyline points="9 12 11 14 15 10"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="ks-arch-card-title">3. Safe Advisory & Escalation</h3>
+                    <p class="ks-arch-card-desc">
+                        Generates cultural management checklists, asks follow-up questions for missing details, and escalates to KVK experts when needed.
+                    </p>
+                </div>
+                <!-- Illustration 3: Clipboard Checklist & Leaf -->
+                <div class="ks-arch-illus">
+                    <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="22" width="70" height="96" rx="8" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2.2"/>
+                        <rect x="96" y="14" width="38" height="16" rx="4" fill="#174B35"/>
+                        <rect x="104" y="18" width="22" height="6" rx="2" fill="#E7F2E8"/>
+                        <!-- Checkmark 1 -->
+                        <path d="M90 48 L95 53 L104 43" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="110" y1="48" x2="138" y2="48" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Checkmark 2 -->
+                        <path d="M90 66 L95 71 L104 61" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="110" y1="66" x2="138" y2="66" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Checkmark 3 -->
+                        <path d="M90 84 L95 89 L104 79" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="110" y1="84" x2="138" y2="84" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Dot line 4 -->
+                        <circle cx="95" cy="100" r="3.5" fill="#2E7D50"/>
+                        <line x1="110" y1="100" x2="130" y2="100" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Leaf Sprout on Right -->
+                        <path d="M156 108 C 154 92, 166 84, 172 75 C 174 86, 165 98, 160 108" fill="#3B925E"/>
+                        <path d="M158 95 C 168 90, 180 90, 184 97 C 178 101, 165 101, 158 95" fill="#2E7D50"/>
+                        <path d="M158 102 C 148 98, 140 102, 138 108 C 144 110, 153 106, 158 102" fill="#3B925E"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Landscape Wave -->
+        <div style="width:100%; overflow:hidden; line-height:0; margin-top:4rem;">
+            <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+                <path d="M0 45 C 360 85, 720 15, 1080 65 C 1260 85, 1380 60, 1440 50 L 1440 90 L 0 90 Z" fill="#DCEBDE" opacity="0.6"/>
+                <path d="M0 65 C 400 95, 800 35, 1200 75 L 1440 60 L 1440 90 L 0 90 Z" fill="#C7DFC8" opacity="0.75"/>
+            </svg>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 with tab_ask:
     # -----------------------------------------------------------------------------
     # 5. Crop Diagnostic Intake Form (#ask-ai)
     # -----------------------------------------------------------------------------
     st.markdown('<div id="ask-ai"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="ks-content-container" style="padding-top:1.5rem;">', unsafe_allow_html=True)
 
-    with st.container(border=True):
-        st.markdown(f"""
-        <div class="ks-form-header">
-            <div class="ks-form-title">
-                {ICONS['leaf_brand']}
-                <span>Crop Diagnostic Center</span>
-            </div>
-            <span style="font-size:0.78rem; font-weight:700; color:#2E7D50; background:#E7F2E8; padding:0.35rem 0.9rem; border-radius:999px;">
-                AI Symptom Intake
-            </span>
-        </div>
-        """, unsafe_allow_html=True)
+    # Benchmark scenario quick-fill buttons (4 dark green chips matching reference)
+    st.markdown('<div class="ks-preset-row"><div class="ks-preset-title">✏️ Quick-Fill Benchmark Scenarios:</div>', unsafe_allow_html=True)
+    p1, p2, p3, p4 = st.columns(4, gap="small")
+    with p1:
+        if st.button("🍅 Tomato Leaf Curl (UP)", key="pre_tomato", use_container_width=True):
+            set_preset("Tomato", "Uttar Pradesh", "Flowering", "Slowly", "English", "Tomato leaves have yellow spots and curling edges.")
+            st.rerun()
+    with p2:
+        if st.button("🌾 Rice Brown Spot (WB)", key="pre_rice", use_container_width=True):
+            set_preset("Rice", "West Bengal", "Vegetative", "Slowly", "English", "Rice plants have brown spots on the leaves.")
+            st.rerun()
+    with p3:
+        if st.button("🌱 Wheat Yellowing (PB)", key="pre_wheat", use_container_width=True):
+            set_preset("Wheat", "Punjab", "Not sure", "Rapidly", "Hindi", "गेहूं की पत्तियां नोक से पीली पड़ रही हैं और समस्या तेजी से बढ़ रही है।")
+            st.rerun()
+    with p4:
+        if st.button("🥔 Potato Stunting (UP)", key="pre_potato", use_container_width=True):
+            set_preset("Potato", "Uttar Pradesh", "Vegetative", "Not sure", "Hinglish", "Aloo ke paudhe me curling leaves dikh rahi hain aur growth ruk gayi hai.")
+            st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
-        # Benchmark scenario quick-fill buttons
-        st.caption("🧪 **Quick-Fill Benchmark Scenarios:**")
-        p1, p2, p3, p4, p5 = st.columns([1, 1, 1, 1, 0.85])
-        with p1:
-            if st.button("🍅 Tomato Curl (UP)", use_container_width=True):
-                set_preset("Tomato", "Uttar Pradesh", "Flowering", "Slowly", "English", "Tomato leaves have yellow spots and curling edges.")
-                st.rerun()
-        with p2:
-            if st.button("🌾 Rice Spot (WB)", use_container_width=True):
-                set_preset("Rice", "West Bengal", "Vegetative", "Slowly", "English", "Rice plants have brown spots on the leaves.")
-                st.rerun()
-        with p3:
-            if st.button("🌱 Wheat Yellow (PB)", use_container_width=True):
-                set_preset("Wheat", "Punjab", "Not sure", "Rapidly", "Hindi", "गेहूं की पत्तियां नोक से पीली पड़ रही हैं और समस्या तेजी से बढ़ रही है।")
-                st.rerun()
-        with p4:
-            if st.button("🥔 Potato Stunt (UP)", use_container_width=True):
-                set_preset("Potato", "Uttar Pradesh", "Vegetative", "Not sure", "Hinglish", "Aloo ke paudhe me curling leaves dikh rahi hain aur growth ruk gayi hai.")
-                st.rerun()
-        with p5:
-            if st.button("🔄 Reset", use_container_width=True):
-                st.session_state.result = None
-                st.session_state.follow_up_history = []
-                st.session_state.follow_up_answer = ""
-                st.session_state.original_form = {
-                    "crop": "",
-                    "region": "",
-                    "stage": "Not sure",
-                    "query": "",
-                    "spread": "Not sure",
-                    "language": st.session_state.original_form.get("language", "English"),
-                }
-                st.rerun()
+    OF = st.session_state.original_form
 
-        st.markdown("<div style='height: 0.75rem;'></div>", unsafe_allow_html=True)
-        OF = st.session_state.original_form
+    # 2 balanced columns matching media_1795287711202_ce2ae332.png
+    col_left, col_right = st.columns(2, gap="large")
+    with col_left:
+        crop = st.text_input("Crop Name", value=OF["crop"], placeholder="e.g. Tomato / Rice / गेहूं")
+        region = st.text_input("Region / State", value=OF["region"], placeholder="e.g. Uttar Pradesh, Punjab")
+        stage_opts = ["Not sure", "Seedling", "Vegetative", "Flowering", "Fruiting", "Harvest"]
+        current_stage = OF["stage"]
+        stage = st.selectbox("Growth Stage", stage_opts, index=stage_opts.index(current_stage) if current_stage in stage_opts else 0)
 
-        # Row 1: Crop Name & Region
-        r1_c1, r1_c2 = st.columns(2, gap="medium")
-        with r1_c1:
-            crop = st.text_input("Crop Name", value=OF["crop"], placeholder="e.g. Tomato / Rice / गेहूं")
-        with r1_c2:
-            region = st.text_input("Region / State", value=OF["region"], placeholder="e.g. Uttar Pradesh, Punjab")
-
-        # Row 2: Growth Stage, Problem Spreading, Advisory Language
-        r2_c1, r2_c2, r2_c3 = st.columns(3, gap="medium")
-        with r2_c1:
-            stage_opts = ["Not sure", "Seedling", "Vegetative", "Flowering", "Fruiting", "Harvest"]
-            current_stage = OF["stage"]
-            stage = st.selectbox("Growth Stage", stage_opts, index=stage_opts.index(current_stage) if current_stage in stage_opts else 0)
-        with r2_c2:
-            spread_opts = ["Not sure", "Not spreading", "Slowly", "Rapidly"]
-            current_spread = OF["spread"]
-            spread = st.selectbox("Problem Spreading?", spread_opts, index=spread_opts.index(current_spread) if current_spread in spread_opts else 0)
-        with r2_c3:
-            lang_opts = ["English", "Hindi", "Hinglish"]
-            current_lang = OF["language"]
-            form_lang = st.selectbox("Advisory Language", lang_opts, index=lang_opts.index(current_lang) if current_lang in lang_opts else 0)
-
-        # Row 3: Symptoms Observed (Full Width)
+    with col_right:
+        spread_opts = ["Not sure", "Not spreading", "Slowly", "Rapidly"]
+        current_spread = OF["spread"]
+        spread = st.selectbox("Problem Spreading?", spread_opts, index=spread_opts.index(current_spread) if current_spread in spread_opts else 0)
+        lang_opts = ["English", "Hindi", "Hinglish"]
+        current_lang = OF["language"]
+        form_lang = st.selectbox("Preferred Advisory Language", lang_opts, index=lang_opts.index(current_lang) if current_lang in lang_opts else 0)
         query = st.text_area(
             "Describe Symptoms Observed",
             value=OF["query"],
             placeholder="Describe color change, leaf curling, spots, insect presence, etc.",
-            height=110,
+            height=85,
         )
 
-        OF["language"] = form_lang
+    OF["language"] = form_lang
 
-        st.markdown("<div style='height: 0.75rem;'></div>", unsafe_allow_html=True)
-        submit = st.button("🌿 Get Crop Advice", type="primary", use_container_width=True)
+    st.markdown("<div style='height: 0.85rem;'></div>", unsafe_allow_html=True)
+    submit = st.button("🌿 Get Crop Advice", type="primary", use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # -----------------------------------------------------------------------------
     # 6. Pipeline Execution
@@ -1449,78 +1696,9 @@ with tab_ask:
         with st.expander("🔍 View Structured Pipeline Output (JSON)", expanded=bool(st.session_state.get("follow_up_answer"))):
             st.json(result)
 
-with tab_home:
+with tab_safety:
     # -----------------------------------------------------------------------------
-    # 2. Hero Section (Clean 2-Column, No Overlapping Logos, Sharp Farmer Photo)
-    # -----------------------------------------------------------------------------
-    farmer_b64 = get_base64_image("assets/farmer_portrait_hd.jpg") or get_base64_image("assets/farmer_clean_hd.jpg")
-
-    st.markdown(f"""
-    <div class="ks-hero-card">
-        <svg class="ks-foliage-svg" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.4;">
-            <path d="M-10 -10 C 20 20, 60 40, 120 45" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M25 24 C 15 15, 20 0, 35 5 C 45 10, 40 25, 25 24 Z" fill="#2E7D50" opacity="0.8"/>
-            <path d="M55 35 C 50 20, 65 10, 78 18 C 85 28, 70 40, 55 35 Z" fill="#3B925E" opacity="0.85"/>
-            <path d="M85 41 C 85 25, 102 22, 110 32 C 115 42, 98 50, 85 41 Z" fill="#2E7D50" opacity="0.75"/>
-            <path d="M40 32 C 30 45, 15 45, 18 32 C 22 22, 35 25, 40 32 Z" fill="#256C42" opacity="0.7"/>
-            <path d="M72 40 C 65 55, 50 56, 52 42 C 55 32, 68 32, 72 40 Z" fill="#2E7D50" opacity="0.8"/>
-            <path d="M105 45 C 102 60, 88 62, 88 48 C 90 38, 102 38, 105 45 Z" fill="#3B925E" opacity="0.75"/>
-        </svg>
-        <div class="ks-hero-inner">
-            <div class="ks-hero-left">
-                <h1 class="ks-hero-h1">
-                    Better Crop Decisions.<br>
-                    <span style="color:#174B35;">Better Farming.</span>
-                </h1>
-                <div class="ks-hero-accent-bar"></div>
-                <p class="ks-hero-desc">
-                    Describe your crop problem in your preferred language and receive clear, cautious guidance to help you take the next step.
-                </p>
-                <div class="ks-hero-actions">
-                    <a href="#ask-ai" class="ks-btn-primary">
-                        {ICONS['leaf_white']} Get Crop Advice &rarr;
-                    </a>
-                    <a href="#how-it-works" class="ks-btn-outline">
-                        {ICONS['circle_icon']} How It Works
-                    </a>
-                </div>
-            </div>
-            <div class="ks-hero-right">
-                <div class="ks-farmer-frame">
-                    <img src="data:image/jpeg;base64,{farmer_b64}" alt="Indian farmer using smartphone in green field" />
-                </div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # -----------------------------------------------------------------------------
-    # 3. 4-Pillar Feature Strip (Matching Reference Mockup)
-    # -----------------------------------------------------------------------------
-    st.markdown(f"""
-    <div class="ks-feature-strip">
-        <div class="ks-feature-item">
-            <div class="ks-feature-icon">{ICONS['leaf_pillar']}</div>
-            <div class="ks-feature-title">Crop Guidance</div>
-        </div>
-        <div class="ks-feature-item">
-            <div class="ks-feature-icon">{ICONS['search_pillar']}</div>
-            <div class="ks-feature-title">Problem Identification</div>
-        </div>
-        <div class="ks-feature-item">
-            <div class="ks-feature-icon">{ICONS['shield_pillar']}</div>
-            <div class="ks-feature-title">Safe Recommendations</div>
-        </div>
-        <div class="ks-feature-item">
-            <div class="ks-feature-icon">{ICONS['lang_pillar']}</div>
-            <div class="ks-feature-title">Multi-language Support</div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with tab_how:
-    # -----------------------------------------------------------------------------
-    # 4. How It Works Section (Exact Reference Mockup Layout)
+    # 8. Safety Architecture Section (Exact Reference Mockup Layout)
     # -----------------------------------------------------------------------------
     st.markdown("""
     <div class="ks-how-it-works-page">
@@ -1546,76 +1724,56 @@ with tab_how:
         <div style="text-align:center; max-width:760px; margin:0 auto 3.2rem auto; position:relative; z-index:2;">
             <div style="display:inline-block; margin-bottom:0.85rem;">
                 <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.4rem 1.15rem; border-radius:999px;">
-                    SYSTEM ARCHITECTURE
+                    SAFETY ARCHITECTURE
                 </span>
             </div>
             <h1 style="font-size:2.8rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0; letter-spacing:-0.03em;">
-                How KisanSaathi Works
+                Safety-First Agricultural Guardrails
             </h1>
             <p style="color:#68756C; font-size:1.08rem; line-height:1.6; margin:0;">
-                A grounded three-stage prompt workflow ensuring verified agronomic advice with zero chemical dosage hallucination.
+                Protecting crop health, soil vitality, and farmer safety through strict computational guardrails.
             </p>
         </div>
 
-        <!-- 3 Cards with Connecting Arrows -->
+        <!-- 3 Large Safety Cards -->
         <div class="ks-arch-container">
-            <!-- Card 1 -->
+            <!-- Card 1: Zero Chemical Dosage -->
             <div class="ks-arch-card">
                 <div>
                     <div class="ks-arch-icon-box">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
                         </svg>
                     </div>
-                    <h3 class="ks-arch-card-title">1. Multi-Lingual Extraction</h3>
+                    <h3 class="ks-arch-card-title">Zero Chemical Dosage</h3>
                     <p class="ks-arch-card-desc">
-                        Understands farmer queries in English, Hindi, and Hinglish. Extracts crop, region, phenological stage, symptoms, and spread rate.
+                        Never computes or prescribes synthetic pesticide spraying doses, preventing crop phytotoxicity and pollinator poisoning.
                     </p>
                 </div>
-                <!-- Illustration 1: Document with speech bubbles -->
+                <!-- Illustration 1: Prohibition Flask & Sprout -->
                 <div class="ks-arch-illus">
                     <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="80" y="24" width="70" height="96" rx="8" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2.2"/>
-                        <line x1="94" y1="44" x2="136" y2="44" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
-                        <line x1="94" y1="58" x2="136" y2="58" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
-                        <line x1="94" y1="72" x2="124" y2="72" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
-                        <line x1="94" y1="86" x2="136" y2="86" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
-                        <line x1="94" y1="100" x2="116" y2="100" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round"/>
-                        <!-- Bubble: Hindi -->
+                        <ellipse cx="115" cy="116" rx="78" ry="12" fill="#E2E9E1"/>
+                        <path d="M106 32 L106 50 L84 96 A 8 8 0 0 0 91 108 L139 108 A 8 8 0 0 0 146 96 L124 50 L124 32 Z" fill="#FFFFFF" stroke="#174B35" stroke-width="2.2"/>
+                        <rect x="102" y="28" width="26" height="5" rx="2.5" fill="#174B35"/>
+                        <path d="M90 94 L97 78 L133 78 L140 94 C 137 104, 93 104, 90 94 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                        <circle cx="106" cy="88" r="3" fill="#2E7D50" opacity="0.6"/>
+                        <circle cx="122" cy="91" r="2.5" fill="#2E7D50" opacity="0.6"/>
+                        <!-- Red prohibition badge -->
                         <g>
-                            <rect x="18" y="20" width="56" height="28" rx="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                            <text x="46" y="38" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hindi</text>
-                            <path d="M52 47 L60 56 L64 47 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                            <line x1="53" y1="47" x2="63" y2="47" stroke="#E7F2E8" stroke-width="2"/>
+                            <circle cx="152" cy="46" r="22" fill="#FFFFFF" stroke="#DC2626" stroke-width="2.5"/>
+                            <line x1="136" y1="30" x2="168" y2="62" stroke="#DC2626" stroke-width="2.5"/>
+                            <text x="152" y="49" font-family="Inter, sans-serif" font-size="9" font-weight="800" fill="#DC2626" text-anchor="middle">0% DOSE</text>
                         </g>
-                        <!-- Bubble: English -->
-                        <g>
-                            <rect x="146" y="14" width="66" height="28" rx="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                            <text x="179" y="32" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">English</text>
-                            <path d="M156 41 L148 50 L162 43 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                            <line x1="154" y1="41" x2="161" y2="41" stroke="#E7F2E8" stroke-width="2"/>
-                        </g>
-                        <!-- Bubble: Hinglish -->
-                        <g>
-                            <rect x="148" y="76" width="68" height="28" rx="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                            <text x="182" y="94" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hinglish</text>
-                            <path d="M158 77 L148 70 L160 76 Z" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
-                            <line x1="156" y1="77" x2="161" y2="77" stroke="#E7F2E8" stroke-width="2"/>
-                        </g>
+                        <!-- Sprout -->
+                        <path d="M68 96 C 64 82, 74 74, 80 66 C 82 76, 73 87, 68 96" fill="#3B925E"/>
+                        <path d="M69 84 C 61 78, 54 82, 52 88 C 58 89, 66 87, 69 84" fill="#2E7D50"/>
                     </svg>
                 </div>
             </div>
 
-            <!-- Arrow 1 -> 2 -->
-            <div class="ks-arch-arrow">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-            </div>
-
-            <!-- Card 2 -->
+            <!-- Card 2: Evidence Grounding -->
             <div class="ks-arch-card">
                 <div>
                     <div class="ks-arch-icon-box">
@@ -1625,9 +1783,9 @@ with tab_how:
                             <polyline points="2 12 12 17 22 12"></polyline>
                         </svg>
                     </div>
-                    <h3 class="ks-arch-card-title">2. Grounded TF-IDF Retrieval</h3>
+                    <h3 class="ks-arch-card-title">Evidence Grounding</h3>
                     <p class="ks-arch-card-desc">
-                        Matches symptom profiles against ICAR agronomic reference materials. Every diagnosis is grounded in verified literature citations.
+                        All possible causes are grounded in ICAR and state university agronomy reference manuals, eliminating ungrounded speculation.
                     </p>
                 </div>
                 <!-- Illustration 2: 3D ICAR Book -->
@@ -1646,50 +1804,36 @@ with tab_how:
                 </div>
             </div>
 
-            <!-- Arrow 2 -> 3 -->
-            <div class="ks-arch-arrow">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E7D50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-            </div>
-
-            <!-- Card 3 -->
+            <!-- Card 3: Human-In-The-Loop -->
             <div class="ks-arch-card">
                 <div>
                     <div class="ks-arch-icon-box">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            <polyline points="9 12 11 14 15 10"></polyline>
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
                     </div>
-                    <h3 class="ks-arch-card-title">3. Safe Advisory & Escalation</h3>
+                    <h3 class="ks-arch-card-title">Human-In-The-Loop</h3>
                     <p class="ks-arch-card-desc">
-                        Generates cultural management checklists, asks follow-up questions for missing details, and escalates to KVK experts when needed.
+                        Uncertain symptoms or rapidly spreading plots automatically trigger escalation recommendations to local extension officers (KVK).
                     </p>
                 </div>
-                <!-- Illustration 3: Clipboard Checklist & Leaf -->
+                <!-- Illustration 3: KVK Officer Badge & Call Centre -->
                 <div class="ks-arch-illus">
                     <svg width="230" height="135" viewBox="0 0 230 135" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="80" y="22" width="70" height="96" rx="8" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2.2"/>
-                        <rect x="96" y="14" width="38" height="16" rx="4" fill="#174B35"/>
-                        <rect x="104" y="18" width="22" height="6" rx="2" fill="#E7F2E8"/>
-                        <!-- Checkmark 1 -->
-                        <path d="M90 48 L95 53 L104 43" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="110" y1="48" x2="138" y2="48" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Checkmark 2 -->
-                        <path d="M90 66 L95 71 L104 61" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="110" y1="66" x2="138" y2="66" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Checkmark 3 -->
-                        <path d="M90 84 L95 89 L104 79" stroke="#2E7D50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="110" y1="84" x2="138" y2="84" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Dot line 4 -->
-                        <circle cx="95" cy="100" r="3.5" fill="#2E7D50"/>
-                        <line x1="110" y1="100" x2="130" y2="100" stroke="#2E7D50" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Leaf Sprout on Right -->
-                        <path d="M156 108 C 154 92, 166 84, 172 75 C 174 86, 165 98, 160 108" fill="#3B925E"/>
-                        <path d="M158 95 C 168 90, 180 90, 184 97 C 178 101, 165 101, 158 95" fill="#2E7D50"/>
-                        <path d="M158 102 C 148 98, 140 102, 138 108 C 144 110, 153 106, 158 102" fill="#3B925E"/>
+                        <rect x="52" y="24" width="126" height="92" rx="14" fill="#FFFFFF" stroke="#2E7D50" stroke-width="2"/>
+                        <rect x="68" y="16" width="94" height="18" rx="4" fill="#174B35"/>
+                        <text x="115" y="29" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle">KVK EXTENSION</text>
+                        <!-- Officer avatar -->
+                        <circle cx="115" cy="54" r="14" fill="#E7F2E8" stroke="#2E7D50" stroke-width="1.5"/>
+                        <circle cx="115" cy="48" r="4" fill="#174B35"/>
+                        <path d="M107 58 C 107 54, 123 54, 123 58 Z" fill="#174B35"/>
+                        <!-- Toll-free banner -->
+                        <rect x="62" y="76" width="106" height="30" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
+                        <text x="115" y="89" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">KISAN CALL CENTRE</text>
+                        <text x="115" y="100" font-family="Inter, sans-serif" font-size="8.5" font-weight="800" fill="#15803D" text-anchor="middle">1800-180-1551</text>
                     </svg>
                 </div>
             </div>
@@ -1705,84 +1849,42 @@ with tab_how:
     </div>
     """, unsafe_allow_html=True)
 
-with tab_safety:
-    # -----------------------------------------------------------------------------
-    # 8. Safety Architecture Section (#safety)
-    # -----------------------------------------------------------------------------
-    st.markdown("""
-    <div id="safety" style="margin-top:4rem; margin-bottom:3rem;">
-        <div style="text-align:center; max-width:680px; margin:0 auto 2rem auto;">
-            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.3rem 0.85rem; border-radius:999px; display:inline-block; margin-bottom:0.6rem;">
-                Safety Architecture
-            </span>
-            <h2 style="font-size:2rem; font-weight:800; color:#174B35; margin-bottom:0.5rem;">
-                Safety-First Agricultural Guardrails
-            </h2>
-            <p style="color:#68756C; font-size:1rem; line-height:1.6;">
-                Protecting crop health, soil vitality, and farmer safety through strict computational guardrails.
-            </p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    saf_col1, saf_col2, saf_col3 = st.columns(3)
-    with saf_col1:
-        st.markdown(f"""
-        <div class="ks-card">
-            <div class="ks-card-icon-box">{ICONS['shield_pillar']}</div>
-            <h3>Zero Chemical Dosage</h3>
-            <p>Never computes or prescribes synthetic pesticide spraying doses, preventing crop phytotoxicity and pollinator poisoning.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with saf_col2:
-        st.markdown(f"""
-        <div class="ks-card">
-            <div class="ks-card-icon-box">{ICONS['leaf_brand']}</div>
-            <h3>Evidence Grounding</h3>
-            <p>All possible causes are grounded in ICAR and state university agronomy reference manuals, eliminating ungrounded speculation.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with saf_col3:
-        st.markdown(f"""
-        <div class="ks-card">
-            <div class="ks-card-icon-box">{ICONS['search']}</div>
-            <h3>Human-In-The-Loop</h3>
-            <p>Uncertain symptoms or rapidly spreading plots automatically trigger escalation recommendations to local extension officers.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
 with tab_eval:
     # -----------------------------------------------------------------------------
-    # 9. Evaluation Benchmark Summary
+    # 9. Evaluation Benchmark Summary (Exact Reference Mockup Layout)
     # -----------------------------------------------------------------------------
     st.markdown("""
-    <div class="ks-card" style="margin-top:1rem;">
-        <div style="text-align:center; margin-bottom:1.5rem;">
-            <h3 style="font-size:1.45rem; font-weight:800; color:#174B35; margin-bottom:0.35rem;">
+    <div class="ks-content-container" style="padding-top:2.5rem;">
+        <div style="text-align:center; max-width:760px; margin:0 auto 2.5rem auto;">
+            <div style="display:inline-block; margin-bottom:0.85rem;">
+                <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#2E7D50; background:#E7F2E8; padding:0.4rem 1.15rem; border-radius:999px;">
+                    EVALUATION
+                </span>
+            </div>
+            <h1 style="font-size:2.8rem; font-weight:800; color:#174B35; margin:0 0 0.85rem 0; letter-spacing:-0.03em;">
                 Empirical Benchmark Verification
-            </h3>
-            <p style="color:#68756C; font-size:0.9rem; margin:0;">
+            </h1>
+            <p style="color:#68756C; font-size:1.08rem; line-height:1.6; margin:0;">
                 Evaluated across 12 distinct synthetic field scenarios with zero failures.
             </p>
         </div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:1rem; text-align:center;">
-            <div style="padding:1.1rem; background:#F7F8F2; border-radius:12px; border:1px solid #E2E9E1;">
-                <div style="font-size:1.9rem; font-weight:800; color:#174B35; line-height:1;">12 / 12</div>
-                <div style="font-size:0.8rem; font-weight:600; color:#68756C; margin-top:0.35rem;">Scenarios Evaluated</div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; text-align:center; margin-bottom:2.5rem;">
+            <div style="padding:1.4rem; background:#FFFFFF; border-radius:18px; border:1.5px solid #E2E9E1; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+                <div style="font-size:2.4rem; font-weight:800; color:#174B35; line-height:1;">12 / 12</div>
+                <div style="font-size:0.88rem; font-weight:600; color:#68756C; margin-top:0.45rem;">Scenarios Evaluated</div>
             </div>
-            <div style="padding:1.1rem; background:#F0FDF4; border-radius:12px; border:1px solid #BBF7D0;">
-                <div style="font-size:1.9rem; font-weight:800; color:#15803D; line-height:1;">100%</div>
-                <div style="font-size:0.8rem; font-weight:600; color:#166534; margin-top:0.35rem;">Pass Rate</div>
+            <div style="padding:1.4rem; background:#F0FDF4; border-radius:18px; border:1.5px solid #BBF7D0; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+                <div style="font-size:2.4rem; font-weight:800; color:#15803D; line-height:1;">100%</div>
+                <div style="font-size:0.88rem; font-weight:600; color:#166534; margin-top:0.45rem;">Pass Rate</div>
             </div>
-            <div style="padding:1.1rem; background:#FEF3C7; border-radius:12px; border:1px solid #FDE68A;">
-                <div style="font-size:1.9rem; font-weight:800; color:#B45309; line-height:1;">0</div>
-                <div style="font-size:0.8rem; font-weight:600; color:#92400E; margin-top:0.35rem;">Dosages Prescribed</div>
+            <div style="padding:1.4rem; background:#FEF3C7; border-radius:18px; border:1.5px solid #FDE68A; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+                <div style="font-size:2.4rem; font-weight:800; color:#B45309; line-height:1;">0</div>
+                <div style="font-size:0.88rem; font-weight:600; color:#92400E; margin-top:0.45rem;">Dosages Prescribed</div>
             </div>
-            <div style="padding:1.1rem; background:#F7F8F2; border-radius:12px; border:1px solid #E2E9E1;">
-                <div style="font-size:1.9rem; font-weight:800; color:#2E7D50; line-height:1;">3</div>
-                <div style="font-size:0.8rem; font-weight:600; color:#68756C; margin-top:0.35rem;">Languages Supported</div>
+            <div style="padding:1.4rem; background:#FFFFFF; border-radius:18px; border:1.5px solid #E2E9E1; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
+                <div style="font-size:2.4rem; font-weight:800; color:#2E7D50; line-height:1;">3</div>
+                <div style="font-size:0.88rem; font-weight:600; color:#68756C; margin-top:0.45rem;">Languages Supported</div>
             </div>
         </div>
     </div>
@@ -1790,14 +1892,33 @@ with tab_eval:
 
     csv_path = "evaluation_results.csv"
     if os.path.exists(csv_path):
-        with st.expander("📋 View All 12 Test Cases (evaluation_results.csv)", expanded=False):
+        with st.expander("📋 View All 12 Test Cases (evaluation_results.csv)", expanded=True):
             try:
                 with open(csv_path, encoding="utf-8") as f:
                     reader = csv.DictReader(f)
                     for r in reader:
-                        st.markdown(f"**{r.get('Test ID', '')}:** {r.get('Input', '')[:100]}... — **Status:** `{r.get('Pass/Fail', '')}`")
-                        st.caption(f"Reason: {r.get('Reason', '')}")
-                        st.markdown("---")
+                        tid = r.get("Test ID", "")
+                        inp = r.get("Input", "")
+                        reas = r.get("Reason", "")
+                        status = r.get("Pass/Fail", "PASS")
+                        st.markdown(f"""
+                        <div style="background:#FFFFFF; border:1.5px solid #E2E9E1; border-radius:14px; padding:1.25rem 1.4rem; margin-bottom:1rem; box-shadow:0 2px 8px rgba(23,75,53,0.03);">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                                <div style="font-weight:800; font-size:1.02rem; color:#174B35;">
+                                    {tid}
+                                </div>
+                                <span style="background:#DEF7EC; color:#03543F; font-weight:700; font-size:0.78rem; padding:0.25rem 0.85rem; border-radius:999px; border:1px solid #BCF0DA;">
+                                    {status}
+                                </span>
+                            </div>
+                            <div style="font-size:0.86rem; color:#4B5563; margin-bottom:0.5rem; line-height:1.5;">
+                                <b>Input:</b> {inp}
+                            </div>
+                            <div style="font-size:0.84rem; color:#166534; background:#F0FDF4; padding:0.6rem 0.85rem; border-radius:8px; line-height:1.45;">
+                                <b>Verification:</b> {reas}
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
             except Exception as e:
                 st.caption(f"Could not read CSV: {e}")
 
