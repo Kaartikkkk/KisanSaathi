@@ -10,13 +10,13 @@ def render_pinned_navbar(language: str = "English"):
     """Render the pinned full-width top navbar."""
     nav_html = f"""
     <div class="ks-navbar">
-        <div class="ks-nav-brand">
+        <div class="ks-nav-brand" onclick="var d=(window.parent&&window.parent.document)||document; var t=d.querySelectorAll('[data-baseweb=tab-list] button, button[role=tab]'); if(t&&t[0]) t[0].click();">
             <div style="height:44px; display:flex; align-items:center;">
                 {LOGOS['horizontal']}
             </div>
         </div>
 
-        <div class="ks-nav-tabs-slot" style="flex:1; max-width:650px; height:42px;">
+        <div class="ks-nav-tabs-slot" style="flex:1; max-width:650px; height:42px; pointer-events:none;">
             <!-- Native Streamlit st.tabs are positioned centered here via CSS -->
         </div>
 

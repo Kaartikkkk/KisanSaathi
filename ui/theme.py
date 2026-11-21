@@ -76,13 +76,14 @@ header[data-testid="stHeader"],
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     border-bottom: 1.5px solid var(--border-color) !important;
-    z-index: 99998 !important;
+    z-index: 99990 !important;
     padding: 0 2.5rem !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     box-shadow: 0 2px 10px rgba(23, 75, 53, 0.03) !important;
+    pointer-events: none !important; /* Clicks pass through empty areas to centered tabs */
 }
 
 .ks-nav-brand {
@@ -93,6 +94,7 @@ header[data-testid="stHeader"],
     cursor: pointer !important;
     flex-shrink: 0 !important;
     z-index: 100000 !important;
+    pointer-events: auto !important; /* Brand logo is clickable */
 }
 
 .ks-nav-brand-title {
@@ -110,12 +112,17 @@ header[data-testid="stHeader"],
     line-height: 1.1 !important;
 }
 
+.ks-nav-tabs-slot {
+    pointer-events: none !important; /* Transparent slot passes clicks */
+}
+
 .ks-nav-lang {
     display: flex !important;
     align-items: center !important;
     gap: 0.75rem !important;
     flex-shrink: 0 !important;
     z-index: 100000 !important;
+    pointer-events: auto !important; /* Language pill is clickable */
 }
 
 .ks-lang-pill {
@@ -133,10 +140,13 @@ header[data-testid="stHeader"],
     flex-shrink: 0 !important;
 }
 
-/* PIN NATIVE STREAMLIT TABS INTO NAVBAR CENTER */
+/* PIN NATIVE STREAMLIT TABS INTO NAVBAR CENTER WITH MAXIMUM STACKING & RELIABLE HIT-TESTING */
+div[data-testid="stElementContainer"]:has(div[data-testid="stTabs"]),
 div[data-testid="stTabs"] {
     background: transparent !important;
     border: none !important;
+    position: relative !important;
+    z-index: 999999 !important;
 }
 
 [data-baseweb="tab-list"],
@@ -146,7 +156,8 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"],
     top: 14px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    z-index: 99999 !important;
+    z-index: 1000000 !important;
+    pointer-events: auto !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -165,6 +176,10 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"],
 /* Individual Tab Buttons */
 div[data-baseweb="tab-list"] button[role="tab"],
 .stTabs [data-baseweb="tab-list"] button {
+    position: relative !important;
+    z-index: 1000001 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
     background-color: transparent !important;
     background: transparent !important;
     color: var(--text-primary) !important;
@@ -175,7 +190,6 @@ div[data-baseweb="tab-list"] button[role="tab"],
     border-radius: 999px !important;
     border: none !important;
     transition: all 0.2s ease !important;
-    cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
@@ -187,8 +201,20 @@ div[data-baseweb="tab-list"] button[role="tab"],
 
 div[data-baseweb="tab-list"] button[role="tab"]:hover,
 .stTabs [data-baseweb="tab-list"] button:hover {
-    background-color: rgba(23, 75, 53, 0.06) !important;
+    background-color: rgba(23, 75, 53, 0.08) !important;
     color: var(--color-primary) !important;
+}
+
+/* Child elements and SVG icons inside tab buttons must not intercept clicks from the button */
+div[data-baseweb="tab-list"] button[role="tab"] *,
+.stTabs [data-baseweb="tab-list"] button * {
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
+div[data-baseweb="tab-list"] button[role="tab"]::before,
+.stTabs [data-baseweb="tab-list"] button::before {
+    pointer-events: none !important;
 }
 
 /* Active Tab: Solid Forest Green Pill with White Text */
@@ -198,6 +224,7 @@ div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"],
     background: var(--color-primary) !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
+    border-radius: 999px !important;
     box-shadow: 0 4px 14px rgba(23, 75, 53, 0.22) !important;
 }
 
@@ -854,29 +881,31 @@ div[data-testid="stBaseButton-primary"] button::before {
 /* 8. RESPONSIVE DESIGN (1440px, 1280px, 768px, 375px) */
 @media (max-width: 992px) {
     .ks-navbar {
-        height: auto !important;
-        padding: 0.65rem 1rem !important;
-        flex-wrap: wrap !important;
-        gap: 0.5rem !important;
+        height: 64px !important;
+        padding: 0.5rem 1rem !important;
+        flex-wrap: nowrap !important;
     }
 
     [data-baseweb="tab-list"],
     div[data-testid="stTabs"] [data-baseweb="tab-list"],
     .stTabs [data-baseweb="tab-list"] {
-        top: 60px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+        top: 64px !important;
+        left: 0 !important;
+        transform: none !important;
         width: 100% !important;
         max-width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
         justify-content: flex-start !important;
-        padding: 0.25rem 0.75rem !important;
+        padding: 0.35rem 0.75rem !important;
         background: #FFFFFF !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        z-index: 1000000 !important;
+        pointer-events: auto !important;
     }
 
     div[data-baseweb="tab-panel"] {
-        padding-top: 115px !important;
+        padding-top: 125px !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
