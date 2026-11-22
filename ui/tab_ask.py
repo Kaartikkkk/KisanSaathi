@@ -360,6 +360,24 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         # Advisory & Field Checklist in 2 equal columns
         res_col1, res_col2 = st.columns(2, gap="medium")
         with res_col1:
+            checklist_items = []
+            if isinstance(advisory.get("next_steps"), list):
+                for step in advisory.get("next_steps", []):
+                    if step and str(step).strip():
+                        checklist_items.append(f"<li style='margin-bottom:0.55rem;'>{step}</li>")
+
+            advice_text = advisory.get("advice", "")
+            checklist_body = ""
+            if advice_text:
+                checklist_body += f"<div style='margin-bottom:0.85rem; font-weight:600; color:#174B35; line-height:1.5;'>{advice_text}</div>"
+            if checklist_items:
+                checklist_body += f"<ul style='padding-left:1.25rem; margin:0 0 0.85rem 0;'>{''.join(checklist_items)}</ul>"
+            if advisory.get("warning"):
+                checklist_body += f"<div style='margin-top:0.75rem; padding:0.65rem 0.95rem; background:#FEF3C7; border:1px solid #FDE68A; border-radius:10px; font-size:0.85rem; color:#92400E;'><b>Caution:</b> {advisory['warning']}</div>"
+
+            if not checklist_body:
+                checklist_body = advisory.get("checklist_md") or advisory.get("response_text") or "Non-chemical cultural practices verified safe for immediate field application."
+
             checklist_card = f"""
             <div class="ks-card" style="height:100%;">
                 <h3 style="font-size:1.2rem; font-weight:800; color:#174B35; margin-bottom:0.75rem;">
@@ -369,7 +387,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                     Non-chemical cultural and biological practices verified safe for immediate field application:
                 </p>
                 <div style="font-size:0.92rem; color:#25352D; line-height:1.65;">
-                    {advisory.get('checklist_md', advisory.get('response_text', 'No checklist available.'))}
+                    {checklist_body}
                 </div>
             </div>
             """
@@ -397,7 +415,14 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             st.markdown(clean_html(guardrails_card), unsafe_allow_html=True)
 
         # KVK Escalation Banner
-        if advisory.get("escalate_to_expert", False) or extraction.get("spread") == "Rapidly":
+        should_escalate = (
+            advisory.get("escalate", False) or
+            advisory.get("escalate_to_expert", False) or
+            extraction.get("spread") == "Rapidly" or
+            diagnosis.get("uncertainty") == "high"
+        )
+        if should_escalate:
+            escalation_reason = advisory.get("escalation_reason") or "This problem is flagged as rapidly expanding or requires laboratory confirmation."
             escalation_html = f"""
             <div style="background:#FEF2F2; border:1.5px solid #FCA5A5; border-radius:16px; padding:1.25rem 1.5rem; margin-top:1.5rem; display:flex; align-items:center; gap:1.25rem;">
                 <div style="background:#FEE2E2; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -408,7 +433,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
                         Recommended Field Action: Consult Local Agricultural Extension (KVK)
                     </div>
                     <div style="font-size:0.88rem; color:#7F1D1D; line-height:1.5;">
-                        This problem is flagged as rapidly expanding or requires laboratory confirmation. Contact your nearest Krishi Vigyan Kendra (KVK) or Call the Kisan Call Centre at <b>1800-180-1551</b> (toll-free).
+                        {escalation_reason} Contact your nearest Krishi Vigyan Kendra (KVK) or Call the Kisan Call Centre at <b>1800-180-1551</b> (toll-free).
                     </div>
                 </div>
             </div>
