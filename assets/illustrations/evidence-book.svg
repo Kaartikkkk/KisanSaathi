@@ -1,1 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 150" fill="none"><g stroke="#145438" stroke-width="3" stroke-linejoin="round"><path d="M20 42 76 16l65 27-57 28z" fill="#2d8b57"/><path d="m20 42 1 20 63 29 57-27V43L84 71z" fill="#f8fff8"/><path d="m21 62 1 20 62 29 57-27V65L84 91z" fill="#d9efdf"/><path d="m84 71 1 40" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 130" fill="none">
+    <!-- Flanking leaves left -->
+    <g fill="#2E8B57" opacity="0.85">
+        <path d="M38 74 C28 68 24 60 25 52 C33 53 41 59 44 68 Z"/>
+        <path d="M42 81 C32 81 24 88 23 95 C31 95 39 90 44 83 Z"/>
+    </g>
+    <!-- Flanking leaves right -->
+    <g fill="#2E8B57" opacity="0.85">
+        <path d="M162 74 C172 68 176 60 175 52 C167 53 159 59 156 68 Z"/>
+        <path d="M158 81 C168 81 176 88 177 95 C169 95 161 90 156 83 Z"/>
+    </g>
+    <!-- Isometric Book Stack -->
+    <!-- Bottom book cover / pages -->
+    <path d="M52 64 L100 88 L148 64 L100 40 Z" fill="#1E6B42" stroke="#124C35" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M52 64 L52 76 L100 100 L148 76 L148 64 L100 88 Z" fill="#FFFFFF" stroke="#124C35" stroke-width="2.2" stroke-linejoin="round"/>
+    <line x1="100" y1="88" x2="100" y2="100" stroke="#124C35" stroke-width="2.2"/>
+    <line x1="52" y1="70" x2="100" y2="94" stroke="#DCE9DD" stroke-width="1.5"/>
+    <line x1="100" y1="94" x2="148" y2="70" stroke="#DCE9DD" stroke-width="1.5"/>
+    <!-- Top book cover / pages -->
+    <path d="M52 46 L100 70 L148 46 L100 22 Z" fill="#2E8B57" stroke="#124C35" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M52 46 L52 58 L100 82 L148 58 L148 46 L100 70 Z" fill="#FFFFFF" stroke="#124C35" stroke-width="2.2" stroke-linejoin="round"/>
+    <line x1="100" y1="70" x2="100" y2="82" stroke="#124C35" stroke-width="2.2"/>
+    <line x1="52" y1="52" x2="100" y2="76" stroke="#DCE9DD" stroke-width="1.5"/>
+    <line x1="100" y1="76" x2="148" y2="52" stroke="#DCE9DD" stroke-width="1.5"/>
+    <!-- ICAR Guidelines Text on isometric cover -->
+    <g transform="translate(100, 46) rotate(-26) skewX(35) scale(0.85, 0.65)">
+        <text x="0" y="-7" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-size="13" font-weight="800" text-anchor="middle" letter-spacing="1">ICAR</text>
+        <text x="0" y="8" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0.5">Guidelines</text>
+    </g>
+</svg>

@@ -2,14 +2,17 @@
 Integrates the complete KisanSaathi Visual Asset Pack:
 - Workflow icons from assets/icons/ (search, layers, shield-check)
 - Vector illustrations from assets/illustrations/ (evidence-book, human-escalation)
-- Decorative elements from assets/decorative/ (leaf-branch, field-hills)
+- Decorative elements from assets/decorative/ (leaf-branch)
+- Scenic countryside horizon banner matching reference design
 """
 
 import streamlit as st
-from ui.assets import ICONS, ILLUSTRATIONS, DECORATIVE, clean_html
+from ui.assets import ICONS, ILLUSTRATIONS, DECORATIVE, get_image_base64, clean_html
 
 def render_tab_how():
     """Render the 3-stage architecture workflow."""
+    landscape_horizon_b64 = get_image_base64("countryside-horizon.png")
+
     how_html = f"""
     <div class="ks-how-it-works-page" style="position:relative;">
         <!-- Floating Foliage Background SVGs from Asset Pack -->
@@ -23,7 +26,9 @@ def render_tab_how():
         <!-- Section Header -->
         <div style="text-align:center; max-width:760px; margin:0 auto 1.4rem auto; position:relative; z-index:2;">
             <div style="display:inline-block; margin-bottom:0.6rem;">
-                <span class="ks-pill-badge">SYSTEM ARCHITECTURE</span>
+                <span class="ks-pill-badge" style="display:inline-flex; align-items:center; gap:6px;">
+                    {ICONS['layers']} SYSTEM ARCHITECTURE
+                </span>
             </div>
             <h1 style="font-size:2.35rem; font-weight:800; color:#174B35; margin:0 0 0.5rem 0; letter-spacing:-0.03em; line-height:1.15;">
                 How KisanSaathi Works
@@ -57,21 +62,22 @@ def render_tab_how():
                         <line x1="94" y1="100" x2="116" y2="100" stroke="#2F8A57" stroke-width="2.2" stroke-linecap="round"/>
                         <g>
                             <rect x="18" y="20" width="56" height="28" rx="14" fill="#E7F2E8" stroke="#2F8A57" stroke-width="1.5"/>
-                            <text x="46" y="38" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hindi</text>
+                            <text x="46" y="38" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hindi</text>
                             <path d="M52 47 L60 56 L64 47 Z" fill="#E7F2E8" stroke="#2F8A57" stroke-width="1.5"/>
                         </g>
                         <g>
                             <rect x="146" y="14" width="66" height="28" rx="14" fill="#E7F2E8" stroke="#2F8A57" stroke-width="1.5"/>
-                            <text x="179" y="32" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">English</text>
+                            <text x="179" y="32" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">English</text>
                             <path d="M156 41 L148 50 L162 43 Z" fill="#E7F2E8" stroke="#2F8A57" stroke-width="1.5"/>
                         </g>
                         <g>
                             <rect x="148" y="76" width="68" height="28" rx="14" fill="#E7F2E8" stroke="#2F8A57" stroke-width="1.5"/>
-                            <text x="182" y="94" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hinglish</text>
+                            <text x="182" y="94" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" fill="#174B35" text-anchor="middle">Hinglish</text>
                             <path d="M158 77 L148 70 L160 76 Z" fill="#E7F2E8" stroke="#2F8A57" stroke-width="1.5"/>
                         </g>
                     </svg>
                 </div>
+                <div class="ks-feature-accent-line"></div>
             </div>
 
             <!-- Arrow 1 -> 2 -->
@@ -93,12 +99,13 @@ def render_tab_how():
                         Matches symptom profiles against ICAR agronomic reference materials. Every diagnosis is grounded in verified literature citations.
                     </p>
                 </div>
-                <!-- Illustration 2 from Visual Asset Pack -->
+                <!-- Illustration 2: ICAR Guidelines Stacked Book from Visual Asset Pack -->
                 <div class="ks-arch-illus" style="display:flex; justify-content:center; align-items:center; min-height:120px;">
-                    <div style="width:130px; height:120px; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:180px; height:120px; display:flex; align-items:center; justify-content:center;">
                         {ILLUSTRATIONS['evidence_book']}
                     </div>
                 </div>
+                <div class="ks-feature-accent-line"></div>
             </div>
 
             <!-- Arrow 2 -> 3 -->
@@ -120,18 +127,19 @@ def render_tab_how():
                         Generates cultural management checklists, asks follow-up questions for missing details, and escalates to KVK experts when needed.
                     </p>
                 </div>
-                <!-- Illustration 3 from Visual Asset Pack -->
+                <!-- Illustration 3: Checklist & KVK Expert from Visual Asset Pack -->
                 <div class="ks-arch-illus" style="display:flex; justify-content:center; align-items:center; min-height:120px;">
-                    <div style="width:130px; height:120px; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:190px; height:120px; display:flex; align-items:center; justify-content:center;">
                         {ILLUSTRATIONS['human_escalation']}
                     </div>
                 </div>
+                <div class="ks-feature-accent-line"></div>
             </div>
         </div>
 
-        <!-- Bottom Landscape Hills Decoration -->
-        <div style="width:100%; overflow:hidden; line-height:0; margin-top:1.5rem; opacity:0.65;">
-            {DECORATIVE['field_hills']}
+        <!-- Scenic Countryside Horizon Decoration matching Reference Image -->
+        <div class="ks-landscape-horizon" style="margin-top:1.5rem; margin-bottom:0;">
+            <img src="{landscape_horizon_b64}" alt="Scenic Indian agricultural countryside horizon" />
         </div>
     </div>
     """

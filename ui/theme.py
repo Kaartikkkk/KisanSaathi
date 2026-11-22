@@ -908,7 +908,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     background: #FFFFFF !important;
     border: 1.5px solid var(--border-color) !important;
     border-radius: 20px !important;
-    padding: 1.4rem 1.5rem 1.15rem 1.5rem !important;
+    padding: 1.4rem 1.5rem 1.4rem 1.5rem !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
@@ -917,6 +917,8 @@ div[data-testid="stBaseButton-primary"] button::before {
     min-height: 290px !important;
     box-shadow: 0 4px 20px rgba(23, 75, 53, 0.04) !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
 }
 
 .ks-arch-card:hover {

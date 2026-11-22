@@ -1,1 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 150" fill="none"><g fill="none" stroke="#145438" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="44" width="64" height="82" rx="7"/><path d="m27 65 7 7 13-15M27 91l7 7 13-15"/><circle cx="111" cy="42" r="19"/><path d="M80 124c3-28 16-42 31-42s28 14 31 42M96 88l15 13 15-13"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 130" fill="none">
+    <!-- Checklist Clipboard on Left -->
+    <g stroke="#2E8B57" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Clip tab -->
+        <rect x="52" y="18" width="20" height="8" rx="3" fill="#E2EFE2"/>
+        <!-- Clipboard body -->
+        <rect x="36" y="24" width="52" height="74" rx="7" fill="#FFFFFF"/>
+        <!-- Row 1 -->
+        <polyline points="44 42 48 46 56 38" stroke-width="2.4"/>
+        <line x1="62" y1="42" x2="78" y2="42" stroke-width="2"/>
+        <!-- Row 2 -->
+        <polyline points="44 58 48 62 56 54" stroke-width="2.4"/>
+        <line x1="62" y1="58" x2="78" y2="58" stroke-width="2"/>
+        <!-- Row 3 -->
+        <polyline points="44 74 48 78 56 70" stroke-width="2.4"/>
+        <line x1="62" y1="74" x2="74" y2="74" stroke-width="2"/>
+    </g>
+
+    <!-- KVK Expert / Farmer on Right -->
+    <g stroke="#155B3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Hat Crown -->
+        <path d="M120 40 C120 27 144 27 144 40 Z" fill="#E2EFE2"/>
+        <!-- Hat Brim -->
+        <path d="M110 42 C120 37 144 37 154 42" fill="#E2EFE2"/>
+        <!-- Head / Face -->
+        <path d="M123 44 C123 55 141 55 141 44"/>
+        <!-- Shoulders / Body -->
+        <path d="M112 88 C112 68 124 64 132 64 C140 64 152 68 152 88" fill="#FFFFFF"/>
+        <path d="M126 64 L132 74 L138 64"/>
+    </g>
+
+    <!-- KVK Badge -->
+    <circle cx="166" cy="74" r="16" fill="#E2EFE2" stroke="#2E8B57" stroke-width="2"/>
+    <text x="166" y="78" font-family="'Inter', -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#155B3D" text-anchor="middle">KVK</text>
+</svg>

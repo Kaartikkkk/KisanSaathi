@@ -8,7 +8,7 @@ Integrates the complete KisanSaathi Visual Asset Pack:
 import os
 import csv
 import streamlit as st
-from ui.assets import ICONS, LOGOS, DECORATIVE, BADGES, BOTTOM_ORGANIC_WAVE_SVG, clean_html
+from ui.assets import ICONS, LOGOS, DECORATIVE, BADGES, get_image_base64, clean_html
 
 def get_evaluation_metrics(csv_path: str = "evaluation_results.csv") -> dict:
     """Dynamically parse evaluation_results.csv and compute benchmark telemetry."""
@@ -230,4 +230,10 @@ def render_tab_eval():
     </div>
     """
     st.markdown(clean_html(footer_html), unsafe_allow_html=True)
-    st.markdown(clean_html(BOTTOM_ORGANIC_WAVE_SVG), unsafe_allow_html=True)
+    landscape_horizon_b64 = get_image_base64("countryside-horizon.png")
+    horizon_html = f"""
+    <div class="ks-landscape-horizon" style="margin-top:1.5rem; margin-bottom:0;">
+        <img src="{landscape_horizon_b64}" alt="Scenic Indian agricultural countryside horizon" />
+    </div>
+    """
+    st.markdown(clean_html(horizon_html), unsafe_allow_html=True)

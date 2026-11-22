@@ -2,14 +2,17 @@
 Integrates the complete KisanSaathi Visual Asset Pack:
 - Safety icons from assets/icons/ (flask-ban, book, users)
 - Vector illustrations from assets/illustrations/ (no-chemical, evidence-book, human-escalation)
-- Decorative elements from assets/decorative/ (leaf-branch, field-hills)
+- Decorative elements from assets/decorative/ (leaf-branch)
+- Scenic Countryside Horizon Banner matching reference design
 """
 
 import streamlit as st
-from ui.assets import ICONS, ILLUSTRATIONS, DECORATIVE, clean_html
+from ui.assets import ICONS, ILLUSTRATIONS, DECORATIVE, get_image_base64, clean_html
 
 def render_tab_safety():
     """Render the Safety Guardrails architecture page."""
+    landscape_horizon_b64 = get_image_base64("countryside-horizon.png")
+
     safety_html = f"""
     <div class="ks-safety-page" style="position:relative;">
         <!-- Floating Foliage Background SVGs from Asset Pack -->
@@ -23,7 +26,9 @@ def render_tab_safety():
         <!-- Section Header -->
         <div style="text-align:center; max-width:760px; margin:0 auto 1.4rem auto; position:relative; z-index:2;">
             <div style="display:inline-block; margin-bottom:0.6rem;">
-                <span class="ks-pill-badge">SAFETY ARCHITECTURE</span>
+                <span class="ks-pill-badge" style="display:inline-flex; align-items:center; gap:6px;">
+                    {ICONS['shield_check']} SAFETY ARCHITECTURE
+                </span>
             </div>
             <h1 style="font-size:2.35rem; font-weight:800; color:#174B35; margin:0 0 0.5rem 0; letter-spacing:-0.03em; line-height:1.15;">
                 Safety-First Agricultural Guardrails
@@ -48,10 +53,11 @@ def render_tab_safety():
                 </div>
                 <!-- Illustration 1 from Visual Asset Pack -->
                 <div class="ks-arch-illus" style="display:flex; justify-content:center; align-items:center; min-height:120px;">
-                    <div style="width:130px; height:120px; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:140px; height:120px; display:flex; align-items:center; justify-content:center;">
                         {ILLUSTRATIONS['no_chemical']}
                     </div>
                 </div>
+                <div class="ks-feature-accent-line"></div>
             </div>
 
             <!-- Card 2: Evidence Grounding -->
@@ -67,10 +73,11 @@ def render_tab_safety():
                 </div>
                 <!-- Illustration 2 from Visual Asset Pack -->
                 <div class="ks-arch-illus" style="display:flex; justify-content:center; align-items:center; min-height:120px;">
-                    <div style="width:130px; height:120px; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:180px; height:120px; display:flex; align-items:center; justify-content:center;">
                         {ILLUSTRATIONS['evidence_book']}
                     </div>
                 </div>
+                <div class="ks-feature-accent-line"></div>
             </div>
 
             <!-- Card 3: Human-In-The-Loop -->
@@ -86,16 +93,17 @@ def render_tab_safety():
                 </div>
                 <!-- Illustration 3 from Visual Asset Pack -->
                 <div class="ks-arch-illus" style="display:flex; justify-content:center; align-items:center; min-height:120px;">
-                    <div style="width:130px; height:120px; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:190px; height:120px; display:flex; align-items:center; justify-content:center;">
                         {ILLUSTRATIONS['human_escalation']}
                     </div>
                 </div>
+                <div class="ks-feature-accent-line"></div>
             </div>
         </div>
 
-        <!-- Bottom Landscape Hills Decoration -->
-        <div style="width:100%; overflow:hidden; line-height:0; margin-top:1.5rem; opacity:0.65;">
-            {DECORATIVE['field_hills']}
+        <!-- Scenic Countryside Horizon Decoration -->
+        <div class="ks-landscape-horizon" style="margin-top:1.5rem; margin-bottom:0;">
+            <img src="{landscape_horizon_b64}" alt="Scenic Indian agricultural countryside horizon" />
         </div>
     </div>
     """
