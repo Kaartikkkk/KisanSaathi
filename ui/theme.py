@@ -180,7 +180,7 @@ div[data-testid="stTabs"] {
 div[data-testid="stTabs"] [data-baseweb="tab-list"],
 [role="tablist"] {
     position: fixed !important;
-    top: 14px !important;
+    top: 16px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 10005 !important;
@@ -190,10 +190,12 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"],
     gap: 8px !important;
     background: transparent !important;
     border: none !important;
+    border-bottom: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
-    height: 42px !important;
+    height: 38px !important;
+    min-height: 38px !important;
     pointer-events: auto !important;
 }
 
@@ -202,10 +204,10 @@ div[data-testid="stTabs"] button[role="tab"],
 [data-testid="stTab"] {
     background: transparent !important;
     color: var(--text-primary) !important;
-    border: none !important;
+    border: 1.5px solid transparent !important;
     border-radius: 999px !important;
-    padding: 7px 18px !important;
-    font-size: 0.92rem !important;
+    padding: 0 16px !important;
+    font-size: 0.90rem !important;
     font-weight: 500 !important;
     font-family: var(--font-body) !important;
     cursor: pointer !important;
@@ -218,8 +220,11 @@ div[data-testid="stTabs"] button[role="tab"],
     white-space: nowrap !important;
     outline: none !important;
     box-shadow: none !important;
-    height: 40px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     margin: 0 !important;
+    box-sizing: border-box !important;
 }
 
 [data-baseweb="tab-list"] button[role="tab"]:hover,
@@ -237,8 +242,9 @@ div[data-testid="stTabs"] button[role="tab"][aria-selected="true"],
     background: var(--color-accent) !important;
     color: var(--color-primary) !important;
     font-weight: 700 !important;
-    border: 1px solid var(--color-accent-border) !important;
+    border: 1.5px solid var(--color-accent-border) !important;
     border-radius: 999px !important;
+    box-shadow: none !important;
 }
 
 [data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] *,
@@ -248,64 +254,43 @@ div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] *,
     font-weight: 700 !important;
 }
 
-/* Remove default Streamlit tab highlight underline */
+/* Ensure inner tab text and paragraphs are vertically centered */
+[data-baseweb="tab-list"] button[role="tab"] p,
+div[data-testid="stTabs"] button[role="tab"] p,
+[data-testid="stTab"] p,
+[data-baseweb="tab-list"] button[role="tab"] div,
+div[data-testid="stTabs"] button[role="tab"] div {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+}
+
+/* Completely remove and suppress default Streamlit tab highlight and border lines */
 div[data-baseweb="tab-highlight"],
-div[data-baseweb="tab-border"],
 [data-baseweb="tab-highlight"],
-[data-baseweb="tab-border"] {
+div[data-baseweb="tab-border"],
+[data-baseweb="tab-border"],
+[role="tablist"] div[role="presentation"],
+[role="tablist"] div[aria-hidden="true"],
+div[data-testid="stTabs"] [data-baseweb="tab-highlight"],
+div[data-testid="stTabs"] [data-baseweb="tab-border"] {
     display: none !important;
     height: 0px !important;
+    width: 0px !important;
+    opacity: 0 !important;
     visibility: hidden !important;
+    pointer-events: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    background: transparent !important;
 }
 
-/* Tab Icons */
-[data-baseweb="tab-list"] button[role="tab"]::before,
-div[data-testid="stTabs"] button[role="tab"]::before,
-[data-testid="stTab"]::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 6px;
-    flex-shrink: 0;
-}
-
-/* Tab 1: Home */
-[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(1)::before,
-div[data-testid="stTabs"] button[role="tab"]:nth-of-type(1)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C36' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
-}
-
-/* Tab 2: Ask AI */
-[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(2)::before,
-div[data-testid="stTabs"] button[role="tab"]:nth-of-type(2)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C36' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
-}
-
-/* Tab 3: How It Works */
-[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(3)::before,
-div[data-testid="stTabs"] button[role="tab"]:nth-of-type(3)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C36' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'/%3E%3Cpolyline points='2 17 12 22 22 17'/%3E%3Cpolyline points='2 12 12 17 22 12'/%3E%3C/svg%3E");
-}
-
-/* Tab 4: Safety Guardrails */
-[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(4)::before,
-div[data-testid="stTabs"] button[role="tab"]:nth-of-type(4)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C36' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpolyline points='9 12 11 14 15 10'/%3E%3C/svg%3E");
-}
-
-/* Tab 5: Evaluation */
-[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(5)::before,
-div[data-testid="stTabs"] button[role="tab"]:nth-of-type(5)::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C36' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E");
-}
-
-/* 4. MAIN PAGE CONTAINER PADDING */
+/* 4. MAIN PAGE CONTAINER PADDING (Sufficient clearance below 70px pinned navbar) */
 div[data-baseweb="tab-panel"] {
-    padding-top: 96px !important;
+    padding-top: 110px !important;
     padding-left: 2rem !important;
     padding-right: 2rem !important;
     padding-bottom: 2.5rem !important;

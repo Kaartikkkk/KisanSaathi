@@ -19,15 +19,15 @@ def render_page_home():
     home_html = f"""
     <div class="ks-home-page" style="position:relative;">
         <!-- Floating Foliage Background SVGs from Asset Pack -->
-        <div style="position:absolute; top:-15px; left:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4;">
+        <div style="position:absolute; top:5px; left:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4;">
             {DECORATIVE['leaf_branch']}
         </div>
-        <div style="position:absolute; top:-15px; right:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4; transform:scaleX(-1);">
+        <div style="position:absolute; top:5px; right:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4; transform:scaleX(-1);">
             {DECORATIVE['leaf_branch']}
         </div>
 
         <!-- 1. Hero Section (Two Columns) -->
-        <div class="ks-hero-container">
+        <div class="ks-hero-container" style="padding-top:0.8rem;">
             <div class="ks-hero-left">
                 <div class="ks-hero-badge">
                     {ICONS['leaf_primary']}

@@ -15,16 +15,16 @@ def render_page_safety():
     safety_html = f"""
     <div class="ks-safety-page" style="position:relative;">
         <!-- Floating Foliage Background SVGs from Asset Pack -->
-        <div style="position:absolute; top:-15px; left:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4;">
+        <div style="position:absolute; top:5px; left:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4;">
             {DECORATIVE['leaf_branch']}
         </div>
-        <div style="position:absolute; top:-15px; right:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4; transform:scaleX(-1);">
+        <div style="position:absolute; top:5px; right:-10px; width:130px; height:90px; pointer-events:none; z-index:1; opacity:0.4; transform:scaleX(-1);">
             {DECORATIVE['leaf_branch']}
         </div>
 
         <!-- Section Header -->
-        <div style="text-align:center; max-width:760px; margin:0 auto 1.4rem auto; position:relative; z-index:2;">
-            <div style="display:inline-block; margin-bottom:0.6rem;">
+        <div style="text-align:center; max-width:760px; margin:0 auto 1.4rem auto; padding-top:1.2rem; position:relative; z-index:2;">
+            <div style="display:inline-block; margin-bottom:0.75rem;">
                 <span class="ks-pill-badge" style="display:inline-flex; align-items:center; gap:6px;">
                     {ICONS['shield_check']} SAFETY ARCHITECTURE
                 </span>

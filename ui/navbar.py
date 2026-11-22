@@ -32,20 +32,43 @@ def render_top_navbar(language: str = "English"):
             <span class="ks-lang-pill">{ICONS['globe']} {language} &#9662;</span>
         </div>
     </div>
-    <!-- Client-side script to clear lingering heading anchor hashes and guarantee scroll-to-top on tab switches -->
-    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'/>" style="display:none;" onerror="
+    <!-- Client-side script to clear lingering heading anchor hashes, inject tab icons, and guarantee scroll-to-top on tab switches -->
+    <img src="x" style="display:none;" onerror="
         try {{
             if (window.location.hash) {{
                 history.replaceState(null, null, window.location.pathname + window.location.search);
-                window.scrollTo(0, 0);
             }}
-            document.querySelectorAll('[data-baseweb=\\'tab\\'], button[role=\\'tab\\']').forEach(function(tab) {{
-                if (!tab.__hasScrollHandler) {{
-                    tab.__hasScrollHandler = true;
+            function resetAllScroll() {{
+                window.scrollTo(0, 0);
+                if (document.documentElement) document.documentElement.scrollTop = 0;
+                if (document.body) document.body.scrollTop = 0;
+                document.querySelectorAll('section.main, [data-testid=\\'stMain\\'], [data-testid=\\'stAppViewContainer\\'], .main, .block-container, [data-baseweb=\\'tab-panel\\']').forEach(function(el) {{
+                    el.scrollTop = 0;
+                }});
+            }}
+            resetAllScroll();
+
+            var TAB_ICONS = [
+                '<svg width=\\'15\\' height=\\'15\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\' stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' style=\\'margin-right:6px;flex-shrink:0;\\'><path d=\\'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\'/><polyline points=\\'9 22 9 12 15 12 15 22\\'/></svg>',
+                '<svg width=\\'15\\' height=\\'15\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\' stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' style=\\'margin-right:6px;flex-shrink:0;\\'><path d=\\'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\\'/></svg>',
+                '<svg width=\\'15\\' height=\\'15\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\' stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' style=\\'margin-right:6px;flex-shrink:0;\\'><polygon points=\\'12 2 2 7 12 12 22 7 12 2\\'/><polyline points=\\'2 17 12 22 22 17\\'/><polyline points=\\'2 12 12 17 22 12\\'/></svg>',
+                '<svg width=\\'15\\' height=\\'15\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\' stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' style=\\'margin-right:6px;flex-shrink:0;\\'><path d=\\'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\'/></svg>',
+                '<svg width=\\'15\\' height=\\'15\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\' stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' style=\\'margin-right:6px;flex-shrink:0;\\'><line x1=\\'18\\' y1=\\'20\\' x2=\\'18\\' y2=\\'10\\'/><line x1=\\'12\\' y1=\\'20\\' x2=\\'12\\' y2=\\'4\\'/><line x1=\\'6\\' y1=\\'20\\' x2=\\'6\\' y2=\\'14\\'/></svg>'
+            ];
+
+            var tabs = document.querySelectorAll('[data-baseweb=\\'tab-list\\'] button, div[data-testid=\\'stTabs\\'] button[role=\\'tab\\']');
+            tabs.forEach(function(tab, idx) {{
+                if (!tab.__hasKisanIcon && idx < TAB_ICONS.length) {{
+                    tab.__hasKisanIcon = true;
+                    tab.insertAdjacentHTML('afterbegin', TAB_ICONS[idx]);
+                }}
+                if (!tab.__hasKisanScroll) {{
+                    tab.__hasKisanScroll = true;
                     tab.addEventListener('click', function() {{
-                        window.scrollTo({{top: 0, behavior: 'instant'}});
-                        var sc = document.querySelector('section.main, [data-testid=\\'stMain\\']');
-                        if (sc) sc.scrollTop = 0;
+                        resetAllScroll();
+                        setTimeout(resetAllScroll, 10);
+                        setTimeout(resetAllScroll, 50);
+                        setTimeout(resetAllScroll, 120);
                     }});
                 }}
             }});
