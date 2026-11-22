@@ -71,47 +71,64 @@ def get_image_base64(filename: str) -> str:
                 return f"data:{mime};base64,{data}"
     return ""
 
+class SafeDict(dict):
+    """Dictionary that returns empty string or tries to load missing icons without ever raising KeyError."""
+    def __init__(self, *args, fallback_loader=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fallback_loader = fallback_loader
+
+    def __missing__(self, key):
+        if self.fallback_loader:
+            try:
+                res = self.fallback_loader(key)
+                if res:
+                    self[key] = res
+                    return res
+            except Exception:
+                pass
+        return ""
+
 # -----------------------------------------------------------------------------
 # Pre-rendered Logos
 # -----------------------------------------------------------------------------
-LOGOS = {
+LOGOS = SafeDict({
     "horizontal": load_raw_svg("logos/kisansaathi-horizontal.svg"),
     "mark": load_raw_svg("logos/kisansaathi-mark.svg"),
     "wordmark": load_raw_svg("logos/kisansaathi-wordmark.svg"),
-}
+})
 
 # -----------------------------------------------------------------------------
 # Pre-rendered Illustrations
 # -----------------------------------------------------------------------------
-ILLUSTRATIONS = {
+ILLUSTRATIONS = SafeDict({
     "no_chemical": load_raw_svg("illustrations/no-chemical.svg"),
     "evidence_book": load_raw_svg("illustrations/evidence-book.svg"),
     "human_escalation": load_raw_svg("illustrations/human-escalation.svg"),
-}
+})
 
 # -----------------------------------------------------------------------------
 # Pre-rendered Decorative Agricultural SVGs
 # -----------------------------------------------------------------------------
-DECORATIVE = {
+DECORATIVE = SafeDict({
     "leaf_branch": load_raw_svg("decorative/leaf-branch.svg"),
     "crop_rows": load_raw_svg("decorative/crop-rows.svg"),
     "field_hills": load_raw_svg("decorative/field-hills.svg"),
-}
+})
 
 # -----------------------------------------------------------------------------
 # Pre-rendered Status Badges
 # -----------------------------------------------------------------------------
-BADGES = {
+BADGES = SafeDict({
     "pass": load_raw_svg("pass.svg"),
     "fail": load_raw_svg("fail.svg"),
     "caution": load_raw_svg("caution.svg"),
     "info": load_raw_svg("info.svg"),
-}
+})
 
 # -----------------------------------------------------------------------------
 # Central Icon Dictionary (FEATHER / LUCIDE 24x24 standard line styling)
 # -----------------------------------------------------------------------------
-ICONS = {
+ICONS = SafeDict({
     # Brand / Navigation
     "leaf_brand": get_svg_icon("leaf", size=24, color="#174B35", stroke_width=2.0),
     "home": get_svg_icon("home", size=16, color="#174B35", stroke_width=1.8),
@@ -126,11 +143,14 @@ ICONS = {
     "sprout": get_svg_icon("sprout", size=18, color="#174B35", stroke_width=1.8),
     "map_pin": get_svg_icon("map-pin", size=18, color="#174B35", stroke_width=1.8),
     "alert_triangle": get_svg_icon("alert-triangle", size=18, color="#B45309", stroke_width=1.8),
+    "alert_amber": get_svg_icon("alert-triangle", size=18, color="#B45309", stroke_width=1.8),
     "language": get_svg_icon("language", size=18, color="#174B35", stroke_width=1.8),
     "message": get_svg_icon("message", size=18, color="#174B35", stroke_width=1.8),
     "clipboard_check": get_svg_icon("clipboard-check", size=18, color="#174B35", stroke_width=1.8),
     "refresh": get_svg_icon("refresh", size=15, color="#174B35", stroke_width=1.8),
     "play_circle": get_svg_icon("play-circle", size=18, color="#FFFFFF", stroke_width=2.0),
+    "user": get_svg_icon("users", size=16, color="#174B35", stroke_width=1.8),
+    "bot": get_svg_icon("sprout", size=16, color="#174B35", stroke_width=1.8),
 
     # Safety & Advisory
     "flask_ban": get_svg_icon("flask-ban", size=20, color="#174B35", stroke_width=1.8),
@@ -146,7 +166,7 @@ ICONS = {
     "download": get_svg_icon("download", size=16, color="#174B35", stroke_width=1.8),
     "info": get_svg_icon("info", size=16, color="#174B35", stroke_width=1.8),
     "arrow_right": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
-}
+}, fallback_loader=lambda k: get_svg_icon(k.replace('_', '-')) or get_svg_icon('info') or '')
 
 # Corner Foliage Accent SVG using the supplied decorative leaf branch
 CORNER_LEAF_BRANCH_SVG = f"""
