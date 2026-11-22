@@ -1,27 +1,53 @@
-# Environment & Secrets
+# ==============================================================================
+# KisanSaathi Git Ignore Configuration
+# ==============================================================================
+
+# Environment Secrets and Local Credentials
 .env
-*.env
 .env.*
+!.env.example
+*.key
+*.pem
+*.pfx
+service-account*.json
+credentials.json
 
 # Python Virtual Environments
 .venv/
 venv/
 env/
 ENV/
+env.bak/
+venv.bak/
 
 # Python Cache & Bytecode
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
-# OS and Editor files
+# Operating System & Editor Artifacts
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
 Thumbs.db
-.vscode/
+ehthumbs.db
 .idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# Application Logs & Temporary Exports
+*.log
+logs/
+*.tmp
+*.bak
+*.swp
+*.swo

@@ -249,36 +249,68 @@ KisanSaathi is engineered strictly as an **educational and advisory assistant**,
 ```text
 KisanSaathi/
 ├── .env.example                  # Template for environment configuration
-├── .gitignore                    # Ignores .env, virtualenvs, caches, and secrets
-├── README.md                     # Project documentation and setup guide
-├── TECHNICAL_REPORT.md           # Milestone 2 comprehensive technical report
-├── PROMPT_ITERATION_LOG.md       # Detailed prompt evolution log (V0–V3)
+├── .gitignore                    # Excludes .env, virtual environments, caches, and secrets
+├── CHANGELOG.md                  # Milestone evolution log following Keep a Changelog
+├── README.md                     # Comprehensive project documentation
 ├── requirements.txt              # Production Python dependencies
-├── app.py                        # Streamlit web interface and session state
-├── evaluation.py                 # Automated 12-case evaluation testing suite
-├── evaluation_results.csv        # Live execution results of 12 test cases
-├── data/
-│   └── agriculture_notes.txt     # Curated reference knowledge base for retrieval
-├── docs/
+├── app.py                        # Streamlit web application entry point
+├── evaluation.py                 # Automated 12-scenario evaluation suite
+├── evaluation_results.csv        # Benchmark evaluation output (100% pass rate)
+│
+├── reports/                      # Official Project Submission Reports
+│   ├── Technical_Report.pdf      # Complete technical, architecture & evaluation report
+│   └── Milestone_Report.pdf      # Milestone-by-milestone progress and outcomes
+│
+├── prompts/                      # Systematic prompt engineering version history
+│   ├── v1/                       # Baseline syntax-corrected prompts
+│   ├── v2/                       # Multi-turn sequential state management prompts
+│   ├── v3/                       # Anti-contamination independent clause prompts
+│   └── final/                    # Production-active prompts
+│
+├── data/                         # Knowledge base data
+│   ├── agriculture_notes.txt     # Curated reference notes for TF-IDF grounding
+│   └── README.md                 # Dataset documentation and chunking guide
+│
+├── test-data/                    # Benchmark testing dataset
+│   ├── test_cases.json           # 12 evaluation test case definitions
+│   ├── evaluation_results.csv    # Benchmark log with verification outcomes
+│   └── agriculture_notes.txt     # Reference notes copy for evaluator portability
+│
+├── docs/                         # Extended architectural documentation
 │   ├── architecture_flowchart.md # Visual system & sequence diagrams
-│   └── prompt_iteration_log.md   # Prompt iteration log duplicate
-├── kisansaathi/
+│   ├── prompt_iteration_log.md   # Chronological prompt evolution log (V0–V3)
+│   └── technical_report.md       # Markdown version of the technical report
+│
+├── kisansaathi/                  # Core backend Python package
 │   ├── __init__.py               # Package initializer
-│   ├── pipeline.py               # 3-stage pipeline orchestrator and state logic
-│   ├── prompts.py                # EXTRACTION, DIAGNOSIS, and ADVISORY prompts
-│   └── retrieval.py              # TF-IDF vectorizer and evidence retriever
-├── screenshots/                  # Web UI screenshots and analysis captures
-│   ├── ui_analysis_progress.jpg
-│   ├── ui_form_input.jpg
-│   └── ui_main.png
-└── tests/
-    └── test_retrieval.py         # 8 unit tests for retrieval & state management
+│   ├── pipeline.py               # 3-stage pipeline orchestrator and state management
+│   ├── prompts.py                # Active extraction, diagnosis, and advisory prompts
+│   └── retrieval.py              # TF-IDF vectorizer and evidence retrieval engine
+│
+├── ui/                           # User interface components
+│   ├── assets.py                 # Asset loader and SVG registry
+│   ├── navbar.py                 # Navigation bar component
+│   ├── sidebar.py                # Sidebar configuration and API key handler
+│   ├── footer.py                 # Footer component
+│   ├── theme.py                  # Custom styling and CSS
+│   └── page_*.py                 # Individual page views
+│
+└── tests/                        # Automated test suite
+    ├── __init__.py
+    └── test_retrieval.py         # 8 unit tests for retrieval and state logic
 ```
 
 ---
 
-## 📜 License & Acknowledgments
+## 📑 Official Reports
 
-- **Author**: Kartik Lamba
-- **Platform**: Google Gemini API (`gemini-3.5-flash-lite`)
-- **Reference Material**: Curated agricultural reference notes grounded in public ICAR and extension guidelines.
+The official PDF reports for external evaluation are located in the `reports/` directory:
+1. **[Technical Report](reports/Technical_Report.pdf)**: Detailed architectural design, 3-stage prompt pipeline, TF-IDF grounding, safety guardrails, and experimental validation.
+2. **[Milestone Report](reports/Milestone_Report.pdf)**: Milestone-by-milestone delivery, challenges faced, solutions engineered, and benchmark outcomes.
+
+---
+
+## 📜 Acknowledgments
+
+- **Platform**: Google Gemini API (`gemini-flash-lite-latest` / `gemini-3.5-flash-lite`)
+- **Reference Material**: Curated agricultural reference notes grounded in Indian Council of Agricultural Research (ICAR) practices.
