@@ -226,27 +226,91 @@ div[data-testid="stCustomComponentV1"] {
     flex-shrink: 0 !important;
 }
 
-/* 3. OFF-SCREEN ACCESSIBLE NATIVE TABS (Hidden from view, 100% active React click listener) */
+/* 3. CENTERED TOP NAVBAR TABS (Native Streamlit Tabs positioned in Top Navbar) */
 div[data-testid="stTabs"] {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
 
-div[data-baseweb="tab-list"],
-.stTabs [data-baseweb="tab-list"],
-[data-baseweb="tab-list"] {
-    position: absolute !important;
-    top: -9999px !important;
-    left: -9999px !important;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-    opacity: 0 !important;
+/* Position native tab list directly in the center of the sticky top navbar */
+[data-baseweb="tab-list"],
+div[data-testid="stTabs"] [data-baseweb="tab-list"],
+[role="tablist"] {
+    position: fixed !important;
+    top: 14px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10005 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 40px !important;
     pointer-events: auto !important;
-    visibility: visible !important;
+    overflow: visible !important;
 }
 
-/* Hide Default Streamlit Underline Highlights & Borders Completely */
+/* Native tab buttons styled as KisanSaathi Nav Pills */
+[data-baseweb="tab-list"] button[role="tab"],
+div[data-testid="stTabs"] button[role="tab"],
+[data-testid="stTab"] {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 7px 16px !important;
+    font-size: 0.90rem !important;
+    font-weight: 500 !important;
+    font-family: var(--font-main) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    transition: all 0.18s ease !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    outline: none !important;
+    box-shadow: none !important;
+    height: 38px !important;
+    margin: 0 !important;
+    pointer-events: auto !important;
+}
+
+[data-baseweb="tab-list"] button[role="tab"]:hover,
+div[data-testid="stTabs"] button[role="tab"]:hover,
+[data-testid="stTab"]:hover {
+    background-color: rgba(18, 76, 53, 0.05) !important;
+    color: var(--color-primary) !important;
+}
+
+/* Active State: Pale Mint Pill with Dark Forest Green Text */
+[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"],
+div[data-testid="stTabs"] button[role="tab"][aria-selected="true"],
+[data-testid="stTab"][aria-selected="true"] {
+    background-color: var(--color-accent) !important;
+    background: var(--color-accent) !important;
+    color: var(--color-primary) !important;
+    font-weight: 700 !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
+}
+
+[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] *,
+div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] *,
+[data-testid="stTab"][aria-selected="true"] * {
+    color: var(--color-primary) !important;
+    font-weight: 700 !important;
+}
+
+/* Hide Streamlit's Default Underline / Border on Tabs */
 div[data-baseweb="tab-highlight"],
 div[data-baseweb="tab-border"],
 [data-baseweb="tab-highlight"],
@@ -257,6 +321,56 @@ div[data-baseweb="tab-border"],
     background: transparent !important;
     opacity: 0 !important;
     visibility: hidden !important;
+}
+
+/* Icons via ::before */
+[data-baseweb="tab-list"] button[role="tab"]::before,
+div[data-testid="stTabs"] button[role="tab"]::before,
+[data-testid="stTab"]::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+/* Tab 1: Home */
+[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(1)::before,
+div[data-testid="stTabs"] button[role="tab"]:nth-of-type(1)::before,
+[data-testid="stTab"]:nth-of-type(1)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+}
+
+/* Tab 2: Ask AI */
+[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(2)::before,
+div[data-testid="stTabs"] button[role="tab"]:nth-of-type(2)::before,
+[data-testid="stTab"]:nth-of-type(2)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
+}
+
+/* Tab 3: How It Works */
+[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(3)::before,
+div[data-testid="stTabs"] button[role="tab"]:nth-of-type(3)::before,
+[data-testid="stTab"]:nth-of-type(3)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'/%3E%3Cpolyline points='2 17 12 22 22 17'/%3E%3Cpolyline points='2 12 12 17 22 12'/%3E%3C/svg%3E");
+}
+
+/* Tab 4: Safety Guardrails */
+[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(4)::before,
+div[data-testid="stTabs"] button[role="tab"]:nth-of-type(4)::before,
+[data-testid="stTab"]:nth-of-type(4)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpolyline points='9 12 11 14 15 10'/%3E%3C/svg%3E");
+}
+
+/* Tab 5: Evaluation */
+[data-baseweb="tab-list"] button[role="tab"]:nth-of-type(5)::before,
+div[data-testid="stTabs"] button[role="tab"]:nth-of-type(5)::before,
+[data-testid="stTab"]:nth-of-type(5)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23124C35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E");
 }
 
 /* Constrain all decorative and foliage SVGs to prevent viewport overflow */
