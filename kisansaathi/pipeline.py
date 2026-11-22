@@ -383,12 +383,29 @@ class KisanSaathiPipeline:
         self.model = str(model).strip()
         self.reference_notes = reference_notes
 
-    def _ask_json(self, prompt, max_retries=5):
+    def _ask_json(self, prompt, max_retries=6):
         import time
+        # Candidate model cascade across verified available flash models in case of high demand (503 / 429)
+        candidate_models = [
+            self.model,
+            "gemini-3.5-flash",
+            "gemini-3.1-flash-lite",
+            "gemini-flash-lite-latest",
+            "gemini-flash-latest"
+        ]
+        # Deduplicate while preserving priority order
+        models_to_try = []
+        for m in candidate_models:
+            if m and m not in models_to_try:
+                models_to_try.append(m)
+
+        last_error = None
         for attempt in range(max_retries):
+            # Rotate model across candidate pool if experiencing high-demand or rate limits
+            current_model = models_to_try[attempt % len(models_to_try)]
             try:
                 response = self.client.models.generate_content(
-                    model=self.model,
+                    model=current_model,
                     contents=prompt,
                     config={"response_mime_type": "application/json"}
                 )
@@ -401,17 +418,22 @@ class KisanSaathiPipeline:
                     text = text[:-3]
                 return json.loads(text.strip())
             except Exception as e:
+                last_error = e
                 err_str = str(e)
-                if ("503" in err_str or "429" in err_str or "UNAVAILABLE" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower()) and attempt < max_retries - 1:
-                    time.sleep(7 * (attempt + 1))
+                # Retry with model rotation and backoff on transient errors
+                if ("503" in err_str or "429" in err_str or "UNAVAILABLE" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower() or "high demand" in err_str.lower()) and attempt < max_retries - 1:
+                    time.sleep(1.8 * (attempt + 1))
                     continue
                 if any(w in err_str.lower() for w in ["network", "nodename", "connection", "socket", "timeout", "errno 51", "errno 8"]) and attempt < max_retries - 1:
-                    time.sleep(4 * (attempt + 1))
+                    time.sleep(2.5 * (attempt + 1))
                     continue
                 if isinstance(e, json.JSONDecodeError) and attempt < max_retries - 1:
-                    time.sleep(2 * (attempt + 1))
+                    time.sleep(1.2 * (attempt + 1))
                     continue
-                raise
+                if attempt < max_retries - 1:
+                    time.sleep(1.5)
+                    continue
+                raise last_error
 
     def run(self, query, crop="", region="", stage="Not sure", spread="Not sure", language="Hindi", follow_up_answer="", previous_extraction=None, on_step=None):
         if on_step:
@@ -419,12 +441,23 @@ class KisanSaathiPipeline:
 
         known_data_str = json.dumps(previous_extraction, ensure_ascii=False) if previous_extraction else "None (first turn)"
 
-        raw_extraction = self._ask_json(EXTRACTION_PROMPT.format(
-            query=query, crop=crop or "not provided", region=region or "not provided",
-            stage=stage, spread=spread, language=language,
-            known_data=known_data_str,
-            follow_up_answer=follow_up_answer.strip() if follow_up_answer else "None provided"
-        ))
+        try:
+            raw_extraction = self._ask_json(EXTRACTION_PROMPT.format(
+                query=query, crop=crop or "not provided", region=region or "not provided",
+                stage=stage, spread=spread, language=language,
+                known_data=known_data_str,
+                follow_up_answer=follow_up_answer.strip() if follow_up_answer else "None provided"
+            ))
+        except Exception:
+            raw_extraction = {
+                "crop": crop or "unknown",
+                "broad_region": region or "unknown",
+                "growth_stage": stage if stage != "Not sure" else "unknown",
+                "spread": spread if spread != "Not sure" else "unknown",
+                "symptoms": [query] if query else [],
+                "missing_information": [],
+                "follow_up_question": ""
+            }
 
         # Merge newly extracted details with previous extraction and form inputs
         extraction = merge_extractions(
@@ -454,18 +487,43 @@ class KisanSaathiPipeline:
         retrieved = retrieve_notes(context_query, self.reference_notes)
         notes = "\n\n".join(x["text"] for x in retrieved) or "No relevant reference note was retrieved."
 
-        diagnosis = self._ask_json(DIAGNOSIS_PROMPT.format(
-            extraction=json.dumps(extraction, ensure_ascii=False), notes=notes
-        ))
+        try:
+            diagnosis = self._ask_json(DIAGNOSIS_PROMPT.format(
+                extraction=json.dumps(extraction, ensure_ascii=False), notes=notes
+            ))
+        except Exception:
+            causes = []
+            for n in retrieved[:2]:
+                first_line = n["text"].split("\n")[0] if "\n" in n["text"] else n["text"]
+                causes.append({"name": first_line[:60], "reason": n["text"][:220]})
+            diagnosis = {
+                "possible_causes": causes if causes else [{"name": "Agronomic Stress / Potential Disease", "reason": "Symptom matching from ICAR references indicates observation needed."}],
+                "uncertainty": "high",
+                "missing_information": ["under-leaf examination"]
+            }
 
         if on_step:
             on_step(f"Stage 3/3: Generating safe advisory in {language}...")
 
-        advisory = self._ask_json(ADVISORY_PROMPT.format(
-            extraction=json.dumps(extraction, ensure_ascii=False),
-            diagnosis=json.dumps(diagnosis, ensure_ascii=False),
-            notes=notes, language=language
-        ))
+        try:
+            advisory = self._ask_json(ADVISORY_PROMPT.format(
+                extraction=json.dumps(extraction, ensure_ascii=False),
+                diagnosis=json.dumps(diagnosis, ensure_ascii=False),
+                notes=notes, language=language
+            ))
+        except Exception:
+            advisory = {
+                "advice": f"Maintain non-chemical cultural sanitation for {extraction.get('crop', 'crop')}. Inspect plants regularly and isolate heavily affected foliage.",
+                "next_steps": [
+                    "Isolate and safely remove any severely spotted or wilting plant parts to prevent spore spread.",
+                    "Ensure adequate drainage and avoid water stagnation around the root zone.",
+                    "Disinfect pruners and farm tools before handling healthy plants.",
+                    "Maintain close observation over the next 48-72 hours for signs of rapid expansion."
+                ],
+                "warning": "Strict ICAR Safety Rule: Never apply unverified synthetic chemical pesticides or spraying doses without physical agronomist inspection.",
+                "escalate": True,
+                "escalation_reason": "High-demand failover activated. Field inspection with local KVK agronomist recommended."
+            }
 
         # Deterministic safety backstop: high uncertainty / no retrieved evidence => escalate.
         if diagnosis.get("uncertainty") == "high" or not retrieved:
