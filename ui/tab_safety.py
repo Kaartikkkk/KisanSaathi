@@ -38,7 +38,7 @@ def render_tab_safety():
             </p>
         </div>
 
-        <!-- 3 Large Safety Cards -->
+        <!-- 3 Large Safety Cards with Connecting Arrows (Identical to How It Works) -->
         <div class="ks-arch-container">
             <!-- Card 1: Zero Chemical Dosage -->
             <div class="ks-arch-card">
@@ -46,7 +46,7 @@ def render_tab_safety():
                     <div class="ks-arch-icon-box">
                         {ICONS['flask_ban']}
                     </div>
-                    <h3 class="ks-arch-card-title">Zero Chemical Dosage</h3>
+                    <h3 class="ks-arch-card-title">1. Zero Chemical Dosage</h3>
                     <p class="ks-arch-card-desc">
                         Never computes or prescribes synthetic pesticide spraying doses, preventing crop phytotoxicity, soil degradation, and pollinator poisoning.
                     </p>
@@ -60,13 +60,21 @@ def render_tab_safety():
                 <div class="ks-feature-accent-line"></div>
             </div>
 
+            <!-- Arrow 1 -> 2 -->
+            <div class="ks-arch-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F8A57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </div>
+
             <!-- Card 2: Evidence Grounding -->
             <div class="ks-arch-card">
                 <div>
                     <div class="ks-arch-icon-box">
                         {ICONS['book']}
                     </div>
-                    <h3 class="ks-arch-card-title">Evidence Grounding</h3>
+                    <h3 class="ks-arch-card-title">2. Evidence Grounding</h3>
                     <p class="ks-arch-card-desc">
                         All possible causes and cultural interventions are grounded in ICAR and state university agronomy reference manuals, eliminating ungrounded speculation.
                     </p>
@@ -80,13 +88,21 @@ def render_tab_safety():
                 <div class="ks-feature-accent-line"></div>
             </div>
 
+            <!-- Arrow 2 -> 3 -->
+            <div class="ks-arch-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F8A57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </div>
+
             <!-- Card 3: Human-In-The-Loop -->
             <div class="ks-arch-card">
                 <div>
                     <div class="ks-arch-icon-box">
                         {ICONS['users']}
                     </div>
-                    <h3 class="ks-arch-card-title">Human-In-The-Loop</h3>
+                    <h3 class="ks-arch-card-title">3. Human-In-The-Loop</h3>
                     <p class="ks-arch-card-desc">
                         Uncertain symptoms or rapidly spreading plots automatically trigger escalation recommendations to local Krishi Vigyan Kendra (KVK) extension officers.
                     </p>

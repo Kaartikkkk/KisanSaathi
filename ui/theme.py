@@ -1225,7 +1225,7 @@ div[data-testid="stBaseButton-primary"] button::before {
     }
 
     div[data-baseweb="tab-panel"] {
-        padding-top: 1.25rem !important;
+        padding-top: 96px !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }

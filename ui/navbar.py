@@ -27,5 +27,24 @@ def render_pinned_navbar(language: str = "English"):
             <span class="ks-lang-pill">{ICONS['globe']} {language} &#9662;</span>
         </div>
     </div>
+    <!-- Client-side script to clear lingering heading anchor hashes and guarantee scroll-to-top on tab switches -->
+    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'/>" style="display:none;" onerror="
+        try {{
+            if (window.location.hash) {{
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+                window.scrollTo(0, 0);
+            }}
+            document.querySelectorAll('[data-baseweb=\\'tab\\'], button[role=\\'tab\\']').forEach(function(tab) {{
+                if (!tab.__hasScrollHandler) {{
+                    tab.__hasScrollHandler = true;
+                    tab.addEventListener('click', function() {{
+                        window.scrollTo({{top: 0, behavior: 'instant'}});
+                        var sc = document.querySelector('section.main, [data-testid=\\'stMain\\']');
+                        if (sc) sc.scrollTop = 0;
+                    }});
+                }}
+            }});
+        }} catch(e) {{}}
+    " />
     """
     st.markdown(clean_html(nav_html), unsafe_allow_html=True)
