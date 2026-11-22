@@ -1,0 +1,11 @@
+REFERENCE NOTE 1 — General symptom caution
+Yellowing, spots, curling, wilting or leaf damage can have multiple causes, including infectious disease, insect activity, nutrient imbalance, weather stress or irrigation problems. A symptom description alone is not enough to confirm a crop disease. Consider crop type, plant age, affected plant parts, pattern in the field and recent weather. When evidence is insufficient, seek local agricultural expertise.
+---
+REFERENCE NOTE 2 — Safe observation and field checks
+Observe whether symptoms affect old leaves or new leaves, whether both sides of leaves are affected, whether pests or insects are visible, and whether symptoms occur on a few plants or across the field. Take clear photographs in natural light if possible. Avoid applying pesticides based only on an unconfirmed text description. Consult local agriculture extension staff or a Krishi Vigyan Kendra for crop-specific assessment.
+---
+REFERENCE NOTE 3 — Irrigation and water stress
+Both insufficient and excessive water can contribute to visible plant stress. Check soil moisture near the root zone and inspect whether water is standing in the field or the soil is unusually dry. Consider recent rainfall and irrigation frequency. Do not change irrigation drastically based only on a chatbot response; local soil, crop stage and weather conditions matter.
+---
+REFERENCE NOTE 4 — Escalation
+Seek help from an agriculture officer, local extension worker or Krishi Vigyan Kendra when symptoms spread rapidly, many plants are affected, plants are dying, the cause is unclear, or a chemical treatment is being considered. A remote text-based assistant cannot confirm a diagnosis or prescribe a pesticide dose.
