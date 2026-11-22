@@ -90,18 +90,19 @@ div[data-testid="stCustomComponentV1"] {
     margin: 0 !important;
 }
 
-/* 2. IN-FLOW STICKY FULL-WIDTH TOP NAVBAR (REPRODUCING REFERENCE SPECIFICATION) */
+/* 2. FIXED FULL-WIDTH TOP NAVBAR (EDGE-TO-EDGE, ALWAYS VISIBLE) */
 .ks-navbar {
-    position: sticky !important;
+    position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    width: 100% !important;
+    width: 100vw !important;
+    max-width: 100% !important;
     height: 68px !important;
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     border-bottom: 1.5px solid var(--border-color) !important;
-    z-index: 9999 !important;
+    z-index: 10000 !important;
     padding: 0 2rem !important;
     box-sizing: border-box !important;
     display: flex !important;
@@ -637,7 +638,7 @@ div[data-testid="stTabs"] button[role="tab"]:nth-of-type(5)::before,
 
 /* 4. TAB PANELS CONTAINER (Comfortable 1240px container, natural document flow) */
 div[data-baseweb="tab-panel"] {
-    padding-top: 1.75rem !important;
+    padding-top: 84px !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
     padding-bottom: 2.5rem !important;

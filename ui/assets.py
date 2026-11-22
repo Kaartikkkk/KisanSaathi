@@ -88,6 +88,17 @@ class SafeDict(dict):
                 pass
         return ""
 
+    def __getitem__(self, key):
+        if key not in self:
+            return self.__missing__(key)
+        return super().__getitem__(key)
+
+    def get(self, key, default=""):
+        if key in self:
+            return super().get(key, default)
+        val = self.__missing__(key)
+        return val if val else (default or "")
+
 # -----------------------------------------------------------------------------
 # Pre-rendered Logos
 # -----------------------------------------------------------------------------

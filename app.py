@@ -13,6 +13,7 @@ from ui.tab_how import render_tab_how
 from ui.tab_ask import render_tab_ask
 from ui.tab_safety import render_tab_safety
 from ui.tab_eval import render_tab_eval
+from ui.footer import render_footer
 from ui.sidebar import render_sidebar
 
 load_dotenv(override=True)
@@ -76,3 +77,6 @@ with tab_safety:
 
 with tab_eval:
     render_tab_eval()
+
+# Render Single Unified Footer across all views
+render_footer()

@@ -1,10 +1,8 @@
 """Home View module for KisanSaathi.
 Renders:
-1. Hero section with farmer-using-phone.jpg and leaf-branch decorative SVG.
-2. 4-Pillar capability strip with Feather/Lucide vector line icons.
-3. Crop variety showcase featuring crop-variety.jpg.
-4. Farmer empowerment & KVK escalation section featuring farmer-in-field.jpg.
-5. Scenic agricultural footer banner featuring farm-landscape.jpg.
+1. Main Hero section with farmer-using-phone.jpg, pill badge, title lines, and CTAs.
+2. Countryside landscape horizon decoration.
+3. 4-Pillar capability cards (Crop Guidance, Problem Identification, Safe Recommendations, Multi-language Support).
 """
 
 import streamlit as st
@@ -13,9 +11,6 @@ from ui.assets import ICONS, DECORATIVE, get_image_base64, clean_html
 def render_tab_home():
     """Render Home Tab hero banner, capability pillars, and visual showcases."""
     phone_farmer_b64 = get_image_base64("farmer-using-phone.jpg")
-    crop_variety_b64 = get_image_base64("crop-variety.jpg")
-    field_farmer_b64 = get_image_base64("farmer-in-field.jpg")
-    landscape_b64 = get_image_base64("farm-landscape.jpg")
     landscape_horizon_b64 = get_image_base64("countryside-horizon.png")
 
     # -------------------------------------------------------------------------
@@ -118,99 +113,3 @@ def render_tab_home():
     </div>
     """
     st.markdown(clean_html(hero_html), unsafe_allow_html=True)
-
-    # -------------------------------------------------------------------------
-    # 3. Crop Variety Showcase Section (Featuring crop-variety.jpg)
-    # -------------------------------------------------------------------------
-    crop_section_html = f"""
-    <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:24px; padding:2.5rem 3rem; margin-bottom:2rem; box-shadow:0 4px 20px rgba(23,75,53,0.03);">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:2.5rem; flex-wrap:wrap;">
-            <div style="flex:1 1 400px; max-width:480px;">
-                <div style="width:100%; aspect-ratio:16/9; border-radius:18px; overflow:hidden; box-shadow:0 8px 24px rgba(23,75,53,0.06); border:2px solid #FFFFFF;">
-                    <img src="{crop_variety_b64}" alt="Diverse Indian agricultural crops, grains, and produce" style="width:100%; height:100%; object-fit:cover; display:block;" />
-                </div>
-            </div>
-            <div style="flex:1 1 460px;">
-                <div style="display:inline-block; margin-bottom:0.5rem;">
-                    <span class="ks-pill-badge">AGRONOMIC COVERAGE</span>
-                </div>
-                <h2 style="font-size:2rem; font-weight:800; color:#174B35; margin:0 0 0.75rem 0; letter-spacing:-0.02em;">
-                    Calibrated Across Major Indian Crops
-                </h2>
-                <p style="color:#5A6860; font-size:0.98rem; line-height:1.6; margin:0 0 1.25rem 0;">
-                    KisanSaathi's grounded knowledge retrieval integrates standard packages of practices covering staple cereals, solanaceous vegetables, oilseeds, and pulses across distinct state agro-climatic zones.
-                </p>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
-                    <div style="background:#F7FAF4; border:1px solid #DFE8DF; border-radius:12px; padding:0.85rem 1rem;">
-                        <div style="font-weight:700; color:#174B35; font-size:0.92rem; display:flex; align-items:center; gap:6px;">
-                            {ICONS['sprout']} Cereals & Grains
-                        </div>
-                        <div style="font-size:0.8rem; color:#5A6860; margin-top:2px;">Rice (WB), Wheat (PB), Maize</div>
-                    </div>
-                    <div style="background:#F7FAF4; border:1px solid #DFE8DF; border-radius:12px; padding:0.85rem 1rem;">
-                        <div style="font-weight:700; color:#174B35; font-size:0.92rem; display:flex; align-items:center; gap:6px;">
-                            {ICONS['leaf_primary']} Solanaceous Crops
-                        </div>
-                        <div style="font-size:0.8rem; color:#5A6860; margin-top:2px;">Tomato (UP), Potato (UP)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    """
-    st.markdown(clean_html(crop_section_html), unsafe_allow_html=True)
-
-    # -------------------------------------------------------------------------
-    # 4. Farmer Empowerment & KVK Extension Section (Featuring farmer-in-field.jpg)
-    # -------------------------------------------------------------------------
-    farmer_section_html = f"""
-    <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:24px; padding:2.5rem 3rem; margin-bottom:2rem; box-shadow:0 4px 20px rgba(23,75,53,0.03);">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:2.5rem; flex-wrap:wrap;">
-            <div style="flex:1 1 460px;">
-                <div style="display:inline-block; margin-bottom:0.5rem;">
-                    <span class="ks-pill-badge">FIELD EXTENSION ALIGNMENT</span>
-                </div>
-                <h2 style="font-size:2rem; font-weight:800; color:#174B35; margin:0 0 0.75rem 0; letter-spacing:-0.02em;">
-                    Empowering Farmers On-Ground
-                </h2>
-                <p style="color:#5A6860; font-size:0.98rem; line-height:1.6; margin:0 0 1.25rem 0;">
-                    Rather than speculating with hazardous chemical spraying dosages, KisanSaathi provides biological, mechanical, and cultural remedies. When issues are uncertain or rapidly spreading, it provides immediate contact pathways to Krishi Vigyan Kendra (KVK) agronomy scientists.
-                </p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                    <span style="background:#E7F2E8; color:#174B35; font-weight:700; font-size:0.82rem; padding:0.4rem 1rem; border-radius:999px; border:1px solid #D0E7D4; display:inline-flex; align-items:center; gap:5px;">
-                        {ICONS['shield_check']} Zero Chemical Dosage Risk
-                    </span>
-                    <span style="background:#E7F2E8; color:#174B35; font-weight:700; font-size:0.82rem; padding:0.4rem 1rem; border-radius:999px; border:1px solid #D0E7D4; display:inline-flex; align-items:center; gap:5px;">
-                        {ICONS['users']} Human-in-the-Loop Safeguard
-                    </span>
-                </div>
-            </div>
-            <div style="flex:1 1 400px; max-width:480px;">
-                <div style="width:100%; aspect-ratio:16/9; border-radius:18px; overflow:hidden; box-shadow:0 8px 24px rgba(23,75,53,0.06); border:2px solid #FFFFFF;">
-                    <img src="{field_farmer_b64}" alt="Indian farmer inspecting crop foliage in the field" style="width:100%; height:100%; object-fit:cover; display:block;" />
-                </div>
-            </div>
-        </div>
-    </div>
-    """
-    st.markdown(clean_html(farmer_section_html), unsafe_allow_html=True)
-
-    # -------------------------------------------------------------------------
-    # 5. Agricultural Landscape Banner (Featuring farm-landscape.jpg)
-    # -------------------------------------------------------------------------
-    landscape_banner_html = f"""
-    <div style="position:relative; border-radius:24px; overflow:hidden; height:180px; box-shadow:0 8px 24px rgba(23,75,53,0.06); margin-bottom:1.5rem; border:2px solid #FFFFFF;">
-        <img src="{landscape_b64}" alt="Lush Indian agricultural terraced farmland landscape" style="width:100%; height:100%; object-fit:cover; display:block; filter:brightness(0.85);" />
-        <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(23,75,53,0.88) 0%, rgba(23,75,53,0.4) 100%); display:flex; align-items:center; padding:0 3rem;">
-            <div style="max-width:560px;">
-                <h3 style="color:#FFFFFF; font-size:1.6rem; font-weight:800; margin:0 0 0.35rem 0;">
-                    Sustaining Soil, Crop & Farmer Prosperity
-                </h3>
-                <p style="color:#E7F2E8; font-size:0.95rem; margin:0; line-height:1.5;">
-                    Reliable agricultural AI grounded in certified agronomic literature for Indian farming communities.
-                </p>
-            </div>
-        </div>
-    </div>
-    """
-    st.markdown(clean_html(landscape_banner_html), unsafe_allow_html=True)
