@@ -9,17 +9,18 @@ CSS_LIGHT_THEME = """
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --bg-primary: #F7F8F4;
+    --bg-primary: #F7F9F3;
     --bg-card: #FFFFFF;
-    --border-color: #DFE8DF;
-    --border-focus: #174B35;
-    --color-primary: #174B35;
-    --color-primary-hover: #123D2B;
-    --color-secondary: #2F8A57;
-    --color-accent: #E7F1E8;
-    --text-primary: #26352D;
+    --border-color: #DFE9DF;
+    --border-focus: #124C35;
+    --color-primary: #124C35;
+    --color-primary-hover: #0D3726;
+    --color-secondary: #238451;
+    --color-accent: #E2EFE2;
+    --color-accent-subtle: #65A94E;
+    --text-primary: #18392D;
     --text-secondary: #4A5B52;
-    --text-muted: #68766D;
+    --text-muted: #64746B;
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -53,6 +54,29 @@ header[data-testid="stHeader"],
     height: 0px !important;
 }
 
+/* Off-screen invisible component controller iframe (keeps JS engine running without layout impact) */
+iframe[title="streamlit_components_v1.html"],
+iframe[src*="component"] {
+    position: fixed !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0.01 !important;
+    pointer-events: none !important;
+}
+
+div[data-testid="stCustomComponentV1"] {
+    position: fixed !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    width: 0px !important;
+    height: 0px !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 /* Strip main block padding so top navbar touches true top edge-to-edge */
 .block-container,
 [data-testid="block-container"],
@@ -66,7 +90,7 @@ header[data-testid="stHeader"],
     margin: 0 !important;
 }
 
-/* 2. IN-FLOW STICKY FULL-WIDTH TOP NAVBAR (100% RELIABLE IN ALL BROWSERS) */
+/* 2. IN-FLOW STICKY FULL-WIDTH TOP NAVBAR (REPRODUCING REFERENCE SPECIFICATION) */
 .ks-navbar {
     position: sticky !important;
     top: 0 !important;
@@ -83,7 +107,13 @@ header[data-testid="stHeader"],
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    box-shadow: 0 2px 10px rgba(23, 75, 53, 0.03) !important;
+    box-shadow: 0 2px 10px rgba(18, 76, 53, 0.04) !important;
+}
+
+.ks-nav-left {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
 }
 
 .ks-nav-brand {
@@ -92,7 +122,6 @@ header[data-testid="stHeader"],
     text-decoration: none !important;
     cursor: pointer !important;
     flex-shrink: 0 !important;
-    width: 180px !important;
     user-select: none !important;
 }
 
@@ -103,13 +132,21 @@ header[data-testid="stHeader"],
     display: block !important;
 }
 
+.ks-nav-divider {
+    width: 1px !important;
+    height: 22px !important;
+    background-color: var(--border-color) !important;
+    margin: 0 1.25rem 0 1.25rem !important;
+    flex-shrink: 0 !important;
+}
+
 .ks-nav-links {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 6px !important;
+    gap: 8px !important;
     flex: 1 !important;
-    max-width: 680px !important;
+    max-width: 720px !important;
     margin: 0 auto !important;
 }
 
@@ -119,14 +156,14 @@ header[data-testid="stHeader"],
     color: var(--text-primary) !important;
     border: none !important;
     border-radius: 999px !important;
-    padding: 7px 18px !important;
+    padding: 7px 16px !important;
     font-size: 0.90rem !important;
     font-weight: 500 !important;
     font-family: var(--font-main) !important;
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 6px !important;
+    gap: 7px !important;
     transition: all 0.18s ease !important;
     text-decoration: none !important;
     white-space: nowrap !important;
@@ -137,31 +174,33 @@ header[data-testid="stHeader"],
 .ks-nav-btn svg {
     width: 16px !important;
     height: 16px !important;
-    stroke: var(--color-primary) !important;
+    stroke: var(--text-primary) !important;
     transition: stroke 0.18s ease !important;
     vertical-align: middle !important;
     flex-shrink: 0 !important;
 }
 
 .ks-nav-btn:hover {
-    background-color: rgba(23, 75, 53, 0.08) !important;
+    background-color: rgba(18, 76, 53, 0.05) !important;
     color: var(--color-primary) !important;
 }
 
+/* Active Page highlighted with pale green background and dark green text */
 .ks-nav-btn.active {
-    background-color: var(--color-primary) !important;
-    background: var(--color-primary) !important;
-    color: #FFFFFF !important;
+    background-color: var(--color-accent) !important;
+    background: var(--color-accent) !important;
+    color: var(--color-primary) !important;
     font-weight: 700 !important;
-    box-shadow: 0 3px 12px rgba(23, 75, 53, 0.22) !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
 }
 
 .ks-nav-btn.active svg {
-    stroke: #FFFFFF !important;
+    stroke: var(--color-primary) !important;
 }
 
 .ks-nav-btn.active span {
-    color: #FFFFFF !important;
+    color: var(--color-primary) !important;
 }
 
 .ks-nav-lang {
@@ -193,8 +232,9 @@ div[data-testid="stTabs"] {
     padding-top: 0 !important;
 }
 
-div[data-testid="stTabs"] [data-baseweb="tab-list"],
-.stTabs [data-baseweb="tab-list"] {
+div[data-baseweb="tab-list"],
+.stTabs [data-baseweb="tab-list"],
+[data-baseweb="tab-list"] {
     position: absolute !important;
     top: -9999px !important;
     left: -9999px !important;
@@ -206,7 +246,7 @@ div[data-testid="stTabs"] [data-baseweb="tab-list"],
     visibility: visible !important;
 }
 
-/* Hide Default Streamlit Underline Highlights & Borders */
+/* Hide Default Streamlit Underline Highlights & Borders Completely */
 div[data-baseweb="tab-highlight"],
 div[data-baseweb="tab-border"],
 [data-baseweb="tab-highlight"],
@@ -215,6 +255,8 @@ div[data-baseweb="tab-border"],
     height: 0px !important;
     border: none !important;
     background: transparent !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* Constrain all decorative and foliage SVGs to prevent viewport overflow */
@@ -224,6 +266,259 @@ div[data-baseweb="tab-border"],
     max-width: 100% !important;
     height: auto !important;
     display: block !important;
+}
+
+/* =========================================================================
+   HOMEPAGE EXACT RECREATION (HERO, COUNTRYSIDE HORIZON, 4 FEATURE CARDS)
+   ========================================================================= */
+.ks-hero-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 2.5rem !important;
+    flex-wrap: wrap !important;
+    padding-top: 1.25rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.ks-hero-left {
+    flex: 1 1 480px !important;
+    max-width: 540px !important;
+}
+
+.ks-hero-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    padding: 0.4rem 1.15rem !important;
+    background-color: var(--color-accent) !important;
+    background: var(--color-accent) !important;
+    color: var(--color-primary) !important;
+    border-radius: 999px !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 1.25rem !important;
+    border: 1px solid #D2E4D2 !important;
+}
+
+.ks-hero-badge svg {
+    width: 15px !important;
+    height: 15px !important;
+    stroke: var(--color-primary) !important;
+}
+
+.ks-hero-title {
+    font-size: clamp(2.4rem, 3.3vw, 3.2rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.03em !important;
+    margin: 0 0 1.25rem 0 !important;
+}
+
+.ks-hero-title-line1 {
+    color: var(--color-primary) !important;
+    display: block !important;
+}
+
+.ks-hero-title-line2 {
+    color: var(--color-secondary) !important;
+    display: block !important;
+}
+
+.ks-hero-desc {
+    font-size: 1.05rem !important;
+    color: var(--text-muted) !important;
+    line-height: 1.65 !important;
+    max-width: 500px !important;
+    margin: 0 0 2rem 0 !important;
+}
+
+.ks-hero-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    flex-wrap: wrap !important;
+}
+
+.ks-btn-primary {
+    background-color: var(--color-primary) !important;
+    background: var(--color-primary) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 0.85rem 1.85rem !important;
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.55rem !important;
+    box-shadow: 0 4px 14px rgba(18, 76, 53, 0.22) !important;
+    transition: all 0.2s ease !important;
+    outline: none !important;
+    user-select: none !important;
+}
+
+.ks-btn-primary:hover {
+    background-color: var(--color-primary-hover) !important;
+    background: var(--color-primary-hover) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 18px rgba(18, 76, 53, 0.30) !important;
+}
+
+.ks-btn-primary svg {
+    stroke: #FFFFFF !important;
+}
+
+.ks-btn-secondary {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    color: var(--color-primary) !important;
+    border: 1.8px solid var(--color-primary) !important;
+    border-radius: 999px !important;
+    padding: 0.80rem 1.85rem !important;
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.55rem !important;
+    transition: all 0.2s ease !important;
+    outline: none !important;
+    user-select: none !important;
+}
+
+.ks-btn-secondary:hover {
+    background-color: #F4F8F4 !important;
+    background: #F4F8F4 !important;
+    transform: translateY(-1px) !important;
+}
+
+.ks-btn-secondary svg {
+    stroke: var(--color-primary) !important;
+}
+
+.ks-hero-right {
+    flex: 1 1 420px !important;
+    max-width: 490px !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.ks-hero-farmer-frame {
+    width: 100% !important;
+    max-width: 480px !important;
+    aspect-ratio: 16 / 10.5 !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    border: 4px solid #FFFFFF !important;
+    box-shadow: 0 16px 36px rgba(18, 76, 53, 0.10) !important;
+    background: #FFFFFF !important;
+}
+
+.ks-hero-farmer-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 22% !important;
+    display: block !important;
+}
+
+/* Countryside Landscape Horizon Decoration */
+.ks-landscape-horizon {
+    width: 100% !important;
+    height: 75px !important;
+    margin: 0.4rem 0 1.25rem 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}
+
+.ks-landscape-horizon img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
+}
+
+/* 4 Feature Cards Grid */
+.ks-feature-cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1.25rem !important;
+    margin-bottom: 2.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.ks-feature-card {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    padding: 1.2rem 1.35rem 1.35rem 1.35rem !important;
+    box-shadow: 0 2px 10px rgba(18, 76, 53, 0.03) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.85rem !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.ks-feature-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(18, 76, 53, 0.08) !important;
+}
+
+.ks-feature-icon-box {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    background-color: #E8F3E8 !important;
+    background: #E8F3E8 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+
+.ks-feature-icon-box svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke: var(--color-primary) !important;
+}
+
+.ks-feature-text {
+    flex: 1 !important;
+}
+
+.ks-feature-title {
+    font-size: 0.96rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 3px !important;
+    line-height: 1.2 !important;
+}
+
+.ks-feature-desc {
+    font-size: 0.80rem !important;
+    color: var(--text-muted) !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+}
+
+.ks-feature-accent-line {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 20px !important;
+    width: 48px !important;
+    height: 3px !important;
+    background-color: var(--color-secondary) !important;
+    background: var(--color-secondary) !important;
+    border-radius: 2px !important;
 }
 
 /* 4. TAB PANELS CONTAINER (Comfortable 1240px container, natural document flow) */
@@ -762,9 +1057,17 @@ div[data-testid="stBaseButton-primary"] button::before {
         gap: 0.5rem !important;
     }
 
-    .ks-nav-brand {
+    .ks-nav-left {
         order: 1 !important;
         width: auto !important;
+    }
+
+    .ks-nav-brand {
+        width: auto !important;
+    }
+
+    .ks-nav-divider {
+        display: none !important;
     }
 
     .ks-nav-lang {
@@ -791,6 +1094,25 @@ div[data-testid="stBaseButton-primary"] button::before {
         padding-top: 1.25rem !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
+    }
+
+    .ks-hero-container {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 1.5rem !important;
+    }
+
+    .ks-hero-left, .ks-hero-right {
+        max-width: 100% !important;
+    }
+
+    .ks-hero-farmer-frame {
+        max-width: 100% !important;
+    }
+
+    .ks-feature-cards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
     }
 
     div[data-testid="stVerticalBlockBorderWrapper"],
@@ -822,6 +1144,20 @@ div[data-testid="stBaseButton-primary"] button::before {
     }
     .ks-ask-title {
         font-size: 1.35rem !important;
+    }
+    .ks-hero-title {
+        font-size: 2.1rem !important;
+    }
+    .ks-hero-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+    .ks-btn-primary, .ks-btn-secondary {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    .ks-feature-cards-grid {
+        grid-template-columns: 1fr !important;
     }
 }
 </style>

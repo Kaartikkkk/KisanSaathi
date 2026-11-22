@@ -54,22 +54,22 @@ if current_lang == "Select language":
 render_pinned_navbar(language=current_lang)
 
 # Integrated Navigation Tabs (Centered inside pinned navbar)
-tab_home, tab_how, tab_ask, tab_safety, tab_eval = st.tabs([
+tab_home, tab_ask, tab_how, tab_safety, tab_eval = st.tabs([
     "Home",
-    "How It Works",
     "Ask AI",
-    "Safety",
+    "How It Works",
+    "Safety Guardrails",
     "Evaluation",
 ])
 
 with tab_home:
     render_tab_home()
 
-with tab_how:
-    render_tab_how()
-
 with tab_ask:
     render_tab_ask(resolved_api_key, resolved_model_name)
+
+with tab_how:
+    render_tab_how()
 
 with tab_safety:
     render_tab_safety()

@@ -215,11 +215,11 @@ def render_tab_eval():
             {LOGOS['horizontal']}
         </div>
         <div style="display:flex; justify-content:center; gap:1.8rem; margin-bottom:1rem; font-weight:600; font-size:0.88rem; flex-wrap:wrap;">
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(0);">Home</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(1);">How It Works</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(2);">Ask AI</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(3);">Safety Guardrails</a>
-            <a href="javascript:void(0)" onclick="if(window.ksSwitchTab) window.ksSwitchTab(4);">Evaluation</a>
+            <a href="javascript:void(0)" onclick="(function(){{var t=document.querySelectorAll('[data-baseweb=\'tab-list\'] button, div[data-testid=\'stTabs\'] button[role=\'tab\']');if(t&&t[0])t[0].click();var b=document.querySelectorAll('.ks-nav-btn');b.forEach(function(el,i){{if(i===0)el.classList.add('active');else el.classList.remove('active');}});window.scrollTo({{top:0,behavior:'smooth'}});}})()">Home</a>
+            <a href="javascript:void(0)" onclick="(function(){{var t=document.querySelectorAll('[data-baseweb=\'tab-list\'] button, div[data-testid=\'stTabs\'] button[role=\'tab\']');if(t&&t[1])t[1].click();var b=document.querySelectorAll('.ks-nav-btn');b.forEach(function(el,i){{if(i===1)el.classList.add('active');else el.classList.remove('active');}});window.scrollTo({{top:0,behavior:'smooth'}});}})()">Ask AI</a>
+            <a href="javascript:void(0)" onclick="(function(){{var t=document.querySelectorAll('[data-baseweb=\'tab-list\'] button, div[data-testid=\'stTabs\'] button[role=\'tab\']');if(t&&t[2])t[2].click();var b=document.querySelectorAll('.ks-nav-btn');b.forEach(function(el,i){{if(i===2)el.classList.add('active');else el.classList.remove('active');}});window.scrollTo({{top:0,behavior:'smooth'}});}})()">How It Works</a>
+            <a href="javascript:void(0)" onclick="(function(){{var t=document.querySelectorAll('[data-baseweb=\'tab-list\'] button, div[data-testid=\'stTabs\'] button[role=\'tab\']');if(t&&t[3])t[3].click();var b=document.querySelectorAll('.ks-nav-btn');b.forEach(function(el,i){{if(i===3)el.classList.add('active');else el.classList.remove('active');}});window.scrollTo({{top:0,behavior:'smooth'}});}})()">Safety Guardrails</a>
+            <a href="javascript:void(0)" onclick="(function(){{var t=document.querySelectorAll('[data-baseweb=\'tab-list\'] button, div[data-testid=\'stTabs\'] button[role=\'tab\']');if(t&&t[4])t[4].click();var b=document.querySelectorAll('.ks-nav-btn');b.forEach(function(el,i){{if(i===4)el.classList.add('active');else el.classList.remove('active');}});window.scrollTo({{top:0,behavior:'smooth'}});}})()">Evaluation</a>
         </div>
         <div style="max-width:720px; margin:0 auto 1rem auto; font-size:0.82rem; line-height:1.6; color:#5A6860;">
             <b>Agricultural Advisory Notice:</b> KisanSaathi is an agronomic artificial intelligence prototype developed for preliminary educational and advisory support. All assessments and recommendations must be physically verified by certified agricultural extension officers or Krishi Vigyan Kendras (KVK).

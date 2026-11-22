@@ -16,97 +16,108 @@ def render_tab_home():
     crop_variety_b64 = get_image_base64("crop-variety.jpg")
     field_farmer_b64 = get_image_base64("farmer-in-field.jpg")
     landscape_b64 = get_image_base64("farm-landscape.jpg")
+    landscape_horizon_b64 = get_image_base64("countryside-horizon.png")
 
     # -------------------------------------------------------------------------
-    # 1. Main Hero Banner
+    # 1. Main Hero Section (Exact Recreation of Reference Image)
     # -------------------------------------------------------------------------
     hero_html = f"""
-    <div class="ks-hero-card" style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:24px; padding:2.8rem 3rem; position:relative; overflow:hidden; box-shadow:0 4px 24px rgba(23,75,53,0.05); margin-bottom:2rem;">
-        <!-- Foliage Accent SVG from Asset Pack -->
-        <div style="position:absolute; top:0; left:0; width:160px; height:120px; pointer-events:none; opacity:0.35;">
-            {DECORATIVE['leaf_branch']}
+    <div class="ks-hero-container">
+        <div class="ks-hero-left">
+            <div class="ks-hero-badge">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#124C35" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                </svg>
+                <span>AGRI-TECH ADVISORY PLATFORM</span>
+            </div>
+
+            <h1 class="ks-hero-title">
+                <span class="ks-hero-title-line1">Better Crop Decisions.</span>
+                <span class="ks-hero-title-line2">Safer Farming.</span>
+            </h1>
+
+            <p class="ks-hero-desc">
+                Describe your crop problem in your preferred language and receive clear, cautious guidance grounded in verified ICAR agronomic practices.
+            </p>
+
+            <div class="ks-hero-actions">
+                <button type="button" class="ks-btn-primary" onclick="(function(){{var t=document.querySelectorAll('[data-baseweb=\'tab-list\'] button, div[data-testid=\'stTabs\'] button[role=\'tab\']');if(t&&t[1])t[1].click();var b=document.querySelectorAll('.ks-nav-btn');b.forEach(function(el,i){{if(i===1)el.classList.add('active');else el.classList.remove('active');}});window.scrollTo({{top:0,behavior:'smooth'}});}})()">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                    </svg>
+                    <span>Get Crop Advice &rarr;</span>
+                </button>
+                <button type="button" class="ks-btn-secondary" onclick="(function(){{var t=document.querySelectorAll('[data-baseweb=\'tab-list\'] button, div[data-testid=\'stTabs\'] button[role=\'tab\']');if(t&&t[2])t[2].click();var b=document.querySelectorAll('.ks-nav-btn');b.forEach(function(el,i){{if(i===2)el.classList.add('active');else el.classList.remove('active');}});window.scrollTo({{top:0,behavior:'smooth'}});}})()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#124C35" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="6 3 20 12 6 21 6 3"/>
+                    </svg>
+                    <span>How It Works</span>
+                </button>
+            </div>
         </div>
 
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:2.5rem; flex-wrap:wrap; position:relative; z-index:2;">
-            <div style="flex:1 1 480px; max-width:560px;">
-                <div style="display:inline-block; margin-bottom:0.75rem;">
-                    <span class="ks-pill-badge">AGRI-TECH ADVISORY PLATFORM</span>
-                </div>
-                <h1 style="font-size:2.85rem; font-weight:800; color:#174B35; line-height:1.15; letter-spacing:-0.03em; margin:0 0 1rem 0;">
-                    Better Crop Decisions.<br>
-                    <span style="color:#2F8A57;">Safer Farming.</span>
-                </h1>
-                <div style="width:48px; height:4px; background:#2F8A57; border-radius:2px; margin-bottom:1.5rem;"></div>
-                <p style="font-size:1.05rem; color:#5A6860; line-height:1.6; margin:0 0 2rem 0;">
-                    Describe your crop problem in your preferred language and receive clear, cautious guidance grounded in verified ICAR agronomic practices.
-                </p>
-                <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
-                    <button onclick="if(window.ksSwitchTab) window.ksSwitchTab(2);" style="background:#174B35; color:#FFFFFF; border:none; border-radius:999px; padding:0.85rem 1.85rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(23,75,53,0.25);">
-                        {ICONS['leaf_white']} Get Crop Advice &rarr;
-                    </button>
-                    <button onclick="if(window.ksSwitchTab) window.ksSwitchTab(1);" style="background:#FFFFFF; color:#174B35; border:1.5px solid #174B35; border-radius:999px; padding:0.82rem 1.8rem; font-size:1rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;">
-                        How It Works
-                    </button>
-                </div>
+        <div class="ks-hero-right">
+            <div class="ks-hero-farmer-frame">
+                <img src="{phone_farmer_b64}" alt="Indian farmer using smartphone in lush green crop field" />
             </div>
+        </div>
+    </div>
 
-            <div style="flex:1 1 400px; max-width:480px; display:flex; justify-content:center;">
-                <div style="width:100%; max-width:440px; aspect-ratio:4/3; border-radius:20px; overflow:hidden; box-shadow:0 12px 32px rgba(23,75,53,0.08); border:3px solid #FFFFFF;">
-                    <img src="{phone_farmer_b64}" alt="Indian farmer using smartphone in lush green crop field" style="width:100%; height:100%; object-fit:cover; display:block;" />
-                </div>
+    <!-- Countryside Landscape Horizon Decoration -->
+    <div class="ks-landscape-horizon">
+        <img src="{landscape_horizon_b64}" alt="Scenic Indian agricultural countryside horizon" />
+    </div>
+
+    <!-- 4 Feature Cards Grid Directly Below Hero -->
+    <div class="ks-feature-cards-grid">
+        <div class="ks-feature-card">
+            <div class="ks-feature-icon-box">
+                {ICONS['leaf_primary']}
             </div>
+            <div class="ks-feature-text">
+                <div class="ks-feature-title">Crop Guidance</div>
+                <div class="ks-feature-desc">ICAR-validated agronomic steps and best practices.</div>
+            </div>
+            <div class="ks-feature-accent-line"></div>
+        </div>
+
+        <div class="ks-feature-card">
+            <div class="ks-feature-icon-box">
+                {ICONS['search']}
+            </div>
+            <div class="ks-feature-text">
+                <div class="ks-feature-title">Problem Identification</div>
+                <div class="ks-feature-desc">AI-powered, multilingual symptom understanding.</div>
+            </div>
+            <div class="ks-feature-accent-line"></div>
+        </div>
+
+        <div class="ks-feature-card">
+            <div class="ks-feature-icon-box">
+                {ICONS['shield_check']}
+            </div>
+            <div class="ks-feature-text">
+                <div class="ks-feature-title">Safe Recommendations</div>
+                <div class="ks-feature-desc">No chemical dosage, with farmer-safe guidance.</div>
+            </div>
+            <div class="ks-feature-accent-line"></div>
+        </div>
+
+        <div class="ks-feature-card">
+            <div class="ks-feature-icon-box">
+                {ICONS['language']}
+            </div>
+            <div class="ks-feature-text">
+                <div class="ks-feature-title">Multi-language Support</div>
+                <div class="ks-feature-desc">Get advice in English, Hindi and Hinglish.</div>
+            </div>
+            <div class="ks-feature-accent-line"></div>
         </div>
     </div>
     """
     st.markdown(clean_html(hero_html), unsafe_allow_html=True)
-
-    # -------------------------------------------------------------------------
-    # 2. 4-Pillar Capability Strip
-    # -------------------------------------------------------------------------
-    strip_html = f"""
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-bottom:2.5rem;">
-        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
-            <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                {ICONS['leaf_primary']}
-            </div>
-            <div>
-                <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Crop Guidance</div>
-                <div style="font-size:0.78rem; color:#5A6860;">ICAR validated steps</div>
-            </div>
-        </div>
-
-        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
-            <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                {ICONS['search']}
-            </div>
-            <div>
-                <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Problem Identification</div>
-                <div style="font-size:0.78rem; color:#5A6860;">Multilingual symptom parsing</div>
-            </div>
-        </div>
-
-        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
-            <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                {ICONS['shield_check']}
-            </div>
-            <div>
-                <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Safe Recommendations</div>
-                <div style="font-size:0.78rem; color:#5A6860;">Zero synthetic dosage</div>
-            </div>
-        </div>
-
-        <div style="background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:16px; padding:1.25rem 1.4rem; display:flex; align-items:center; gap:0.85rem; box-shadow:0 2px 8px rgba(23,75,53,0.02);">
-            <div style="background:#E7F2E8; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                {ICONS['language']}
-            </div>
-            <div>
-                <div style="font-size:0.95rem; font-weight:700; color:#174B35;">Multi-language Support</div>
-                <div style="font-size:0.78rem; color:#5A6860;">English, Hindi & Hinglish</div>
-            </div>
-        </div>
-    </div>
-    """
-    st.markdown(clean_html(strip_html), unsafe_allow_html=True)
 
     # -------------------------------------------------------------------------
     # 3. Crop Variety Showcase Section (Featuring crop-variety.jpg)
