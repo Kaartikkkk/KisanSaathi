@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  body {
+    width: 1920px;
+    height: 1080px;
+    background: linear-gradient(145deg, #F8FAF9 0%, #EBF4EE 100%);
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #D5E5D8;
+    padding-bottom: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand-title {
+    font-size: 38px;
+    font-weight: 800;
+    color: #124C36;
+    letter-spacing: -0.5px;
+  }
+  .brand-sub {
+    font-size: 20px;
+    color: #64756C;
+    font-weight: 500;
+  }
+  .rubric-pill {
+    background: #E8F3E9;
+    color: #1B6E45;
+    border: 1.5px solid #A3D1B5;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 30px;
+    letter-spacing: 0.5px;
+  }
+  .title-section {
+    margin-top: 15px;
+  }
+  .main-heading {
+    font-size: 46px;
+    font-weight: 800;
+    color: #124C36;
+    letter-spacing: -1px;
+    line-height: 1.2;
+  }
+  .main-desc {
+    font-size: 22px;
+    color: #4A5A52;
+    margin-top: 8px;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 30px;
+    flex-grow: 1;
+  }
+  .card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(18, 76, 54, 0.06);
+  }
+  .card-before {
+    border: 2.5px solid #FCA5A5;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F5 100%);
+  }
+  .card-after {
+    border: 2.5px solid #86EFAC;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F2FBF5 100%);
+  }
+  .badge-before {
+    background: #EF4444;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-after {
+    background: #15803D;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .prompt-box {
+    margin-top: 16px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+  .prompt-box-before {
+    background: #FFF1F2;
+    border: 1.5px solid #FECDD3;
+    color: #9F1239;
+  }
+  .prompt-box-after {
+    background: #F0FDF4;
+    border: 1.5px solid #BBF7D0;
+    color: #14532D;
+    font-weight: 600;
+  }
+  .output-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .output-before-title { color: #991B1B; }
+  .output-after-title { color: #166534; }
+  .result-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .result-list li {
+    font-size: 19px;
+    line-height: 1.45;
+    position: relative;
+    padding-left: 28px;
+  }
+  .result-list-before li { color: #7F1D1D; }
+  .result-list-before li::before {
+    content: "✖";
+    position: absolute;
+    left: 0;
+    color: #DC2626;
+    font-weight: bold;
+  }
+  .result-list-after li { color: #14532D; }
+  .result-list-after li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #16A34A;
+    font-weight: bold;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #D5E5D8;
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #64756C;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <span style="font-size: 36px;">🌱</span>
+      <div>
+        <div class="brand-title">KisanSaathi</div>
+        <div class="brand-sub">AI Crop Advisory Assistant &bull; SCSE4041 Prompt Engineering</div>
+      </div>
+    </div>
+    <div class="rubric-pill">RUBRIC PART 2: PROMPT EXPERIMENT (~30–40s)</div>
+  </div>
+
+  <div class="title-section">
+    <h1 class="main-heading">Empirical Prompt Iteration: Baseline V0 vs. Grounded V3</h1>
+    <p class="main-desc">Evaluating safety, retrieval grounding, and structured JSON outputs under real Indian agronomic conditions.</p>
+  </div>
+
+  <div class="cards-grid">
+    <!-- BEFORE CARD -->
+    <div class="card card-before">
+      <div>
+        <span class="badge-before">❌ Old Prompt (Baseline V0 - Naive Zero-Shot)</span>
+        <div class="prompt-box prompt-box-before">
+          "You are an agricultural AI. Tell the farmer what disease their crop has and recommend pesticides to spray."
+        </div>
+        <div class="output-title output-before-title">
+          <span>⚠️</span> Flawed & Hazardous Output:
+        </div>
+        <ul class="result-list result-list-before">
+          <li><b>Toxic Chemical Hallucinations:</b> Prescribed lethal synthetic dosages (e.g. <i>"Spray 2.5 ml/L Imidacloprid twice weekly"</i>) without field safety checks.</li>
+          <li><b>Dialogue Context Collapse:</b> Multi-turn follow-ups were concatenated into flat unstructured text, dropping symptom history.</li>
+          <li><b>Unverified Guesses:</b> Diagnosed fungal blights without verified reference grounding or confidence intervals.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- AFTER CARD -->
+    <div class="card card-after">
+      <div>
+        <span class="badge-after">✅ Improved Prompt (Grounded V3 - Three-Stage Pipeline)</span>
+        <div class="prompt-box prompt-box-after">
+          "Strict Negative Constraint: Never prescribe synthetic pesticide dosages. Ground advice in ICAR agronomic literature. Output verified cultural practices in strict JSON schema."
+        </div>
+        <div class="output-title output-after-title">
+          <span>🛡️</span> Grounded, Safe & Structured Output:
+        </div>
+        <ul class="result-list result-list-after">
+          <li><b>Zero Chemical Toxicity Risk:</b> Enforces strict refusal of synthetic pesticide chemicals; provides safe cultural and biological measures.</li>
+          <li><b>100% ICAR Evidence Grounding:</b> Every advisory step cites verified Indian Council of Agricultural Research literature.</li>
+          <li><b>Automated KVK Escalation:</b> Severe or uncertain crop pathogens automatically route directly to local agricultural scientists.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div><b>Presenters:</b> Kartik &amp; Suhani &bull; <b>Model:</b> Google Gemini 2.5 Flash</div>
+    <div><b>Live Deployment:</b> kisansaathi-yo89ppcwtybkwaxavqklu.streamlit.app</div>
+  </div>
+</body>
+</html>
