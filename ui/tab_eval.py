@@ -83,7 +83,7 @@ def render_tab_eval():
         </div>
 
         <!-- 4 Dynamically Aligned Metric Cards -->
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:1.25rem; margin-bottom:2.5rem; position:relative; z-index:2;">
+        <div class="ks-eval-metrics-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1.25rem; margin-bottom:2.5rem; position:relative; z-index:2;">
             <!-- Metric 1: Total Scenarios -->
             <div style="display:flex; align-items:center; background:#FFFFFF; border:1.5px solid #DFE8DF; border-radius:18px; padding:1.25rem 1.4rem; gap:1.2rem; box-shadow:0 2px 10px rgba(23,75,53,0.03);">
                 <div style="width:48px; height:48px; border-radius:12px; background:#E7F2E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">

@@ -95,7 +95,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
             <div class="ks-ask-corner-foliage">
                 {CORNER_LEAF_BRANCH_SVG}
             </div>
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:2;">
+            <div style="display:flex; justify-content:space-between; align-items:center; position:relative; z-index:2; flex-wrap:wrap; gap:1rem;">
                 <div>
                     <h2 class="ks-ask-title">
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#174B35" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -129,7 +129,7 @@ def render_tab_ask(resolved_api_key: str, resolved_model_name: str):
         """
         st.markdown(clean_html(preset_title_html), unsafe_allow_html=True)
 
-        p1, p2, p3, p4, p5 = st.columns([1.1, 1.1, 1.1, 1.1, 0.9], gap="small")
+        p1, p2, p3, p4, p5 = st.columns(5, gap="small")
         with p1:
             if st.button("Tomato Leaf Curl (UP)", key="qf_tomato", use_container_width=True):
                 set_preset_scenario(

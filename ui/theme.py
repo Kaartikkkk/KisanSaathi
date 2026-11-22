@@ -98,7 +98,7 @@ div[data-testid="stCustomComponentV1"] {
     right: 0 !important;
     width: 100vw !important;
     max-width: 100% !important;
-    height: 68px !important;
+    height: 70px !important;
     background-color: #FFFFFF !important;
     background: #FFFFFF !important;
     border-bottom: 1.5px solid var(--border-color) !important;
@@ -636,13 +636,13 @@ div[data-testid="stTabs"] button[role="tab"]:nth-of-type(5)::before,
     border-radius: 2px !important;
 }
 
-/* 4. TAB PANELS CONTAINER (Comfortable 1240px container, natural document flow) */
+/* 4. TAB PANELS CONTAINER (Comfortable 1260px container, natural document flow) */
 div[data-baseweb="tab-panel"] {
-    padding-top: 84px !important;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-    padding-bottom: 2.5rem !important;
-    max-width: 1240px !important;
+    padding-top: 96px !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    padding-bottom: 3rem !important;
+    max-width: 1260px !important;
     margin-left: auto !important;
     margin-right: auto !important;
     box-sizing: border-box !important;
@@ -1154,6 +1154,15 @@ div[data-testid="stBaseButton-primary"] button::before {
     margin-top: 2.5rem;
     text-align: center;
     background: transparent;
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ks-footer svg {
+    height: 34px !important;
+    width: auto !important;
+    max-width: 160px !important;
+    display: inline-block !important;
 }
 .ks-footer a {
     color: var(--color-primary);
@@ -1164,7 +1173,15 @@ div[data-testid="stBaseButton-primary"] button::before {
     text-decoration: underline;
 }
 
-/* 8. RESPONSIVE DESIGN (1440px, 1280px, 992px, 768px, 375px) */
+/* 8. RESPONSIVE DESIGN (1440px, 1366px, 1280px, 992px, 768px) */
+@media (max-width: 1024px) {
+    .ks-eval-metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .ks-feature-cards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
 @media (max-width: 992px) {
     .ks-navbar {
         height: auto !important;

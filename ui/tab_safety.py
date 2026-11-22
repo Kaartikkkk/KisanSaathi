@@ -53,7 +53,7 @@ def render_tab_safety():
                 </div>
                 <!-- Illustration 1 from Visual Asset Pack -->
                 <div class="ks-arch-illus" style="display:flex; justify-content:center; align-items:center; min-height:120px;">
-                    <div style="width:140px; height:120px; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:180px; height:120px; display:flex; align-items:center; justify-content:center;">
                         {ILLUSTRATIONS['no_chemical']}
                     </div>
                 </div>
@@ -93,7 +93,7 @@ def render_tab_safety():
                 </div>
                 <!-- Illustration 3 from Visual Asset Pack -->
                 <div class="ks-arch-illus" style="display:flex; justify-content:center; align-items:center; min-height:120px;">
-                    <div style="width:190px; height:120px; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:180px; height:120px; display:flex; align-items:center; justify-content:center;">
                         {ILLUSTRATIONS['human_escalation']}
                     </div>
                 </div>
