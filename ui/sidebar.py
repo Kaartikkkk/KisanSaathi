@@ -30,7 +30,7 @@ def get_gemini_model() -> str:
     env_model = os.getenv("GEMINI_MODEL", "")
     if env_model and env_model.strip():
         return env_model.strip()
-    return "gemini-3.5-flash-lite"
+    return "gemini-flash-lite-latest"
 
 def render_sidebar() -> tuple[str, str]:
     """Render sidebar controls and return (api_key, model_name)."""

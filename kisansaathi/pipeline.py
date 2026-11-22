@@ -377,21 +377,26 @@ class KisanSaathiPipeline:
             if not model:
                 model = os.getenv("GEMINI_MODEL", "")
             if not model:
-                model = "gemini-3.5-flash-lite"
+                model = "gemini-flash-lite-latest"
 
-        self.client = genai.Client(api_key=api_key)
+        # Initialize with a strict 10s timeout to guarantee responsive, low-latency UI
+        from google.genai import types
+        self.client = genai.Client(
+            api_key=api_key,
+            http_options=types.HttpOptions(timeout=10000)
+        )
         self.model = str(model).strip()
         self.reference_notes = reference_notes
 
-    def _ask_json(self, prompt, max_retries=6):
+    def _ask_json(self, prompt, max_retries=2):
         import time
-        # Candidate model cascade across verified available flash models in case of high demand (503 / 429)
+        from google.genai import types
+
+        # Only use verified ultra-low-latency models (avoid slow 30s+ reasoning models)
         candidate_models = [
             self.model,
-            "gemini-3.5-flash",
-            "gemini-3.1-flash-lite",
             "gemini-flash-lite-latest",
-            "gemini-flash-latest"
+            "gemini-3.5-flash-lite"
         ]
         # Deduplicate while preserving priority order
         models_to_try = []
@@ -401,13 +406,15 @@ class KisanSaathiPipeline:
 
         last_error = None
         for attempt in range(max_retries):
-            # Rotate model across candidate pool if experiencing high-demand or rate limits
             current_model = models_to_try[attempt % len(models_to_try)]
             try:
                 response = self.client.models.generate_content(
                     model=current_model,
                     contents=prompt,
-                    config={"response_mime_type": "application/json"}
+                    config=types.GenerateContentConfig(
+                        response_mime_type="application/json",
+                        temperature=0.2
+                    )
                 )
                 text = (response.text or "").strip()
                 if text.startswith("```json"):
@@ -420,18 +427,9 @@ class KisanSaathiPipeline:
             except Exception as e:
                 last_error = e
                 err_str = str(e)
-                # Retry with model rotation and backoff on transient errors
-                if ("503" in err_str or "429" in err_str or "UNAVAILABLE" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower() or "high demand" in err_str.lower()) and attempt < max_retries - 1:
-                    time.sleep(1.8 * (attempt + 1))
-                    continue
-                if any(w in err_str.lower() for w in ["network", "nodename", "connection", "socket", "timeout", "errno 51", "errno 8"]) and attempt < max_retries - 1:
-                    time.sleep(2.5 * (attempt + 1))
-                    continue
-                if isinstance(e, json.JSONDecodeError) and attempt < max_retries - 1:
-                    time.sleep(1.2 * (attempt + 1))
-                    continue
+                # Quick retry on transient 503/429 with minimal sleep
                 if attempt < max_retries - 1:
-                    time.sleep(1.5)
+                    time.sleep(0.5)
                     continue
                 raise last_error
 
@@ -484,7 +482,7 @@ class KisanSaathiPipeline:
             " ".join(extraction.get("symptoms", []))
         ]
         context_query = " ".join([p for p in context_parts if p and p.strip() and p != "Not sure" and p != "unknown"])
-        retrieved = retrieve_notes(context_query, self.reference_notes)
+        retrieved = retrieve_notes(context_query, self.reference_notes, top_k=2)
         notes = "\n\n".join(x["text"] for x in retrieved) or "No relevant reference note was retrieved."
 
         try:
