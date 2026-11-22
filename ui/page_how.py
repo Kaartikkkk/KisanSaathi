@@ -138,6 +138,65 @@ def render_page_how():
             </div>
         </div>
 
+        <!-- 4. Prompt Experiment Section (Before vs After) for Rubric Part 2 -->
+        <div style="margin-top:2.2rem; background:#FFFFFF; border:1.5px solid #DDE8DE; border-radius:14px; padding:1.5rem 1.8rem; box-shadow:0 2px 10px rgba(18,76,54,0.03);">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.2rem; border-bottom:1px solid #EEF3EE; padding-bottom:0.75rem;">
+                <div style="display:flex; align-items:center; gap:0.6rem;">
+                    <span class="ks-pill-badge" style="font-size:0.75rem; padding:3px 10px;">
+                        🔬 RUBRIC PART 2: PROMPT EXPERIMENT
+                    </span>
+                    <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:#124C36; margin:0;">
+                        Before vs. After Prompt Iteration
+                    </h3>
+                </div>
+                <span style="font-size:0.8rem; color:#64756C; font-weight:500;">
+                    Empirical Prompt Evolution from Baseline V0 to Grounded V3
+                </span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
+                <!-- BEFORE: Old Prompt & Failure Output -->
+                <div style="background:#FFF8F8; border:1.5px solid #FCA5A5; border-radius:10px; padding:1.1rem; box-sizing:border-box;">
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.6rem;">
+                        <span style="background:#EF4444; color:#FFFFFF; font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:4px; text-transform:uppercase;">
+                            ❌ Old Prompt (Baseline V0)
+                        </span>
+                    </div>
+                    <div style="background:#FFFFFF; border:1px solid #FECACA; border-radius:6px; padding:0.6rem 0.8rem; font-family:monospace; font-size:0.8rem; color:#7F1D1D; margin-bottom:0.75rem; line-height:1.4;">
+                        &ldquo;You are an agricultural AI. Tell the farmer what disease their crop has and recommend pesticides to spray.&rdquo;
+                    </div>
+                    <div style="font-size:0.8rem; font-weight:700; color:#991B1B; margin-bottom:0.3rem;">
+                        ⚠️ Old Output (Dangerous Hallucinations &amp; State Loss):
+                    </div>
+                    <ul style="margin:0; padding-left:1.2rem; font-size:0.82rem; color:#7F1D1D; line-height:1.5;">
+                        <li><b>Hazardous Dosages:</b> Hallucinated <i>&ldquo;Spray 2.5 ml/L Imidacloprid twice a week&rdquo;</i> risking crop toxicity.</li>
+                        <li><b>Input Contamination:</b> Multi-part follow-ups dumped into a single raw text string.</li>
+                        <li><b>No Evidence Grounding:</b> Guessed diseases without certified ICAR literature citations.</li>
+                    </ul>
+                </div>
+
+                <!-- AFTER: Improved Prompt & Grounded Output -->
+                <div style="background:#F2FBF5; border:1.5px solid #86EFAC; border-radius:10px; padding:1.1rem; box-sizing:border-box;">
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.6rem;">
+                        <span style="background:#15803D; color:#FFFFFF; font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:4px; text-transform:uppercase;">
+                            ✅ Improved Prompt (Grounded V3)
+                        </span>
+                    </div>
+                    <div style="background:#FFFFFF; border:1px solid #BBF7D0; border-radius:6px; padding:0.6rem 0.8rem; font-family:monospace; font-size:0.8rem; color:#14532D; margin-bottom:0.75rem; line-height:1.4;">
+                        &ldquo;Strict Negative Constraint: Never prescribe synthetic pesticide dosages. Ground all advice in ICAR reference notes. Return verified cultural checklist in strict JSON.&rdquo;
+                    </div>
+                    <div style="font-size:0.8rem; font-weight:700; color:#166534; margin-bottom:0.3rem;">
+                        🛡️ Improved Output (Farmer-Safe &amp; Production-Grade):
+                    </div>
+                    <ul style="margin:0; padding-left:1.2rem; font-size:0.82rem; color:#14532D; line-height:1.5;">
+                        <li><b>Zero Chemical Risk:</b> Replaces chemical sprays with non-chemical cultural remedies.</li>
+                        <li><b>Evidence-Grounded:</b> Every symptom matches certified ICAR agronomic research.</li>
+                        <li><b>Automated Escalation:</b> Severe or uncertain outbreaks route directly to <b>KVK scientists</b>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <!-- Scenic Countryside Horizon Banner -->
         <div class="ks-landscape-horizon" style="margin-top:1.5rem; margin-bottom:0;">
             <img src="{landscape_b64}" alt="Scenic Indian agricultural countryside horizon" />
